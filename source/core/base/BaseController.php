@@ -104,7 +104,8 @@ class BaseController extends Controller
      * 执行一个action
      * @param string $id
      * @param array $params
-     * @return ActionResult
+     * @return mixed|ActionResult
+     * @throws InvalidRouteException
      */
     public function runAction($id, $params = []) {
         $action = $this->createAction($id);

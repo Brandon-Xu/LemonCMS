@@ -1,4 +1,5 @@
 <?php
+
 namespace source\core\front;
 
 use source\core\base\BaseApplication;
@@ -6,9 +7,8 @@ use source\core\base\BaseApplication;
 class FrontApplication extends BaseApplication
 {
 
-    public function init()
-    {
+    public function init() {
         parent::init();
-        $this->loadActiveModules(false);
+        $this->loadActiveModules(FALSE);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace source\core\back;
 
-use Yii;
 use source\core\base\BaseView;
 use yii\base\Theme;
 use source\LuLu;

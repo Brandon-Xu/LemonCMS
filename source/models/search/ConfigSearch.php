@@ -12,28 +12,25 @@ use source\models\Config;
  */
 class ConfigSearch extends Config
 {
-    public function init()
-    {
+    public function init() {
         parent::init();
-        $this->userValidate = false;
+        $this->userValidate = FALSE;
     }
-    
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['id'], 'integer'],
-            [['key', 'value'], 'safe'],
+            [ ['id'], 'integer' ],
+            [ [ 'key', 'value' ], 'safe' ],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -45,8 +42,7 @@ class ConfigSearch extends Config
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Config::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -65,8 +61,15 @@ class ConfigSearch extends Config
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'key', $this->key])
-            ->andFilterWhere(['like', 'value', $this->value]);
+        $query->andFilterWhere([
+            'like',
+            'key',
+            $this->key
+        ])->andFilterWhere([
+                'like',
+                'value',
+                $this->value
+            ]);
 
         return $dataProvider;
     }

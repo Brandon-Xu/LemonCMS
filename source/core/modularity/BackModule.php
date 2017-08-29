@@ -1,4 +1,5 @@
 <?php
+
 namespace source\core\modularity;
 
 class BackModule extends BaseModule

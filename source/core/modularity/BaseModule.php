@@ -1,7 +1,9 @@
 <?php
+
 namespace source\core\modularity;
 
 use source\LuLu;
+
 class BaseModule extends \source\core\base\BaseModule
 {
 
@@ -21,7 +23,7 @@ class BaseModule extends \source\core\base\BaseModule
 
     public function init() {
         parent::init();
-        $this->modularityService=LuLu::getService('modularity');
+        $this->modularityService = LuLu::getService('modularity');
     }
 
     public function getMenus() {
@@ -32,8 +34,13 @@ class BaseModule extends \source\core\base\BaseModule
 
     public function getPermissions() {
         $permissions = [
-            ['key'=>'create','title'=>'create post','description'=>'create a new post'],
+            [
+                'key' => 'create',
+                'title' => 'create post',
+                'description' => 'create a new post'
+            ],
         ];
+
         return $permissions;
     }
 

@@ -74,14 +74,13 @@ class AttributeBehavior extends Behavior
      */
     public $value;
 
-    public $batch=true;
+    public $batch = TRUE;
 
-    
+
     /**
      * @inheritdoc
      */
-    public function events()
-    {
+    public function events() {
         return array_fill_keys(array_keys($this->attributes), 'evaluateAttributes');
     }
 
@@ -89,12 +88,10 @@ class AttributeBehavior extends Behavior
      * Evaluates the attribute value and assigns it to the current attributes.
      * @param Event $event
      */
-    public function evaluateAttributes($event)
-    {
-        if (!empty($this->attributes[$event->name])) {
-            $attributes = (array) $this->attributes[$event->name];
-            if($this->batch)
-            {
+    public function evaluateAttributes($event) {
+        if (!empty($this->attributes[ $event->name ])) {
+            $attributes = (array)$this->attributes[ $event->name ];
+            if ($this->batch) {
                 $value = $this->getValue($event, $attributes);
                 foreach ($attributes as $attribute) {
                     // ignore attribute names which are not string (e.g. when set by TimestampBehavior::updatedAtAttribute)
@@ -102,9 +99,7 @@ class AttributeBehavior extends Behavior
                         $this->owner->$attribute = $value;
                     }
                 }
-            }
-            else 
-            {
+            } else {
                 foreach ($attributes as $attribute) {
                     // ignore attribute names which are not string (e.g. when set by TimestampBehavior::updatedAtAttribute)
                     if (is_string($attribute)) {
@@ -123,8 +118,7 @@ class AttributeBehavior extends Behavior
      * @param Event $event the event that triggers the current attribute updating.
      * @return mixed the attribute value
      */
-    protected function getValue($event,$attributes)
-    {
+    protected function getValue($event, $attributes) {
         return $this->value instanceof Closure ? call_user_func($this->value, $event, $attributes) : $this->value;
     }
 }

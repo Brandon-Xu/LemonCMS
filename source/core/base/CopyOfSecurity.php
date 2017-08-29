@@ -93,9 +93,8 @@ class Security extends \yii\base\Component
      * @see decryptByPassword()
      * @see encryptByKey()
      */
-    public function encryptByPassword($data, $password)
-    {
-        return $this->encrypt($data, true, $password, null);
+    public function encryptByPassword($data, $password) {
+        return $this->encrypt($data, TRUE, $password, NULL);
     }
 
     /**
@@ -112,9 +111,8 @@ class Security extends \yii\base\Component
      * @see decryptByPassword()
      * @see encryptByKey()
      */
-    public function encryptByKey($data, $inputKey, $info = null)
-    {
-        return $this->encrypt($data, false, $inputKey, $info);
+    public function encryptByKey($data, $inputKey, $info = NULL) {
+        return $this->encrypt($data, FALSE, $inputKey, $info);
     }
 
     /**
@@ -124,9 +122,8 @@ class Security extends \yii\base\Component
      * @return bool|string the decrypted data or false on authentication failure
      * @see encryptByPassword()
      */
-    public function decryptByPassword($data, $password)
-    {
-        return $this->decrypt($data, true, $password, null);
+    public function decryptByPassword($data, $password) {
+        return $this->decrypt($data, TRUE, $password, NULL);
     }
 
     /**
@@ -137,9 +134,8 @@ class Security extends \yii\base\Component
      * @return bool|string the decrypted data or false on authentication failure
      * @see encryptByKey()
      */
-    public function decryptByKey($data, $inputKey, $info = null)
-    {
-        return $this->decrypt($data, false, $inputKey, $info);
+    public function decryptByKey($data, $inputKey, $info = NULL) {
+        return $this->decrypt($data, FALSE, $inputKey, $info);
     }
 
     /**
@@ -148,16 +144,15 @@ class Security extends \yii\base\Component
      * @throws InvalidConfigException if mcrypt extension is not installed
      * @throws Exception if mcrypt initialization fails
      */
-    protected function getCryptModule()
-    {
-        if ($this->_cryptModule === null) {
+    protected function getCryptModule() {
+        if ($this->_cryptModule === NULL) {
             if (!extension_loaded('mcrypt')) {
                 throw new InvalidConfigException('The mcrypt PHP extension is not installed.');
             }
 
             $this->_cryptModule = @mcrypt_module_open(self::MCRYPT_CIPHER, '', self::MCRYPT_MODE, '');
-            if ($this->_cryptModule === false) {
-                $this->_cryptModule = null;
+            if ($this->_cryptModule === FALSE) {
+                $this->_cryptModule = NULL;
                 throw new Exception('Failed to initialize the mcrypt module.');
             }
         }
@@ -165,11 +160,10 @@ class Security extends \yii\base\Component
         return $this->_cryptModule;
     }
 
-    public function __destruct()
-    {
-        if ($this->_cryptModule !== null) {
+    public function __destruct() {
+        if ($this->_cryptModule !== NULL) {
             mcrypt_module_close($this->_cryptModule);
-            $this->_cryptModule = null;
+            $this->_cryptModule = NULL;
         }
     }
 
@@ -185,8 +179,7 @@ class Security extends \yii\base\Component
      * @throws Exception if PHP Mcrypt extension is not loaded or failed to be initialized
      * @see decrypt()
      */
-    protected function encrypt($data, $passwordBased, $secret, $info)
-    {
+    protected function encrypt($data, $passwordBased, $secret, $info) {
         $module = $this->getCryptModule();
 
         $keySalt = $this->generateRandomKey(self::KEY_SIZE);
@@ -203,8 +196,8 @@ class Security extends \yii\base\Component
         $encrypted = mcrypt_generic($module, $data);
         mcrypt_generic_deinit($module);
 
-        $authKey = $this->hkdf(self::KDF_HASH, $key, null, self::AUTH_KEY_INFO, self::KEY_SIZE);
-        $hashed = $this->hashData($iv . $encrypted, $authKey);
+        $authKey = $this->hkdf(self::KDF_HASH, $key, NULL, self::AUTH_KEY_INFO, self::KEY_SIZE);
+        $hashed = $this->hashData($iv.$encrypted, $authKey);
 
         /*
          * Output: [keySalt][MAC][IV][ciphertext]
@@ -212,7 +205,8 @@ class Security extends \yii\base\Component
          * - MAC: message authentication code, length same as the output of MAC_HASH
          * - IV: initialization vector, length set by CRYPT_CIPHER and CRYPT_MODE, mcrypt_enc_get_iv_size()
          */
-        return $keySalt . $hashed;
+
+        return $keySalt.$hashed;
     }
 
     /**
@@ -224,8 +218,7 @@ class Security extends \yii\base\Component
      * @return bool|string the decrypted data or false on authentication failure
      * @see encrypt()
      */
-    protected function decrypt($data, $passwordBased, $secret, $info)
-    {
+    protected function decrypt($data, $passwordBased, $secret, $info) {
         $keySalt = StringHelper::byteSubstr($data, 0, self::KEY_SIZE);
         if ($passwordBased) {
             $key = $this->pbkdf2(self::KDF_HASH, $secret, $keySalt, $this->derivationIterations, self::KEY_SIZE);
@@ -233,16 +226,16 @@ class Security extends \yii\base\Component
             $key = $this->hkdf(self::KDF_HASH, $secret, $keySalt, $info, self::KEY_SIZE);
         }
 
-        $authKey = $this->hkdf(self::KDF_HASH, $key, null, self::AUTH_KEY_INFO, self::KEY_SIZE);
-        $data = $this->validateData(StringHelper::byteSubstr($data, self::KEY_SIZE, null), $authKey);
-        if ($data === false) {
-            return false;
+        $authKey = $this->hkdf(self::KDF_HASH, $key, NULL, self::AUTH_KEY_INFO, self::KEY_SIZE);
+        $data = $this->validateData(StringHelper::byteSubstr($data, self::KEY_SIZE, NULL), $authKey);
+        if ($data === FALSE) {
+            return FALSE;
         }
 
         $module = $this->getCryptModule();
         $ivSize = mcrypt_enc_get_iv_size($module);
         $iv = StringHelper::byteSubstr($data, 0, $ivSize);
-        $encrypted = StringHelper::byteSubstr($data, $ivSize, null);
+        $encrypted = StringHelper::byteSubstr($data, $ivSize, NULL);
         mcrypt_generic_init($module, $key, $iv);
         $decrypted = mdecrypt_generic($module, $encrypted);
         mcrypt_generic_deinit($module);
@@ -255,13 +248,12 @@ class Security extends \yii\base\Component
      * @param string $data the data to pad
      * @return string the padded data
      */
-    protected function addPadding($data)
-    {
+    protected function addPadding($data) {
         $module = $this->getCryptModule();
         $blockSize = mcrypt_enc_get_block_size($module);
         $pad = $blockSize - (StringHelper::byteLength($data) % $blockSize);
 
-        return $data . str_repeat(chr($pad), $pad);
+        return $data.str_repeat(chr($pad), $pad);
     }
 
     /**
@@ -269,16 +261,15 @@ class Security extends \yii\base\Component
      * @param string $data the data to trim
      * @return string the trimmed data
      */
-    protected function stripPadding($data)
-    {
-        $end = StringHelper::byteSubstr($data, -1, null);
+    protected function stripPadding($data) {
+        $end = StringHelper::byteSubstr($data, -1, NULL);
         $last = ord($end);
         $n = StringHelper::byteLength($data) - $last;
-        if (StringHelper::byteSubstr($data, $n, null) === str_repeat($end, $last)) {
+        if (StringHelper::byteSubstr($data, $n, NULL) === str_repeat($end, $last)) {
             return StringHelper::byteSubstr($data, 0, $n);
         }
 
-        return false;
+        return FALSE;
     }
 
     /**
@@ -296,36 +287,36 @@ class Security extends \yii\base\Component
      * @throws InvalidParamException
      * @return string the derived key
      */
-    public function hkdf($algo, $inputKey, $salt = null, $info = null, $length = 0)
-    {
-        $test = @hash_hmac($algo, '', '', true);
+    public function hkdf($algo, $inputKey, $salt = NULL, $info = NULL, $length = 0) {
+        $test = @hash_hmac($algo, '', '', TRUE);
         if (!$test) {
-            throw new InvalidParamException('Failed to generate HMAC with hash algorithm: ' . $algo);
+            throw new InvalidParamException('Failed to generate HMAC with hash algorithm: '.$algo);
         }
         $hashLength = StringHelper::byteLength($test);
         if (is_string($length) && preg_match('{^\d{1,16}$}', $length)) {
-            $length = (int) $length;
+            $length = (int)$length;
         }
         if (!is_integer($length) || $length < 0 || $length > 255 * $hashLength) {
             throw new InvalidParamException('Invalid length');
         }
         $blocks = $length !== 0 ? ceil($length / $hashLength) : 1;
 
-        if ($salt === null) {
+        if ($salt === NULL) {
             $salt = str_repeat("\0", $hashLength);
         }
-        $prKey = hash_hmac($algo, $inputKey, $salt, true);
+        $prKey = hash_hmac($algo, $inputKey, $salt, TRUE);
 
         $hmac = '';
         $outputKey = '';
         for ($i = 1; $i <= $blocks; $i++) {
-            $hmac = hash_hmac($algo, $hmac . $info . chr($i), $prKey, true);
+            $hmac = hash_hmac($algo, $hmac.$info.chr($i), $prKey, TRUE);
             $outputKey .= $hmac;
         }
 
         if ($length !== 0) {
             $outputKey = StringHelper::byteSubstr($outputKey, 0, $length);
         }
+
         return $outputKey;
     }
 
@@ -343,29 +334,29 @@ class Security extends \yii\base\Component
      * @throws InvalidParamException
      * @return string the derived key
      */
-    public function pbkdf2($algo, $password, $salt, $iterations, $length = 0)
-    {
+    public function pbkdf2($algo, $password, $salt, $iterations, $length = 0) {
         if (function_exists('hash_pbkdf2')) {
-            $outputKey = hash_pbkdf2($algo, $password, $salt, $iterations, $length, true);
-            if ($outputKey === false) {
+            $outputKey = hash_pbkdf2($algo, $password, $salt, $iterations, $length, TRUE);
+            if ($outputKey === FALSE) {
                 throw new InvalidParamException('Invalid parameters to hash_pbkdf2()');
             }
+
             return $outputKey;
         }
 
         // todo: is there a nice way to reduce the code repetition in hkdf() and pbkdf2()?
-        $test = @hash_hmac($algo, '', '', true);
+        $test = @hash_hmac($algo, '', '', TRUE);
         if (!$test) {
-            throw new InvalidParamException('Failed to generate HMAC with hash algorithm: ' . $algo);
+            throw new InvalidParamException('Failed to generate HMAC with hash algorithm: '.$algo);
         }
         if (is_string($iterations) && preg_match('{^\d{1,16}$}', $iterations)) {
-            $iterations = (int) $iterations;
+            $iterations = (int)$iterations;
         }
         if (!is_integer($iterations) || $iterations < 1) {
             throw new InvalidParamException('Invalid iterations');
         }
         if (is_string($length) && preg_match('{^\d{1,16}$}', $length)) {
-            $length = (int) $length;
+            $length = (int)$length;
         }
         if (!is_integer($length) || $length < 0) {
             throw new InvalidParamException('Invalid length');
@@ -375,10 +366,10 @@ class Security extends \yii\base\Component
 
         $outputKey = '';
         for ($j = 1; $j <= $blocks; $j++) {
-            $hmac = hash_hmac($algo, $salt . pack('N', $j), $password, true);
+            $hmac = hash_hmac($algo, $salt.pack('N', $j), $password, TRUE);
             $xorsum = $hmac;
             for ($i = 1; $i < $iterations; $i++) {
-                $hmac = hash_hmac($algo, $hmac, $password, true);
+                $hmac = hash_hmac($algo, $hmac, $password, TRUE);
                 $xorsum ^= $hmac;
             }
             $outputKey .= $xorsum;
@@ -387,6 +378,7 @@ class Security extends \yii\base\Component
         if ($length !== 0) {
             $outputKey = StringHelper::byteSubstr($outputKey, 0, $length);
         }
+
         return $outputKey;
     }
 
@@ -406,13 +398,13 @@ class Security extends \yii\base\Component
      * @see hkdf()
      * @see pbkdf2()
      */
-    public function hashData($data, $key, $rawHash = false)
-    {
+    public function hashData($data, $key, $rawHash = FALSE) {
         $hash = hash_hmac(self::MAC_HASH, $data, $key, $rawHash);
         if (!$hash) {
-            throw new InvalidConfigException('Failed to generate HMAC with hash algorithm: ' . self::MAC_HASH);
+            throw new InvalidConfigException('Failed to generate HMAC with hash algorithm: '.self::MAC_HASH);
         }
-        return $hash . $data;
+
+        return $hash.$data;
     }
 
     /**
@@ -430,16 +422,15 @@ class Security extends \yii\base\Component
      * @return string the real data with the hash stripped off. False if the data is tampered.
      * @see hashData()
      */
-    public function validateData($data, $key, $rawHash = false)
-    {
+    public function validateData($data, $key, $rawHash = FALSE) {
         $test = @hash_hmac(self::MAC_HASH, '', '', $rawHash);
         if (!$test) {
-            throw new InvalidConfigException('Failed to generate HMAC with hash algorithm: ' . self::MAC_HASH);
+            throw new InvalidConfigException('Failed to generate HMAC with hash algorithm: '.self::MAC_HASH);
         }
         $hashLength = StringHelper::byteLength($test);
         if (StringHelper::byteLength($data) >= $hashLength) {
             $hash = StringHelper::byteSubstr($data, 0, $hashLength);
-            $pureData = StringHelper::byteSubstr($data, $hashLength, null);
+            $pureData = StringHelper::byteSubstr($data, $hashLength, NULL);
 
             $calculatedHash = hash_hmac(self::MAC_HASH, $pureData, $key, $rawHash);
 
@@ -447,7 +438,8 @@ class Security extends \yii\base\Component
                 return $pureData;
             }
         }
-        return false;
+
+        return FALSE;
     }
 
     /**
@@ -459,15 +451,15 @@ class Security extends \yii\base\Component
      * @throws Exception on failure.
      * @return string the generated random bytes
      */
-    public function generateRandomKey($length = 32)
-    {
+    public function generateRandomKey($length = 32) {
         if (!extension_loaded('mcrypt')) {
             throw new InvalidConfigException('The mcrypt PHP extension is not installed.');
         }
         $bytes = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
-        if ($bytes === false) {
+        if ($bytes === FALSE) {
             throw new Exception('Unable to generate random bytes.');
         }
+
         return $bytes;
     }
 
@@ -479,8 +471,7 @@ class Security extends \yii\base\Component
      * @throws Exception Exception on failure.
      * @return string the generated random key
      */
-    public function generateRandomString($length = 32)
-    {
+    public function generateRandomString($length = 32) {
         $bytes = $this->generateRandomKey($length);
         // '=' character(s) returned by base64_encode() are always discarded because
         // they are guaranteed to be after position $length in the base64_encode() output.
@@ -521,13 +512,13 @@ class Security extends \yii\base\Component
      * might increase in future versions of PHP (http://php.net/manual/en/function.password-hash.php)
      * @see validatePassword()
      */
-    public function generatePasswordHash($password, $cost = 13)
-    {
+    public function generatePasswordHash($password, $cost = 13) {
         switch ($this->passwordHashStrategy) {
             case 'password_hash':
                 if (!function_exists('password_hash')) {
                     throw new InvalidConfigException('Password hash key strategy "password_hash" requires PHP >= 5.5.0, either upgrade your environment or use another strategy.');
                 }
+
                 /** @noinspection PhpUndefinedConstantInspection */
                 return password_hash($password, PASSWORD_DEFAULT, ['cost' => $cost]);
             case 'crypt':
@@ -537,6 +528,7 @@ class Security extends \yii\base\Component
                 if (!is_string($hash) || strlen($hash) !== 60) {
                     throw new Exception('Unknown error occurred while generating hash.');
                 }
+
                 return $hash;
             default:
                 throw new InvalidConfigException("Unknown password hash strategy '{$this->passwordHashStrategy}'");
@@ -552,13 +544,13 @@ class Security extends \yii\base\Component
      * @throws InvalidConfigException on unsupported password hash strategy is configured.
      * @see generatePasswordHash()
      */
-    public function validatePassword($password, $hash)
-    {
+    public function validatePassword($password, $hash) {
         if (!is_string($password) || $password === '') {
             throw new InvalidParamException('Password must be a string and cannot be empty.');
         }
 
-        if (!preg_match('/^\$2[axy]\$(\d\d)\$[\.\/0-9A-Za-z]{22}/', $hash, $matches) || $matches[1] < 4 || $matches[1] > 30) {
+        if (!preg_match('/^\$2[axy]\$(\d\d)\$[\.\/0-9A-Za-z]{22}/', $hash,
+                $matches) || $matches[ 1 ] < 4 || $matches[ 1 ] > 30) {
             throw new InvalidParamException('Hash is invalid.');
         }
 
@@ -567,13 +559,15 @@ class Security extends \yii\base\Component
                 if (!function_exists('password_verify')) {
                     throw new InvalidConfigException('Password hash key strategy "password_hash" requires PHP >= 5.5.0, either upgrade your environment or use another strategy.');
                 }
+
                 return password_verify($password, $hash);
             case 'crypt':
                 $test = crypt($password, $hash);
                 $n = strlen($test);
                 if ($n !== 60) {
-                    return false;
+                    return FALSE;
                 }
+
                 return $this->compareString($test, $hash);
             default:
                 throw new InvalidConfigException("Unknown password hash strategy '{$this->passwordHashStrategy}'");
@@ -592,8 +586,7 @@ class Security extends \yii\base\Component
      * @return string the random salt value.
      * @throws InvalidParamException if the cost parameter is not between 4 and 31
      */
-    protected function generateSalt($cost = 13)
-    {
+    protected function generateSalt($cost = 13) {
         $cost = (int)$cost;
         if ($cost < 4 || $cost > 31) {
             throw new InvalidParamException('Cost must be between 4 and 31.');
@@ -616,16 +609,16 @@ class Security extends \yii\base\Component
      * @param string $actual user-supplied string.
      * @return boolean whether strings are equal.
      */
-    public function compareString($expected, $actual)
-    {
+    public function compareString($expected, $actual) {
         $expected .= "\0";
         $actual .= "\0";
         $expectedLength = StringHelper::byteLength($expected);
         $actualLength = StringHelper::byteLength($actual);
         $diff = $expectedLength - $actualLength;
         for ($i = 0; $i < $actualLength; $i++) {
-            $diff |= (ord($actual[$i]) ^ ord($expected[$i % $expectedLength]));
+            $diff |= (ord($actual[ $i ]) ^ ord($expected[ $i % $expectedLength ]));
         }
+
         return $diff === 0;
     }
 }

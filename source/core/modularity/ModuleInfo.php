@@ -1,4 +1,5 @@
 <?php
+
 namespace source\core\modularity;
 
 use yii\base\Object;
@@ -20,7 +21,7 @@ class ModuleInfo extends Object
 
     public $author_url;
 
-    public $is_system = false;
+    public $is_system = FALSE;
 
     public $is_content;
 

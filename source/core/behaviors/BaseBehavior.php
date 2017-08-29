@@ -8,7 +8,6 @@
 namespace source\core\behaviors;
 
 
-
 class BaseBehavior extends \yii\base\Behavior
 {
 

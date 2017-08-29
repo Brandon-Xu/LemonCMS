@@ -1,11 +1,8 @@
 <?php
-namespace source\core\front\widgets;
 
-use Yii;
-use yii\helpers\Html;
+namespace source\core\front\widgets;
 
 class ActiveField extends \yii\widgets\ActiveField
 {
-    
-    
+
 }

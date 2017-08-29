@@ -1,4 +1,5 @@
 <?php
+
 namespace source\core\base;
 
 use yii\base\Module;
