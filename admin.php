@@ -1,6 +1,7 @@
 <?php
 
 use source\core\back\BackApplication;
+use source\libs\Common;
 
 // comment out the following two lines when deployed to production
 defined('YII_DEBUG') or define('YII_DEBUG', TRUE);
@@ -20,6 +21,8 @@ $config = yii\helpers\ArrayHelper::merge(
     require(__DIR__.'/backend/config/main.php'),
     require(__DIR__.'/backend/config/main-local.php')
 );
+
+Common::checkInstall($config);
 
 $app = new BackApplication($config);
 $app->defaultRoute = '/site/index';

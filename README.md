@@ -8,6 +8,11 @@ Yii2 (https://github.com/yiisoft/yii2)
 
 powerful and modularity CMS, based on lulucms2 >= Yii2
 
+clone 下来之后记得要运行一下这个代码安装必要的库哟
+```
+composer install 
+```
+
 因为 lulucms2 的作者貌似已经弃坑了，所以本兄贵因个人需要就直接扒过来改了点忍不了的比较蠢的 bug 并重新缩进了部分文件的代码
 
 不知道会不会一直更新及添加功能 ㄟ( ▔, ▔ )ㄏ 所以你们先不要对这个项目抱有浓厚期望，

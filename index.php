@@ -1,7 +1,6 @@
 <?php
 
 use source\core\front\FrontApplication;
-use source\LuLu;
 use source\libs\Common;
 
 // comment out the following two lines when deployed to production
@@ -22,6 +21,8 @@ $config = yii\helpers\ArrayHelper::merge(
     require(__DIR__ . '/frontend/config/main.php'),
     require(__DIR__ . '/frontend/config/main-local.php')
 );
+
+Common::checkInstall($config);
 
 $app = new FrontApplication($config);
 if(Common::getConfigValue('sys_status') === '0') { $app->catchAll = ['site/close', 'message' => 'test']; }
