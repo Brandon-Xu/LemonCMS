@@ -48,13 +48,6 @@ class SiteController extends FrontController
         ];
     }
 
-    public function actionApp() {
-
-        $value = App::getData();
-
-        return $this->jsonResponse($value);
-    }
-
     public function actionIndex() {
         return $this->render('index', []);
     }
