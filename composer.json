@@ -1,0 +1,40 @@
+{
+    "name": "brandonxu/lemon-cms",
+    "description": "A CMS system CMS system based on yii2",
+    "type": "project",
+    "license": "MIT License",
+    "authors": [
+        {
+            "name": "BrandonXu",
+            "email": "lemonxl1994@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "*",
+        "yiisoft/yii2-bootstrap": "*",
+        "yiisoft/yii2-codeception": "*",
+        "yiisoft/yii2-composer": "*",
+        "yiisoft/yii2-debug": "*",
+        "yiisoft/yii2-faker": "*",
+        "yiisoft/yii2-gii": "*",
+        "yiisoft/yii2-swiftmailer": "*"
+    },
+    "require-dev": {
+    },
+    "config": {
+        "process-timeout": 1800
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    }
+}
