@@ -28,7 +28,6 @@ class SiteController extends FrontController
             [
                 'class' => Cors::className(),
                 'cors' => [
-                    'Origin' => ['http://j.brandon.com'],
                     //定义允许来源的数组
                     'Access-Control-Request-Method' => [
                         'GET',
