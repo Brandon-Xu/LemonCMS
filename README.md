@@ -1,6 +1,6 @@
 # LemonCMS
 
-本项目基于下面俩项目基础上随心所欲而成
+本项目基于下面俩项目基础上随心所欲而成，并且看心情要不要一直维护下去
 
 lulucms2 (https://github.com/yiifans/lulucms2)
 
