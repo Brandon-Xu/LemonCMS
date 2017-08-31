@@ -36,7 +36,6 @@ class ApiController extends BaseRestController
     }
 
     public function actionIndex(){
-        dd(app()->urlManager);
         return [123];
     }
 

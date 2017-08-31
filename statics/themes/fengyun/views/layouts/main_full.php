@@ -1,14 +1,8 @@
-<?php 
-
-use source\libs\Resource;
-use source\models\Menu;
-use source\LuLu;
-
-
+<?php
 ?>
 
-<?php echo $this->render('header');?>
+<?php echo $this->render('header'); ?>
 
-                <?php echo $content;?>
-                    
-<?php echo $this->render('footer');?>
+<?php echo $content; ?>
+
+<?php echo $this->render('footer'); ?>

@@ -12,30 +12,23 @@ class LuLu extends \Yii
 {
 
     public static function getApp() {
-        return self::$app;
+        return app();
     }
 
     public static function getView() {
-        $app = self::getApp();
-
-        return $app->getView();
+        return app()->getView();
     }
 
     public static function getRequest() {
-        $app = self::getApp();
-
-        return $app->request;
+        return app()->request;
     }
 
     public static function getResponse() {
-        $app = static::getApp();
-
-        return $app->response;
+        return app()->response;
     }
 
     public static function getBaseUrl($url = NULL) {
-        $app = self::getApp();
-        $baseUrl = $app->request->getBaseUrl();
+        $baseUrl = app()->request->getBaseUrl();
         if ($url !== NULL) {
             $baseUrl .= $url;
         }
@@ -44,8 +37,7 @@ class LuLu extends \Yii
     }
 
     public static function getHomeUrl($url = NULL) {
-        $app = self::getApp();
-        $homeUrl = $app->getHomeUrl();
+        $homeUrl = app()->getHomeUrl();
         if ($url !== NULL) {
             $homeUrl .= $url;
         }
@@ -72,24 +64,21 @@ class LuLu extends \Yii
     }
 
     public static function getAppParam($key, $defaultValue = NULL) {
-        $app = self::getApp();
-        if (array_key_exists($key, $app->params)) {
-            return $app->params[ $key ];
+        if (array_key_exists($key, app()->params)) {
+            return app()->params[ $key ];
         }
 
         return $defaultValue;
     }
 
     public static function setAppParam($array) {
-        $app = self::getApp();
         foreach ($array as $key => $value) {
-            $app->params[ $key ] = $value;
+            app()->params[ $key ] = $value;
         }
     }
 
     public static function getViewParam($key, $defaultValue = NULL) {
-        $app = self::getApp();
-        $view = $app->getView();
+        $view = app()->getView();
         if (array_key_exists($key, $view->params)) {
             return $view->params[ $key ];
         }
@@ -98,8 +87,7 @@ class LuLu extends \Yii
     }
 
     public static function setViewParam($array) {
-        $app = self::getApp();
-        $view = $app->getView();
+        $view = app()->getView();
         foreach ($array as $name => $value) {
             $view->params[ $name ] = $value;
         }
@@ -158,8 +146,7 @@ class LuLu extends \Yii
     }
 
     public static function getFlash($type, $default = NULL) {
-        $app = self::getApp();
-        $flash = $app->session->getFlash($type, $default);
+        $flash = app()->session->getFlash($type, $default);
         if ($flash === NULL) {
             $flash = [];
         }
@@ -182,8 +169,7 @@ class LuLu extends \Yii
             }
             $message = $flash;
         }
-        $app = self::getApp();
-        $app->session->setFlash($type, $message);
+        app()->session->setFlash($type, $message);
     }
 
     public static function setWarningMessage($message) {
@@ -219,36 +205,27 @@ class LuLu extends \Yii
     }
 
     public static function getCache($key) {
-        $cache = LuLu::$app->cache;
-
-        return $cache->get($key);
+        return app()->cache->get($key);
     }
 
     public static function setCache($key, $value, $duration = 0, $dependency = NULL) {
-        $cache = LuLu::$app->cache;
-
-        return $cache->set($key, $value, $duration, $dependency);
+        return app()->cache->set($key, $value, $duration, $dependency);
     }
 
     public static function deleteCache($key) {
-        $cache = LuLu::$app->cache;
-        $cache->delete($key);
+        app()->cache->delete($key);
     }
 
     public static function flushCache() {
-        $cache = LuLu::$app->cache;
-        $cache->flush();
+        app()->cache->flush();
     }
 
     public static function getUser() {
-        $app = self::getApp();
-
-        return $app->user;
+        return app()->user;
     }
 
     public static function getIdentity() {
-        $app = self::getApp();
-        $identity = $app->user->getIdentity();
+        $identity = app()->user->getIdentity();
         if (empty($identity)) {
             $identity = new \source\models\User();
         }
@@ -257,14 +234,11 @@ class LuLu extends \Yii
     }
 
     public static function getIsGuest() {
-        $app = self::getApp();
-
-        return $app->user->isGuest;
+        return app()->user->isGuest;
     }
 
     public static function checkIsGuest($loginUrl = NULL) {
-        $app = self::getApp();
-        $isGuest = $app->user->isGuest;
+        $isGuest = app()->user->isGuest;
         if ($isGuest) {
             if ($loginUrl == FALSE) {
                 return FALSE;
@@ -275,50 +249,36 @@ class LuLu extends \Yii
                 ];
             }
 
-            return $app->getResponse()->redirect(Url::to($loginUrl), 302);
+            return app()->getResponse()->redirect(Url::to($loginUrl), 302);
         }
 
         return TRUE;
     }
 
     public static function checkAuth($permissionName, $params = [], $allowCaching = TRUE) {
-        $app = self::getApp();
-
-        return $app->user->can($permissionName, $params, $allowCaching);
+        return app()->user->can($permissionName, $params, $allowCaching);
     }
 
     public static function getDB() {
-        return self::getApp()->db;
+        return app()->db;
     }
 
     public static function createCommand($sql = NULL) {
-        $db = self::getDB();
-        if ($sql !== NULL) {
-            return $db->createCommand($sql);
-        }
+        if ($sql !== NULL) return app()->db->createCommand($sql);
 
-        return $db->createCommand();
+        return app()->db->createCommand();
     }
 
     public static function execute($sql) {
-        $db = self::getDB();
-        $command = $db->createCommand($sql);
-
-        return $command->execute();
+        return self::createCommand($sql)->execute();
     }
 
     public static function queryAll($sql) {
-        $db = self::getDB();
-        $command = $db->createCommand($sql);
-
-        return $command->queryAll();
+        return self::createCommand($sql)->queryAll();
     }
 
     public static function queryOne($sql) {
-        $db = self::getDB();
-        $command = $db->createCommand($sql);
-
-        return $command->queryOne();
+        return self::createCommand($sql)->queryOne();
     }
 
     /**
@@ -361,7 +321,7 @@ class LuLu extends \Yii
 
     public static function getService($id) {
         $id = $id.'Service';
-        $component = self::$app->get($id, TRUE);
+        $component = app()->get($id, TRUE);
         if ($component instanceof ModuleService) {
             return $component;
         }

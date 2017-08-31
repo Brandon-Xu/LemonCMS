@@ -17,7 +17,7 @@ class BackView extends BaseView
     public function setTheme() {
         $currentTheme = Resource::getAdminTheme();
 
-        $moduleId = LuLu::$app->controller->module->id;
+        $moduleId = app()->controller->module->id;
 
         $config = [
             'pathMap' => [

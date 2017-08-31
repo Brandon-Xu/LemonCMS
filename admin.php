@@ -23,8 +23,4 @@ $config = yii\helpers\ArrayHelper::merge(
 );
 
 Common::checkInstall($config);
-
-$app = new BackApplication($config);
-$app->defaultRoute = '/site/index';
-$app->run();
-
+(new BackApplication($config))->run();
