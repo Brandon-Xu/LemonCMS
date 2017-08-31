@@ -11,9 +11,3 @@ Yii::$classMap['yii\helpers\Markdown'] = '@source/helpers/Markdown.php';
 Yii::$classMap['yii\helpers\StringHelper'] = '@source/helpers/StringHelper.php';
 Yii::$classMap['yii\helpers\Url'] = '@source/helpers/Url.php';
 Yii::$classMap['yii\helpers\VarDumper'] = '@source/helpers/VarDumper.php';
-
-function app(){	return Yii::$app; }
-
-function dd($d){
-    \yii\helpers\VarDumper::dump($d, 999, true);exit;
-}
