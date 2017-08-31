@@ -2,7 +2,12 @@
 
 date_default_timezone_set('PRC');
 
-$db = require(__DIR__.'/db.php');
+// 正常人不要理会这个文件！！这个只是方便阿婆主自己用的而已！！
+$db = file_exists(__DIR__ . '/local-db.php') ? require(__DIR__.'/local-db.php') : require(__DIR__.'/db.php');
+
+// 正常人可以用这行来引入数据库配置！！，注释掉上面那行！
+//$db = require(__DIR__.'/db.php');
+
 
 return [
     'vendorPath' => dirname(dirname(__DIR__)).'/vendor',
