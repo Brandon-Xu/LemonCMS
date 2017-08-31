@@ -3,7 +3,9 @@
 namespace frontend\controllers;
 
 use yii\filters\Cors;
+use source\models\ContactForm;
 use source\core\front\FrontController;
+use source\models\User;
 
 class SiteController extends FrontController
 {

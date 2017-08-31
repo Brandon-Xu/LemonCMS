@@ -15,8 +15,6 @@ require (__DIR__ . '/source/override.php');
 require (__DIR__ . '/data/config/bootstrap.php');
 require (__DIR__ . '/install/config/bootstrap.php');
 
-
-
 $config = yii\helpers\ArrayHelper::merge(
 		require(__DIR__ . '/data/config/main.php'),
 		require(__DIR__ . '/data/config/main-local.php'),
