@@ -8,7 +8,7 @@ use source\core\modularity\ModuleService;
 use yii\base\InvalidParamException;
 use yii\helpers\Url;
 
-require_once './libs/functions.php';
+require_once __DIR__.'/libs/functions.php';
 
 class LuLu extends \Yii
 {
