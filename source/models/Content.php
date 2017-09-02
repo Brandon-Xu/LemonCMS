@@ -67,6 +67,7 @@ use source\LuLu;
  *
  * @property ContentBody $body
  * @property Taxonomy $taxonomy
+ *
  */
 class Content extends BaseActiveRecord
 {
@@ -75,6 +76,10 @@ class Content extends BaseActiveRecord
      * @var ContentBody $bodyClass 内容表对应的 model 名
      */
     private $_bodyClass;
+
+    public static function find() {
+        return new ContentQuery(get_called_class());
+    }
 
     /**
      * @return string
@@ -176,20 +181,6 @@ class Content extends BaseActiveRecord
 
         if (!empty($condition)) {
             $query->andWhere($condition);
-        }
-
-        return $query;
-    }
-
-    /**
-     * @param null $where
-     * @return \source\core\base\ActiveQuery|\yii\db\ActiveQuery
-     */
-    public static function findPublished($where = NULL) {
-        $query = self::find();
-        $query->where(['status' => Constants::Status_Publish]);
-        if (!empty($where)) {
-            $query->andWhere($where);
         }
 
         return $query;

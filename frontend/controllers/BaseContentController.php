@@ -22,7 +22,7 @@ class BaseContentController extends FrontController
      * @return string
      */
     public function actionIndex() {
-        $query = Content::findPublished(['content_type' => $this->content_type]);
+        $query = Content::find()->published()->andWhere(['content_type' => $this->content_type]);
 
         $locals = LuLu::getPagedRows($query, [
             'orderBy' => 'created_at desc',
@@ -38,7 +38,7 @@ class BaseContentController extends FrontController
      * @return string
      */
     public function actionList($taxonomy = -1) {
-        $query = Content::findPublished(['content_type' => $this->content_type]);
+        $query = Content::find()->published()->andWhere(['content_type' => $this->content_type]);
         if (intval($taxonomy) > 0) {
             $query->andFilterWhere(['taxonomy_id' => intval($taxonomy)]);
         }

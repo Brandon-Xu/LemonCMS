@@ -13,6 +13,7 @@ use source\LuLu;
 use Yii;
 use source\models\Content;
 use yii\base\InvalidCallException;
+use yii\db\ActiveQuery;
 use yii\rest\ActiveController;
 use yii\web\Response;
 
@@ -140,11 +141,17 @@ class BaseRestController extends ActiveController
      * @return object
      */
     public function listDataProvider() {
-        $query = Content::findPublished(['content_type' => $this->content_type])->with(['taxonomy'])->asArray();
+        $query = Content::find()->published()->normalSelect()->andWhere(['content_type' => $this->content_type])->with(['taxonomy'=>function($query){
+            /** @var $query ActiveQuery */
+            $query->select(['id', 'parent_id', 'category_id', 'name']);
+        }])->asArray();
 
         return Yii::createObject([
             'class' => ActiveDataProvider::className(),
-            'query' => $query
+            'query' => $query,
+            'pagination' => [
+                'pagesize' => $this->pageSize_index,
+            ],
         ]);
     }
 
@@ -157,7 +164,7 @@ class BaseRestController extends ActiveController
         Content::updateAllCounters(['view_count' => 1], ['id' => $id]);
 
         /** @var Content $object */
-        $object = Content::find()->where(['id' => $id])->one();
+        $object = Content::find()->published()->normalSelect()->where(['id' => $id])->one();
         $data = $object->toArray();
         $data[ 'taxonomy' ] = $object->taxonomy;
         $data[ 'body' ] = $object->body;
