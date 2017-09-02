@@ -7,7 +7,6 @@ use source\modules\taxonomy\models\Taxonomy;
 use source\modules\taxonomy\models\search\TaxonomySearch;
 use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\data\ArrayDataProvider;
 
 /**
@@ -16,20 +15,18 @@ use yii\data\ArrayDataProvider;
 class TaxonomyController extends BackController
 {
 
-
     /**
      * Lists all Taxonomy models.
+     * @param $category
      * @return mixed
      */
-    public function actionIndex($category)
-    {
+    public function actionIndex($category) {
         $searchModel = new TaxonomySearch();
-        
-        $dataProvider = new ArrayDataProvider();
-        $dataProvider->allModels=Taxonomy::getArrayTree($category);
-        $dataProvider->key='id';
 
-        
+        $dataProvider = new ArrayDataProvider();
+        $dataProvider->allModels = Taxonomy::getArrayTree($category, FALSE);
+        $dataProvider->key = 'id';
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -39,10 +36,10 @@ class TaxonomyController extends BackController
     /**
      * Displays a single Taxonomy model.
      * @param integer $id
+     * @param string $type
      * @return mixed
      */
-    public function actionView($id,$type)
-    {
+    public function actionView($id, $type) {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -51,15 +48,18 @@ class TaxonomyController extends BackController
     /**
      * Creates a new Taxonomy model.
      * If creation is successful, the browser will be redirected to the 'view' page.
+     * @param $category
      * @return mixed
      */
-    public function actionCreate($category)
-    {
+    public function actionCreate($category) {
         $model = new Taxonomy();
-		$model->category_id=$category;
-		$model->loadDefaultValues();
+        $model->category_id = $category;
+        $model->loadDefaultValues();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'category'=>$category]);
+            return $this->redirect([
+                'index',
+                'category' => $category
+            ]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -73,13 +73,15 @@ class TaxonomyController extends BackController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
-        $category=$model->category_id;
+        $category = $model->category_id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'category'=>$category]);
+            return $this->redirect([
+                'index',
+                'category' => $category
+            ]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -93,13 +95,15 @@ class TaxonomyController extends BackController
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $model = $this->findModel($id);
         $model->delete();
-        $category=$model->category_id;
+        $category = $model->category_id;
 
-        return $this->redirect(['index', 'category'=>$category]);
+        return $this->redirect([
+            'index',
+            'category' => $category
+        ]);
     }
 
     /**
@@ -109,9 +113,8 @@ class TaxonomyController extends BackController
      * @return Taxonomy the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
-        if (($model = Taxonomy::findOne($id)) !== null) {
+    protected function findModel($id) {
+        if (($model = Taxonomy::findOne($id)) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

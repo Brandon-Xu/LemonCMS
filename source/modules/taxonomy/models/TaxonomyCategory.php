@@ -2,7 +2,7 @@
 
 namespace source\modules\taxonomy\models;
 
-use Yii;
+use source\core\base\BaseActiveRecord;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -12,7 +12,7 @@ use yii\helpers\ArrayHelper;
  * @property string $name
  * @property string $description
  */
-class TaxonomyCategory extends \source\core\base\BaseActiveRecord
+class TaxonomyCategory extends BaseActiveRecord
 {
     /**
      * @inheritdoc

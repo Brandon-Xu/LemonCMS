@@ -1,4 +1,5 @@
 <?php
+
 namespace backend\controllers;
 
 use Yii;
@@ -6,8 +7,6 @@ use source\models\Content;
 use source\models\search\ContentSearch;
 use source\core\back\BackController;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use source\libs\Common;
 use yii\helpers\StringHelper;
 use source\LuLu;
 
@@ -20,8 +19,7 @@ abstract class BaseContentController extends BackController
 
     protected $bodyModel;
 
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new ContentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere([
@@ -34,8 +32,7 @@ abstract class BaseContentController extends BackController
         ]);
     }
 
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Content();
         $model->user_id = LuLu::getIdentity()->id;
         $model->user_name = LuLu::getIdentity()->username;
@@ -45,8 +42,7 @@ abstract class BaseContentController extends BackController
         $bodyModel = $this->findBodyModel();
         $bodyModel->loadDefaultValues();
 
-        if ($this->saveContent($model, $bodyModel))
-        {
+        if ($this->saveContent($model, $bodyModel)) {
             return $this->redirect([
                 'index'
             ]);
@@ -58,13 +54,11 @@ abstract class BaseContentController extends BackController
         ]);
     }
 
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
         $bodyModel = $this->findBodyModel($id);
 
-        if ($this->saveContent($model, $bodyModel))
-        {
+        if ($this->saveContent($model, $bodyModel)) {
             return $this->redirect([
                 'index'
             ]);
@@ -76,16 +70,13 @@ abstract class BaseContentController extends BackController
         ]);
     }
 
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $transaction = LuLu::getDB()->beginTransaction();
-        try{
+        try {
             $this->findModel($id)->delete();
             $this->findBodyModel($id)->delete();
             $transaction->commit();
-        }
-        catch (\Exception $e)
-        {
+        } catch (\Exception $e) {
             $transaction->rollBack();
         }
 
@@ -94,78 +85,87 @@ abstract class BaseContentController extends BackController
         ]);
     }
 
-    protected function findModel($id)
-    {
-        if (($model = Content::findOne($id)) !== null)
-        {
+    /**
+     * @param $id
+     * @return array|null|\source\models\ContentBody|static
+     * @throws NotFoundHttpException
+     */
+    protected function findModel($id) {
+        if (($model = Content::findOne($id)) !== NULL) {
             return $model;
-        }
-        else
-        {
+        } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 
-    public function findBodyModel($contentId = null)
-    {
+    /**
+     * @param null $contentId
+     * @return array|null|\source\models\ContentBody|static
+     */
+    public function findBodyModel($contentId = NULL) {
         $bodyClass = $this->bodyClass;
 
-        if ($contentId === null)
-        {
+        if ($contentId === NULL) {
             return new $bodyClass();
-        }
-        else
-        {
+        } else {
+            /* @var $bodyClass yii\db\ActiveRecord */
+            /* @var $ret \source\models\ContentBody */
             $ret = $bodyClass::findOne([
                 'content_id' => $contentId
             ]);
-            if ($ret === null)
-            {
+            if ($ret === NULL) {
                 $ret = new $bodyClass();
                 $ret->content_id = $contentId;
                 $ret->body = '';
                 $ret->save();
             }
+
             return $ret;
         }
     }
 
-    public function saveContent($model, $bodyModel)
-    {
+    /**
+     * @param $model \source\models\ContentBody
+     * @param $bodyModel \source\models\ContentBody
+     * @return bool
+     */
+    public function saveContent($model, $bodyModel) {
         $postDatas = Yii::$app->request->post();
 
-        if ($model->load($postDatas) && $bodyModel->load($postDatas) && $model->validate() && $bodyModel->validate())
-        {
+        if ($model->load($postDatas) && $bodyModel->load($postDatas) && $model->validate() && $bodyModel->validate()) {
             $model->summary = $this->getSummary($model, $bodyModel);
             $transaction = LuLu::getDB()->beginTransaction();
-            try{
-                $model->save(false);
+            try {
+                $model->save(FALSE);
                 $bodyModel->content_id = $model->id;
                 $bodyModel->save();
                 $transaction->commit();
 
-                return true;
-            }
-            catch (\Exception $e)
-            {
+                return TRUE;
+            } catch (\Exception $e) {
                 $transaction->rollBack();
-                return false;
+
+                return FALSE;
             }
         }
-        return false;
+
+        return FALSE;
     }
 
-    public function getSummary($model, $bodyModel)
-    {
-        if(empty($model->summary))
-        {
-            if ($bodyModel->hasAttribute('body'))
-            {
+    /**
+     * @param $model \source\models\ContentBody
+     * @param $bodyModel \source\models\ContentBody
+     * @return bool
+     */
+    public function getSummary($model, $bodyModel) {
+        if (empty($model->summary)) {
+            if ($bodyModel->hasAttribute('body')) {
                 $content = strip_tags($bodyModel->body);
                 $content = preg_replace('/\s/', '', $content);
                 $model->summary = StringHelper::subString($content, 250);
             }
         }
+
         return $model->summary;
     }
 }

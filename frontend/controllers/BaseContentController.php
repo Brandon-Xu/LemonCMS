@@ -62,7 +62,7 @@ class BaseContentController extends FrontController
 
     /**
      * 内容页
-     * @param unknown $id
+     * @param $id
      * @return string
      */
     public function actionDetail($id) {
@@ -83,7 +83,7 @@ class BaseContentController extends FrontController
     }
 
     public function getDetail($id) {
-        $model = Content::getBody($this->bodyClass, [
+        $model = Content::getBodyByClass($this->bodyClass, [
             'content.id' => $id
         ])->one();
 
@@ -94,7 +94,7 @@ class BaseContentController extends FrontController
 
     /**
      *
-     * @param unknown $taxonomyModel
+     * @param array $taxonomyModel
      * @return array ['view','layout','pageSize]
      */
     public function getListVars($taxonomyModel) {
@@ -109,8 +109,8 @@ class BaseContentController extends FrontController
 
     /**
      *
-     * @param unknown $taxonomyModel
-     * @param unknown $detailModel
+     * @param array $taxonomyModel
+     * @param array $detailModel
      * @return array ['view','layout']
      */
     public function getDetailVars($taxonomyModel, $detailModel) {

@@ -2,10 +2,14 @@
 
 namespace source\models;
 
+use source\core\base\ActiveQuery;
 use source\core\base\BaseActiveRecord;
+use source\modules\taxonomy\models\Taxonomy;
 use Yii;
 use source\helpers\DateTimeHelper;
 use source\core\behaviors\DefaultValueBehavior;
+use yii\base\Model;
+use yii\db\ActiveRecord;
 use yii\db\Query;
 use source\libs\Common;
 use yii\helpers\Url;
@@ -60,22 +64,42 @@ use source\LuLu;
  * @property string $summary
  * @property string $thumb
  * @property string $thumbs
+ *
+ * @property ContentBody $body
+ * @property Taxonomy $taxonomy
  */
 class Content extends BaseActiveRecord
 {
 
+    /**
+     * @var ContentBody $bodyClass 内容表对应的 model 名
+     */
+    private $_bodyClass;
+
+    /**
+     * @return string
+     */
     public function getCreatedAt() {
         return DateTimeHelper::formatTime($this->created_at);
     }
 
+    /**
+     * @return array
+     */
     public function getStatusText() {
         return Constants::getStatusItemsForContent($this->status);
     }
 
+    /**
+     * @return string
+     */
     public function getUserText() {
         return Html::a($this->user_name, ['/user']);
     }
 
+    /**
+     * @return string
+     */
     public function getUrl() {
         return Url::to([
             '/'.$this->content_type.'/default/detail',
@@ -83,6 +107,10 @@ class Content extends BaseActiveRecord
         ]);
     }
 
+    /**
+     * @param bool $insert
+     * @return bool
+     */
     public function beforeSave($insert) {
         $uploadedFile = Common::uploadFile('Content[thumb]');
         if ($uploadedFile[ 'message' ] === 'ok') {
@@ -92,12 +120,39 @@ class Content extends BaseActiveRecord
         return parent::beforeSave($insert);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getTaxonomy() {
         return $this->hasOne(LuLu::getService('taxonomy')->getModel("Taxonomy"), ['id' => 'taxonomy_id']);
     }
 
+    public function getBodyClass(){
+        if ($this->_bodyClass === NULL && !empty($this->content_type)){
+            $contentType = strtolower($this->content_type);
+            $className = "source\\modules\\{$contentType}\\models\\Content".ucfirst($contentType);
+            if(class_exists($className)) {
+                $this->_bodyClass = $className;
+            }
+        }
+        return $this->_bodyClass;
+    }
 
-    public static function getBody($class, $condition = [], $columns = []) {
+    public function getBody(){
+        if($this->getBodyClass() !== NULL && is_subclass_of($this->getBodyClass(), ContentBody::className())){
+            return $this->hasOne($this->getBodyClass()::className(), ['content_id'=>'id']);
+        }
+        return $this->hasOne(ContentBody::className(), []);
+    }
+
+    /**
+     * @param $class
+     * @param array $condition
+     * @param array $columns
+     * @return Query
+     */
+    public static function getBodyByClass($class, $condition = [], $columns = []) {
+    /** @var ActiveRecord $bodyModel */
         $bodyModel = new $class();
         if (empty($columns)) {
             $columns = $bodyModel->getTableSchema()->columns;
@@ -140,6 +195,9 @@ class Content extends BaseActiveRecord
         return $query;
     }
 
+    /**
+     * @return array
+     */
     public function behaviors() {
         return [
             [
@@ -169,73 +227,12 @@ class Content extends BaseActiveRecord
      */
     public function rules() {
         return [
-            [
-                [
-                    'taxonomy_id',
-                    'user_id',
-                    'last_user_id',
-                    'created_at',
-                    'updated_at',
-                    'focus_count',
-                    'favorite_count',
-                    'view_count',
-                    'comment_count',
-                    'agree_count',
-                    'against_count',
-                    'sticky',
-                    'recommend',
-                    'headline',
-                    'flag',
-                    'allow_comment',
-                    'sort_num',
-                    'visibility',
-                    'status'
-                ],
-                'integer'
-            ],
-            [
-                [
-                    'content_type',
-                    'title'
-                ],
-                'required'
-            ],
-            [
-                [
-                    'user_name',
-                    'last_user_name',
-                    'password',
-                    'view',
-                    'layout',
-                    'content_type'
-                ],
-                'string',
-                'max' => 64
-            ],
-            [
-                [
-                    'seo_title',
-                    'seo_keywords',
-                    'seo_description',
-                    'title',
-                    'sub_title',
-                    'url_alias',
-                    'redirect_url',
-                    'thumb'
-                ],
-                'string',
-                'max' => 256
-            ],
-            [
-                ['summary'],
-                'string',
-                'max' => 512
-            ],
-            [
-                ['thumbs'],
-                'string',
-                'max' => 1024
-            ]
+            [ [ 'taxonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'sticky', 'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status' ], 'integer' ],
+            [ [ 'content_type', 'title' ], 'required' ],
+            [ [ 'user_name', 'last_user_name', 'password', 'view', 'layout', 'content_type' ], 'string', 'max' => 64 ],
+            [ [ 'seo_title', 'seo_keywords', 'seo_description', 'title', 'sub_title', 'url_alias', 'redirect_url', 'thumb' ], 'string', 'max' => 256 ],
+            [ ['summary'], 'string', 'max' => 512 ],
+            [ ['thumbs'], 'string', 'max' => 1024 ]
         ];
     }
 
@@ -285,4 +282,5 @@ class Content extends BaseActiveRecord
 
         ];
     }
+
 }

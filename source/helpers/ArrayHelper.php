@@ -4,9 +4,15 @@ namespace yii\helpers;
 
 use yii\base\InvalidParamException;
 
-class ArrayHelper extends \yii\helpers\BaseArrayHelper
+class ArrayHelper extends BaseArrayHelper
 {
 
+    /**
+     * @param $items array
+     * @param null $key
+     * @param bool $throw
+     * @return array
+     */
     public static function getItems($items, $key = NULL, $throw = FALSE) {
         if ($key !== NULL) {
             if (key_exists($key, $items)) {
@@ -15,8 +21,7 @@ class ArrayHelper extends \yii\helpers\BaseArrayHelper
             if ($throw) {
                 throw new InvalidParamException();
             }
-
-            return 'unknown key:'.$key;
+            throw new InvalidParamException('unknown key:'.$key);
         }
 
         return $items;

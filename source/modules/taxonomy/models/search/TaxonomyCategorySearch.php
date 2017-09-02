@@ -2,7 +2,6 @@
 
 namespace source\modules\taxonomy\models\search;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use source\modules\taxonomy\models\TaxonomyCategory;

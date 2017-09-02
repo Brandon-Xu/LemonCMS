@@ -8,7 +8,7 @@ use source\core\modularity\ModuleService;
 use yii\base\InvalidParamException;
 use yii\helpers\Url;
 
-require_once './libs/functions.php';
+require_once __DIR__.'/libs/functions.php';
 
 class LuLu extends \Yii
 {
@@ -103,7 +103,7 @@ class LuLu extends \Yii
      *
      * @param string $key a or a/b/c
      * @param string $default
-     * @return string|unknown
+     * @return string
      */
     public static function getGetValue($key, $default = NULL) {
         $data = $_GET;
@@ -285,9 +285,9 @@ class LuLu extends \Yii
 
     /**
      *
-     * @param unknown $query
+     * @param \source\core\base\ActiveQuery|\yii\db\ActiveQuery $query
      * @param array $config ['db','page','pageSize','orderBy','rows','pager']
-     * @return multitype:\yii\data\Pagination unknown
+     * @return array
      */
     public static function getPagedRows($query, $config = []) {
         $db = isset($config[ 'db' ]) ? $config[ 'db' ] : NULL;

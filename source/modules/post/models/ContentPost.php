@@ -2,6 +2,7 @@
 
 namespace source\modules\post\models;
 
+use source\models\Content;
 use Yii;
 use source\models\ContentBody;
 
@@ -11,9 +12,11 @@ use source\models\ContentBody;
  * @property integer $id
  * @property integer $content_id
  * @property string $body
+ * @property Content $head
  */
 class ContentPost extends ContentBody
 {
+
     /**
      * @inheritdoc
      */
@@ -45,4 +48,5 @@ class ContentPost extends ContentBody
             'body' => '内容',
         ];
     }
+
 }

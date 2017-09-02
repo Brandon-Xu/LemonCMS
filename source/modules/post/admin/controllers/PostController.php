@@ -11,6 +11,6 @@ class PostController extends BaseContentController
     {
         parent::init();
         $this->content_type = 'post';
-        $this->bodyClass=ContentPost::className();
+        $this->bodyClass = ContentPost::className();
     }
 }

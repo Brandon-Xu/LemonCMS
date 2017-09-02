@@ -51,55 +51,11 @@ class Taxonomy extends BaseActiveRecord
      */
     public function rules() {
         return [
-            [
-                [
-                    'category_id',
-                    'parent_id',
-                    'name',
-                    'sort_num'
-                ],
-                'required'
-            ],
-            [
-                [
-                    'parent_id',
-                    'page_size',
-                    'contents',
-                    'sort_num'
-                ],
-                'integer'
-            ],
-            [
-                [
-                    'category_id',
-                    'name',
-                    'url_alias',
-                    'list_view',
-                    'list_layout',
-                    'detail_view',
-                    'detail_layout'
-                ],
-                'string',
-                'max' => 64
-            ],
-            [
-                [
-                    'redirect_url',
-                    'thumb'
-                ],
-                'string',
-                'max' => 128
-            ],
-            [
-                [
-                    'description',
-                    'seo_title',
-                    'seo_keywords',
-                    'seo_description'
-                ],
-                'string',
-                'max' => 256
-            ]
+            [ [ 'category_id', 'parent_id', 'name', 'sort_num' ], 'required' ],
+            [ [ 'parent_id', 'page_size', 'contents', 'sort_num' ], 'integer' ],
+            [ [ 'category_id', 'name', 'url_alias', 'list_view', 'list_layout', 'detail_view', 'detail_layout' ], 'string', 'max' => 64 ],
+            [ [ 'redirect_url', 'thumb' ], 'string', 'max' => 128 ],
+            [ [ 'description', 'seo_title', 'seo_keywords', 'seo_description' ], 'string', 'max' => 256 ]
         ];
     }
 
@@ -182,8 +138,8 @@ class Taxonomy extends BaseActiveRecord
     }
 
 
-    public static function getArrayTree($category) {
-        return self::getTaxonomiesByCategory($category);
+    public static function getArrayTree($category, $fromCache = TRUE) {
+        return self::getTaxonomiesByCategory($category, $fromCache);
     }
 
 

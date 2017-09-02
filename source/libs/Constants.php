@@ -19,6 +19,10 @@ class Constants
     const YesNo_Yes = 1;
     const YesNo_No = 0;
 
+    /**
+     * @param null $key
+     * @return array
+     */
     public static function getYesNoItems($key = NULL) {
         $items = [
             self::YesNo_Yes => '是',
@@ -31,6 +35,10 @@ class Constants
     const Status_Enable = 1;
     const Status_Desable = 0;
 
+    /**
+     * @param null $key
+     * @return array
+     */
     public static function getStatusItems($key = NULL) {
         $items = [
             self::Status_Enable => '可用',
@@ -43,6 +51,10 @@ class Constants
     const Target_Self = '_self';
     const Target_blank = '_blank';
 
+    /**
+     * @param null $key
+     * @return array
+     */
     public static function getTargetItems($key = NULL) {
         $items = [
             self::Target_Self => '当前窗口',
@@ -57,6 +69,10 @@ class Constants
     const Visibility_Password = '3';
     const Visibility_Private = '4';
 
+    /**
+     * @param null $key
+     * @return array
+     */
     public static function getVisibilityItems($key = NULL) {
         $items = [
             self::Visibility_Public => '公开',
@@ -72,6 +88,10 @@ class Constants
     const Status_Draft = '2';
     const Status_Pending = '3';
 
+    /**
+     * @param null $key
+     * @return array
+     */
     public static function getStatusItemsForContent($key = NULL) {
         $items = [
             self::Status_Publish => '发布',
@@ -82,6 +102,10 @@ class Constants
         return ArrayHelper::getItems($items, $key);
     }
 
+    /**
+     * @param null $key
+     * @return array
+     */
     public static function getRecommendItems($key = NULL) {
         $items = [
             // 0 => '无',
@@ -99,6 +123,10 @@ class Constants
         return ArrayHelper::getItems($items, $key);
     }
 
+    /**
+     * @param null $key
+     * @return array
+     */
     public static function getHeadlineItems($key = NULL) {
         $items = [
             // 0 => '无',
@@ -116,6 +144,10 @@ class Constants
         return ArrayHelper::getItems($items, $key);
     }
 
+    /**
+     * @param null $key
+     * @return array
+     */
     public static function getStickyItems($key = NULL) {
         $items = [
             // 0 => '无',

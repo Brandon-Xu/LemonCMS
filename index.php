@@ -11,7 +11,7 @@ require (__DIR__ . '/vendor/autoload.php');
 require (__DIR__ . '/vendor/yiisoft/yii2/Yii.php');
 
 require (__DIR__ . '/source/override.php');
-require_once (__DIR__ . 'source/libs/functions.php');
+require_once (__DIR__ . '/source/libs/functions.php');
 
 require (__DIR__ . '/data/config/bootstrap.php');
 require (__DIR__ . '/frontend/config/bootstrap.php');

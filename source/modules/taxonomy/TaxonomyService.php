@@ -2,9 +2,9 @@
 
 namespace source\modules\taxonomy;
 
+use yii\helpers\ArrayHelper;
 use source\core\modularity\ModuleService;
 use source\modules\taxonomy\models\Taxonomy;
-use yii\helpers\ArrayHelper;
 use source\modules\taxonomy\models\TaxonomyCategory;
 
 class TaxonomyService extends ModuleService
