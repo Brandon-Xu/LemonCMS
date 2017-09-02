@@ -2,10 +2,9 @@
 
 namespace source\modules\rbac\models\search;
 
-use Yii;
+use source\modules\rbac\models\Relation;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\modules\rbac\models\Relation;
 
 /**
  * RelationSearch represents the model behind the search form about `app\modules\rbac\models\Relation`.
@@ -15,18 +14,20 @@ class RelationSearch extends Relation
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['role', 'permission', 'rule', 'data', 'note'], 'safe'],
+            [
+                [
+                    'role', 'permission', 'rule', 'data', 'note'
+                ], 'safe'
+            ],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -38,8 +39,7 @@ class RelationSearch extends Relation
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Relation::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -54,11 +54,17 @@ class RelationSearch extends Relation
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'role', $this->role])
-            ->andFilterWhere(['like', 'permission', $this->permission])
-            ->andFilterWhere(['like', 'rule', $this->rule])
-            ->andFilterWhere(['like', 'data', $this->data])
-            ->andFilterWhere(['like', 'note', $this->note]);
+        $query->andFilterWhere([
+            'like', 'role', $this->role
+        ])->andFilterWhere([
+            'like', 'permission', $this->permission
+        ])->andFilterWhere([
+            'like', 'rule', $this->rule
+        ])->andFilterWhere([
+            'like', 'data', $this->data
+        ])->andFilterWhere([
+            'like', 'note', $this->note
+        ]);
 
         return $dataProvider;
     }

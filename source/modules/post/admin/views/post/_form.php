@@ -28,10 +28,8 @@ LuLu::setViewParam(['defaultLayout' => FALSE]);
 /* @var $form source\core\widgets\ActiveForm */
 $form = ActiveForm::begin([
     'options' => [
-        'enctype' => 'multipart/form-data',
-        'class' => 'da-form'
-    ],
-    'fieldConfig' => [
+        'enctype' => 'multipart/form-data', 'class' => 'da-form'
+    ], 'fieldConfig' => [
         'size' => 'default',
     ]
 ]); ?>
@@ -48,16 +46,13 @@ $form = ActiveForm::begin([
 
             <div class="da-panel-content">
                 <?= $form->field($model, 'title', $filedOptions)->textInput([
-                    'maxlength' => 256,
-                    'placeholder' => '请输入标题'
+                    'maxlength' => 256, 'placeholder' => '请输入标题'
                 ]) ?>
                 <?= $form->field($model, 'sub_title', $filedOptions)->textInput([
-                    'maxlength' => 256,
-                    'placeholder' => '请输入副标题'
+                    'maxlength' => 256, 'placeholder' => '请输入副标题'
                 ]) ?>
                 <?= $form->field($model, 'url_alias', $filedOptions)->textInput([
-                    'maxlength' => 256,
-                    'placeholder' => 'Url 地址'
+                    'maxlength' => 256, 'placeholder' => 'Url 地址'
                 ]) ?>
                 <?= $form->field($model, 'redirect_url', $filedOptions)->textInput(['maxlength' => 256]) ?>
 
@@ -88,38 +83,31 @@ $form = ActiveForm::begin([
 
                 <div class="da-form-row da-form-block">
                     <?= $form->field($model, 'taxonomy_id', [
-                        'options' => ['class' => 'da-form-col-12-12'],
-                        'size' => 'large'
+                        'options' => ['class' => 'da-form-col-12-12'], 'size' => 'large'
                     ])->dropDownList($options) ?>
                 </div>
 
                 <div class="da-form-row da-form-block">
                     <?= $form->field($model, 'recommend', [
-                        'options' => ['class' => 'da-form-col-4-12 alpha'],
-                        'size' => 'large'
+                        'options' => ['class' => 'da-form-col-4-12 alpha'], 'size' => 'large'
                     ])->dropDownList(Constants::getRecommendItems()) ?>
                     <?= $form->field($model, 'headline', [
-                        'options' => ['class' => 'da-form-col-4-12'],
-                        'size' => 'large'
+                        'options' => ['class' => 'da-form-col-4-12'], 'size' => 'large'
                     ])->dropDownList(Constants::getHeadlineItems()) ?>
                     <?= $form->field($model, 'sticky', [
-                        'options' => ['class' => 'da-form-col-4-12 omega'],
-                        'size' => 'large'
+                        'options' => ['class' => 'da-form-col-4-12 omega'], 'size' => 'large'
                     ])->dropDownList(Constants::getStickyItems()) ?>
                 </div>
 
                 <div class="da-form-row da-form-block">
                     <?= $form->field($model, 'status', [
-                        'options' => ['class' => 'da-form-col-4-12 alpha'],
-                        'size' => 'large'
+                        'options' => ['class' => 'da-form-col-4-12 alpha'], 'size' => 'large'
                     ])->dropDownList(Constants::getStatusItemsForContent(), [], FALSE) ?>
                     <?= $form->field($model, 'visibility', [
-                        'options' => ['class' => 'da-form-col-4-12'],
-                        'size' => 'large'
+                        'options' => ['class' => 'da-form-col-4-12'], 'size' => 'large'
                     ])->dropDownList(Constants::getVisibilityItems(), [], FALSE) ?>
                     <?= $form->field($model, 'allow_comment', [
-                        'options' => ['class' => 'da-form-col-4-12 omega'],
-                        'size' => 'large'
+                        'options' => ['class' => 'da-form-col-4-12 omega'], 'size' => 'large'
                     ])->dropDownList(Constants::getYesNoItems(), [], FALSE) ?>
                 </div>
 
@@ -137,8 +125,7 @@ $form = ActiveForm::begin([
 
             <div class="da-panel-content">
                 <?= $form->field($model, 'sort_num', [
-                    'options' => ['class' => 'da-form-row da-form-block'],
-                    'size' => 'large'
+                    'options' => ['class' => 'da-form-row da-form-block'], 'size' => 'large'
                 ])->textInput() ?>
             </div>
         </div>
@@ -151,19 +138,15 @@ $form = ActiveForm::begin([
 
             <div class="da-panel-content">
                 <?= $form->field($model, 'seo_title', [
-                    'options' => ['class' => 'da-form-row da-form-block'],
-                    'size' => 'large'
+                    'options' => ['class' => 'da-form-row da-form-block'], 'size' => 'large'
                 ])->textInput(['maxlength' => 256]) ?>
                 <?= $form->field($model, 'seo_keywords', [
-                    'options' => ['class' => 'da-form-row da-form-block'],
-                    'size' => 'large'
+                    'options' => ['class' => 'da-form-row da-form-block'], 'size' => 'large'
                 ])->textInput(['maxlength' => 256]) ?>
                 <?= $form->field($model, 'seo_description', [
-                    'options' => ['class' => 'da-form-row da-form-block'],
-                    'size' => 'large'
+                    'options' => ['class' => 'da-form-row da-form-block'], 'size' => 'large'
                 ])->textarea([
-                    'maxlength' => 256,
-                    'rows' => 5
+                    'maxlength' => 256, 'rows' => 5
                 ]) ?>
 
             </div>
@@ -177,12 +160,10 @@ $form = ActiveForm::begin([
 
             <div class="da-panel-content">
                 <?= $form->field($model, 'view', [
-                    'options' => ['class' => 'da-form-row da-form-block'],
-                    'size' => 'large'
+                    'options' => ['class' => 'da-form-row da-form-block'], 'size' => 'large'
                 ])->textInput(['maxlength' => 64]) ?>
                 <?= $form->field($model, 'layout', [
-                    'options' => ['class' => 'da-form-row da-form-block'],
-                    'size' => 'large'
+                    'options' => ['class' => 'da-form-row da-form-block'], 'size' => 'large'
                 ])->textInput(['maxlength' => 64]) ?>
             </div>
         </div>

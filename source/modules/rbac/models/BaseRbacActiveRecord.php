@@ -1,7 +1,6 @@
 <?php
-namespace source\modules\rbac\models;
 
-use Yii;
+namespace source\modules\rbac\models;
 
 class BaseRbacActiveRecord extends \source\core\base\BaseActiveRecord
 {

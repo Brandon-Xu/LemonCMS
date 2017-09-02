@@ -2,12 +2,12 @@
 
 namespace source\modules\dict\admin\controllers;
 
-use Yii;
+use source\core\back\BackController;
+use source\libs\Constants;
 use source\modules\dict\models\Dict;
 use source\modules\dict\models\search\DictSearch;
-use source\core\back\BackController;
+use Yii;
 use yii\web\NotFoundHttpException;
-use source\libs\Constants;
 
 /**
  * DictController implements the CRUD actions for Dict model.
@@ -24,8 +24,7 @@ class DictController extends BackController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -53,8 +52,7 @@ class DictController extends BackController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'index',
-                'category' => $category
+                'index', 'category' => $category
             ]);
         } else {
             return $this->render('create', [
@@ -75,8 +73,7 @@ class DictController extends BackController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'index',
-                'category' => $category
+                'index', 'category' => $category
             ]);
         } else {
             return $this->render('update', [

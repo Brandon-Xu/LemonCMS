@@ -2,15 +2,10 @@
 
 namespace source\core\grid;
 
-use Yii;
-use yii\base\Component;
-use yii\base\ErrorHandler;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
-use yii\base\Model;
-use yii\web\JsExpression;
-use yii\helpers\Url;
 use source\libs\Resource;
+use Yii;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /**
  * ActiveField represents a form input field within an [[ActiveForm]].
@@ -36,8 +31,7 @@ class ActionColumn extends \yii\grid\ActionColumn
         }
 
         $this->contentOptions = [
-            'class' => 'da-icon-column',
-            'style' => 'width:'.$this->width.';'
+            'class' => 'da-icon-column', 'style' => 'width:'.$this->width.';'
         ];
     }
 
@@ -45,16 +39,14 @@ class ActionColumn extends \yii\grid\ActionColumn
         if (!isset($this->buttons[ 'view' ])) {
             $this->buttons[ 'view' ] = function ($url, $model, $key, $index, $gridView) {
                 return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/magnifier.png">', $url, [
-                    'title' => Yii::t('yii', 'View'),
-                    'data-pjax' => '0'
+                    'title' => Yii::t('yii', 'View'), 'data-pjax' => '0'
                 ]);
             };
         }
         if (!isset($this->buttons[ 'update' ])) {
             $this->buttons[ 'update' ] = function ($url, $model, $key, $index, $gridView) {
                 return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/pencil.png">', $url, [
-                    'title' => Yii::t('yii', 'Update'),
-                    'data-pjax' => '0'
+                    'title' => Yii::t('yii', 'Update'), 'data-pjax' => '0'
                 ]);
             };
         }
@@ -63,8 +55,7 @@ class ActionColumn extends \yii\grid\ActionColumn
                 return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/cross.png">', $url, [
                     'title' => Yii::t('yii', 'Delete'),
                     'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                    'data-method' => 'post',
-                    'data-pjax' => '0'
+                    'data-method' => 'post', 'data-pjax' => '0'
                 ]);
             };
         }

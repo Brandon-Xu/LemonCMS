@@ -9,7 +9,7 @@
 echo "<?php\n";
 ?>
 
-namespace source\modules\<?= $generator->moduleDir?>\admin\controllers;
+namespace source\modules\<?= $generator->moduleDir ?>\admin\controllers;
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -21,8 +21,8 @@ use source\libs\Constants;
 
 class DefaultController extends \source\core\back\BackController
 {
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+public function actionIndex()
+{
+return $this->render('index');
+}
 }

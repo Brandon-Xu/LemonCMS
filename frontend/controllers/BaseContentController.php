@@ -2,9 +2,9 @@
 
 namespace frontend\controllers;
 
-use source\models\Content;
 use source\core\front\FrontController;
 use source\LuLu;
+use source\models\Content;
 
 class BaseContentController extends FrontController
 {
@@ -25,8 +25,7 @@ class BaseContentController extends FrontController
         $query = Content::find()->published()->andWhere(['content_type' => $this->content_type]);
 
         $locals = LuLu::getPagedRows($query, [
-            'orderBy' => 'created_at desc',
-            'pageSize' => $this->pageSize_index
+            'orderBy' => 'created_at desc', 'pageSize' => $this->pageSize_index
         ]);
 
         return $this->render('index_default', $locals);
@@ -49,8 +48,7 @@ class BaseContentController extends FrontController
         $vars = $this->getListVars($taxonomyModel);
 
         $locals = LuLu::getPagedRows($query, [
-            'orderBy' => 'created_at desc',
-            'pageSize' => $vars[ 'pageSize' ]
+            'orderBy' => 'created_at desc', 'pageSize' => $vars[ 'pageSize' ]
         ]);
         $locals[ 'taxonomyModel' ] = $taxonomyModel;
 

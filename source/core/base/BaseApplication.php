@@ -2,12 +2,12 @@
 
 namespace source\core\base;
 
+use source\libs\Common;
 use source\LuLu;
+use source\traits\CommonTrait;
 use Yii;
 use yii\base\InvalidRouteException;
 use yii\helpers\FileHelper;
-use source\traits\CommonTrait;
-use source\libs\Common;
 use yii\helpers\Url;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
@@ -75,6 +75,7 @@ class BaseApplication extends \yii\web\Application
                         $id = $route;
                         $route = '';
                     }
+
                     return $this->getModule($id);
                 };
                 if ($loadModuleAndRunInit($route) !== NULL) {

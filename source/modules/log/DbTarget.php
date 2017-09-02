@@ -2,36 +2,26 @@
 
 namespace source\modules\log;
 
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\helpers\StringHelper;
-use yii\helpers\ArrayHelper;
-use source\LuLu;
-use source\libs\Common;
-use source\libs\Constants;
 use source\libs\Utility;
+use source\LuLu;
 
 class DbTarget extends \yii\log\DbTarget
 {
-    public function getMessagePrefix($message)
-    {
-        if ($this->prefix !== null) {
+    public function getMessagePrefix($message) {
+        if ($this->prefix !== NULL) {
             return call_user_func($this->prefix, $message);
         }
-    
+
         $ip = Utility::getIp();
-    
+
         $userID = LuLu::getIdentity()->username;
-        if(empty($userID))
-        {
+        if (empty($userID)) {
             return "[$ip]";
-        }
-        else 
-        {
+        } else {
             return "[$ip]<br/>[$userID]";
         }
-      
-        
+
+
     }
-   
+
 }

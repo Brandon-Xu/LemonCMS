@@ -12,8 +12,7 @@ class Setting extends ConfigForm
     public function rules() {
         return [
             [
-                ['page_taxonomy'],
-                'string'
+                ['page_taxonomy'], 'string'
             ],
         ];
     }

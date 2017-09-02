@@ -2,8 +2,6 @@
 
 namespace source\modules\modularity\models;
 
-use Yii;
-
 /**
  * This is the model class for table "{{%modularity}}".
  *
@@ -18,19 +16,16 @@ class Modularity extends \source\core\base\BaseActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return '{{%modularity}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['id'], 'required'],
-            [['is_system', 'is_content', 'enable_admin', 'enable_home'], 'integer'],
+            [['id'], 'required'], [['is_system', 'is_content', 'enable_admin', 'enable_home'], 'integer'],
             [['id'], 'string', 'max' => 64]
         ];
     }
@@ -38,13 +33,9 @@ class Modularity extends \source\core\base\BaseActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'id' => 'ID',
-            'is_system' => 'Is System',
-            'is_content' => 'Is Content',
-            'enable_admin' => 'Enable Admin',
+            'id' => 'ID', 'is_system' => 'Is System', 'is_content' => 'Is Content', 'enable_admin' => 'Enable Admin',
             'enable_home' => 'Enable Home',
         ];
     }

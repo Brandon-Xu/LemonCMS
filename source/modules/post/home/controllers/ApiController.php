@@ -24,11 +24,13 @@ class ApiController extends BaseRestController
 
     public function actions() {
         $actions = parent::actions();
+
         return $actions;
     }
 
     protected function verbs() {
         $verbs = parent::verbs();
+
         return $verbs;
     }
 

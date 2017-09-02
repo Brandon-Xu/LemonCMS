@@ -1,4 +1,5 @@
 <?php
+
 namespace source\modules\user\admin;
 
 use source\core\modularity\BackModule;

@@ -11,7 +11,7 @@ use source\libs\Common;
 use source\libs\Constants;
 use source\core\grid\GridView;
 use source\core\widgets\ActiveForm;
-use source\modules\<?= $generator->moduleDir?>\models\Setting;
+use source\modules\<?= $generator->moduleDir ?>\models\Setting;
 
 /* @var $this source\core\back\BackView */
 
@@ -20,7 +20,7 @@ use source\modules\<?= $generator->moduleDir?>\models\Setting;
 
 <?= "<?php " ?> $form = ActiveForm::begin(); ?>
 
-    <?= "<?= " ?> $form->field($model, 'post_taxonomy')->dropDownList(ArrayHelper::map($categories, 'id', 'name')) ?>
-   
-    <?= "<?= " ?> $form->defaultButtons() ?>
+<?= "<?= " ?> $form->field($model, 'post_taxonomy')->dropDownList(ArrayHelper::map($categories, 'id', 'name')) ?>
+
+<?= "<?= " ?> $form->defaultButtons() ?>
 <?= "<?php " ?> ActiveForm::end(); ?>

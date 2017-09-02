@@ -2,7 +2,6 @@
 
 use source\core\widgets\ActiveForm;
 use yii\helpers\Html;
-use source\modules\comment\models\Comment;
 
 /* @var $this yii\web\View */
 /* @var $model source\modules\comment\models\Comment */

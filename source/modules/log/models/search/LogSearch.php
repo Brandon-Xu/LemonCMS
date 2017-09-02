@@ -2,47 +2,33 @@
 
 namespace source\modules\log\models\search;
 
-use yii\base\Model;
-use yii\helpers\Inflector;
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\helpers\StringHelper;
-use yii\helpers\ArrayHelper;
-use source\LuLu;
 use source\core\data\ActiveDataProvider;
-use source\libs\Common;
-use source\libs\Constants;
-use source\libs\Resource;
 use source\modules\log\models\Log;
+use yii\base\Model;
 
 /**
  * LogSearch represents the model behind the search form about `source\modules\log\models\Log`.
  */
 class LogSearch extends Log
 {
-    public function init()
-    {
+    public function init() {
         parent::init();
-        $this->userValidate = false;
+        $this->userValidate = FALSE;
     }
-    
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['id', 'level'], 'integer'],
-            [['category', 'prefix', 'message'], 'safe'],
-            [['log_time'], 'number'],
+            [['id', 'level'], 'integer'], [['category', 'prefix', 'message'], 'safe'], [['log_time'], 'number'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -54,16 +40,14 @@ class LogSearch extends Log
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Log::find();
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            //'pagination' => [
+            'query' => $query, //'pagination' => [
             //    'pageSize' => 2,
             //],
-            'sort'=>[
+            'sort' => [
                 'defaultOrder' => [
                     'log_time' => SORT_DESC
                 ]
@@ -79,13 +63,10 @@ class LogSearch extends Log
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'level' => $this->level,
-            'log_time' => $this->log_time,
+            'id' => $this->id, 'level' => $this->level, 'log_time' => $this->log_time,
         ]);
 
-        $query->andFilterWhere(['like', 'category', $this->category])
-            ->andFilterWhere(['like', 'prefix', $this->prefix])
+        $query->andFilterWhere(['like', 'category', $this->category])->andFilterWhere(['like', 'prefix', $this->prefix])
             ->andFilterWhere(['like', 'message', $this->message]);
 
         return $dataProvider;

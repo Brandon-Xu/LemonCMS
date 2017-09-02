@@ -27,12 +27,9 @@ class ContentPage extends ContentBody
         return [
             //[['content_id', 'body'], 'required'],
             [
-                ['content_id'],
-                'integer'
-            ],
-            [
-                ['body'],
-                'string'
+                ['content_id'], 'integer'
+            ], [
+                ['body'], 'string'
             ]
         ];
     }
@@ -42,9 +39,7 @@ class ContentPage extends ContentBody
      */
     public function attributeLabels() {
         return [
-            'id' => 'ID',
-            'content_id' => 'Content ID',
-            'body' => '内容',
+            'id' => 'ID', 'content_id' => 'Content ID', 'body' => '内容',
         ];
     }
 }

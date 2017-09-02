@@ -2,13 +2,12 @@
 
 namespace source\modules\fragment\admin\controllers;
 
-use Yii;
+use source\core\back\BackController;
+use source\libs\Constants;
 use source\modules\fragment\models\Fragment1Data;
 use source\modules\fragment\models\search\Fragment1DataSearch;
-use source\core\back\BackController;
+use Yii;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use source\libs\Constants;
 
 /**
  * Fragment1DataController implements the CRUD actions for Fragment1Data model.
@@ -20,14 +19,12 @@ class Fragment1DataController extends BackController
      * Lists all Fragment1Data models.
      * @return mixed
      */
-    public function actionIndex($fid)
-    {
+    public function actionIndex($fid) {
         $searchModel = new Fragment1DataSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -36,8 +33,7 @@ class Fragment1DataController extends BackController
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -48,14 +44,13 @@ class Fragment1DataController extends BackController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($fid)
-    {
+    public function actionCreate($fid) {
         $model = new Fragment1Data();
-        $model->fragment_id=$fid;
-        $model->status=Constants::Status_Enable;
+        $model->fragment_id = $fid;
+        $model->status = Constants::Status_Enable;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index','fid'=>$fid]);
+            return $this->redirect(['index', 'fid' => $fid]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -69,12 +64,11 @@ class Fragment1DataController extends BackController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id,$fid)
-    {
+    public function actionUpdate($id, $fid) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index','fid'=>$fid]);
+            return $this->redirect(['index', 'fid' => $fid]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -88,11 +82,10 @@ class Fragment1DataController extends BackController
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id,$fid)
-    {
+    public function actionDelete($id, $fid) {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index','fid'=>$fid]);
+        return $this->redirect(['index', 'fid' => $fid]);
     }
 
     /**
@@ -102,9 +95,8 @@ class Fragment1DataController extends BackController
      * @return Fragment1Data the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
-        if (($model = Fragment1Data::findOne($id)) !== null) {
+    protected function findModel($id) {
+        if (($model = Fragment1Data::findOne($id)) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

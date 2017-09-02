@@ -18,13 +18,7 @@ class Utility
     public static function checkServerVar() {
         $missing = [];
         $vars = [
-            'HTTP_HOST',
-            'SERVER_NAME',
-            'SERVER_PORT',
-            'SCRIPT_NAME',
-            'SCRIPT_FILENAME',
-            'PHP_SELF',
-            'HTTP_ACCEPT',
+            'HTTP_HOST', 'SERVER_NAME', 'SERVER_PORT', 'SCRIPT_NAME', 'SCRIPT_FILENAME', 'PHP_SELF', 'HTTP_ACCEPT',
             'HTTP_USER_AGENT'
         ];
         foreach ($vars as $var) {

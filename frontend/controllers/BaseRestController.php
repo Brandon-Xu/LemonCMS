@@ -9,10 +9,8 @@
 namespace frontend\controllers;
 
 use source\core\data\ActiveDataProvider;
-use source\LuLu;
-use Yii;
 use source\models\Content;
-use yii\base\InvalidCallException;
+use Yii;
 use yii\db\ActiveQuery;
 use yii\rest\ActiveController;
 use yii\web\Response;
@@ -69,35 +67,20 @@ class BaseRestController extends ActiveController
     public function actions() {
         $actions = [
             'index' => [
-                'class' => 'IndexAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [ $this, 'checkAccess' ],
-                'prepareDataProvider' => [ $this, 'listDataProvider' ] // 当前 Controller 下的 listDataProvider 方法
-            ],
-            'view' => [
-                'class' => 'ViewAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [ $this, 'checkAccess' ],
-                'prepareDataProvider' => [ $this, 'one' ] // 当前 Controller 下的 one 方法
-            ],
-            'create' => [
-                'class' => 'CreateAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [ $this, 'checkAccess' ],
+                'class' => 'IndexAction', 'modelClass' => $this->modelClass, 'checkAccess' => [$this, 'checkAccess'],
+                'prepareDataProvider' => [$this, 'listDataProvider'] // 当前 Controller 下的 listDataProvider 方法
+            ], 'view' => [
+                'class' => 'ViewAction', 'modelClass' => $this->modelClass, 'checkAccess' => [$this, 'checkAccess'],
+                'prepareDataProvider' => [$this, 'one'] // 当前 Controller 下的 one 方法
+            ], 'create' => [
+                'class' => 'CreateAction', 'modelClass' => $this->modelClass, 'checkAccess' => [$this, 'checkAccess'],
                 'scenario' => $this->createScenario,
-            ],
-            'update' => [
-                'class' => 'UpdateAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [ $this, 'checkAccess' ],
+            ], 'update' => [
+                'class' => 'UpdateAction', 'modelClass' => $this->modelClass, 'checkAccess' => [$this, 'checkAccess'],
                 'scenario' => $this->updateScenario,
-            ],
-            'delete' => [
-                'class' => 'DeleteAction',
-                'modelClass' => $this->modelClass,
-                'checkAccess' => [ $this, 'checkAccess' ],
-            ],
-            'options' => [
+            ], 'delete' => [
+                'class' => 'DeleteAction', 'modelClass' => $this->modelClass, 'checkAccess' => [$this, 'checkAccess'],
+            ], 'options' => [
                 'class' => 'OptionsAction',
             ],
         ];
@@ -123,17 +106,13 @@ class BaseRestController extends ActiveController
 
     protected function verbs() {
         return [
-            'index' => [ 'GET', 'HEAD' ],
-            'view' => [ 'GET', 'HEAD' ],
-            'create' => ['POST'],
-            'update' => [ 'PUT', 'PATCH' ],
+            'index' => ['GET', 'HEAD'], 'view' => ['GET', 'HEAD'], 'create' => ['POST'], 'update' => ['PUT', 'PATCH'],
             'delete' => ['DELETE'],
         ];
     }
 
     public $serializer = [
-        'class' => 'yii\rest\Serializer',
-        'collectionEnvelope' => 'items',
+        'class' => 'yii\rest\Serializer', 'collectionEnvelope' => 'items',
     ];
 
     /**
@@ -141,15 +120,15 @@ class BaseRestController extends ActiveController
      * @return object
      */
     public function listDataProvider() {
-        $query = Content::find()->published()->normalSelect()->andWhere(['content_type' => $this->content_type])->with(['taxonomy'=>function($query){
-            /** @var $query ActiveQuery */
-            $query->select(['id', 'parent_id', 'category_id', 'name']);
-        }])->asArray();
+        $query = Content::find()->published()->normalSelect()->andWhere(['content_type' => $this->content_type])->with([
+            'taxonomy' => function ($query) {
+                /** @var $query ActiveQuery */
+                $query->select(['id', 'parent_id', 'category_id', 'name']);
+            }
+        ])->asArray();
 
         return Yii::createObject([
-            'class' => ActiveDataProvider::className(),
-            'query' => $query,
-            'pagination' => [
+            'class' => ActiveDataProvider::className(), 'query' => $query, 'pagination' => [
                 'pagesize' => $this->pageSize_index,
             ],
         ]);
@@ -167,7 +146,7 @@ class BaseRestController extends ActiveController
         $object = Content::find()->published()->normalSelect()->where(['id' => $id])->one();
         $data = $object->toArray();
         $data[ 'taxonomy' ] = $object->taxonomy;
-        $data[ 'body' ]     = $object->body;
+        $data[ 'body' ] = $object->body;
 
         return $data;
     }

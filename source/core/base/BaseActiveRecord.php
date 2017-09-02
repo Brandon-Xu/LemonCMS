@@ -2,10 +2,10 @@
 
 namespace source\core\base;
 
-use yii\helpers\ArrayHelper;
-use yii\base\InvalidConfigException;
-use source\LuLu;
 use source\libs\Constants;
+use source\LuLu;
+use yii\base\InvalidConfigException;
+use yii\helpers\ArrayHelper;
 
 class BaseActiveRecord extends \yii\db\ActiveRecord
 {
@@ -181,9 +181,7 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
         }
         $scenarios[] = self::SCENARIO_DEFAULT;
         $rules[] = [
-            $all,
-            'trim',
-            'on' => $scenarios
+            $all, 'trim', 'on' => $scenarios
         ];
 
         return $rules;

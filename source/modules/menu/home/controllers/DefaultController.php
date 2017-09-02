@@ -6,8 +6,7 @@ use yii\web\Controller;
 
 class DefaultController extends Controller
 {
-    public function actionIndex()
-    {
+    public function actionIndex() {
         return $this->render('index');
     }
 }

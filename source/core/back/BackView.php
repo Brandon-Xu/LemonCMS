@@ -3,9 +3,9 @@
 namespace source\core\back;
 
 use source\core\base\BaseView;
-use yii\base\Theme;
-use source\LuLu;
 use source\libs\Resource;
+use source\LuLu;
+use yii\base\Theme;
 
 class BackView extends BaseView
 {
@@ -23,12 +23,10 @@ class BackView extends BaseView
             'pathMap' => [
                 '@app/views' => [
                     '@statics/admin/'.$currentTheme.'/views'
-                ],
-                '@source/modules/'.$moduleId.'/admin/views' => [
+                ], '@source/modules/'.$moduleId.'/admin/views' => [
                     '@statics/admin/'.$currentTheme.'/modules/'.$moduleId
                 ]
-            ],
-            'baseUrl' => '@statics/admin/'.$currentTheme
+            ], 'baseUrl' => '@statics/admin/'.$currentTheme
         ];
 
         $this->theme = new Theme($config);

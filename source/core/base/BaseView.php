@@ -2,18 +2,12 @@
 
 namespace source\core\base;
 
-use Yii;
-use source\models\search\UserSearch;
-use yii\web\View;
-use source\models\Config;
-use source\libs\Common;
 use source\core\widgets\LoopData;
-use source\libs\Resource;
-use source\core\widgets\LinkPager;
 use source\libs\DataSource;
+use source\libs\Resource;
 use source\LuLu;
-use yii\helpers\FileHelper;
 use source\traits\CommonTrait;
+use yii\web\View;
 
 /**
  *
@@ -55,14 +49,11 @@ class BaseView extends View
             if (is_array($item)) {
                 if (isset($item[ 2 ])) {
                     $this->params[ 'breadcrumbs' ][] = [
-                        'label' => $item[ 0 ],
-                        'url' => $item[ 1 ],
-                        'img' => $item[ 2 ]
+                        'label' => $item[ 0 ], 'url' => $item[ 1 ], 'img' => $item[ 2 ]
                     ];
                 } else {
                     $this->params[ 'breadcrumbs' ][] = [
-                        'label' => $item[ 0 ],
-                        'url' => $item[ 1 ]
+                        'label' => $item[ 0 ], 'url' => $item[ 1 ]
                     ];
                 }
             } else {

@@ -20,7 +20,7 @@ class ApiController extends BaseRestController
         return parent::actions();
     }
 
-    public function actionGetTree(){
+    public function actionGetTree() {
 
     }
 

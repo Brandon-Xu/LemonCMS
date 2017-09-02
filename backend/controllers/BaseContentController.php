@@ -2,13 +2,13 @@
 
 namespace backend\controllers;
 
-use Yii;
+use source\core\back\BackController;
+use source\LuLu;
 use source\models\Content;
 use source\models\search\ContentSearch;
-use source\core\back\BackController;
-use yii\web\NotFoundHttpException;
+use Yii;
 use yii\helpers\StringHelper;
-use source\LuLu;
+use yii\web\NotFoundHttpException;
 
 abstract class BaseContentController extends BackController
 {
@@ -27,8 +27,7 @@ abstract class BaseContentController extends BackController
         ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider
+            'searchModel' => $searchModel, 'dataProvider' => $dataProvider
         ]);
     }
 
@@ -49,8 +48,7 @@ abstract class BaseContentController extends BackController
         }
 
         return $this->render('create', [
-            'model' => $model,
-            'bodyModel' => $bodyModel
+            'model' => $model, 'bodyModel' => $bodyModel
         ]);
     }
 
@@ -65,8 +63,7 @@ abstract class BaseContentController extends BackController
         }
 
         return $this->render('update', [
-            'model' => $model,
-            'bodyModel' => $bodyModel
+            'model' => $model, 'bodyModel' => $bodyModel
         ]);
     }
 

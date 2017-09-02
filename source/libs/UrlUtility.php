@@ -2,9 +2,9 @@
 
 namespace common\includes;
 
+use source\LuLu;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use source\LuLu;
 
 class UrlUtility
 {
@@ -19,8 +19,7 @@ class UrlUtility
         $actionId = $channel[ 'is_leaf' ] ? 'list' : 'channel';
 
         return Url::to([
-            'content/'.$actionId,
-            'chnid' => $id
+            'content/'.$actionId, 'chnid' => $id
         ]);
     }
 
@@ -46,9 +45,7 @@ class UrlUtility
         }
 
         return Url::to([
-            'content/detail',
-            'id' => $row[ 'id' ],
-            'chnid' => $row[ 'channel_id' ]
+            'content/detail', 'id' => $row[ 'id' ], 'chnid' => $row[ 'channel_id' ]
         ]);
     }
 
@@ -71,8 +68,7 @@ class UrlUtility
 
     public static function getPageUrl($row) {
         return Url::to([
-            'page/detail',
-            'id' => $row[ 'id' ]
+            'page/detail', 'id' => $row[ 'id' ]
         ]);
     }
 

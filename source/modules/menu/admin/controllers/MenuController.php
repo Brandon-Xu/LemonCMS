@@ -2,36 +2,30 @@
 
 namespace source\modules\menu\admin\controllers;
 
-use Yii;
-use source\modules\menu\models\Menu;
-use source\modules\menu\models\search\MenuSearch;
 use source\core\back\BackController;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use source\LuLu;
+use source\modules\menu\models\Menu;
+use Yii;
 use yii\data\ArrayDataProvider;
+use yii\web\NotFoundHttpException;
 
 /**
  * DefaultController implements the CRUD actions for Menu model.
  */
 class MenuController extends BackController
 {
-   
+
 
     /**
      * Lists all Menu models.
      * @return mixed
      */
-    public function actionIndex($category)
-    {
+    public function actionIndex($category) {
         $dataProvider = new ArrayDataProvider([
-            'allModels'=>Menu::getArrayTree($category),
-            'key'=>'id',
-            'pagination' => [
+            'allModels' => Menu::getArrayTree($category), 'key' => 'id', 'pagination' => [
                 'pageSize' => -1,
             ],
         ]);
-      
+
         return $this->render('index', [
             'dataProvider' => $dataProvider,
         ]);
@@ -42,8 +36,7 @@ class MenuController extends BackController
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -54,13 +47,12 @@ class MenuController extends BackController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($category)
-    {
+    public function actionCreate($category) {
         $model = new Menu();
-        $model->category_id=$category;
-      
+        $model->category_id = $category;
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index', 'category' =>$category]);
+            return $this->redirect(['index', 'category' => $category]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -74,11 +66,10 @@ class MenuController extends BackController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
         $category = $model->category_id;
-        
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'category' => $category]);
         } else {
@@ -94,14 +85,13 @@ class MenuController extends BackController
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $model = $this->findModel($id);
         $model->delete();
-        
-        $category=$model->category_id;
 
-        return $this->redirect(['index','category'=>$category]);
+        $category = $model->category_id;
+
+        return $this->redirect(['index', 'category' => $category]);
     }
 
     /**
@@ -111,9 +101,8 @@ class MenuController extends BackController
      * @return Menu the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
-        if (($model = Menu::findOne($id)) !== null) {
+    protected function findModel($id) {
+        if (($model = Menu::findOne($id)) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

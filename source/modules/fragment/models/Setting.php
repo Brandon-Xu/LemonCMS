@@ -2,23 +2,19 @@
 
 namespace source\modules\fragment\models;
 
-use source\LuLu;
-
 class Setting extends \source\models\ConfigForm
 {
 
-	
-    public function rules()
-    {
+
+    public function rules() {
         return [
-			
+
         ];
     }
 
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            
+
         ];
     }
 }

@@ -3,7 +3,6 @@
 namespace source\modules\post\models;
 
 use source\models\Content;
-use Yii;
 use source\models\ContentBody;
 
 /**
@@ -20,32 +19,26 @@ class ContentPost extends ContentBody
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return '{{%content_post}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             //[['content_id', 'body'], 'required'],
-            [['content_id'], 'integer'],
-            [['body'], 'string']
+            [['content_id'], 'integer'], [['body'], 'string']
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'id' => 'ID',
-            'content_id' => 'Content ID',
-            'body' => '内容',
+            'id' => 'ID', 'content_id' => 'Content ID', 'body' => '内容',
         ];
     }
 

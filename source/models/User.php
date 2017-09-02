@@ -3,8 +3,8 @@
 namespace source\models;
 
 use source\core\base\BaseActiveRecord;
-use Yii;
 use source\libs\Constants;
+use Yii;
 use yii\web\IdentityInterface;
 
 /**
@@ -39,51 +39,26 @@ class User extends BaseActiveRecord implements IdentityInterface
         return [
             [
                 [
-                    'username',
-                    'auth_key',
-                    'password_hash',
-                    'email',
-                    'role'
-                ],
-                'required'
-            ],
-            [
+                    'username', 'auth_key', 'password_hash', 'email', 'role'
+                ], 'required'
+            ], [
                 [
-                    'username',
-                    'email'
-                ],
-                'unique'
-            ],
-            [
-                ['password'],
-                'required',
-                'on' => [
-                    'login',
-                    'create'
+                    'username', 'email'
+                ], 'unique'
+            ], [
+                ['password'], 'required', 'on' => [
+                    'login', 'create'
                 ]
-            ],
-            [
+            ], [
                 [
-                    'status',
-                    'created_at',
-                    'updated_at'
-                ],
-                'integer'
-            ],
-            [
-                'email',
-                'email'
-            ],
-            [
+                    'status', 'created_at', 'updated_at'
+                ], 'integer'
+            ], [
+                'email', 'email'
+            ], [
                 [
-                    'username',
-                    'password_hash',
-                    'password_reset_token',
-                    'email',
-                    'auth_key'
-                ],
-                'string',
-                'max' => 255
+                    'username', 'password_hash', 'password_reset_token', 'email', 'auth_key'
+                ], 'string', 'max' => 255
             ],
         ];
     }
@@ -91,23 +66,13 @@ class User extends BaseActiveRecord implements IdentityInterface
     public function scenarios() {
         $parent = parent::scenarios();
         $parent[ 'login' ] = [
-            'username',
-            'password'
+            'username', 'password'
         ];
         $parent[ 'create' ] = [
-            'username',
-            'password',
-            'email',
-            'status',
-            'role'
+            'username', 'password', 'email', 'status', 'role'
         ];
         $parent[ 'update' ] = [
-            'username',
-            'password',
-            'email',
-            'status',
-            'updated_at',
-            'role'
+            'username', 'password', 'email', 'status', 'updated_at', 'role'
         ];
 
         return $parent;
@@ -118,18 +83,9 @@ class User extends BaseActiveRecord implements IdentityInterface
      */
     public function attributeLabels() {
         return [
-            'id' => 'ID',
-            'username' => '用户名',
-            'password' => '密码',
-            'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash',
-            'password_reset_token' => 'Password Reset Token',
-            'email' => 'Email',
-            'status' => '状态',
-            'statusText' => '状态',
-            'created_at' => '创建时间',
-            'updated_at' => '更新时间',
-            'role' => '角色'
+            'id' => 'ID', 'username' => '用户名', 'password' => '密码', 'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash', 'password_reset_token' => 'Password Reset Token', 'email' => 'Email',
+            'status' => '状态', 'statusText' => '状态', 'created_at' => '创建时间', 'updated_at' => '更新时间', 'role' => '角色'
         ];
     }
 

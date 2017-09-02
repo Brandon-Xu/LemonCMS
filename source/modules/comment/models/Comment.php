@@ -2,8 +2,6 @@
 
 namespace source\modules\comment\models;
 
-use Yii;
-
 /**
  * This is the model class for table "{{%comment}}".
  *
@@ -26,21 +24,17 @@ class Comment extends \source\core\base\BaseActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return '{{%comment}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['content_id', 'content'], 'required'],
-            [['content_id', 'user_id', 'status'], 'integer'],
-            [['content'], 'string'],
-            [['created_at'], 'safe'],
+            [['content_id', 'content'], 'required'], [['content_id', 'user_id', 'status'], 'integer'],
+            [['content'], 'string'], [['created_at'], 'safe'],
             [['reply_ids', 'user_url', 'user_address'], 'string', 'max' => 128],
             [['user_name', 'user_email', 'user_ip'], 'string', 'max' => 64]
         ];
@@ -49,20 +43,11 @@ class Comment extends \source\core\base\BaseActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'id' => 'ID',
-            'reply_ids' => 'Reply Ids',
-            'content_id' => 'Content ID',
-            'user_id' => 'User ID',
-            'user_name' => 'User Name',
-            'user_email' => 'User Email',
-            'user_url' => 'User Url',
-            'user_ip' => 'User Ip',
-            'user_address' => 'User Address',
-            'content' => 'Content',
-            'created_at' => 'Created At',
+            'id' => 'ID', 'reply_ids' => 'Reply Ids', 'content_id' => 'Content ID', 'user_id' => 'User ID',
+            'user_name' => 'User Name', 'user_email' => 'User Email', 'user_url' => 'User Url', 'user_ip' => 'User Ip',
+            'user_address' => 'User Address', 'content' => 'Content', 'created_at' => 'Created At',
             'status' => 'Status',
         ];
     }

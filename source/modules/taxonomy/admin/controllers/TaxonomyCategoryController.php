@@ -2,12 +2,12 @@
 
 namespace source\modules\taxonomy\admin\controllers;
 
-use Yii;
-use source\modules\taxonomy\models\TaxonomyCategory;
-use source\modules\taxonomy\models\search\TaxonomyCategorySearch;
 use source\core\back\BackController;
-use yii\web\NotFoundHttpException;
+use source\modules\taxonomy\models\search\TaxonomyCategorySearch;
+use source\modules\taxonomy\models\TaxonomyCategory;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 /**
  * TaxonomyCategoryController implements the CRUD actions for TaxonomyCategory model.
@@ -17,8 +17,7 @@ class TaxonomyCategoryController extends BackController
     public function behaviors() {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
+                'class' => VerbFilter::className(), 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
@@ -34,8 +33,7 @@ class TaxonomyCategoryController extends BackController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
         ]);
     }
 

@@ -2,7 +2,6 @@
 
 namespace source\modules\menu\models;
 
-use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -17,8 +16,7 @@ class MenuCategory extends \source\core\base\BaseActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         //return 'lulu_menu_category';
         return '{{%menu_category}}';
 
@@ -27,29 +25,24 @@ class MenuCategory extends \source\core\base\BaseActiveRecord
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['id', 'name'], 'required'],
-            [['id', 'name'], 'string', 'max' => 64],
-            [['description'], 'string', 'max' => 512],
-            [['id'], 'unique']
+            [['id', 'name'], 'required'], [['id', 'name'], 'string', 'max' => 64],
+            [['description'], 'string', 'max' => 512], [['id'], 'unique']
         ];
     }
 
-    public static function getAttributeLabels($attribute = null)
-    {
+    public static function getAttributeLabels($attribute = NULL) {
         $items = [
-            'id' => '标识',
-            'name' => '名称',
-            'description' => '描述',
+            'id' => '标识', 'name' => '名称', 'description' => '描述',
         ];
+
         return ArrayHelper::getItems($items, $attribute);
     }
-    
-    public function beforeDelete()
-    {
-        Menu::deleteAll(['category_id'=>$this->id]);
-        return true;
+
+    public function beforeDelete() {
+        Menu::deleteAll(['category_id' => $this->id]);
+
+        return TRUE;
     }
 }

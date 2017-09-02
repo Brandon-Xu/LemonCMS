@@ -2,10 +2,10 @@
 
 namespace source\modules\taxonomy;
 
-use yii\helpers\ArrayHelper;
 use source\core\modularity\ModuleService;
 use source\modules\taxonomy\models\Taxonomy;
 use source\modules\taxonomy\models\TaxonomyCategory;
+use yii\helpers\ArrayHelper;
 
 class TaxonomyService extends ModuleService
 {
@@ -37,8 +37,7 @@ class TaxonomyService extends ModuleService
 
     public function getModel($model) {
         $items = [
-            'Taxonomy' => Taxonomy::className(),
-            'TaxonomyCategory' => TaxonomyCategory::className(),
+            'Taxonomy' => Taxonomy::className(), 'TaxonomyCategory' => TaxonomyCategory::className(),
         ];
 
         return ArrayHelper::getItems($items, $model, TRUE);

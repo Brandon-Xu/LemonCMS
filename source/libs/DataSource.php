@@ -3,13 +3,8 @@
 namespace source\libs;
 
 use source\LuLu;
-use yii\base\Object;
-use yii\db\Query;
-
-use source\modules\fragment\models\Fragment1Data;
-use source\modules\fragment\models\Fragment2Data;
-use source\modules\fragment\models\Fragment;
 use source\models\Content;
+use source\modules\fragment\models\Fragment;
 use yii\base\Application;
 
 class DataSource
@@ -40,9 +35,7 @@ class DataSource
         $orderBy = empty($orderBy) ? 'created_at desc' : $orderBy;
 
         $locals = LuLu::getPagedRows($query, [
-            'page' => $page,
-            'pageSize' => $pageSize,
-            'orderBy' => $orderBy,
+            'page' => $page, 'pageSize' => $pageSize, 'orderBy' => $orderBy,
         ]);
 
         return $locals;
@@ -103,7 +96,7 @@ class DataSource
                 $query->andWhere(['taxonomy_id' => $ids]);
             }
         }
-        foreach ([ 'recommend', 'headline', 'sticky' ] as $att) {
+        foreach (['recommend', 'headline', 'sticky'] as $att) {
             if (isset($options[ $att ]) && is_integer($options[ $att ])) {
                 $query->andWhere([$att => $options[ $att ]]);
             }
@@ -118,9 +111,7 @@ class DataSource
 
         if (isset($options[ 'is_pic' ])) {
             $query->andWhere([
-                '!=',
-                'thumb',
-                ''
+                '!=', 'thumb', ''
             ]);
         }
 

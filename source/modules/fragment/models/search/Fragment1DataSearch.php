@@ -2,38 +2,34 @@
 
 namespace source\modules\fragment\models\search;
 
-use Yii;
+use source\LuLu;
+use source\modules\fragment\models\Fragment1Data;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\modules\fragment\models\Fragment1Data;
-use source\LuLu;
 
 /**
  * Fragment1DataSearch represents the model behind the search form about `source\modules\fragment\models\Fragment1Data`.
  */
 class Fragment1DataSearch extends Fragment1Data
 {
-    public function init()
-    {
+    public function init() {
         parent::init();
-        $this->userValidate = false;
+        $this->userValidate = FALSE;
     }
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['id', 'fragment_id', 'sort_num', 'status'], 'integer'],
-            [['title', 'content'], 'safe'],
+            [['id', 'fragment_id', 'sort_num', 'status'], 'integer'], [['title', 'content'], 'safe'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -45,8 +41,7 @@ class Fragment1DataSearch extends Fragment1Data
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Fragment1Data::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -57,7 +52,7 @@ class Fragment1DataSearch extends Fragment1Data
         $query->andFilterWhere([
             'fragment_id' => $this->fragment_id,
         ]);
-        
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -66,15 +61,14 @@ class Fragment1DataSearch extends Fragment1Data
             return $dataProvider;
         }
 
-//         $query->andFilterWhere([
-//             'id' => $this->id,
-//             'fragment_id' => $this->fragment_id,
-//             'sort_num' => $this->sort_num,
-//             'status' => $this->status,
-//         ]);
+        //         $query->andFilterWhere([
+        //             'id' => $this->id,
+        //             'fragment_id' => $this->fragment_id,
+        //             'sort_num' => $this->sort_num,
+        //             'status' => $this->status,
+        //         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'title', $this->title])->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

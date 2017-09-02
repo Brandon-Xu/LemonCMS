@@ -2,12 +2,11 @@
 
 namespace source\modules\fragment\admin\controllers;
 
-use Yii;
+use source\core\back\BackController;
 use source\modules\fragment\models\FragmentCategory;
 use source\modules\fragment\models\search\FragmentCategorySearch;
-use source\core\back\BackController;
+use Yii;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * FragmentCategoryController implements the CRUD actions for FragmentCategory model.
@@ -19,14 +18,12 @@ class FragmentCategoryController extends BackController
      * Lists all FragmentCategory models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new FragmentCategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -35,8 +32,7 @@ class FragmentCategoryController extends BackController
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -47,8 +43,7 @@ class FragmentCategoryController extends BackController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new FragmentCategory();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -66,8 +61,7 @@ class FragmentCategoryController extends BackController
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -85,8 +79,7 @@ class FragmentCategoryController extends BackController
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -99,9 +92,8 @@ class FragmentCategoryController extends BackController
      * @return FragmentCategory the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
-        if (($model = FragmentCategory::findOne($id)) !== null) {
+    protected function findModel($id) {
+        if (($model = FragmentCategory::findOne($id)) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

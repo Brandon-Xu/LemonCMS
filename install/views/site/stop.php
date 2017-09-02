@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /* @var $this source\core\front\FrontView */
 
@@ -18,10 +18,10 @@ $this->title = '安装停止';
                 <p class="red">如重新安装，请删除<code>data/install.lock</code>文件</p>
                 <p class="help">
                     <strong>获取更多帮助</strong>
-                    <br />
-                    帮助中心：<a href="http://www.lulucms.com" target="_blank" > http://www.lulucms.com </a>
-                    <br />
-                    Yii交流中心：<a href="http://www.yiifans.com" target="_blank"> http://www.yiifans.com/</a><br />
+                    <br/>
+                    帮助中心：<a href="http://www.lulucms.com" target="_blank"> http://www.lulucms.com </a>
+                    <br/>
+                    Yii交流中心：<a href="http://www.yiifans.com" target="_blank"> http://www.yiifans.com/</a><br/>
                     QQ群&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：308110659
                 </p>
             </div>

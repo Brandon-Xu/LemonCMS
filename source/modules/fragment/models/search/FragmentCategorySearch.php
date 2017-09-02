@@ -2,38 +2,33 @@
 
 namespace source\modules\fragment\models\search;
 
-use Yii;
+use source\modules\fragment\models\FragmentCategory;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\modules\fragment\models\FragmentCategory;
 
 /**
  * FragmentCategorySearch represents the model behind the search form about `source\modules\fragment\models\FragmentCategory`.
  */
 class FragmentCategorySearch extends FragmentCategory
 {
-    public function init()
-    {
+    public function init() {
         parent::init();
-        $this->userValidate = false;
+        $this->userValidate = FALSE;
     }
-    
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['id', 'type'], 'integer'],
-            [['name'], 'safe'],
+            [['id', 'type'], 'integer'], [['name'], 'safe'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -45,8 +40,7 @@ class FragmentCategorySearch extends FragmentCategory
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = FragmentCategory::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -62,8 +56,7 @@ class FragmentCategorySearch extends FragmentCategory
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'type' => $this->type,
+            'id' => $this->id, 'type' => $this->type,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name]);

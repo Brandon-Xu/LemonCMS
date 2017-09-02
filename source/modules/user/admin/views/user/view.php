@@ -7,8 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model source\models\User */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params[ 'breadcrumbs' ][] = ['label' => 'Users', 'url' => ['index']];
+$this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
 <div class="user-view">
 
@@ -17,26 +17,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
+            'class' => 'btn btn-danger', 'data' => [
+                'confirm' => 'Are you sure you want to delete this item?', 'method' => 'post',
             ],
         ]) ?>
     </p>
 
     <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
-            'email:email',
-            'status',
-            'created_at',
-            'updated_at',
+        'model' => $model, 'attributes' => [
+            'id', 'username', 'auth_key', 'password_hash', 'password_reset_token', 'email:email', 'status',
+            'created_at', 'updated_at',
         ],
     ]) ?>
 

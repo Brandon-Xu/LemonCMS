@@ -2,18 +2,14 @@
 
 namespace source\modules\fragment;
 
-use source\LuLu;
-
 class FragmentService extends \source\core\modularity\ModuleService
 {
 
-    public function init()
-    {
+    public function init() {
         parent::init();
     }
-    
-    public function getServiceId()
-    {
+
+    public function getServiceId() {
         return 'fragmentSerivce';
     }
 }

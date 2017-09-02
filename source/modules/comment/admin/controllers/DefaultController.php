@@ -2,20 +2,19 @@
 
 namespace source\modules\comment\admin\controllers;
 
-use Yii;
+use source\core\back\BackController;
 use source\models\Comment;
 use source\models\search\CommentSearch;
-use source\core\back\BackController;
-use yii\web\NotFoundHttpException;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 class DefaultController extends BackController
 {
     public function behaviors() {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
+                'class' => VerbFilter::className(), 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
@@ -31,8 +30,7 @@ class DefaultController extends BackController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -57,8 +55,7 @@ class DefaultController extends BackController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'view',
-                'id' => $model->id
+                'view', 'id' => $model->id
             ]);
         } else {
             return $this->render('create', [
@@ -78,8 +75,7 @@ class DefaultController extends BackController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'view',
-                'id' => $model->id
+                'view', 'id' => $model->id
             ]);
         } else {
             return $this->render('update', [

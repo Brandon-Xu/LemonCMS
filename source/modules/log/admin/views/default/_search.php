@@ -1,15 +1,6 @@
 <?php
 
-use source\core\grid\GridView;
-use source\libs\Common;
-use source\libs\Constants;
-use source\libs\Resource;
-use source\LuLu;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use yii\helpers\Inflector;
-use yii\helpers\StringHelper;
-use yii\helpers\Url;
 
 /* @var $this source\core\back\BackView */
 /* @var $model source\modules\log\models\search\LogSearch */
@@ -19,8 +10,7 @@ use yii\helpers\Url;
 <div class="log-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
+        'action' => ['index'], 'method' => 'get',
     ]); ?>
 
     <?= $form->field($model, 'id') ?>

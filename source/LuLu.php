@@ -2,11 +2,11 @@
 
 namespace source;
 
-use yii\helpers\VarDumper;
-use yii\data\Pagination;
 use source\core\modularity\ModuleService;
 use yii\base\InvalidParamException;
+use yii\data\Pagination;
 use yii\helpers\Url;
+use yii\helpers\VarDumper;
 
 require_once __DIR__.'/libs/functions.php';
 
@@ -266,7 +266,8 @@ class LuLu extends \Yii
     }
 
     public static function createCommand($sql = NULL) {
-        if ($sql !== NULL) return app()->db->createCommand($sql);
+        if ($sql !== NULL)
+            return app()->db->createCommand($sql);
 
         return app()->db->createCommand();
     }

@@ -7,10 +7,9 @@ use source\modules\dict\models\Setting;
 
 class SettingController extends BaseSettingController
 {
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $model = new Setting();
-        
+
         return $this->doConfig($model);
     }
 }

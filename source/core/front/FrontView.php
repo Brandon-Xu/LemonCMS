@@ -2,12 +2,11 @@
 
 namespace source\core\front;
 
-use source\LuLu;
 use source\core\base\BaseView;
 use source\core\base\Theme;
 use source\core\front\widgets\ActiveForm;
-use source\libs\Resource;
 use source\libs\DataSource;
+use source\libs\Resource;
 
 class FrontView extends BaseView
 {
@@ -24,16 +23,11 @@ class FrontView extends BaseView
         $config = [
             'pathMap' => [
                 '@app/views' => [
-                    '@statics/themes/'.$currentTheme.'/views',
-                    '@statics/themes/basic/views'
-                ],
-                '@source/modules/'.$moduleId.'/home/views' => [
-                    '@statics/themes/'.$currentTheme.'/modules/'.$moduleId,
-                    '@statics/themes/basic/modules/'.$moduleId
+                    '@statics/themes/'.$currentTheme.'/views', '@statics/themes/basic/views'
+                ], '@source/modules/'.$moduleId.'/home/views' => [
+                    '@statics/themes/'.$currentTheme.'/modules/'.$moduleId, '@statics/themes/basic/modules/'.$moduleId
                 ]
-            ],
-            'basePath' => '@statics/themes/basic',
-            'baseUrl' => '@statics/themes/basic'
+            ], 'basePath' => '@statics/themes/basic', 'baseUrl' => '@statics/themes/basic'
         ];
 
         $this->theme = new Theme($config);

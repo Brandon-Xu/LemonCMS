@@ -11,8 +11,7 @@ class HomeModule extends FrontModule
     public function init() {
         app()->urlManager->addRules([
             [
-                'class' => 'yii\rest\UrlRule',
-                'controller' => ['post/api' => 'post/api'],
+                'class' => 'yii\rest\UrlRule', 'controller' => ['post/api' => 'post/api'],
             ],
         ]);
         parent::init();

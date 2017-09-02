@@ -2,12 +2,12 @@
 
 namespace source\modules\taxonomy\home\controllers;
 
-use Yii;
-use source\modules\taxonomy\models\Taxonomy;
-use source\modules\taxonomy\models\search\TaxonomySearch;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use source\core\front\FrontController;
+use source\modules\taxonomy\models\search\TaxonomySearch;
+use source\modules\taxonomy\models\Taxonomy;
+use Yii;
+use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
 /**
  * TaxonomyController implements the CRUD actions for Taxonomy model.
@@ -17,8 +17,7 @@ class TaxonomyController extends FrontController
     public function behaviors() {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
+                'class' => VerbFilter::className(), 'actions' => [
                     'delete' => ['post'],
                 ],
             ],
@@ -34,8 +33,7 @@ class TaxonomyController extends FrontController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -60,8 +58,7 @@ class TaxonomyController extends FrontController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'view',
-                'id' => $model->id
+                'view', 'id' => $model->id
             ]);
         } else {
             return $this->render('create', [
@@ -81,8 +78,7 @@ class TaxonomyController extends FrontController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'view',
-                'id' => $model->id
+                'view', 'id' => $model->id
             ]);
         } else {
             return $this->render('update', [

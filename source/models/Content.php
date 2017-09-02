@@ -2,20 +2,17 @@
 
 namespace source\models;
 
-use source\core\base\ActiveQuery;
 use source\core\base\BaseActiveRecord;
-use source\modules\taxonomy\models\Taxonomy;
-use Yii;
-use source\helpers\DateTimeHelper;
 use source\core\behaviors\DefaultValueBehavior;
-use yii\base\Model;
+use source\helpers\DateTimeHelper;
+use source\libs\Common;
+use source\libs\Constants;
+use source\LuLu;
+use source\modules\taxonomy\models\Taxonomy;
 use yii\db\ActiveRecord;
 use yii\db\Query;
-use source\libs\Common;
-use yii\helpers\Url;
-use source\libs\Constants;
 use yii\helpers\Html;
-use source\LuLu;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "lulu_content".
@@ -107,8 +104,7 @@ class Content extends BaseActiveRecord
      */
     public function getUrl() {
         return Url::to([
-            '/'.$this->content_type.'/default/detail',
-            'id' => $this->id
+            '/'.$this->content_type.'/default/detail', 'id' => $this->id
         ]);
     }
 
@@ -132,21 +128,23 @@ class Content extends BaseActiveRecord
         return $this->hasOne(LuLu::getService('taxonomy')->getModel("Taxonomy"), ['id' => 'taxonomy_id']);
     }
 
-    public function getBodyClass(){
-        if ($this->_bodyClass === NULL && !empty($this->content_type)){
+    public function getBodyClass() {
+        if ($this->_bodyClass === NULL && !empty($this->content_type)) {
             $contentType = strtolower($this->content_type);
             $className = "source\\modules\\{$contentType}\\models\\Content".ucfirst($contentType);
-            if(class_exists($className)) {
+            if (class_exists($className)) {
                 $this->_bodyClass = $className;
             }
         }
+
         return $this->_bodyClass;
     }
 
-    public function getBody(){
-        if($this->getBodyClass() !== NULL && is_subclass_of($this->getBodyClass(), ContentBody::className())){
-            return $this->hasOne($this->getBodyClass()::className(), ['content_id'=>'id']);
+    public function getBody() {
+        if ($this->getBodyClass() !== NULL && is_subclass_of($this->getBodyClass(), ContentBody::className())) {
+            return $this->hasOne($this->getBodyClass()::className(), ['content_id' => 'id']);
         }
+
         return $this->hasOne(ContentBody::className(), []);
     }
 
@@ -157,7 +155,7 @@ class Content extends BaseActiveRecord
      * @return Query
      */
     public static function getBodyByClass($class, $condition = [], $columns = []) {
-    /** @var ActiveRecord $bodyModel */
+        /** @var ActiveRecord $bodyModel */
         $bodyModel = new $class();
         if (empty($columns)) {
             $columns = $bodyModel->getTableSchema()->columns;
@@ -176,8 +174,8 @@ class Content extends BaseActiveRecord
         }
 
         $query = new Query();
-        $query->select($selects)->from(['content' => Content::tableName()])->innerJoin(['body' => $bodyModel::tableName()],
-            '{{content}}.[[id]]={{body}}.[[content_id]]');
+        $query->select($selects)->from(['content' => Content::tableName()])
+            ->innerJoin(['body' => $bodyModel::tableName()], '{{content}}.[[id]]={{body}}.[[content_id]]');
 
         if (!empty($condition)) {
             $query->andWhere($condition);
@@ -192,16 +190,9 @@ class Content extends BaseActiveRecord
     public function behaviors() {
         return [
             [
-                'class' => DefaultValueBehavior::className(),
-                'validates' => [
-                    'focus_count',
-                    'favorite_count',
-                    'view_count',
-                    'comment_count',
-                    'agree_count',
-                    'against_count'
-                ],
-                'value' => 0
+                'class' => DefaultValueBehavior::className(), 'validates' => [
+                'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count'
+            ], 'value' => 0
             ]
         ];
     }
@@ -218,12 +209,19 @@ class Content extends BaseActiveRecord
      */
     public function rules() {
         return [
-            [ [ 'taxonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'sticky', 'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status' ], 'integer' ],
-            [ [ 'content_type', 'title' ], 'required' ],
-            [ [ 'user_name', 'last_user_name', 'password', 'view', 'layout', 'content_type' ], 'string', 'max' => 64 ],
-            [ [ 'seo_title', 'seo_keywords', 'seo_description', 'title', 'sub_title', 'url_alias', 'redirect_url', 'thumb' ], 'string', 'max' => 256 ],
-            [ ['summary'], 'string', 'max' => 512 ],
-            [ ['thumbs'], 'string', 'max' => 1024 ]
+            [
+                [
+                    'taxonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count',
+                    'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'sticky',
+                    'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status'
+                ], 'integer'
+            ], [['content_type', 'title'], 'required'],
+            [['user_name', 'last_user_name', 'password', 'view', 'layout', 'content_type'], 'string', 'max' => 64], [
+                [
+                    'seo_title', 'seo_keywords', 'seo_description', 'title', 'sub_title', 'url_alias', 'redirect_url',
+                    'thumb'
+                ], 'string', 'max' => 256
+            ], [['summary'], 'string', 'max' => 512], [['thumbs'], 'string', 'max' => 1024]
         ];
     }
 
@@ -232,44 +230,15 @@ class Content extends BaseActiveRecord
      */
     public function attributeLabels() {
         return [
-            'id' => 'ID',
-            'taxonomy_id' => '分类',
-            'user_id' => '用户ID',
-            'user_name' => '用户名',
-            'userText' => '用户名',
-            'last_user_id' => 'Last User ID',
-            'last_user_name' => 'Last User Name',
-            'created_at' => '添加时间',
-            'updated_at' => '修改时间',
-            'focus_count' => '关注数',
-            'favorite_count' => '收藏数',
-            'view_count' => '浏览数',
-            'comment_count' => '评论数',
-            'agree_count' => '赞成数',
-            'against_count' => '反对数',
-            'recommend' => '推荐',
-            'headline' => '头条',
-            'sticky' => '置顶',
-            'flag' => '标签',
-            'allow_comment' => '允许评论',
-            'password' => '密码',
-            'view' => '视图(view)',
-            'layout' => '布局(layout)',
-            'sort_num' => '排序',
-            'visibility' => '可见',
-            'status' => '状态',
-            'statusText' => '状态',
-            'content_type' => '内容类型',
-            'seo_title' => '标题',
-            'seo_keywords' => '关键字',
-            'seo_description' => '描述',
-            'title' => '标题',
-            'sub_title' => '副标题',
-            'url_alias' => '别名',
-            'redirect_url' => '转向Url',
-            'summary' => '简介',
-            'thumb' => '缩略图',
-            'thumbs' => '缩略图集',
+            'id' => 'ID', 'taxonomy_id' => '分类', 'user_id' => '用户ID', 'user_name' => '用户名', 'userText' => '用户名',
+            'last_user_id' => 'Last User ID', 'last_user_name' => 'Last User Name', 'created_at' => '添加时间',
+            'updated_at' => '修改时间', 'focus_count' => '关注数', 'favorite_count' => '收藏数', 'view_count' => '浏览数',
+            'comment_count' => '评论数', 'agree_count' => '赞成数', 'against_count' => '反对数', 'recommend' => '推荐',
+            'headline' => '头条', 'sticky' => '置顶', 'flag' => '标签', 'allow_comment' => '允许评论', 'password' => '密码',
+            'view' => '视图(view)', 'layout' => '布局(layout)', 'sort_num' => '排序', 'visibility' => '可见', 'status' => '状态',
+            'statusText' => '状态', 'content_type' => '内容类型', 'seo_title' => '标题', 'seo_keywords' => '关键字',
+            'seo_description' => '描述', 'title' => '标题', 'sub_title' => '副标题', 'url_alias' => '别名',
+            'redirect_url' => '转向Url', 'summary' => '简介', 'thumb' => '缩略图', 'thumbs' => '缩略图集',
 
         ];
     }

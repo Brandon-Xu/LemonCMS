@@ -2,7 +2,6 @@
 
 namespace source\core\base;
 
-use yii\helpers\StringHelper;
 use Yii;
 
 class Theme extends \yii\base\Theme

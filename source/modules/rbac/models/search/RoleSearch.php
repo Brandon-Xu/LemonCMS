@@ -2,11 +2,9 @@
 
 namespace source\modules\rbac\models\search;
 
-use Yii;
+use source\modules\rbac\models\Role;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\modules\rbac\models\Role;
-use source\LuLu;
 
 /**
  * RoleSearch represents the model behind the search form about `source\modules\rbac\models\Role`.
@@ -16,19 +14,22 @@ class RoleSearch extends Role
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['id', 'name', 'description'], 'safe'],
-            [['category_id'], 'integer'],
+            [
+                [
+                    'id', 'name', 'description'
+                ], 'safe'
+            ], [
+                ['category_id'], 'integer'
+            ],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -40,8 +41,7 @@ class RoleSearch extends Role
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Role::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -49,7 +49,7 @@ class RoleSearch extends Role
         ]);
 
         $this->load($params);
-       
+
         if (!$this->validate()) {
             // uncomment the following line if you do not want to any records when validation fails
             // $query->where('0=1');
@@ -57,10 +57,13 @@ class RoleSearch extends Role
         }
 
 
-
-        $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere([
+            'like', 'id', $this->id
+        ])->andFilterWhere([
+            'like', 'name', $this->name
+        ])->andFilterWhere([
+            'like', 'description', $this->description
+        ]);
 
         return $dataProvider;
     }

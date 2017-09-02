@@ -7,8 +7,10 @@ use yii\helpers\Html;
 /* @var $model app\modules\rbac\models\Relation */
 
 $this->title = 'Create Relation';
-$this->params['breadcrumbs'][] = ['label' => 'Relations', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params[ 'breadcrumbs' ][] = [
+    'label' => 'Relations', 'url' => ['index']
+];
+$this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
 <div class="relation-create">
 

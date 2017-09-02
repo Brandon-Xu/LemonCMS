@@ -2,7 +2,6 @@
 
 namespace source\modules\post\home;
 
-use Yii;
 use source\models\Content;
 use source\modules\post\models\ContentPost;
 

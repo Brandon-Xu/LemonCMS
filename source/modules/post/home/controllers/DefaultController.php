@@ -2,8 +2,8 @@
 
 namespace source\modules\post\home\controllers;
 
-use source\modules\post\models\ContentPost;
 use frontend\controllers\BaseContentController;
+use source\modules\post\models\ContentPost;
 
 class DefaultController extends BaseContentController
 {

@@ -5,7 +5,7 @@
 echo "<?php\n";
 ?>
 
-namespace source\modules\<?= $generator->moduleDir?>;
+namespace source\modules\<?= $generator->moduleDir ?>;
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -15,16 +15,16 @@ use source\LuLu;
 use source\libs\Common;
 use source\libs\Constants;
 
-class <?= $generator->getModuleClassName()?>Service extends \source\core\modularity\ModuleService
+class <?= $generator->getModuleClassName() ?>Service extends \source\core\modularity\ModuleService
 {
 
-    public function init()
-    {
-        parent::init();
-    }
-    
-    public function getServiceId()
-    {
-        return '<?= $generator->moduleDir?>Service';
-    }
+public function init()
+{
+parent::init();
+}
+
+public function getServiceId()
+{
+return '<?= $generator->moduleDir ?>Service';
+}
 }

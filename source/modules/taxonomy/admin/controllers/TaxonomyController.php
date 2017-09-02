@@ -2,12 +2,12 @@
 
 namespace source\modules\taxonomy\admin\controllers;
 
-use Yii;
-use source\modules\taxonomy\models\Taxonomy;
-use source\modules\taxonomy\models\search\TaxonomySearch;
 use source\core\back\BackController;
-use yii\web\NotFoundHttpException;
+use source\modules\taxonomy\models\search\TaxonomySearch;
+use source\modules\taxonomy\models\Taxonomy;
+use Yii;
 use yii\data\ArrayDataProvider;
+use yii\web\NotFoundHttpException;
 
 /**
  * TaxonomyController implements the CRUD actions for Taxonomy model.
@@ -28,8 +28,7 @@ class TaxonomyController extends BackController
         $dataProvider->key = 'id';
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -57,8 +56,7 @@ class TaxonomyController extends BackController
         $model->loadDefaultValues();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'index',
-                'category' => $category
+                'index', 'category' => $category
             ]);
         } else {
             return $this->render('create', [
@@ -79,8 +77,7 @@ class TaxonomyController extends BackController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'index',
-                'category' => $category
+                'index', 'category' => $category
             ]);
         } else {
             return $this->render('update', [
@@ -101,8 +98,7 @@ class TaxonomyController extends BackController
         $category = $model->category_id;
 
         return $this->redirect([
-            'index',
-            'category' => $category
+            'index', 'category' => $category
         ]);
     }
 

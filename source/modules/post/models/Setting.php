@@ -2,7 +2,6 @@
 
 namespace source\modules\post\models;
 
-use Yii;
 use source\models\ConfigForm;
 
 class Setting extends ConfigForm
@@ -13,8 +12,7 @@ class Setting extends ConfigForm
     public function rules() {
         return [
             [
-                ['post_taxonomy'],
-                'string'
+                ['post_taxonomy'], 'string'
             ],
         ];
     }

@@ -2,22 +2,11 @@
 
 namespace source\modules\log\admin\controllers;
 
-use Yii;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use yii\helpers\Inflector;
-use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\helpers\StringHelper;
-use yii\helpers\ArrayHelper;
-use source\LuLu;
-use source\core\data\ActiveDataProvider;
-use source\libs\Common;
-use source\libs\Constants;
-use source\libs\Resource;
 use source\core\back\BackController;
 use source\modules\log\models\Log;
 use source\modules\log\models\search\LogSearch;
+use Yii;
+use yii\web\NotFoundHttpException;
 
 
 /**
@@ -30,14 +19,12 @@ class DefaultController extends BackController
      * Lists all Log models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new LogSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -46,8 +33,7 @@ class DefaultController extends BackController
      * @param string $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -58,8 +44,7 @@ class DefaultController extends BackController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Log();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -77,8 +62,7 @@ class DefaultController extends BackController
      * @param string $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -96,8 +80,7 @@ class DefaultController extends BackController
      * @param string $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -110,9 +93,8 @@ class DefaultController extends BackController
      * @return Log the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
-        if (($model = Log::findOne($id)) !== null) {
+    protected function findModel($id) {
+        if (($model = Log::findOne($id)) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

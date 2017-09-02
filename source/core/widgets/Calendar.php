@@ -1,8 +1,6 @@
 <?php
-namespace source\core\widgets;
 
-use yii\base\Widget;
-use yii\web\View;
+namespace source\core\widgets;
 
 class Calendar extends BaseWidget
 {
@@ -13,14 +11,12 @@ class Calendar extends BaseWidget
 
     public $viewFile;
 
-    public function init()
-    {
+    public function init() {
     }
 
-    public function run()
-    {
+    public function run() {
         $view = $this->getView();
-        
+
         return $view->render("@app/views/base/calendar", $this->params);
     }
 }

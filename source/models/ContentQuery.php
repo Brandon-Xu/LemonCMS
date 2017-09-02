@@ -13,33 +13,22 @@ use source\libs\Constants;
 class ContentQuery extends ActiveQuery
 {
 
-    public function normalSelect($moreFields = []){
+    public function normalSelect($moreFields = []) {
         $fields = [
-            'id',
-            'taxonomy_id',
-            'created_at',
-            'updated_at',
-            'view_count',
-            'status',
-            'content_type',
-            'seo_title',
-            'seo_keywords',
-            'seo_description',
-            'title',
-            'sub_title',
-            'summary',
-            'thumb',
-            'thumbs',
+            'id', 'taxonomy_id', 'created_at', 'updated_at', 'view_count', 'status', 'content_type', 'seo_title',
+            'seo_keywords', 'seo_description', 'title', 'sub_title', 'summary', 'thumb', 'thumbs',
         ];
-        if(is_array($moreFields) && !empty($moreFields)){
+        if (is_array($moreFields) && !empty($moreFields)) {
             $fields = array_merge($fields, $moreFields);
         }
         $this->select($fields);
+
         return $this;
     }
 
     public function published() {
         $this->where(['status' => Constants::Status_Publish]);
+
         return $this;
     }
 

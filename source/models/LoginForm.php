@@ -26,20 +26,14 @@ class LoginForm extends Model
             // username and password are both required
             [
                 [
-                    'username',
-                    'password'
-                ],
-                'required'
-            ],
-            // rememberMe must be a boolean value
+                    'username', 'password'
+                ], 'required'
+            ], // rememberMe must be a boolean value
             [
-                'rememberMe',
-                'boolean'
-            ],
-            // password is validated by validatePassword()
+                'rememberMe', 'boolean'
+            ], // password is validated by validatePassword()
             [
-                'password',
-                'validatePassword'
+                'password', 'validatePassword'
             ],
             //['verifyCode', 'captcha'],
         ];
@@ -48,9 +42,7 @@ class LoginForm extends Model
     public function attributeLabels() {
         return [
 
-            'username' => '用户名',
-            'password' => '密码',
-            'verifyCode' => '验证码',
+            'username' => '用户名', 'password' => '密码', 'verifyCode' => '验证码',
 
         ];
     }

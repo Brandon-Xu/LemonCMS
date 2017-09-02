@@ -2,8 +2,8 @@
 
 namespace source\modules\page\home\controllers;
 
-use source\modules\page\models\ContentPage;
 use frontend\controllers\BaseContentController;
+use source\modules\page\models\ContentPage;
 
 class DefaultController extends BaseContentController
 {

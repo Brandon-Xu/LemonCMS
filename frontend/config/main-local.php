@@ -4,19 +4,14 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'nttN49BkYzUIiCrceNFctxIWK33-uLAF',
-            'parsers' => [
+            'cookieValidationKey' => 'nttN49BkYzUIiCrceNFctxIWK33-uLAF', 'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
             ]
-        ],
-        'urlManager' => [
-            'enablePrettyUrl' => TRUE,
-            'showScriptName' => FALSE,
-            'rules' => [
+        ], 'urlManager' => [
+            'enablePrettyUrl' => TRUE, 'showScriptName' => FALSE, 'rules' => [
 
             ],
-        ],
-        'response' => [
+        ], 'response' => [
 
         ],
     ],

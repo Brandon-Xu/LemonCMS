@@ -2,8 +2,8 @@
 
 namespace source\core\base;
 
-use yii\base\Component;
 use source\traits\CommonTrait;
+use yii\base\Component;
 
 /**
  *

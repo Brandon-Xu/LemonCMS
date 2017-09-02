@@ -2,7 +2,6 @@
 
 namespace source\modules\rbac\models;
 
-use Yii;
 use source\LuLu;
 use source\modules\rbac\RbacService;
 
@@ -18,19 +17,16 @@ class Relation extends BaseRbacActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return '{{%auth_relation}}';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['role', 'permission'], 'required'],
-            [['value'], 'string','max'=>128],
+            [['role', 'permission'], 'required'], [['value'], 'string', 'max' => 128],
             [['role', 'permission'], 'string', 'max' => 64]
         ];
     }
@@ -38,22 +34,17 @@ class Relation extends BaseRbacActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
-            'role' => '角色',
-            'permission' => '权限',
-            'value' => '值',
+            'role' => '角色', 'permission' => '权限', 'value' => '值',
         ];
     }
 
-    public static function AddBatchItems($role, $permissions)
-    {
+    public static function AddBatchItems($role, $permissions) {
         self::deleteAll(['role' => $role]);
         LuLu::deleteCache(RbacService::CachePrefix.$role);
-        
-        foreach ($permissions as $key => $value)
-        {
+
+        foreach ($permissions as $key => $value) {
             $newRelation = new Relation();
             $newRelation->role = $role;
             $newRelation->permission = $key;

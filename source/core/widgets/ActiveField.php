@@ -65,8 +65,7 @@ class ActiveField extends \yii\widgets\ActiveField implements IBaseWidget
         $value = $value === NULL ? Html::getAttributeValue($this->model, $this->attribute) : $value;
         $options[ 'class' ] = 'da-style';
         $options[ 'style' ] = 'display: inline-block;';
-        $this->parts[ '{input}' ] = Html::activeHiddenInput($this->model, $this->attribute).Html::tag('span', $value,
-                $options);
+        $this->parts[ '{input}' ] = Html::activeHiddenInput($this->model, $this->attribute).Html::tag('span', $value, $options);
 
         return $this;
     }
@@ -83,8 +82,7 @@ class ActiveField extends \yii\widgets\ActiveField implements IBaseWidget
 
         $options[ 'item' ] = function ($index, $label, $name, $checked, $value) use ($encode, $itemOptions) {
             $radio = Html::radio($name, $checked, array_merge($itemOptions, [
-                'value' => $value,
-                'label' => $encode ? Html::encode($label) : $label,
+                'value' => $value, 'label' => $encode ? Html::encode($label) : $label,
             ]));
 
             return '<li>'.$radio.'</li>';
@@ -106,8 +104,7 @@ class ActiveField extends \yii\widgets\ActiveField implements IBaseWidget
 
         $options[ 'item' ] = function ($index, $label, $name, $checked, $value) use ($encode, $itemOptions) {
             $checkbox = Html::checkbox($name, $checked, array_merge($itemOptions, [
-                'value' => $value,
-                'label' => $encode ? Html::encode($label) : $label,
+                'value' => $value, 'label' => $encode ? Html::encode($label) : $label,
             ]));
 
             return '<li>'.$checkbox.'</li>';

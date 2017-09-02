@@ -2,27 +2,24 @@
 
 namespace source\modules\menu\models\search;
 
-use Yii;
+use source\modules\menu\models\MenuCategory;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\modules\menu\models\MenuCategory;
 
 /**
  * MenuCategorySearch represents the model behind the search form about `source\modules\menu\models\MenuCategory`.
  */
 class MenuCategorySearch extends MenuCategory
 {
-    public function init()
-    {
+    public function init() {
         parent::init();
-        $this->userValidate = false;
+        $this->userValidate = FALSE;
     }
-    
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'name', 'description'], 'safe'],
         ];
@@ -31,8 +28,7 @@ class MenuCategorySearch extends MenuCategory
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -44,8 +40,7 @@ class MenuCategorySearch extends MenuCategory
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = MenuCategory::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -60,8 +55,7 @@ class MenuCategorySearch extends MenuCategory
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'id', $this->id])->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;

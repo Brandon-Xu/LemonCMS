@@ -1,22 +1,19 @@
 <?php
-namespace source\modules\rbac\rules;
 
-use source\core\modularity\ModuleInfo;
+namespace source\modules\rbac\rules;
 
 class Rule extends \yii\base\Object
 {
 
-    public static function getRules()
-    {
+    public static function getRules() {
         $items = [
-            'BooleanRule' => '布尔值判断', 
-            'ControllerRule' => '对控制器中Action判断'
+            'BooleanRule' => '布尔值判断', 'ControllerRule' => '对控制器中Action判断'
         ];
+
         return $items;
     }
 
-    public function execute($permission, $params = [], $role = null)
-    {
-        return true;
+    public function execute($permission, $params = [], $role = NULL) {
+        return TRUE;
     }
 }

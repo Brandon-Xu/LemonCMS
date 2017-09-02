@@ -2,8 +2,6 @@
 
 namespace source\core\widgets;
 
-use Yii;
-
 class ActiveForm extends \yii\widgets\ActiveForm implements IBaseWidget
 {
 

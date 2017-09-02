@@ -7,7 +7,7 @@
 echo "<?php\n";
 ?>
 
-namespace source\modules\<?= $generator->moduleDir?>\home;
+namespace source\modules\<?= $generator->moduleDir ?>\home;
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -19,21 +19,21 @@ use source\libs\Constants;
 
 class HomeModule extends \source\core\modularity\FrontModule
 {
-    
-    public $controllerNamespace = 'source\modules\<?= $generator->moduleDir?>\home\controllers';
 
-    public function init()
-    {
-        parent::init();
+public $controllerNamespace = 'source\modules\<?= $generator->moduleDir ?>\home\controllers';
 
-        // custom initialization code goes here
-    }
-    
-    //public function getMenus()
-    //{
-    //    return [
-    //        //['首页',['/<?= $generator->moduleID?>']],
-    //        //['设置',['/<?= $generator->moduleID?>/setting']],
-    //    ];
-    //}
+public function init()
+{
+parent::init();
+
+// custom initialization code goes here
+}
+
+//public function getMenus()
+//{
+//    return [
+//        //['首页',['/<?= $generator->moduleID ?>']],
+//        //['设置',['/<?= $generator->moduleID ?>/setting']],
+//    ];
+//}
 }

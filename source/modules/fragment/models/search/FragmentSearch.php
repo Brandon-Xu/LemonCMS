@@ -2,39 +2,34 @@
 
 namespace source\modules\fragment\models\search;
 
-use Yii;
+use source\LuLu;
+use source\modules\fragment\models\Fragment;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\modules\fragment\models\Fragment;
-use source\LuLu;
 
 /**
  * FragmentSearch represents the model behind the search form about `source\modules\fragment\models\Fragment`.
  */
 class FragmentSearch extends Fragment
 {
-    public function init()
-    {
+    public function init() {
         parent::init();
-        $this->userValidate = false;
+        $this->userValidate = FALSE;
     }
-    
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['id', 'type'], 'integer'],
-            [['name', 'description'], 'safe'],
+            [['id', 'type'], 'integer'], [['name', 'description'], 'safe'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -46,8 +41,7 @@ class FragmentSearch extends Fragment
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Fragment::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -58,7 +52,7 @@ class FragmentSearch extends Fragment
         $query->andFilterWhere([
             'type' => $this->type,
         ]);
-        
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -67,13 +61,14 @@ class FragmentSearch extends Fragment
             return $dataProvider;
         }
 
-//         $query->andFilterWhere([
-//             'id' => $this->id,
-//             'type' => $this->type,
-//         ]);
+        //         $query->andFilterWhere([
+        //             'id' => $this->id,
+        //             'type' => $this->type,
+        //         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', 'name', $this->name])->andFilterWhere([
+            'like', 'description', $this->description
+        ]);
 
         return $dataProvider;
     }

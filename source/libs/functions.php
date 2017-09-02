@@ -5,10 +5,11 @@
  * Time: 18:05
  */
 
-function app(){
+function app() {
     return \Yii::$app;
 }
 
-function dd($d){
-    \yii\helpers\VarDumper::dump($d, 999, true);exit;
+function dd($d) {
+    \yii\helpers\VarDumper::dump($d, 999, TRUE);
+    exit;
 }

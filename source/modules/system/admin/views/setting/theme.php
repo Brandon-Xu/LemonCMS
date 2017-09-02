@@ -8,19 +8,19 @@ use yii\helpers\Html;
 /* @var $form ActiveForm */
 
 $this->addBreadcrumbs([
-		'主题设置'
-		]);
+    '主题设置'
+]);
 ?>
 <div class="config-theme">
 
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'sys_site_theme') ?>
-    	<?= $form->field($model, 'test_data_theme') ?>
-    
-        <div class="form-group">
-            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
-        </div>
+    <?= $form->field($model, 'sys_site_theme') ?>
+    <?= $form->field($model, 'test_data_theme') ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+    </div>
     <?php ActiveForm::end(); ?>
 
 </div><!-- config-theme -->

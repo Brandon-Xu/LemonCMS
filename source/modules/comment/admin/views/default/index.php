@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Comments';
-$this->params['breadcrumbs'][] = $this->title;
+$this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
 <div class="comment-index">
 
@@ -20,17 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
     </p>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
+        'dataProvider' => $dataProvider, 'filterModel' => $searchModel, 'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'reply_ids',
-            'content_id',
-            'user_id',
-            'user_name',
-            // 'user_email:email',
+            'id', 'reply_ids', 'content_id', 'user_id', 'user_name', // 'user_email:email',
             // 'user_url:url',
             // 'user_ip',
             // 'user_address',

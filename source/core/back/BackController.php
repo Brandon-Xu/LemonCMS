@@ -38,17 +38,13 @@ class BackController extends BaseController
 
     public function ignoreLogin() {
         return [
-            'site/login',
-            'site/captcha',
+            'site/login', 'site/captcha',
         ];
     }
 
     public function ingorePermission() {
         return [
-            'site/logout',
-            'site/error',
-            'site/welcome',
-            'site/index',
+            'site/logout', 'site/error', 'site/welcome', 'site/index',
         ];
     }
 
@@ -57,8 +53,7 @@ class BackController extends BaseController
             $message = '权限不足，无法进行此项操作';
         }
         $params = array_merge([
-            'title' => $title,
-            'message' => $message
+            'title' => $title, 'message' => $message
         ], $params);
 
         return $this->render('//site/message', $params);

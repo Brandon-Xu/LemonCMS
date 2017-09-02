@@ -2,9 +2,9 @@
 
 namespace source\libs;
 
-use yii\web\UploadedFile;
-use source\models\Config;
 use source\LuLu;
+use source\models\Config;
+use yii\web\UploadedFile;
 
 class Common
 {
@@ -120,26 +120,16 @@ class Common
         $uploadedFile->saveAs($save_path.$new_file_name);
 
         return [
-            'path' => $save_path,
-            'url' => $save_url,
-            'name' => $file_name,
-            'new_name' => $new_file_name,
-            'ext' => $file_ext,
-            'full_name' => $save_url.$new_file_name,
-            'temp_name' => $uploadedFile->tempName,
-            'type' => $uploadedFile->type,
-            'size' => $uploadedFile->size,
-            'message' => 'ok'
+            'path' => $save_path, 'url' => $save_url, 'name' => $file_name, 'new_name' => $new_file_name,
+            'ext' => $file_ext, 'full_name' => $save_url.$new_file_name, 'temp_name' => $uploadedFile->tempName,
+            'type' => $uploadedFile->type, 'size' => $uploadedFile->size, 'message' => 'ok'
         ];
     }
 
 
     public static function getTitleFormat($id = NULL) {
         $format = [
-            'b' => '加粗',
-            'i' => '斜体',
-            'u' => '下划线',
-            's' => '删除线'
+            'b' => '加粗', 'i' => '斜体', 'u' => '下划线', 's' => '删除线'
         ];
 
         if ($id !== NULL) {
@@ -246,8 +236,7 @@ class Common
         if ($dir !== NULL) {
             if (is_string($dir)) {
                 $pathArray = [
-                    $root,
-                    $dir
+                    $root, $dir
                 ];
             } else if (is_array($dir)) {
                 $pathArray = array_merge([$root], $dir);

@@ -7,8 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model source\modules\menu\models\MenuCategory */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Menu Categories', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params[ 'breadcrumbs' ][] = ['label' => 'Menu Categories', 'url' => ['index']];
+$this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
 <div class="menu-category-view">
 
@@ -17,20 +17,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
+            'class' => 'btn btn-danger', 'data' => [
+                'confirm' => 'Are you sure you want to delete this item?', 'method' => 'post',
             ],
         ]) ?>
     </p>
 
     <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'name',
-            'description',
+        'model' => $model, 'attributes' => [
+            'id', 'name', 'description',
         ],
     ]) ?>
 

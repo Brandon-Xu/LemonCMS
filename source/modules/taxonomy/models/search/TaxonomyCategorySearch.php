@@ -2,26 +2,24 @@
 
 namespace source\modules\taxonomy\models\search;
 
+use source\modules\taxonomy\models\TaxonomyCategory;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\modules\taxonomy\models\TaxonomyCategory;
 
 /**
  * TaxonomyCategorySearch represents the model behind the search form about `source\models\TaxonomyCategory`.
  */
 class TaxonomyCategorySearch extends TaxonomyCategory
 {
-    public function init()
-    {
+    public function init() {
         parent::init();
-        $this->userValidate = false;
+        $this->userValidate = FALSE;
     }
-    
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'name', 'description'], 'safe'],
         ];
@@ -30,8 +28,7 @@ class TaxonomyCategorySearch extends TaxonomyCategory
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -43,8 +40,7 @@ class TaxonomyCategorySearch extends TaxonomyCategory
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = TaxonomyCategory::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -59,8 +55,7 @@ class TaxonomyCategorySearch extends TaxonomyCategory
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'name', $this->name])
+        $query->andFilterWhere(['like', 'id', $this->id])->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;

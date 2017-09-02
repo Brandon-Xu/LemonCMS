@@ -12,9 +12,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'role')->textInput(['maxlength' => 64,'readonly'=>true]) ?>
+    <?= $form->field($model, 'role')->textInput([
+        'maxlength' => 64, 'readonly' => TRUE
+    ]) ?>
 
-    <?= $form->field($model, 'permission')->textInput(['maxlength' => 64,'readonly'=>true]) ?>
+    <?= $form->field($model, 'permission')->textInput([
+        'maxlength' => 64, 'readonly' => TRUE
+    ]) ?>
 
     <?= $form->field($model, 'rule')->textInput(['maxlength' => 64]) ?>
 

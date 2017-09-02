@@ -7,9 +7,8 @@
 
 namespace source\core\base;
 
-use yii\helpers\StringHelper;
-use Yii;
 use yii\base\InvalidParamException;
+use yii\helpers\StringHelper;
 
 /**
  * Security provides a set of methods to handle common security-related tasks.
@@ -549,8 +548,7 @@ class Security extends \yii\base\Component
             throw new InvalidParamException('Password must be a string and cannot be empty.');
         }
 
-        if (!preg_match('/^\$2[axy]\$(\d\d)\$[\.\/0-9A-Za-z]{22}/', $hash,
-                $matches) || $matches[ 1 ] < 4 || $matches[ 1 ] > 30) {
+        if (!preg_match('/^\$2[axy]\$(\d\d)\$[\.\/0-9A-Za-z]{22}/', $hash, $matches) || $matches[ 1 ] < 4 || $matches[ 1 ] > 30) {
             throw new InvalidParamException('Hash is invalid.');
         }
 

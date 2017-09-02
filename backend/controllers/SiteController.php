@@ -2,11 +2,8 @@
 
 namespace backend\controllers;
 
-use yii\web\Controller;
-use source\LuLu;
-use yii\helpers\Url;
-use source\models\User;
 use source\core\back\BackController;
+use source\LuLu;
 
 class SiteController extends BackController
 {
@@ -55,8 +52,7 @@ class SiteController extends BackController
         }
 
         return $this->render('login', [
-            'model' => $model,
-            'message' => $message,
+            'model' => $model, 'message' => $message,
         ]);
     }
 }

@@ -2,52 +2,44 @@
 
 namespace source\modules\rbac\admin\controllers;
 
-use Yii;
 use source\modules\rbac\models\Permission;
-use source\modules\rbac\models\search\PermissionSearch;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use source\LuLu;
+use Yii;
 use yii\data\ArrayDataProvider;
 use yii\helpers\ArrayHelper;
+use yii\web\NotFoundHttpException;
 
 /**
  * PermissionController implements the CRUD actions for Permission model.
  */
 class PermissionController extends BaseRbacController
 {
-    
+
     /**
      * Lists all Permission models.
      * @return mixed
      */
-    public function actionIndex()
-    {
-        $result=[];
-        $rows = Permission::findAll(null,'sort_num asc');
-        foreach($rows as $row)
-        {
-            $result[$row->category][]=$row;
+    public function actionIndex() {
+        $result = [];
+        $rows = Permission::findAll(NULL, 'sort_num asc');
+        foreach ($rows as $row) {
+            $result[ $row->category ][] = $row;
         }
-        
+
         return $this->render('index', [
-            'basicsDataProvider' =>$this->getDataRrovider($result, Permission::Category_Basic),
+            'basicsDataProvider' => $this->getDataRrovider($result, Permission::Category_Basic),
             'controllersDataProvider' => $this->getDataRrovider($result, Permission::Category_Controller),
             'systemsDataProvider' => $this->getDataRrovider($result, Permission::Category_System),
         ]);
     }
-    
-    private function getDataRrovider($result,$category)
-    {
+
+    private function getDataRrovider($result, $category) {
         $provider = new ArrayDataProvider([
-            'allModels'=>ArrayHelper::getValue($result, $category,[]),
-            'key'=>'id',
-            'pagination' => [
+            'allModels' => ArrayHelper::getValue($result, $category, []), 'key' => 'id', 'pagination' => [
                 'pageSize' => -1,
             ]
-            
+
         ]);
-        
+
         return $provider;
     }
 
@@ -56,8 +48,7 @@ class PermissionController extends BaseRbacController
      * @param string $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -68,10 +59,9 @@ class PermissionController extends BaseRbacController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Permission();
-       
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index']);
         } else {
@@ -87,12 +77,11 @@ class PermissionController extends BaseRbacController
      * @param string $id
      * @return mixed
      */
-    public function actionUpdate($id)
-    {
+    public function actionUpdate($id) {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        	
+
             return $this->redirect(['index']);
         } else {
             return $this->render('update', [
@@ -107,8 +96,7 @@ class PermissionController extends BaseRbacController
      * @param string $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -121,9 +109,8 @@ class PermissionController extends BaseRbacController
      * @return Permission the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
-        if (($model = Permission::findOne(['id'=>$id])) !== null) {
+    protected function findModel($id) {
+        if (($model = Permission::findOne(['id' => $id])) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

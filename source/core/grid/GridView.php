@@ -2,15 +2,6 @@
 
 namespace source\core\grid;
 
-use Yii;
-use yii\base\Component;
-use yii\base\ErrorHandler;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Html;
-use yii\base\Model;
-use yii\web\JsExpression;
-use yii\helpers\Url;
-
 class GridView extends \yii\grid\GridView
 {
     public $dataColumnClass = 'source\core\grid\DataColumn';

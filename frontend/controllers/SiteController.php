@@ -2,10 +2,10 @@
 
 namespace frontend\controllers;
 
-use yii\filters\Cors;
-use source\models\ContactForm;
 use source\core\front\FrontController;
+use source\models\ContactForm;
 use source\models\User;
+use yii\filters\Cors;
 
 class SiteController extends FrontController
 {
@@ -15,24 +15,17 @@ class SiteController extends FrontController
     public function behaviors() {
         return [
             [
-                'class' => Cors::className(),
-                'cors' => [
-                    //定义允许来源的数组
-                    'Access-Control-Request-Method' => [
-                        'GET',
-                        'POST',
-                        'PUT',
-                        'DELETE',
-                        'HEAD',
-                        'OPTIONS'
-                    ],
-                    //允许动作的数组
+                'class' => Cors::className(), 'cors' => [
+                //定义允许来源的数组
+                'Access-Control-Request-Method' => [
+                    'GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS'
                 ],
-                'actions' => [
-                    'app' => [
-                        'Access-Control-Allow-Credentials' => TRUE,
-                    ]
+                //允许动作的数组
+            ], 'actions' => [
+                'app' => [
+                    'Access-Control-Allow-Credentials' => TRUE,
                 ]
+            ]
             ],
         ];
     }
@@ -78,8 +71,7 @@ class SiteController extends FrontController
 
     public function actionAbout() {
         return $this->render('about', [
-            'test' => 5,
-            'testData' => $this->testData
+            'test' => 5, 'testData' => $this->testData
         ]);
     }
 

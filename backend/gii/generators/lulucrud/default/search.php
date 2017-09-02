@@ -12,7 +12,7 @@ use yii\helpers\StringHelper;
 $modelClass = StringHelper::basename($generator->modelClass);
 $searchModelClass = StringHelper::basename($generator->searchModelClass);
 if ($modelClass === $searchModelClass) {
-    $modelAlias = $modelClass . 'Model';
+    $modelAlias = $modelClass.'Model';
 }
 $rules = $generator->generateSearchRules();
 $labels = $generator->generateSearchLabels();
@@ -35,72 +35,72 @@ use source\core\data\ActiveDataProvider;
 use source\libs\Common;
 use source\libs\Constants;
 use source\libs\Resource;
-use <?= ltrim($generator->modelClass, '\\') . (isset($modelAlias) ? " as $modelAlias" : "") ?>;
+use <?= ltrim($generator->modelClass, '\\').(isset($modelAlias) ? " as $modelAlias" : "") ?>;
 
 /**
- * <?= $searchModelClass ?> represents the model behind the search form about `<?= $generator->modelClass ?>`.
- */
+* <?= $searchModelClass ?> represents the model behind the search form about `<?= $generator->modelClass ?>`.
+*/
 class <?= $searchModelClass ?> extends <?= isset($modelAlias) ? $modelAlias : $modelClass ?>
 
 {
-    public function init()
-    {
-        parent::init();
-        $this->userValidate = false;
-    }
-    
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            <?= implode(",\n            ", $rules) ?>,
-        ];
-    }
+public function init()
+{
+parent::init();
+$this->userValidate = false;
+}
 
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
-    {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
-    }
+/**
+* @inheritdoc
+*/
+public function rules()
+{
+return [
+<?= implode(",\n            ", $rules) ?>,
+];
+}
 
-    /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
-     * @return ActiveDataProvider
-     */
-    public function search($params)
-    {
-        $query = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::find();
+/**
+* @inheritdoc
+*/
+public function scenarios()
+{
+// bypass scenarios() implementation in the parent class
+return Model::scenarios();
+}
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-             //'pagination' => [
-             //    'pageSize' => 2,
-             //],
-            'sort'=>[
-                //'defaultOrder' => [
-                //    'created_at' => SORT_DESC
-                //]
-            ],
-        ]);
+/**
+* Creates data provider instance with search query applied
+*
+* @param array $params
+*
+* @return ActiveDataProvider
+*/
+public function search($params)
+{
+$query = <?= isset($modelAlias) ? $modelAlias : $modelClass ?>::find();
 
-        $this->load($params);
+$dataProvider = new ActiveDataProvider([
+'query' => $query,
+//'pagination' => [
+//    'pageSize' => 2,
+//],
+'sort'=>[
+//'defaultOrder' => [
+//    'created_at' => SORT_DESC
+//]
+],
+]);
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
-        }
+$this->load($params);
 
-        <?= implode("\n        ", $searchConditions) ?>
+if (!$this->validate()) {
+// uncomment the following line if you do not want to return any records when validation fails
+// $query->where('0=1');
+return $dataProvider;
+}
 
-        return $dataProvider;
-    }
+<?= implode("\n        ", $searchConditions) ?>
+
+return $dataProvider;
+}
 }

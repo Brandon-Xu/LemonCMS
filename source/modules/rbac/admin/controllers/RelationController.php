@@ -2,14 +2,12 @@
 
 namespace source\modules\rbac\admin\controllers;
 
-use Yii;
-use source\modules\rbac\models\Relation;
-use source\modules\rbac\models\search\RelationSearch;
-use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
-use source\modules\rbac\models\Permission;
 use source\LuLu;
+use source\modules\rbac\models\Permission;
+use source\modules\rbac\models\Relation;
 use source\modules\rbac\models\Role;
+use Yii;
+use yii\web\NotFoundHttpException;
 
 /**
  * RelationController implements the CRUD actions for Relation model.
@@ -21,27 +19,28 @@ class RelationController extends BaseRbacController
      * Lists all Relation models.
      * @return mixed
      */
-    public function actionIndex($role)
-    {
-    	if(\Yii::$app->request->isPost){
-    		
-    		$selectedPermissions = LuLu::getPostValue('Permission');
-    		
-    		Relation::AddBatchItems($role, $selectedPermissions);
-    		
-    		return $this->redirect(['index','role'=>$role]);
-    	}
-    	
-    	$allPermissions = Permission::getAllPermissionsGroupedByCategory();
-    	$rolePermissions = Relation::find()->select(['permission','value'])->where(['role'=>$role])->indexBy('permission')->all();
-    	$categories = Permission::getCategoryItems();
-    	$role = Role::findOne(['id'=>$role]);
-    	
+    public function actionIndex($role) {
+        if (\Yii::$app->request->isPost) {
+
+            $selectedPermissions = LuLu::getPostValue('Permission');
+
+            Relation::AddBatchItems($role, $selectedPermissions);
+
+            return $this->redirect([
+                'index', 'role' => $role
+            ]);
+        }
+
+        $allPermissions = Permission::getAllPermissionsGroupedByCategory();
+        $rolePermissions = Relation::find()->select([
+            'permission', 'value'
+        ])->where(['role' => $role])->indexBy('permission')->all();
+        $categories = Permission::getCategoryItems();
+        $role = Role::findOne(['id' => $role]);
+
         return $this->render('index', [
-            'rolePermissions' => $rolePermissions,
-            'allPermissions' => $allPermissions,
-            'categories'=>$categories,
-            'role'=>$role
+            'rolePermissions' => $rolePermissions, 'allPermissions' => $allPermissions, 'categories' => $categories,
+            'role' => $role
         ]);
     }
 
@@ -51,8 +50,7 @@ class RelationController extends BaseRbacController
      * @param string $permission
      * @return mixed
      */
-    public function actionView($role, $permission)
-    {
+    public function actionView($role, $permission) {
         return $this->render('view', [
             'model' => $this->findModel($role, $permission),
         ]);
@@ -63,12 +61,13 @@ class RelationController extends BaseRbacController
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
+    public function actionCreate() {
         $model = new Relation();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'role' => $model->role, 'permission' => $model->permission]);
+            return $this->redirect([
+                'view', 'role' => $model->role, 'permission' => $model->permission
+            ]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -83,12 +82,13 @@ class RelationController extends BaseRbacController
      * @param string $permission
      * @return mixed
      */
-    public function actionUpdate($role, $permission)
-    {
+    public function actionUpdate($role, $permission) {
         $model = $this->findModel($role, $permission);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'role' => $model->role, 'permission' => $model->permission]);
+            return $this->redirect([
+                'view', 'role' => $model->role, 'permission' => $model->permission
+            ]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -103,8 +103,7 @@ class RelationController extends BaseRbacController
      * @param string $permission
      * @return mixed
      */
-    public function actionDelete($role, $permission)
-    {
+    public function actionDelete($role, $permission) {
         $this->findModel($role, $permission)->delete();
 
         return $this->redirect(['index']);
@@ -118,9 +117,10 @@ class RelationController extends BaseRbacController
      * @return Relation the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($role, $permission)
-    {
-        if (($model = Relation::findOne(['role' => $role, 'permission' => $permission])) !== null) {
+    protected function findModel($role, $permission) {
+        if (($model = Relation::findOne([
+                'role' => $role, 'permission' => $permission
+            ])) !== NULL) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

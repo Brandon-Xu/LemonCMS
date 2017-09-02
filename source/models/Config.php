@@ -2,7 +2,6 @@
 
 namespace source\models;
 
-use Yii;
 use source\LuLu;
 use yii\helpers\ArrayHelper;
 

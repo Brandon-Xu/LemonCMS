@@ -7,12 +7,6 @@
 
 namespace source\core\behaviors;
 
-use Yii;
-use Closure;
-use yii\base\Behavior;
-use yii\base\Event;
-use yii\db\BaseActiveRecord;
-
 /**
  * AttributeBehavior automatically assigns a specified value to one or multiple attributes of an ActiveRecord object when certain events happen.
  *

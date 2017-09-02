@@ -2,27 +2,24 @@
 
 namespace source\modules\menu\models\search;
 
-use Yii;
+use source\modules\menu\models\Menu;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\modules\menu\models\Menu;
 
 /**
  * MenuSearch represents the model behind the search form about `source\modules\menu\models\Menu`.
  */
 class MenuSearch extends Menu
 {
-    public function init()
-    {
+    public function init() {
         parent::init();
-        $this->userValidate = false;
+        $this->userValidate = FALSE;
     }
-    
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'parent_id', 'category_id', 'enabled', 'sort_num'], 'integer'],
             [['name', 'url', 'target', 'description', 'thumb'], 'safe'],
@@ -32,8 +29,7 @@ class MenuSearch extends Menu
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -45,8 +41,7 @@ class MenuSearch extends Menu
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Menu::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -62,18 +57,14 @@ class MenuSearch extends Menu
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'parent_id' => $this->parent_id,
-            'category_id' => $this->category_id,
-            'enabled' => $this->enabled,
-            'sort_num' => $this->sort_num,
+            'id' => $this->id, 'parent_id' => $this->parent_id, 'category_id' => $this->category_id,
+            'enabled' => $this->enabled, 'sort_num' => $this->sort_num,
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'target', $this->target])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'thumb', $this->thumb]);
+        $query->andFilterWhere(['like', 'name', $this->name])->andFilterWhere(['like', 'url', $this->url])
+            ->andFilterWhere(['like', 'target', $this->target])->andFilterWhere([
+                'like', 'description', $this->description
+            ])->andFilterWhere(['like', 'thumb', $this->thumb]);
 
         return $dataProvider;
     }

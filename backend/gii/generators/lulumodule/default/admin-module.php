@@ -7,11 +7,10 @@
 /* @var $generator yii\gii\generators\module\Generator */
 
 
-
 echo "<?php\n";
 ?>
 
-namespace source\modules\<?= $generator->moduleDir?>\admin;
+namespace source\modules\<?= $generator->moduleDir ?>\admin;
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -25,20 +24,20 @@ use source\libs\Constants;
 class AdminModule extends \source\core\modularity\BackModule
 {
 
-    public $controllerNamespace = 'source\modules\<?= $generator->moduleDir?>\admin\controllers';
+public $controllerNamespace = 'source\modules\<?= $generator->moduleDir ?>\admin\controllers';
 
-    public function init()
-    {
-        parent::init();
+public function init()
+{
+parent::init();
 
-        // custom initialization code goes here
-    }
-    
-    //public function getMenus()
-    //{
-    //    return [
-    //        ['首页',['/<?= $generator->moduleID?>']],
-    //        ['设置',['/<?= $generator->moduleID?>/setting']],
-    //    ];
-    //}
+// custom initialization code goes here
+}
+
+//public function getMenus()
+//{
+//    return [
+//        ['首页',['/<?= $generator->moduleID ?>']],
+//        ['设置',['/<?= $generator->moduleID ?>/setting']],
+//    ];
+//}
 }

@@ -2,10 +2,9 @@
 
 namespace source\models\search;
 
-use Yii;
+use source\models\Comment;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\models\Comment;
 
 /**
  * CommentSearch represents the model behind the search form about `source\modules\comment\models\Comment`.
@@ -15,19 +14,21 @@ class CommentSearch extends Comment
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['id', 'content_id', 'user_id', 'status'], 'integer'],
-            [['reply_ids', 'user_name', 'user_email', 'user_url', 'user_ip', 'user_address', 'content', 'created_at'], 'safe'],
+            [['id', 'content_id', 'user_id', 'status'], 'integer'], [
+                [
+                    'reply_ids', 'user_name', 'user_email', 'user_url', 'user_ip', 'user_address', 'content',
+                    'created_at'
+                ], 'safe'
+            ],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +40,7 @@ class CommentSearch extends Comment
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Comment::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -56,20 +56,17 @@ class CommentSearch extends Comment
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'content_id' => $this->content_id,
-            'user_id' => $this->user_id,
-            'created_at' => $this->created_at,
-            'status' => $this->status,
+            'id' => $this->id, 'content_id' => $this->content_id, 'user_id' => $this->user_id,
+            'created_at' => $this->created_at, 'status' => $this->status,
         ]);
 
-        $query->andFilterWhere(['like', 'reply_ids', $this->reply_ids])
-            ->andFilterWhere(['like', 'user_name', $this->user_name])
-            ->andFilterWhere(['like', 'user_email', $this->user_email])
-            ->andFilterWhere(['like', 'user_url', $this->user_url])
-            ->andFilterWhere(['like', 'user_ip', $this->user_ip])
-            ->andFilterWhere(['like', 'user_address', $this->user_address])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'reply_ids', $this->reply_ids])->andFilterWhere([
+            'like', 'user_name', $this->user_name
+        ])->andFilterWhere(['like', 'user_email', $this->user_email])->andFilterWhere([
+            'like', 'user_url', $this->user_url
+        ])->andFilterWhere(['like', 'user_ip', $this->user_ip])->andFilterWhere([
+            'like', 'user_address', $this->user_address
+        ])->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

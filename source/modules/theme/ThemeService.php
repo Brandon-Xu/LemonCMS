@@ -2,18 +2,14 @@
 
 namespace source\modules\theme;
 
-use source\LuLu;
-
 class ThemeService extends \source\core\modularity\ModuleService
 {
 
-    public function init()
-    {
+    public function init() {
         parent::init();
     }
-    
-    public function getServiceId()
-    {
+
+    public function getServiceId() {
         return 'themeSerivce';
     }
 }

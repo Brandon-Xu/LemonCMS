@@ -2,28 +2,25 @@
 
 namespace source\modules\fragment\models\search;
 
-use Yii;
+use source\LuLu;
+use source\modules\fragment\models\Fragment2Data;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\modules\fragment\models\Fragment2Data;
-use source\LuLu;
 
 /**
  * Fragment2DataSearch represents the model behind the search form about `source\modules\fragment\models\Fragment2Data`.
  */
 class Fragment2DataSearch extends Fragment2Data
 {
-    public function init()
-    {
+    public function init() {
         parent::init();
-        $this->userValidate = false;
+        $this->userValidate = FALSE;
     }
-    
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
             [['id', 'fragment_id', 'created_at', 'sort_num', 'status'], 'integer'],
             [['title', 'title_format', 'thumb', 'url', 'sub_title', 'summary', 'created_by'], 'safe'],
@@ -33,8 +30,7 @@ class Fragment2DataSearch extends Fragment2Data
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -46,19 +42,18 @@ class Fragment2DataSearch extends Fragment2Data
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Fragment2Data::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-        
+
         $this->fragment_id = LuLu::getGetValue('fid');
         $query->andFilterWhere([
             'fragment_id' => $this->fragment_id,
         ]);
-        
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -67,21 +62,20 @@ class Fragment2DataSearch extends Fragment2Data
             return $dataProvider;
         }
 
-//         $query->andFilterWhere([
-//             'id' => $this->id,
-//             'fragment_id' => $this->fragment_id,
-//             'created_at' => $this->created_at,
-//             'sort_num' => $this->sort_num,
-//             'status' => $this->status,
-//         ]);
+        //         $query->andFilterWhere([
+        //             'id' => $this->id,
+        //             'fragment_id' => $this->fragment_id,
+        //             'created_at' => $this->created_at,
+        //             'sort_num' => $this->sort_num,
+        //             'status' => $this->status,
+        //         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'title_format', $this->title_format])
-            ->andFilterWhere(['like', 'thumb', $this->thumb])
-            ->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'sub_title', $this->sub_title])
-            ->andFilterWhere(['like', 'summary', $this->summary])
-            ->andFilterWhere(['like', 'created_by', $this->created_by]);
+        $query->andFilterWhere(['like', 'title', $this->title])->andFilterWhere([
+            'like', 'title_format', $this->title_format
+        ])->andFilterWhere(['like', 'thumb', $this->thumb])->andFilterWhere(['like', 'url', $this->url])
+            ->andFilterWhere(['like', 'sub_title', $this->sub_title])->andFilterWhere([
+                'like', 'summary', $this->summary
+            ])->andFilterWhere(['like', 'created_by', $this->created_by]);
 
         return $dataProvider;
     }

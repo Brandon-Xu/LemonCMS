@@ -1,8 +1,5 @@
 <?php
 
-use yii\helpers\Inflector;
-use yii\helpers\StringHelper;
-
 
 /* @var $this yii\web\View */
 /* @var $generator yii\gii\generators\crud\Generator */
@@ -34,19 +31,18 @@ use source\libs\Resource;
 ?>
 
 <?= "<?php " ?> $this->toolbars([
-    Html::a('返回', ['index'], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+Html::a('返回', ['index'], ['class' => 'btn btn-xs btn-primary mod-site-save'])
 ]);?>
 
 
-
-    <?= "<?php " ?>$form = ActiveForm::begin(); ?>
+<?= "<?php " ?>$form = ActiveForm::begin(); ?>
 
 <?php foreach ($generator->getColumnNames() as $attribute) {
     if (in_array($attribute, $safeAttributes)) {
-        echo "    <?= " . $generator->generateActiveField($attribute) . " ?>\n\n";
+        echo "    <?= ".$generator->generateActiveField($attribute)." ?>\n\n";
     }
 } ?>
-    <?= "<?php " ?> $form->defaultButtons() ?>
+<?= "<?php " ?> $form->defaultButtons() ?>
 
-    <?= "<?php " ?>ActiveForm::end(); ?>
+<?= "<?php " ?>ActiveForm::end(); ?>
 

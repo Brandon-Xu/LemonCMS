@@ -31,8 +31,7 @@ class TreeHelper
                 }
             }
 
-            $options .= '<option value="'.$row[ 'id' ].'"'.$style.'>'.str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',
-                    $row[ 'level' ]).$row[ 'name' ].'</option>';
+            $options .= '<option value="'.$row[ 'id' ].'"'.$style.'>'.str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $row[ 'level' ]).$row[ 'name' ].'</option>';
         }
 
         return $options;

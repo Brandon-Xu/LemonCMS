@@ -9,7 +9,7 @@
 echo "<?php\n";
 ?>
 
-namespace source\modules\<?= $generator->moduleDir?>\admin\controllers;
+namespace source\modules\<?= $generator->moduleDir ?>\admin\controllers;
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -18,14 +18,14 @@ use yii\helpers\ArrayHelper;
 use source\LuLu;
 use source\libs\Common;
 use source\libs\Constants;
-use source\modules\<?= $generator->moduleDir?>\models\Setting;
+use source\modules\<?= $generator->moduleDir ?>\models\Setting;
 
 class SettingController extends \backend\controllers\BaseSettingController
 {
-    public function actionIndex()
-    {
-        $model = new Setting();
-        
-        return $this->doConfig($model);
-    }
+public function actionIndex()
+{
+$model = new Setting();
+
+return $this->doConfig($model);
+}
 }

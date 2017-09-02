@@ -1,14 +1,14 @@
 <?php
+
 namespace source\modules\post\admin\controllers;
 
-use source\modules\post\models\ContentPost;
 use backend\controllers\BaseContentController;
+use source\modules\post\models\ContentPost;
 
 class PostController extends BaseContentController
 {
 
-    public function init()
-    {
+    public function init() {
         parent::init();
         $this->content_type = 'post';
         $this->bodyClass = ContentPost::className();

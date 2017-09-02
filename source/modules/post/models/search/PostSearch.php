@@ -2,38 +2,33 @@
 
 namespace source\models\search;
 
-use Yii;
+use app\Models\Post;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\Models\Post;
 
 /**
  * PostSearch represents the model behind the search form about `app\Models\Post`.
  */
 class PostSearch extends Post
 {
-    public function init()
-    {
+    public function init() {
         parent::init();
-        $this->userValidate = false;
+        $this->userValidate = FALSE;
     }
-    
+
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['id', 'user_id'], 'integer'],
-            [['title', 'content'], 'safe'],
+            [['id', 'user_id'], 'integer'], [['title', 'content'], 'safe'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -45,8 +40,7 @@ class PostSearch extends Post
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Post::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -62,12 +56,10 @@ class PostSearch extends Post
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'user_id' => $this->user_id,
+            'id' => $this->id, 'user_id' => $this->user_id,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'title', $this->title])->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;
     }

@@ -4,10 +4,10 @@
  * Date: 2017/9/2
  * Time: 20:28
  */
+
 namespace source\core\rest;
 
 use yii;
-use yii\data\ActiveDataProvider;
 
 /**
  * @author Qiang Xue <qiang.xue@gmail.com>
@@ -16,6 +16,6 @@ use yii\data\ActiveDataProvider;
 class DeleteAction extends yii\rest\DeleteAction
 {
 
-    public function run($id){ }
+    public function run($id) { }
 
 }

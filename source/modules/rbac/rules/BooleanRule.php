@@ -1,18 +1,15 @@
 <?php
-namespace source\modules\rbac\rules;
 
-use source\core\modularity\ModuleInfo;
-use source\LuLu;
+namespace source\modules\rbac\rules;
 
 class BooleanRule extends Rule
 {
 
-    public function execute($permission, $params = [], $role = null)
-    {
-        if ($permission['value'])
-        {
-            return true;
+    public function execute($permission, $params = [], $role = NULL) {
+        if ($permission[ 'value' ]) {
+            return TRUE;
         }
-        return false;
+
+        return FALSE;
     }
 }

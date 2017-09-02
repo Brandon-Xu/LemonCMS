@@ -1,4 +1,5 @@
 <?php
+
 namespace source\core\widgets;
 
 use yii\base\Widget;

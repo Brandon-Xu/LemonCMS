@@ -3,14 +3,14 @@
 namespace source\modules\rbac;
 
 use source\core\modularity\ModuleService;
-use source\modules\rbac\models\Role;
+use source\libs\Utility;
+use source\LuLu;
+use source\models\User;
 use source\modules\rbac\models\Assignment;
 use source\modules\rbac\models\Permission;
 use source\modules\rbac\models\Relation;
+use source\modules\rbac\models\Role;
 use yii\db\Query;
-use source\LuLu;
-use source\models\User;
-use source\libs\Utility;
 
 class RbacService extends ModuleService
 {
@@ -111,20 +111,11 @@ class RbacService extends ModuleService
         if ($value === FALSE) {
             $query = new Query();
             $query->select([
-                'p.id',
-                'p.category',
-                'p.name',
-                'p.description',
-                'p.form',
-                'p.default_value',
-                'p.rule',
-                'p.sort_num',
-                'r.role',
-                'r.value'
+                'p.id', 'p.category', 'p.name', 'p.description', 'p.form', 'p.default_value', 'p.rule', 'p.sort_num',
+                'r.role', 'r.value'
             ]);
             $query->from([
-                'p' => $this->permissionTable,
-                'r' => $this->relationTable
+                'p' => $this->permissionTable, 'r' => $this->relationTable
             ]);
             $query->where('r.permission = p.id');
             $query->andWhere([

@@ -14,6 +14,6 @@ use source\core\widgets\ActiveForm;
 /* @var $this source\core\back\BackView */
 
 
-$this->title='<?= $generator->moduleDir?>';
+$this->title='<?= $generator->moduleDir ?>';
 ?>
 

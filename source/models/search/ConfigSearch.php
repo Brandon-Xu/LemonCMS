@@ -2,10 +2,9 @@
 
 namespace source\models\search;
 
-use Yii;
+use source\models\Config;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\models\Config;
 
 /**
  * ConfigSearch represents the model behind the search form about `source\models\Config`.
@@ -22,8 +21,7 @@ class ConfigSearch extends Config
      */
     public function rules() {
         return [
-            [ ['id'], 'integer' ],
-            [ [ 'key', 'value' ], 'safe' ],
+            [['id'], 'integer'], [['key', 'value'], 'safe'],
         ];
     }
 
@@ -62,14 +60,10 @@ class ConfigSearch extends Config
         ]);
 
         $query->andFilterWhere([
-            'like',
-            'key',
-            $this->key
+            'like', 'key', $this->key
         ])->andFilterWhere([
-                'like',
-                'value',
-                $this->value
-            ]);
+            'like', 'value', $this->value
+        ]);
 
         return $dataProvider;
     }

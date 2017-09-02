@@ -2,10 +2,9 @@
 
 namespace source\modules\rbac\models\search;
 
-use Yii;
+use source\modules\rbac\models\Assignment;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use source\modules\rbac\models\Assignment;
 
 /**
  * AssignmentSearch represents the model behind the search form about `app\modules\rbac\models\Assignment`.
@@ -15,19 +14,16 @@ class AssignmentSearch extends Assignment
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
+    public function rules() {
         return [
-            [['user_id', 'role', 'note'], 'safe'],
-            [['created_at'], 'integer'],
+            [['user_id', 'role', 'note'], 'safe'], [['created_at'], 'integer'],
         ];
     }
 
     /**
      * @inheritdoc
      */
-    public function scenarios()
-    {
+    public function scenarios() {
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
@@ -39,8 +35,7 @@ class AssignmentSearch extends Assignment
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
-    {
+    public function search($params) {
         $query = Assignment::find();
 
         $dataProvider = new ActiveDataProvider([
@@ -59,9 +54,13 @@ class AssignmentSearch extends Assignment
             'created_at' => $this->created_at,
         ]);
 
-        $query->andFilterWhere(['like', 'user_id', $this->user_id])
-            ->andFilterWhere(['like', 'role', $this->role])
-            ->andFilterWhere(['like', 'note', $this->note]);
+        $query->andFilterWhere([
+            'like', 'user_id', $this->user_id
+        ])->andFilterWhere([
+            'like', 'role', $this->role
+        ])->andFilterWhere([
+            'like', 'note', $this->note
+        ]);
 
         return $dataProvider;
     }
