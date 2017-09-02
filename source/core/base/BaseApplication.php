@@ -30,11 +30,9 @@ class BaseApplication extends Application
 
     public function loadActiveModules($isAdmin) {
         $moduleManager = $this->modularityService;
-
         $this->activeModules = $moduleManager->getActiveModules($isAdmin);
 
         $module = $isAdmin ? 'admin\AdminModule' : 'home\HomeModule';
-
         foreach ($this->activeModules as $m) {
             $moduleId = $m['id'];
             $moduleDir = $m['dir'];

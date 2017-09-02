@@ -2,7 +2,9 @@
 
 namespace source\modules\fragment;
 
-class FragmentService extends \source\core\modularity\ModuleService
+use source\core\modularity\ModuleService;
+
+class FragmentService extends ModuleService
 {
 
     public function init() {

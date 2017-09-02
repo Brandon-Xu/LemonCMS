@@ -13,22 +13,17 @@ use yii\helpers\Html;
 /* @var $form yii\widgets\ActiveForm */
 
 $filedOptions = [];
-
 $taxonomy = $this->getConfigValue('page_taxonomy');
 $taxonomies = $this->taxonomyService->getTaxonomiesAsTree($taxonomy);
 $options = TreeHelper::buildTreeOptions($taxonomies);
 LuLu::setViewParam(['defaultLayout' => FALSE]);
-
 ?>
 
-<?php
-
-$form = ActiveForm::begin([
+<?php $form = ActiveForm::begin([
     'options' => ['enctype' => 'multipart/form-data', 'class' => 'da-form'], 'fieldConfig' => [
         'size' => 'default',
     ],
-]);
-?>
+]); ?>
 <div class="da-form-inline">
 
     <div class="grid_3">
