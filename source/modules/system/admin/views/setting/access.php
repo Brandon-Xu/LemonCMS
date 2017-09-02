@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
 
 $this->title = '注册与访问控制';
 $this->addBreadcrumbs([
-    $this->title
+    $this->title,
 ]);
 
 

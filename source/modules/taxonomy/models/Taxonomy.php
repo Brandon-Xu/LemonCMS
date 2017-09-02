@@ -34,7 +34,7 @@ class Taxonomy extends BaseActiveRecord
 
     public function behaviors() {
         return [
-            'treeBehavior' => ['class' => 'source\core\behaviors\TreeBehavior']
+            'treeBehavior' => ['class' => 'source\core\behaviors\TreeBehavior'],
         ];
     }
 
@@ -54,9 +54,9 @@ class Taxonomy extends BaseActiveRecord
             [['category_id', 'parent_id', 'name', 'sort_num'], 'required'],
             [['parent_id', 'page_size', 'contents', 'sort_num'], 'integer'], [
                 ['category_id', 'name', 'url_alias', 'list_view', 'list_layout', 'detail_view', 'detail_layout'],
-                'string', 'max' => 64
+                'string', 'max' => 64,
             ], [['redirect_url', 'thumb'], 'string', 'max' => 128],
-            [['description', 'seo_title', 'seo_keywords', 'seo_description'], 'string', 'max' => 256]
+            [['description', 'seo_title', 'seo_keywords', 'seo_description'], 'string', 'max' => 256],
         ];
     }
 
@@ -75,13 +75,13 @@ class Taxonomy extends BaseActiveRecord
 
     private static function getArrayTreeInternal($category, $parentId = 0, $level = 0) {
         $children = self::findAll([
-            'category_id' => $category, 'parent_id' => $parentId
+            'category_id' => $category, 'parent_id' => $parentId,
         ], 'sort_num asc');
 
         $items = [];
         foreach ($children as $child) {
             $child->level = $level;
-            $items[ $child[ 'id' ] ] = $child;
+            $items[$child['id']] = $child;
             $temp = self::getArrayTreeInternal($category, $child->id, $level + 1);
             $items = ArrayHelper::merge($items, $temp);
         }

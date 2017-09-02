@@ -23,7 +23,7 @@ class Menu extends BaseWidget
 
     private function getChildrenMenus($parentId) {
         $menus = \source\modules\menu\models\Menu::findAll([
-            'category_id' => $this->menuId, 'parent_id' => $parentId, 'enabled' => 1
+            'category_id' => $this->menuId, 'parent_id' => $parentId, 'enabled' => 1,
         ], 'sort_num desc');
 
         return $menus;
@@ -33,8 +33,8 @@ class Menu extends BaseWidget
         $ret = '';
 
         foreach ($menus as $menu) {
-            $ret .= '<li class="menu_item menu_'.$this->menuId.'_item" id="menu_item_'.$menu[ 'id' ].'">'.Html::a($menu[ 'name' ], $menu[ 'url' ], ['target' => $menu[ 'target' ]]).'</li>';
-            $children = $this->getChildrenMenus($menu[ 'id' ]);
+            $ret .= '<li class="menu_item menu_'.$this->menuId.'_item" id="menu_item_'.$menu['id'].'">'.Html::a($menu['name'], $menu['url'], ['target' => $menu['target']]).'</li>';
+            $children = $this->getChildrenMenus($menu['id']);
             if (count($children) !== 0) {
                 $ret .= '<ul class="menu_'.$this->menuId.'_sub">';
                 $ret .= $this->getMenu($children);

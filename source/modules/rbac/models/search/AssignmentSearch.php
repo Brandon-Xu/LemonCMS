@@ -55,11 +55,11 @@ class AssignmentSearch extends Assignment
         ]);
 
         $query->andFilterWhere([
-            'like', 'user_id', $this->user_id
+            'like', 'user_id', $this->user_id,
         ])->andFilterWhere([
-            'like', 'role', $this->role
+            'like', 'role', $this->role,
         ])->andFilterWhere([
-            'like', 'note', $this->note
+            'like', 'note', $this->note,
         ]);
 
         return $dataProvider;

@@ -11,10 +11,10 @@ use yii\widgets\ActiveForm;
 $user = LuLu::getGetValue('user');
 
 $this->title = '用户名：'.$user;
-$this->params[ 'breadcrumbs' ][] = [
-    'label' => '指派角色', 'url' => ['index']
+$this->params['breadcrumbs'][] = [
+    'label' => '指派角色', 'url' => ['index'],
 ];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="relation-index">
@@ -29,7 +29,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
             <?php foreach ($allRoles as $role): ?>
                 <?php
                 $checked = '';
-                if ($userRoles != NULL && isset($userRoles[ $role[ 'key' ] ])) {
+                if ($userRoles != NULL && isset($userRoles[$role['key']])) {
 
                     $checked = 'checked="checked"';
                 }
@@ -37,10 +37,10 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                 ?>
                 <li>
                     <label><input type="checkbox" name="roles[]"
-                                  value="<?php echo $role[ 'key' ] ?>" <?php echo $checked ?>/><?php echo $role[ 'name' ] ?>
+                                  value="<?php echo $role['key'] ?>" <?php echo $checked ?>/><?php echo $role['name'] ?>
                     </label>
                     (<?php echo Html::a('查看权限', [
-                        'relation/index', 'role' => $role[ 'key' ]
+                        'relation/index', 'role' => $role['key'],
                     ]) ?>)
                 </li>
 

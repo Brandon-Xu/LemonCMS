@@ -24,7 +24,7 @@ class RandomUtility
 
         $code = '';
         for ($i = 0; $i < $length; ++$i) {
-            $code .= $letters[ mt_rand(0, $lettersLength) ];
+            $code .= $letters[mt_rand(0, $lettersLength)];
         }
 
         return $code;

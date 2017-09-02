@@ -14,12 +14,12 @@ $category = LuLu::getGetValue('category');
 $categoryModel = DictCategory::findOne(['id' => $category]);
 
 $this->title = '字典';
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php $this->toolbars([
     Html::a('返回', ['/dict/dict-category'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-    Html::a('新建', ['create', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+    Html::a('新建', ['create', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
 
@@ -42,7 +42,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         ], [
             'class' => 'source\core\grid\StatusColumn',
         ], [
-            'class' => 'source\core\grid\ActionColumn', 'queryParams' => ['view' => ['category' => $category]]
+            'class' => 'source\core\grid\ActionColumn', 'queryParams' => ['view' => ['category' => $category]],
         ],
 
     ],

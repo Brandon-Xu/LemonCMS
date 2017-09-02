@@ -23,21 +23,21 @@ class InhritLayout extends BaseWidget
 
     public function run() {
         $params = $this->params;
-        if (!isset($params[ 'content' ])) {
-            $params[ 'content' ] = ob_get_clean();
+        if (!isset($params['content'])) {
+            $params['content'] = ob_get_clean();
         }
 
         if (count($this->blocks) > 0) {
             foreach ($this->blocks as $id) {
                 if (in_array($id, $this->view->blocks)) {
-                    $params[ $id ] = $this->view->blocks[ $id ];
-                    unset($this->view->blocks[ $id ]);
+                    $params[$id] = $this->view->blocks[$id];
+                    unset($this->view->blocks[$id]);
                 }
             }
         } else {
             foreach ($this->view->blocks as $id => $block) {
-                $params[ $id ] = $block;
-                unset($this->view->blocks[ $id ]);
+                $params[$id] = $block;
+                unset($this->view->blocks[$id]);
             }
         }
 

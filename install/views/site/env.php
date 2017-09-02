@@ -36,9 +36,9 @@ $this->title = '检测运行环境';
             <td>1.0</td>
             <td>2.0</td>
             <td><?php
-                $tmp = function_exists('gd_info') ? gd_info() : array();
-                @$env_items[ $key ][ 'current' ] = empty($tmp[ 'GD Version' ]) ? 'noext' : $tmp[ 'GD Version' ];
-                echo @$env_items[ $key ][ 'current' ];
+                $tmp = function_exists('gd_info') ? gd_info() : [];
+                @$env_items[$key]['current'] = empty($tmp['GD Version']) ? 'noext' : $tmp['GD Version'];
+                echo @$env_items[$key]['current'];
                 unset($tmp);
                 ?></td>
         </tr>
@@ -48,11 +48,11 @@ $this->title = '检测运行环境';
             <td>不限制</td>
             <td><?php
                 if (function_exists('disk_free_space')) {
-                    @$env_items[ $key ][ 'current' ] = floor(disk_free_space('../') / (1024 * 1024)).'M';
+                    @$env_items[$key]['current'] = floor(disk_free_space('../') / (1024 * 1024)).'M';
                 } else {
-                    $env_items[ $key ][ 'current' ] = 'unknow';
+                    $env_items[$key]['current'] = 'unknow';
                 }
-                echo @$env_items[ $key ][ 'current' ];
+                echo @$env_items[$key]['current'];
                 ?></td>
         </tr>
     </table>
@@ -67,10 +67,10 @@ $this->title = '检测运行环境';
         </tr>
         <?php foreach ((array)$isWritable as $val): ?>
             <tr>
-                <td><?php echo $val[ 0 ]; ?></td>
-                <td class="<?php echo $val[ 2 ] ? 'passed' : ($val[ 1 ] ? 'failed' : 'warning'); ?>"><?php echo $val[ 2 ] ? '通过' : '未通过'; ?></td>
-                <td style="color: #999;"><?php echo $val[ 3 ]; ?></td>
-                <td><?php echo $val[ 4 ]; ?></td>
+                <td><?php echo $val[0]; ?></td>
+                <td class="<?php echo $val[2] ? 'passed' : ($val[1] ? 'failed' : 'warning'); ?>"><?php echo $val[2] ? '通过' : '未通过'; ?></td>
+                <td style="color: #999;"><?php echo $val[3]; ?></td>
+                <td><?php echo $val[4]; ?></td>
             </tr>
         <?php endforeach ?>
     </table>
@@ -85,10 +85,10 @@ $this->title = '检测运行环境';
         </tr>
         <?php foreach ($requirements as $requirement): ?>
             <tr>
-                <td><?php echo $requirement[ 0 ]; ?></td>
-                <td class="<?php echo $requirement[ 2 ] ? 'passed' : ($requirement[ 1 ] ? 'failed' : 'warning'); ?>"><?php echo $requirement[ 2 ] ? '通过' : '未通过'; ?></td>
-                <td><?php echo $requirement[ 3 ]; ?></td>
-                <td><?php echo $requirement[ 4 ]; ?></td>
+                <td><?php echo $requirement[0]; ?></td>
+                <td class="<?php echo $requirement[2] ? 'passed' : ($requirement[1] ? 'failed' : 'warning'); ?>"><?php echo $requirement[2] ? '通过' : '未通过'; ?></td>
+                <td><?php echo $requirement[3]; ?></td>
+                <td><?php echo $requirement[4]; ?></td>
             </tr>
         <?php endforeach; ?>
     </table>

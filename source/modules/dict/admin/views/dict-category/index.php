@@ -8,11 +8,11 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '字典';
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?php $this->toolbars([
-    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
 <?= GridView::widget([
@@ -24,7 +24,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
             'value' => function ($model, $key, $index, $column) {
 
                 return Html::a($model->name, ['/dict/dict/index', 'category' => $model->id]);
-            }
+            },
         ], [
             'attribute' => 'description', 'width' => 'auto',
         ],

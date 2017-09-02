@@ -16,7 +16,7 @@ $this->addBreadcrumbs([
 
 ?>
 <?php $this->toolbars([
-    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
 
@@ -30,7 +30,7 @@ $this->addBreadcrumbs([
             'value' => function ($model, $key, $index, $column) {
 
                 return Html::a($model->name, ['/taxonomy/taxonomy/index', 'category' => $model->id]);
-            }
+            },
         ], [
             'attribute' => 'description', 'width' => 'auto',
         ], [
@@ -40,11 +40,11 @@ $this->addBreadcrumbs([
                 'view' => function ($url, $model, $key, $index, $column) {
 
                     return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', Url::to([
-                        'taxonomy/index', 'category' => $key
+                        'taxonomy/index', 'category' => $key,
                     ]), [
                         'title' => Yii::t('yii', 'View'), 'data-pjax' => '0',
                     ]);
-                }
+                },
             ],
         ],
     ],

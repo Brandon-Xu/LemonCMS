@@ -9,7 +9,7 @@ use yii\web\UploadedFile;
 class Common
 {
     public static function checkInstall($config) {
-        if (!isset($config[ 'components' ][ 'db' ][ 'class' ])) {
+        if (!isset($config['components']['db']['class'])) {
             exit('<script>top.location.href="install.php"</script>');
         }
     }
@@ -122,18 +122,18 @@ class Common
         return [
             'path' => $save_path, 'url' => $save_url, 'name' => $file_name, 'new_name' => $new_file_name,
             'ext' => $file_ext, 'full_name' => $save_url.$new_file_name, 'temp_name' => $uploadedFile->tempName,
-            'type' => $uploadedFile->type, 'size' => $uploadedFile->size, 'message' => 'ok'
+            'type' => $uploadedFile->type, 'size' => $uploadedFile->size, 'message' => 'ok',
         ];
     }
 
 
     public static function getTitleFormat($id = NULL) {
         $format = [
-            'b' => '加粗', 'i' => '斜体', 'u' => '下划线', 's' => '删除线'
+            'b' => '加粗', 'i' => '斜体', 'u' => '下划线', 's' => '删除线',
         ];
 
         if ($id !== NULL) {
-            return $format[ $id ];
+            return $format[$id];
         }
 
         return $format;
@@ -151,8 +151,8 @@ class Common
         $format = '';
         if (is_string($var)) {
             $format = $var;
-        } else if (isset($var[ 'title_format' ])) {
-            $format = $var[ 'title_format' ];
+        } else if (isset($var['title_format'])) {
+            $format = $var['title_format'];
         }
 
         return explode(',', trim($format, ','));
@@ -160,16 +160,16 @@ class Common
 
     public static function formatTitle($title, $format) {
         $format = self::getTitleFormatArray($format);
-        if (isset($format[ 'b' ])) {
+        if (isset($format['b'])) {
             $title = '<b>'.$title.'</b>';
         }
-        if (isset($format[ 'i' ])) {
+        if (isset($format['i'])) {
             $title = '<i>'.$title.'</i>';
         }
-        if (isset($format[ 'u' ])) {
+        if (isset($format['u'])) {
             $title = '<u>'.$title.'</u>';
         }
-        if (isset($format[ 's' ])) {
+        if (isset($format['s'])) {
             $title = '<s>'.$title.'</s>';
         }
         // 		if(isset($format['c']))
@@ -182,8 +182,8 @@ class Common
     public static function getFlag($id = NULL) {
         $flags = ContentFlag::getFlags();
         if ($id !== NULL) {
-            if (isset($flags[ $id ])) {
-                return $flags[ $id ];
+            if (isset($flags[$id])) {
+                return $flags[$id];
             }
 
             return '';
@@ -212,8 +212,8 @@ class Common
         $titlePic = '';
         if (is_string($var)) {
             $titlePic = $var;
-        } else if (isset($var[ 'title_pic' ])) {
-            $titlePic = $var[ 'title_pic' ];
+        } else if (isset($var['title_pic'])) {
+            $titlePic = $var['title_pic'];
         }
         if (stripos($titlePic, 'http') === FALSE) {
             return 'data/'.$titlePic;
@@ -236,7 +236,7 @@ class Common
         if ($dir !== NULL) {
             if (is_string($dir)) {
                 $pathArray = [
-                    $root, $dir
+                    $root, $dir,
                 ];
             } else if (is_array($dir)) {
                 $pathArray = array_merge([$root], $dir);

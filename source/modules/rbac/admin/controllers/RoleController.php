@@ -26,16 +26,16 @@ class RoleController extends BaseRbacController
         $result = [];
         $rows = Role::findAll();
         foreach ($rows as $row) {
-            $result[ $row->category ][] = $row;
+            $result[$row->category][] = $row;
         }
 
         return $this->render('index', [
             'membersDataProvider' => new ArrayDataProvider([
-                'allModels' => ArrayHelper::getValue($result, Role::Category_Member, []), 'key' => 'id'
+                'allModels' => ArrayHelper::getValue($result, Role::Category_Member, []), 'key' => 'id',
             ]), 'adminsDataProvider' => new ArrayDataProvider([
-                'allModels' => ArrayHelper::getValue($result, Role::Category_Admin, []), 'key' => 'id'
+                'allModels' => ArrayHelper::getValue($result, Role::Category_Admin, []), 'key' => 'id',
             ]), 'systemsDataProvider' => new ArrayDataProvider([
-                'allModels' => ArrayHelper::getValue($result, Role::Category_System, []), 'key' => 'id'
+                'allModels' => ArrayHelper::getValue($result, Role::Category_System, []), 'key' => 'id',
             ]),
         ]);
     }
@@ -48,20 +48,20 @@ class RoleController extends BaseRbacController
             Relation::AddBatchItems($role, $selectedPermissions);
 
             return $this->redirect([
-                'index', 'role' => $role
+                'index', 'role' => $role,
             ]);
         }
 
         $allPermissions = Permission::getAllPermissionsGroupedByCategory();
         $rolePermissions = Relation::find()->select([
-            'permission', 'value'
+            'permission', 'value',
         ])->where(['role' => $role])->indexBy('permission')->all();
         $categories = Permission::getCategoryItems();
         $role = Role::findOne(['id' => $role]);
 
         return $this->render('relation', [
             'rolePermissions' => $rolePermissions, 'allPermissions' => $allPermissions, 'categories' => $categories,
-            'role' => $role
+            'role' => $role,
         ]);
     }
 

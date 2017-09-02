@@ -14,7 +14,7 @@ $this->title = '新建分类项';
 $category = LuLu::getGetValue('category');
 $categoryModel = TaxonomyCategory::findOne(['id' => $category]);
 $this->addBreadcrumbs([
-    ['分类管理', ['/taxonomy']], [$categoryModel[ 'name' ], ['/taxonomy/taxonomy', 'category' => $category]], $this->title,
+    ['分类管理', ['/taxonomy']], [$categoryModel['name'], ['/taxonomy/taxonomy', 'category' => $category]], $this->title,
 ]);
 
 

@@ -7,8 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model source\modules\fragment\models\Fragment2Data */
 
 $this->title = $model->title;
-$this->params[ 'breadcrumbs' ][] = ['label' => 'Fragment2 Datas', 'url' => ['index']];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Fragment2 Datas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="fragment2-data-view">
 

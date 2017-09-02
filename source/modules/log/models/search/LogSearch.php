@@ -49,8 +49,8 @@ class LogSearch extends Log
             //],
             'sort' => [
                 'defaultOrder' => [
-                    'log_time' => SORT_DESC
-                ]
+                    'log_time' => SORT_DESC,
+                ],
             ],
         ]);
 

@@ -29,7 +29,7 @@ class ContentPost extends ContentBody
     public function rules() {
         return [
             //[['content_id', 'body'], 'required'],
-            [['content_id'], 'integer'], [['body'], 'string']
+            [['content_id'], 'integer'], [['body'], 'string'],
         ];
     }
 

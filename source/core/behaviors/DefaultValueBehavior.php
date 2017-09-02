@@ -44,8 +44,8 @@ class DefaultValueBehavior extends CommonBehavior
     public $empty;
 
     public function evaluateAttributes($event) {
-        if (!empty($this->attributes[ $event->name ])) {
-            $attributes = (array)$this->attributes[ $event->name ];
+        if (!empty($this->attributes[$event->name])) {
+            $attributes = (array)$this->attributes[$event->name];
             $value = $this->getValue($event, $attributes);
             foreach ($attributes as $attribute) {
 

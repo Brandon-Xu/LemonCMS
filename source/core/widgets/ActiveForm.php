@@ -6,7 +6,7 @@ class ActiveForm extends \yii\widgets\ActiveForm implements IBaseWidget
 {
 
     public $options = [
-        'class' => 'da-form'
+        'class' => 'da-form',
     ];
 
     public $fieldClass = 'source\core\widgets\ActiveField';

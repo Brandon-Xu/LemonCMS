@@ -56,7 +56,7 @@ class TaxonomyController extends BackController
         $model->loadDefaultValues();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'index', 'category' => $category
+                'index', 'category' => $category,
             ]);
         } else {
             return $this->render('create', [
@@ -77,7 +77,7 @@ class TaxonomyController extends BackController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'index', 'category' => $category
+                'index', 'category' => $category,
             ]);
         } else {
             return $this->render('update', [
@@ -98,7 +98,7 @@ class TaxonomyController extends BackController
         $category = $model->category_id;
 
         return $this->redirect([
-            'index', 'category' => $category
+            'index', 'category' => $category,
         ]);
     }
 

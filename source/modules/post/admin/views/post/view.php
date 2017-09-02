@@ -7,8 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model source\models\Content */
 
 $this->title = $model->title;
-$this->params[ 'breadcrumbs' ][] = ['label' => 'Contents', 'url' => ['index']];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Contents', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="content-view">
 

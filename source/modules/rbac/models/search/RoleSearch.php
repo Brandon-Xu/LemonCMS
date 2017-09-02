@@ -18,10 +18,10 @@ class RoleSearch extends Role
         return [
             [
                 [
-                    'id', 'name', 'description'
-                ], 'safe'
+                    'id', 'name', 'description',
+                ], 'safe',
             ], [
-                ['category_id'], 'integer'
+                ['category_id'], 'integer',
             ],
         ];
     }
@@ -58,11 +58,11 @@ class RoleSearch extends Role
 
 
         $query->andFilterWhere([
-            'like', 'id', $this->id
+            'like', 'id', $this->id,
         ])->andFilterWhere([
-            'like', 'name', $this->name
+            'like', 'name', $this->name,
         ])->andFilterWhere([
-            'like', 'description', $this->description
+            'like', 'description', $this->description,
         ]);
 
         return $dataProvider;

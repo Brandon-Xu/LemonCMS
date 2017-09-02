@@ -9,13 +9,13 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 $type = 'post';
 $this->title = '单面管理';
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 
 
 ?>
 <?php $this->toolbars([
     Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-    Html::a('设置', ['setting/index'], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+    Html::a('设置', ['setting/index'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
 <?= GridView::widget([

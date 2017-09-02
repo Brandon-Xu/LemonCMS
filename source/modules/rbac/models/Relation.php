@@ -27,7 +27,7 @@ class Relation extends BaseRbacActiveRecord
     public function rules() {
         return [
             [['role', 'permission'], 'required'], [['value'], 'string', 'max' => 128],
-            [['role', 'permission'], 'string', 'max' => 64]
+            [['role', 'permission'], 'string', 'max' => 64],
         ];
     }
 

@@ -24,7 +24,7 @@ class Setting extends \source\models\ConfigForm
 
     public static function getAttributeLabels($attribute = NULL) {
         $items = [
-            'sys_theme_home' => '前台主题', 'sys_theme_admin' => '后台主题'
+            'sys_theme_home' => '前台主题', 'sys_theme_admin' => '后台主题',
         ];
 
         return ArrayHelper::getItems($items, $attribute);

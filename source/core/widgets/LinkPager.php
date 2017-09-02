@@ -36,7 +36,7 @@ class LinkPager extends \yii\widgets\LinkPager implements IBaseWidget
             return Html::tag('li', Html::tag('span', $label), $options);
         }
         $linkOptions = $this->linkOptions;
-        $linkOptions[ 'data-page' ] = $page;
+        $linkOptions['data-page'] = $page;
 
         return Html::tag('li', Html::a($label, $this->pagination->createUrl($page), $linkOptions), $options);
     }

@@ -12,7 +12,7 @@ $categoryModel = MenuCategory::findOne(['id' => $category]);
 
 $this->title = '新建菜单项';
 $this->addBreadcrumbs([
-    ['菜单管理', ['/menu']], [$categoryModel[ 'name' ], ['/menu/default/index', 'category' => $category]], $this->title,
+    ['菜单管理', ['/menu']], [$categoryModel['name'], ['/menu/default/index', 'category' => $category]], $this->title,
 ]);
 ?>
 

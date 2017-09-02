@@ -29,12 +29,12 @@ class Pikaday extends BaseWidget
     public function run() {
         $view = $this->view;
 
-        if (!isset($view->params[ '__Pikaday' ])) {
+        if (!isset($view->params['__Pikaday'])) {
             $view->registerCssFile($this->libUrl.'/css/pikaday.css');
             $view->registerJsFile($this->libUrl.'/pikaday.js', ['yii\web\JqueryAsset']);
             $view->registerJsFile($this->libUrl.'/moment.min.js');
 
-            $view->params[ '__Pikaday' ] = TRUE;
+            $view->params['__Pikaday'] = TRUE;
         }
 
         if ($this->inputId === NULL) {

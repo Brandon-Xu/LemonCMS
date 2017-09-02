@@ -10,7 +10,7 @@ use yii\helpers\Url;
 
 
 $this->title = '指派角色';
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 
 
 ?>
@@ -28,9 +28,9 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
                 'class' => 'yii\grid\ActionColumn', 'template' => '{role}{view}{update} {delete}', 'buttons' => [
                 'role' => function ($url, $model) {
                     return Html::a('设定角色', Url::to([
-                        'role', 'user' => $model[ 'username' ]
+                        'role', 'user' => $model['username'],
                     ]));
-                }
+                },
             ],
             ],
         ],

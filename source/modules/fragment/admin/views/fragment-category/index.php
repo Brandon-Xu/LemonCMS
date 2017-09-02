@@ -10,10 +10,10 @@ use yii\helpers\Html;
 /* @var $dataProvider source\core\data\ActiveDataProvider */
 
 $this->title = '分类管理';
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php $this->toolbars([
-    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
 <?= GridView::widget([

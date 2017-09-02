@@ -27,20 +27,20 @@ class RelationController extends BaseRbacController
             Relation::AddBatchItems($role, $selectedPermissions);
 
             return $this->redirect([
-                'index', 'role' => $role
+                'index', 'role' => $role,
             ]);
         }
 
         $allPermissions = Permission::getAllPermissionsGroupedByCategory();
         $rolePermissions = Relation::find()->select([
-            'permission', 'value'
+            'permission', 'value',
         ])->where(['role' => $role])->indexBy('permission')->all();
         $categories = Permission::getCategoryItems();
         $role = Role::findOne(['id' => $role]);
 
         return $this->render('index', [
             'rolePermissions' => $rolePermissions, 'allPermissions' => $allPermissions, 'categories' => $categories,
-            'role' => $role
+            'role' => $role,
         ]);
     }
 
@@ -66,7 +66,7 @@ class RelationController extends BaseRbacController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'view', 'role' => $model->role, 'permission' => $model->permission
+                'view', 'role' => $model->role, 'permission' => $model->permission,
             ]);
         } else {
             return $this->render('create', [
@@ -87,7 +87,7 @@ class RelationController extends BaseRbacController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'view', 'role' => $model->role, 'permission' => $model->permission
+                'view', 'role' => $model->role, 'permission' => $model->permission,
             ]);
         } else {
             return $this->render('update', [
@@ -119,7 +119,7 @@ class RelationController extends BaseRbacController
      */
     protected function findModel($role, $permission) {
         if (($model = Relation::findOne([
-                'role' => $role, 'permission' => $permission
+                'role' => $role, 'permission' => $permission,
             ])) !== NULL) {
             return $model;
         } else {

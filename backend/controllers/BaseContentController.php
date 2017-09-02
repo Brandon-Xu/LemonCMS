@@ -23,11 +23,11 @@ abstract class BaseContentController extends BackController
         $searchModel = new ContentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->andWhere([
-            'content_type' => $this->content_type
+            'content_type' => $this->content_type,
         ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel, 'dataProvider' => $dataProvider
+            'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -43,12 +43,12 @@ abstract class BaseContentController extends BackController
 
         if ($this->saveContent($model, $bodyModel)) {
             return $this->redirect([
-                'index'
+                'index',
             ]);
         }
 
         return $this->render('create', [
-            'model' => $model, 'bodyModel' => $bodyModel
+            'model' => $model, 'bodyModel' => $bodyModel,
         ]);
     }
 
@@ -58,12 +58,12 @@ abstract class BaseContentController extends BackController
 
         if ($this->saveContent($model, $bodyModel)) {
             return $this->redirect([
-                'index'
+                'index',
             ]);
         }
 
         return $this->render('update', [
-            'model' => $model, 'bodyModel' => $bodyModel
+            'model' => $model, 'bodyModel' => $bodyModel,
         ]);
     }
 
@@ -78,7 +78,7 @@ abstract class BaseContentController extends BackController
         }
 
         return $this->redirect([
-            'index'
+            'index',
         ]);
     }
 
@@ -108,7 +108,7 @@ abstract class BaseContentController extends BackController
             /* @var $bodyClass yii\db\ActiveRecord */
             /* @var $ret \source\models\ContentBody */
             $ret = $bodyClass::findOne([
-                'content_id' => $contentId
+                'content_id' => $contentId,
             ]);
             if ($ret === NULL) {
                 $ret = new $bodyClass();

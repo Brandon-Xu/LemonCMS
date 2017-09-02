@@ -8,7 +8,7 @@ class ActiveField extends \yii\widgets\ActiveField implements IBaseWidget
 {
 
     public $options = [
-        'class' => 'da-form-row'
+        'class' => 'da-form-row',
     ];
 
     public $template = "{label}\n<div class=\"da-form-item {size}\">{input}\n{error}</div>\n{hint}";
@@ -17,25 +17,25 @@ class ActiveField extends \yii\widgets\ActiveField implements IBaseWidget
 
 
     public $errorOptions = [
-        'class' => 'errorMessage'
+        'class' => 'errorMessage',
     ];
 
     public function render($content = NULL) {
         if ($content === NULL) {
-            if (!isset($this->parts[ '{input}' ])) {
-                $this->parts[ '{input}' ] = Html::activeTextInput($this->model, $this->attribute, $this->inputOptions);
+            if (!isset($this->parts['{input}'])) {
+                $this->parts['{input}'] = Html::activeTextInput($this->model, $this->attribute, $this->inputOptions);
             }
-            if (!isset($this->parts[ '{label}' ])) {
-                $this->parts[ '{label}' ] = Html::activeLabel($this->model, $this->attribute, $this->labelOptions);
+            if (!isset($this->parts['{label}'])) {
+                $this->parts['{label}'] = Html::activeLabel($this->model, $this->attribute, $this->labelOptions);
             }
-            if (!isset($this->parts[ '{error}' ])) {
-                $this->parts[ '{error}' ] = Html::error($this->model, $this->attribute, $this->errorOptions);
+            if (!isset($this->parts['{error}'])) {
+                $this->parts['{error}'] = Html::error($this->model, $this->attribute, $this->errorOptions);
             }
-            if (!isset($this->parts[ '{hint}' ])) {
-                $this->parts[ '{hint}' ] = '';
+            if (!isset($this->parts['{hint}'])) {
+                $this->parts['{hint}'] = '';
             }
 
-            $this->parts[ '{size}' ] = $this->size;
+            $this->parts['{size}'] = $this->size;
             $content = strtr($this->template, $this->parts);
         } else if (!is_string($content)) {
             $content = call_user_func($content, $this);
@@ -51,8 +51,8 @@ class ActiveField extends \yii\widgets\ActiveField implements IBaseWidget
     }
 
     public function dropDownList($items, $options = [], $generateDefault = TRUE) {
-        if ($generateDefault === TRUE && !isset($options[ 'prompt' ])) {
-            $options[ 'prompt' ] = '请选择';
+        if ($generateDefault === TRUE && !isset($options['prompt'])) {
+            $options['prompt'] = '请选择';
         }
 
         return parent::dropDownList($items, $options);
@@ -63,24 +63,24 @@ class ActiveField extends \yii\widgets\ActiveField implements IBaseWidget
 
         $this->adjustLabelFor($options);
         $value = $value === NULL ? Html::getAttributeValue($this->model, $this->attribute) : $value;
-        $options[ 'class' ] = 'da-style';
-        $options[ 'style' ] = 'display: inline-block;';
-        $this->parts[ '{input}' ] = Html::activeHiddenInput($this->model, $this->attribute).Html::tag('span', $value, $options);
+        $options['class'] = 'da-style';
+        $options['style'] = 'display: inline-block;';
+        $this->parts['{input}'] = Html::activeHiddenInput($this->model, $this->attribute).Html::tag('span', $value, $options);
 
         return $this;
     }
 
     public function radioList($items, $options = []) {
-        $options[ 'tag' ] = 'ul';
+        $options['tag'] = 'ul';
 
         $inputId = Html::getInputId($this->model, $this->attribute);
         $this->selectors = ['input' => "#$inputId input"];
 
-        $options[ 'class' ] = 'da-form-list inline';
-        $encode = !isset($options[ 'encode' ]) || $options[ 'encode' ];
-        $itemOptions = isset($options[ 'itemOptions' ]) ? $options[ 'itemOptions' ] : [];
+        $options['class'] = 'da-form-list inline';
+        $encode = !isset($options['encode']) || $options['encode'];
+        $itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : [];
 
-        $options[ 'item' ] = function ($index, $label, $name, $checked, $value) use ($encode, $itemOptions) {
+        $options['item'] = function ($index, $label, $name, $checked, $value) use ($encode, $itemOptions) {
             $radio = Html::radio($name, $checked, array_merge($itemOptions, [
                 'value' => $value, 'label' => $encode ? Html::encode($label) : $label,
             ]));
@@ -93,16 +93,16 @@ class ActiveField extends \yii\widgets\ActiveField implements IBaseWidget
 
     public function checkboxList($items, $options = []) {
 
-        $options[ 'tag' ] = 'ul';
+        $options['tag'] = 'ul';
 
         $inputId = Html::getInputId($this->model, $this->attribute);
         $this->selectors = ['input' => "#$inputId input"];
 
-        $options[ 'class' ] = 'da-form-list inline';
-        $encode = !isset($options[ 'encode' ]) || $options[ 'encode' ];
-        $itemOptions = isset($options[ 'itemOptions' ]) ? $options[ 'itemOptions' ] : [];
+        $options['class'] = 'da-form-list inline';
+        $encode = !isset($options['encode']) || $options['encode'];
+        $itemOptions = isset($options['itemOptions']) ? $options['itemOptions'] : [];
 
-        $options[ 'item' ] = function ($index, $label, $name, $checked, $value) use ($encode, $itemOptions) {
+        $options['item'] = function ($index, $label, $name, $checked, $value) use ($encode, $itemOptions) {
             $checkbox = Html::checkbox($name, $checked, array_merge($itemOptions, [
                 'value' => $value, 'label' => $encode ? Html::encode($label) : $label,
             ]));
@@ -114,8 +114,8 @@ class ActiveField extends \yii\widgets\ActiveField implements IBaseWidget
     }
 
     public function textarea($options = []) {
-        if (!isset($options[ 'rows' ])) {
-            $options[ 'rows' ] = 5;
+        if (!isset($options['rows'])) {
+            $options['rows'] = 5;
         }
 
         return parent::textarea($options);

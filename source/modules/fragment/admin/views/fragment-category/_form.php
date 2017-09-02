@@ -10,7 +10,7 @@ use yii\helpers\Html;
 ?>
 
 <?php $this->toolbars([
-    Html::a('返回', ['index'], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+    Html::a('返回', ['index'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
 

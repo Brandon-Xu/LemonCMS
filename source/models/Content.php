@@ -104,7 +104,7 @@ class Content extends BaseActiveRecord
      */
     public function getUrl() {
         return Url::to([
-            '/'.$this->content_type.'/default/detail', 'id' => $this->id
+            '/'.$this->content_type.'/default/detail', 'id' => $this->id,
         ]);
     }
 
@@ -114,8 +114,8 @@ class Content extends BaseActiveRecord
      */
     public function beforeSave($insert) {
         $uploadedFile = Common::uploadFile('Content[thumb]');
-        if ($uploadedFile[ 'message' ] === 'ok') {
-            $this->thumb = $uploadedFile[ 'full_name' ];
+        if ($uploadedFile['message'] === 'ok') {
+            $this->thumb = $uploadedFile['full_name'];
         }
 
         return parent::beforeSave($insert);
@@ -191,9 +191,9 @@ class Content extends BaseActiveRecord
         return [
             [
                 'class' => DefaultValueBehavior::className(), 'validates' => [
-                'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count'
-            ], 'value' => 0
-            ]
+                'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count',
+            ], 'value' => 0,
+            ],
         ];
     }
 
@@ -213,15 +213,15 @@ class Content extends BaseActiveRecord
                 [
                     'taxonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count',
                     'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'sticky',
-                    'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status'
-                ], 'integer'
+                    'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status',
+                ], 'integer',
             ], [['content_type', 'title'], 'required'],
             [['user_name', 'last_user_name', 'password', 'view', 'layout', 'content_type'], 'string', 'max' => 64], [
                 [
                     'seo_title', 'seo_keywords', 'seo_description', 'title', 'sub_title', 'url_alias', 'redirect_url',
-                    'thumb'
-                ], 'string', 'max' => 256
-            ], [['summary'], 'string', 'max' => 512], [['thumbs'], 'string', 'max' => 1024]
+                    'thumb',
+                ], 'string', 'max' => 256,
+            ], [['summary'], 'string', 'max' => 512], [['thumbs'], 'string', 'max' => 1024],
         ];
     }
 

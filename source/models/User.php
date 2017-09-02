@@ -39,40 +39,40 @@ class User extends BaseActiveRecord implements IdentityInterface
         return [
             [
                 [
-                    'username', 'auth_key', 'password_hash', 'email', 'role'
-                ], 'required'
+                    'username', 'auth_key', 'password_hash', 'email', 'role',
+                ], 'required',
             ], [
                 [
-                    'username', 'email'
-                ], 'unique'
+                    'username', 'email',
+                ], 'unique',
             ], [
                 ['password'], 'required', 'on' => [
-                    'login', 'create'
-                ]
+                    'login', 'create',
+                ],
             ], [
                 [
-                    'status', 'created_at', 'updated_at'
-                ], 'integer'
+                    'status', 'created_at', 'updated_at',
+                ], 'integer',
             ], [
-                'email', 'email'
+                'email', 'email',
             ], [
                 [
-                    'username', 'password_hash', 'password_reset_token', 'email', 'auth_key'
-                ], 'string', 'max' => 255
+                    'username', 'password_hash', 'password_reset_token', 'email', 'auth_key',
+                ], 'string', 'max' => 255,
             ],
         ];
     }
 
     public function scenarios() {
         $parent = parent::scenarios();
-        $parent[ 'login' ] = [
-            'username', 'password'
+        $parent['login'] = [
+            'username', 'password',
         ];
-        $parent[ 'create' ] = [
-            'username', 'password', 'email', 'status', 'role'
+        $parent['create'] = [
+            'username', 'password', 'email', 'status', 'role',
         ];
-        $parent[ 'update' ] = [
-            'username', 'password', 'email', 'status', 'updated_at', 'role'
+        $parent['update'] = [
+            'username', 'password', 'email', 'status', 'updated_at', 'role',
         ];
 
         return $parent;
@@ -85,7 +85,7 @@ class User extends BaseActiveRecord implements IdentityInterface
         return [
             'id' => 'ID', 'username' => '用户名', 'password' => '密码', 'auth_key' => 'Auth Key',
             'password_hash' => 'Password Hash', 'password_reset_token' => 'Password Reset Token', 'email' => 'Email',
-            'status' => '状态', 'statusText' => '状态', 'created_at' => '创建时间', 'updated_at' => '更新时间', 'role' => '角色'
+            'status' => '状态', 'statusText' => '状态', 'created_at' => '创建时间', 'updated_at' => '更新时间', 'role' => '角色',
         ];
     }
 

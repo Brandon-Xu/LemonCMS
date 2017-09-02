@@ -20,7 +20,7 @@ class ThemeConfig extends ConfigForm
      */
     public function attributeLabels() {
         return [
-            'sys_site_theme' => '主题', 'test_data_theme' => '测试'
+            'sys_site_theme' => '主题', 'test_data_theme' => '测试',
         ];
     }
 }

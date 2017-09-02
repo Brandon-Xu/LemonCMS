@@ -26,7 +26,7 @@ class FragmentCategory extends \source\core\base\BaseActiveRecord
      */
     public function rules() {
         return [
-            [['name', 'type'], 'required'], [['type'], 'integer'], [['name'], 'string', 'max' => 64]
+            [['name', 'type'], 'required'], [['type'], 'integer'], [['name'], 'string', 'max' => 64],
         ];
     }
 

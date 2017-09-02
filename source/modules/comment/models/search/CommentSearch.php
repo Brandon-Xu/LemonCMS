@@ -19,8 +19,8 @@ class CommentSearch extends Comment
             [['id', 'content_id', 'user_id', 'status'], 'integer'], [
                 [
                     'reply_ids', 'user_name', 'user_email', 'user_url', 'user_ip', 'user_address', 'content',
-                    'created_at'
-                ], 'safe'
+                    'created_at',
+                ], 'safe',
             ],
         ];
     }
@@ -61,11 +61,11 @@ class CommentSearch extends Comment
         ]);
 
         $query->andFilterWhere(['like', 'reply_ids', $this->reply_ids])->andFilterWhere([
-            'like', 'user_name', $this->user_name
+            'like', 'user_name', $this->user_name,
         ])->andFilterWhere(['like', 'user_email', $this->user_email])->andFilterWhere([
-            'like', 'user_url', $this->user_url
+            'like', 'user_url', $this->user_url,
         ])->andFilterWhere(['like', 'user_ip', $this->user_ip])->andFilterWhere([
-            'like', 'user_address', $this->user_address
+            'like', 'user_address', $this->user_address,
         ])->andFilterWhere(['like', 'content', $this->content]);
 
         return $dataProvider;

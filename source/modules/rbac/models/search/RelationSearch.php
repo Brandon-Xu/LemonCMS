@@ -18,8 +18,8 @@ class RelationSearch extends Relation
         return [
             [
                 [
-                    'role', 'permission', 'rule', 'data', 'note'
-                ], 'safe'
+                    'role', 'permission', 'rule', 'data', 'note',
+                ], 'safe',
             ],
         ];
     }
@@ -55,15 +55,15 @@ class RelationSearch extends Relation
         }
 
         $query->andFilterWhere([
-            'like', 'role', $this->role
+            'like', 'role', $this->role,
         ])->andFilterWhere([
-            'like', 'permission', $this->permission
+            'like', 'permission', $this->permission,
         ])->andFilterWhere([
-            'like', 'rule', $this->rule
+            'like', 'rule', $this->rule,
         ])->andFilterWhere([
-            'like', 'data', $this->data
+            'like', 'data', $this->data,
         ])->andFilterWhere([
-            'like', 'note', $this->note
+            'like', 'note', $this->note,
         ]);
 
         return $dataProvider;

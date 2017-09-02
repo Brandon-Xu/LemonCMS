@@ -8,11 +8,11 @@ $value = intval($value);
 ?>
 
 <ul class="da-form-list inline">
-    <li><label><input type="radio" name="Permission[<?php echo $permission[ 'id' ] ?>]"
+    <li><label><input type="radio" name="Permission[<?php echo $permission['id'] ?>]"
                       value="1" <?php if ($value === 1) {
                 echo 'checked';
             } ?>> 是</label></li>
-    <li><label><input type="radio" name="Permission[<?php echo $permission[ 'id' ] ?>]"
+    <li><label><input type="radio" name="Permission[<?php echo $permission['id'] ?>]"
                       value="0" <?php if ($value !== 1) {
                 echo 'checked';
             } ?>> 否</label></li>

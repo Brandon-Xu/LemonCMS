@@ -13,7 +13,7 @@ $this->addBreadcrumbs([
 ]);
 ?>
 <?php $this->toolbars([
-    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
 <?= GridView::widget([
@@ -27,9 +27,9 @@ $this->addBreadcrumbs([
             'attribute' => 'name', 'format' => 'html', 'width' => '250px',
             'value' => function ($model, $key, $index, $column) {
                 return Html::a($model->name, ['/menu/menu/index', 'category' => $model->id]);
-            }
+            },
         ], [
-            'attribute' => 'description', 'width' => 'auto'
+            'attribute' => 'description', 'width' => 'auto',
         ], ['class' => 'source\core\grid\ActionColumn'],
     ],
 ]); ?>

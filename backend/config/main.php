@@ -12,7 +12,7 @@ return [
             'traceLevel' => YII_DEBUG ? 3 : 0, 'targets' => [
                 [
                     'class' => 'yii\log\FileTarget', 'levels' => [
-                    'error', 'warning'
+                    'error', 'warning',
                 ],
                 ],
             ],
@@ -22,7 +22,7 @@ return [
             'class' => 'source\core\back\BackView',
         ], 'request' => [
             'class' => 'yii\web\Request', 'enableCsrfValidation' => FALSE,
-        ]
+        ],
 
     ], 'params' => $params,
 ];

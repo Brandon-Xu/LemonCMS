@@ -12,7 +12,7 @@ use source\modules\rbac\models\Role;
 <?php $form = ActiveForm::begin(); ?>
 
 <?= $form->field($model, 'id')->textInput([
-    'maxlength' => 64, 'readonly' => $model->isNewRecord ? FALSE : TRUE
+    'maxlength' => 64, 'readonly' => $model->isNewRecord ? FALSE : TRUE,
 ]) ?>
 
 <?= $form->field($model, 'category')->dropDownList(Role::getCategoryItems()) ?>

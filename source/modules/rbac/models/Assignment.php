@@ -22,7 +22,7 @@ class Assignment extends BaseRbacActiveRecord
      */
     public function rules() {
         return [
-            [['user', 'role'], 'required'], [['user', 'role'], 'string', 'max' => 64]
+            [['user', 'role'], 'required'], [['user', 'role'], 'string', 'max' => 64],
         ];
     }
 

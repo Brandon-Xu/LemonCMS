@@ -30,7 +30,7 @@ use yii\helpers\ArrayHelper;
 <?php if (!empty($relations)): ?>
     *
     <?php foreach ($relations as $name => $relation): ?>
-        * @property <?= $relation[ 1 ].($relation[ 2 ] ? '[]' : '').' $'.lcfirst($name)."\n" ?>
+        * @property <?= $relation[1].($relation[2] ? '[]' : '').' $'.lcfirst($name)."\n" ?>
     <?php endforeach; ?>
 <?php endif; ?>
 */
@@ -79,7 +79,7 @@ return ArrayHelper::getItems($items, $attribute);
     */
     public function get<?= $name ?>()
     {
-    <?= $relation[ 0 ]."\n" ?>
+    <?= $relation[0]."\n" ?>
     }
 <?php endforeach; ?>
 <?php if ($queryClassName): ?>

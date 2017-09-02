@@ -28,53 +28,53 @@ class Tabs extends \yii\bootstrap\Tabs implements IBaseWidget
         $panes = [];
 
         if (!$this->hasActiveTab() && !empty($this->items)) {
-            $this->items[ 0 ][ 'active' ] = TRUE;
+            $this->items[0]['active'] = TRUE;
         }
 
         foreach ($this->items as $n => $item) {
-            if (!isset($item[ 'label' ])) {
+            if (!isset($item['label'])) {
                 throw new InvalidConfigException("The 'label' option is required.");
             }
-            $label = $this->encodeLabels ? Html::encode($item[ 'label' ]) : $item[ 'label' ];
+            $label = $this->encodeLabels ? Html::encode($item['label']) : $item['label'];
             $headerOptions = array_merge($this->headerOptions, ArrayHelper::getValue($item, 'headerOptions', []));
             $linkOptions = array_merge($this->linkOptions, ArrayHelper::getValue($item, 'linkOptions', []));
 
-            if (isset($item[ 'items' ])) {
+            if (isset($item['items'])) {
                 $label .= ' <b class="caret"></b>';
                 Html::addCssClass($headerOptions, 'dropdown');
 
-                if ($this->renderDropdown($item[ 'items' ], $panes)) {
+                if ($this->renderDropdown($item['items'], $panes)) {
                     Html::addCssClass($headerOptions, 'active');
                 }
 
                 Html::addCssClass($linkOptions, 'dropdown-toggle');
-                $linkOptions[ 'data-toggle' ] = 'dropdown';
+                $linkOptions['data-toggle'] = 'dropdown';
                 $header = Html::a($label, "#", $linkOptions)."\n".Dropdown::widget([
-                        'items' => $item[ 'items' ], 'clientOptions' => FALSE, 'view' => $this->getView()
+                        'items' => $item['items'], 'clientOptions' => FALSE, 'view' => $this->getView(),
                     ]);
-            } else if (isset($item[ 'content' ])) {
+            } else if (isset($item['content'])) {
                 $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
-                $options[ 'id' ] = ArrayHelper::getValue($options, 'id', $this->options[ 'id' ].'-tab'.$n);
+                $options['id'] = ArrayHelper::getValue($options, 'id', $this->options['id'].'-tab'.$n);
 
                 Html::addCssClass($options, 'tab-pane');
                 if (ArrayHelper::remove($item, 'active')) {
                     Html::addCssClass($options, 'active');
                     Html::addCssClass($headerOptions, 'active');
                 }
-                $linkOptions[ 'data-toggle' ] = 'tab';
-                $header = Html::a($label, '#'.$options[ 'id' ], $linkOptions);
-                $panes[] = Html::tag('div', $item[ 'content' ], $options);
-            } else if (isset($item[ 'contentId' ])) {
+                $linkOptions['data-toggle'] = 'tab';
+                $header = Html::a($label, '#'.$options['id'], $linkOptions);
+                $panes[] = Html::tag('div', $item['content'], $options);
+            } else if (isset($item['contentId'])) {
                 $options = array_merge($this->itemOptions, ArrayHelper::getValue($item, 'options', []));
-                $options[ 'id' ] = $item[ 'contentId' ];
+                $options['id'] = $item['contentId'];
 
                 Html::addCssClass($options, 'tab-pane');
                 if (ArrayHelper::remove($item, 'active')) {
                     Html::addCssClass($options, 'active');
                     Html::addCssClass($headerOptions, 'active');
                 }
-                $linkOptions[ 'data-toggle' ] = 'tab';
-                $header = Html::a($label, '#'.$options[ 'id' ], $linkOptions);
+                $linkOptions['data-toggle'] = 'tab';
+                $header = Html::a($label, '#'.$options['id'], $linkOptions);
                 $panes[] = ''; // Html::tag('div', $item['content'], $options);
             } else {
                 throw new InvalidConfigException("Either the 'content' or 'items' option must be set.");
@@ -84,7 +84,7 @@ class Tabs extends \yii\bootstrap\Tabs implements IBaseWidget
         }
 
         return Html::tag('ul', implode("\n", $headers), $this->options)."\n".Html::tag('div', implode("\n", $panes).$html, [
-                'class' => 'tab-content'
+                'class' => 'tab-content',
             ]);
     }
 }

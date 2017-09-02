@@ -52,7 +52,7 @@ class AssignmentController extends BaseRbacController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'index', 'user' => $model->user, 'role' => $model->role
+                'index', 'user' => $model->user, 'role' => $model->role,
             ]);
         } else {
             return $this->render('create', [
@@ -73,7 +73,7 @@ class AssignmentController extends BaseRbacController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'view', '$user' => $model->user_id, 'role' => $model->role
+                'view', '$user' => $model->user_id, 'role' => $model->role,
             ]);
         } else {
             return $this->render('update', [
@@ -89,12 +89,12 @@ class AssignmentController extends BaseRbacController
             $selectedRoles = LuLu::getPostValue('roles', []);
             Assignment::deleteAll([
                 'and', 'user=\''.$user.'\'', [
-                    'not in', 'role', $selectedRoles
-                ]
+                    'not in', 'role', $selectedRoles,
+                ],
             ]);
 
             foreach ($selectedRoles as $selectedRole) {
-                if ($userRoles != NULL && isset($userRoles[ $selectedRole ])) {
+                if ($userRoles != NULL && isset($userRoles[$selectedRole])) {
                     continue;
                 }
 
@@ -105,7 +105,7 @@ class AssignmentController extends BaseRbacController
             }
 
             return $this->redirect([
-                'role', 'user' => $user
+                'role', 'user' => $user,
             ]);
         }
 
@@ -141,7 +141,7 @@ class AssignmentController extends BaseRbacController
      */
     protected function findModel($user, $role) {
         if (($model = Assignment::findOne([
-                'user' => $user, 'role' => $role
+                'user' => $user, 'role' => $role,
             ])) !== NULL) {
             return $model;
         } else {

@@ -67,7 +67,7 @@ class LuLu extends \Yii
 
     public static function getAppParam($key, $defaultValue = NULL) {
         if (array_key_exists($key, app()->params)) {
-            return app()->params[ $key ];
+            return app()->params[$key];
         }
 
         return $defaultValue;
@@ -75,14 +75,14 @@ class LuLu extends \Yii
 
     public static function setAppParam($array) {
         foreach ($array as $key => $value) {
-            app()->params[ $key ] = $value;
+            app()->params[$key] = $value;
         }
     }
 
     public static function getViewParam($key, $defaultValue = NULL) {
         $view = app()->getView();
         if (array_key_exists($key, $view->params)) {
-            return $view->params[ $key ];
+            return $view->params[$key];
         }
 
         return $defaultValue;
@@ -91,12 +91,12 @@ class LuLu extends \Yii
     public static function setViewParam($array) {
         $view = app()->getView();
         foreach ($array as $name => $value) {
-            $view->params[ $name ] = $value;
+            $view->params[$name] = $value;
         }
     }
 
     public static function hasGetValue($key) {
-        return isset($_GET[ $key ]);
+        return isset($_GET[$key]);
     }
 
     /**
@@ -111,7 +111,7 @@ class LuLu extends \Yii
         $keys = explode('/', $key);
         foreach ($keys as $key) {
             if (is_array($data) && key_exists($key, $data)) {
-                $data = $data[ $key ];
+                $data = $data[$key];
             } else {
                 return $default;
             }
@@ -125,7 +125,7 @@ class LuLu extends \Yii
     }
 
     public static function hasPostValue($key) {
-        return isset($_POST[ $key ]);
+        return isset($_POST[$key]);
     }
 
     public static function getPostValue($key, $default = NULL) {
@@ -134,7 +134,7 @@ class LuLu extends \Yii
         $keys = explode('/', $key);
         foreach ($keys as $key) {
             if (is_array($data) && key_exists($key, $data)) {
-                $data = $data[ $key ];
+                $data = $data[$key];
             } else {
                 return $default;
             }
@@ -247,7 +247,7 @@ class LuLu extends \Yii
             }
             if ($loginUrl == NULL) {
                 $loginUrl = [
-                    'site/login'
+                    'site/login',
                 ];
             }
 
@@ -291,33 +291,33 @@ class LuLu extends \Yii
      * @return array
      */
     public static function getPagedRows($query, $config = []) {
-        $db = isset($config[ 'db' ]) ? $config[ 'db' ] : NULL;
+        $db = isset($config['db']) ? $config['db'] : NULL;
 
         $countQuery = clone $query;
         $pager = new Pagination([
             'totalCount' => $countQuery->count('*', $db),
         ]);
-        if (isset($config[ 'page' ])) {
-            $pager->setPage($config[ 'page' ], TRUE);
+        if (isset($config['page'])) {
+            $pager->setPage($config['page'], TRUE);
         }
 
-        if (isset($config[ 'pageSize' ])) {
-            $pager->setPageSize($config[ 'pageSize' ], TRUE);
+        if (isset($config['pageSize'])) {
+            $pager->setPageSize($config['pageSize'], TRUE);
         }
 
         $rows = $query->offset($pager->offset)->limit($pager->limit);
 
-        if (isset($config[ 'orderBy' ])) {
-            $rows = $rows->orderBy($config[ 'orderBy' ]);
+        if (isset($config['orderBy'])) {
+            $rows = $rows->orderBy($config['orderBy']);
         }
         $rows = $rows->all($db);
 
-        $rowsLable = isset($config[ 'rows' ]) ? $config[ 'rows' ] : 'rows';
-        $pagerLable = isset($config[ 'pager' ]) ? $config[ 'pager' ] : 'pager';
+        $rowsLable = isset($config['rows']) ? $config['rows'] : 'rows';
+        $pagerLable = isset($config['pager']) ? $config['pager'] : 'pager';
 
         $ret = [];
-        $ret[ $rowsLable ] = $rows;
-        $ret[ $pagerLable ] = $pager;
+        $ret[$rowsLable] = $rows;
+        $ret[$pagerLable] = $pager;
 
         return $ret;
     }

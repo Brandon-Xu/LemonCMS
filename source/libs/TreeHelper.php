@@ -10,20 +10,20 @@ class TreeHelper
         $found = FALSE;;
 
         foreach ($treeArray as $row) {
-            $theId = intval($row[ 'id' ]);
+            $theId = intval($row['id']);
             $style = '';
 
             if ($model != NULL) {
-                if ($model[ 'parent_id' ] == $theId) {
+                if ($model['parent_id'] == $theId) {
                     $style = ' selected';
                 }
-                if ($model[ 'id' ] === $theId) {
-                    $model[ 'level' ] = intval($row[ 'level' ]);
+                if ($model['id'] === $theId) {
+                    $model['level'] = intval($row['level']);
                     $found = TRUE;
                     continue;
                 }
                 if ($found) {
-                    if (intval($row[ 'level' ]) > $model[ 'level' ]) {
+                    if (intval($row['level']) > $model['level']) {
                         continue;
                     } else {
                         $found = FALSE;
@@ -31,7 +31,7 @@ class TreeHelper
                 }
             }
 
-            $options .= '<option value="'.$row[ 'id' ].'"'.$style.'>'.str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $row[ 'level' ]).$row[ 'name' ].'</option>';
+            $options .= '<option value="'.$row['id'].'"'.$style.'>'.str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $row['level']).$row['name'].'</option>';
         }
 
         return $options;
@@ -40,7 +40,7 @@ class TreeHelper
     public static function buildTreeOptions($treeArray) {
         $options = [];
         foreach ($treeArray as $row) {
-            $options[ $row[ 'id' ] ] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $row[ 'level' ]).$row[ 'name' ];
+            $options[$row['id']] = str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $row['level']).$row['name'];
         }
 
         return $options;

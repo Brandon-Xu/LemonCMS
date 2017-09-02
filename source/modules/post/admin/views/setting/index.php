@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
 
 $this->title = '文章模块设置';
 $this->addBreadcrumbs([
-    '基本设置'
+    '基本设置',
 ]);
 
 $categories = Common::getTaxonomyCategories();

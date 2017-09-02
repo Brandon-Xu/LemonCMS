@@ -26,7 +26,7 @@ class SiteController extends BackController
         LuLu::$app->user->logout();
 
         return $this->redirect([
-            'index'
+            'index',
         ]);
     }
 

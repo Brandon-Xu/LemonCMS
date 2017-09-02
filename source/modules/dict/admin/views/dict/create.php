@@ -5,8 +5,8 @@
 /* @var $model source\models\Dict */
 
 $this->title = '新建字典';
-$this->params[ 'breadcrumbs' ][] = ['label' => 'Dicts', 'url' => ['index']];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Dicts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <?= $this->render('_form', [
     'model' => $model,

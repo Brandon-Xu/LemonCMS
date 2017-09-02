@@ -31,7 +31,7 @@ class DataSource
         $query = self::buildContentQuery($where, $options);
         $query->joinWith('taxonomy', TRUE, 'LEFT JOIN');
 
-        $page = isset($options[ 'page' ]) ? $options[ 'page' ] : NULL;
+        $page = isset($options['page']) ? $options['page'] : NULL;
         $orderBy = empty($orderBy) ? 'created_at desc' : $orderBy;
 
         $locals = LuLu::getPagedRows($query, [
@@ -65,8 +65,8 @@ class DataSource
         $orderBy = empty($orderBy) ? 'created_at desc' : $orderBy;
         $query->orderBy($orderBy);
 
-        if (isset($options[ 'page' ])) {
-            $query->offset(intval($options[ 'page' ]));
+        if (isset($options['page'])) {
+            $query->offset(intval($options['page']));
         }
 
         if ($limit > 0) {
@@ -79,17 +79,17 @@ class DataSource
 
     private static function buildContentQuery($where = NULL, $options = []) {
         $query = Content::find()->published()->andWhere($where);
-        if (isset($options[ 'taxonomy' ])) {
+        if (isset($options['taxonomy'])) {
             $ids = [];
-            if (is_array($options[ 'taxonomy' ])) {
-                foreach ($options[ 'taxonomy' ] as $t) {
+            if (is_array($options['taxonomy'])) {
+                foreach ($options['taxonomy'] as $t) {
                     if (intval($t) > 0) {
                         $ids[] = intval($t);
                     }
                 }
             } else {
-                if (intval($options[ 'taxonomy' ]) > 0) {
-                    $ids = intval($options[ 'taxonomy' ]);
+                if (intval($options['taxonomy']) > 0) {
+                    $ids = intval($options['taxonomy']);
                 }
             }
             if (!empty($ids)) {
@@ -97,27 +97,27 @@ class DataSource
             }
         }
         foreach (['recommend', 'headline', 'sticky'] as $att) {
-            if (isset($options[ $att ]) && is_integer($options[ $att ])) {
-                $query->andWhere([$att => $options[ $att ]]);
+            if (isset($options[$att]) && is_integer($options[$att])) {
+                $query->andWhere([$att => $options[$att]]);
             }
         }
 
-        if (isset($options[ 'flag' ])) {
-            $flagValue = Common::getFlagValue($options[ 'flag' ]);
+        if (isset($options['flag'])) {
+            $flagValue = Common::getFlagValue($options['flag']);
             if ($flagValue > 0) {
                 $query->andWhere('flag&'.$flagValue.'>0');
             }
         }
 
-        if (isset($options[ 'is_pic' ])) {
+        if (isset($options['is_pic'])) {
             $query->andWhere([
-                '!=', 'thumb', ''
+                '!=', 'thumb', '',
             ]);
         }
 
-        if (isset($options[ 'content_type' ])) {
-            if (is_string($options[ 'content_type' ])) {
-                $type = $options[ 'content_type' ];
+        if (isset($options['content_type'])) {
+            if (is_string($options['content_type'])) {
+                $type = $options['content_type'];
             } else {
                 $module = app()->controller->module;
                 if (!($module instanceof Application)) {
@@ -125,7 +125,7 @@ class DataSource
                 }
             }
             if (!empty($type)) {
-                $query->andWhere(['content_type' => $options[ 'content_type' ]]);
+                $query->andWhere(['content_type' => $options['content_type']]);
             }
         }
 

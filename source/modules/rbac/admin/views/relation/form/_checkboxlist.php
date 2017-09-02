@@ -13,20 +13,20 @@ if (is_string($value)) {
 <ul class="da-form-list inline">
     <?php
 
-    $options = explode("\r\n", $permission[ 'default_value' ]);
+    $options = explode("\r\n", $permission['default_value']);
     foreach ($options as $option) {
         $item = explode("|", $option);
 
         if (count($item) === 1) {
-            $ret[ $item[ 0 ] ] = $item[ 0 ];
+            $ret[$item[0]] = $item[0];
         } else {
-            $ret[ $item[ 0 ] ] = $item[ 1 ];
+            $ret[$item[0]] = $item[1];
         }
         ?>
-        <li><label><input type="checkbox" name="Permission[<?php echo $permission[ 'id' ] ?>][]"
-                          value="<?php echo $item[ 0 ] ?>" <?php if (in_array($item[ 0 ], $value)) {
+        <li><label><input type="checkbox" name="Permission[<?php echo $permission['id'] ?>][]"
+                          value="<?php echo $item[0] ?>" <?php if (in_array($item[0], $value)) {
                     echo 'checked';
-                } ?>><?php echo $item[ 1 ] ?></label></li>
+                } ?>><?php echo $item[1] ?></label></li>
 
     <?php } ?>
 

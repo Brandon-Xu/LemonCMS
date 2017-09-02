@@ -71,10 +71,10 @@ class Fragment2DataSearch extends Fragment2Data
         //         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])->andFilterWhere([
-            'like', 'title_format', $this->title_format
+            'like', 'title_format', $this->title_format,
         ])->andFilterWhere(['like', 'thumb', $this->thumb])->andFilterWhere(['like', 'url', $this->url])
             ->andFilterWhere(['like', 'sub_title', $this->sub_title])->andFilterWhere([
-                'like', 'summary', $this->summary
+                'like', 'summary', $this->summary,
             ])->andFilterWhere(['like', 'created_by', $this->created_by]);
 
         return $dataProvider;

@@ -24,12 +24,12 @@ class DatetimeConfig extends ConfigForm
             'Etc/GMT-8' => '(GMT + 8:00 小时) 北京，香港，澳洲伯斯，新加坡，台北', 'Etc/GMT-9' => '(GMT + 9:00 小时) 大阪，札幌，首尔，东京，亚库次克',
             'Etc/GMT-10' => '(GMT + 10:00 小时) 墨尔本，巴布亚新几内亚，雪梨', 'Etc/GMT-11' => '(GMT + 11:00 小时) 马加丹，新喀里多尼亚，所罗门群岛',
             'Etc/GMT-12' => '(GMT + 12:00 小时) 新西兰，斐济，马绍尔群岛', 'Etc/GMT-13' => '(GMT + 13:00 小时) 堪察加半岛，阿那底河',
-            'Etc/GMT-14' => '(GMT + 14:00 小时) 圣诞岛'
+            'Etc/GMT-14' => '(GMT + 14:00 小时) 圣诞岛',
         ];
 
         if ($v != NULL) {
-            if (isset($ret[ $v ])) {
-                return $ret[ $v ];
+            if (isset($ret[$v])) {
+                return $ret[$v];
             }
 
             return 'unknown timezone:'.$v;

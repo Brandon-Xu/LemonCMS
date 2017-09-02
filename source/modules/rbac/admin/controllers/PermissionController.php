@@ -22,7 +22,7 @@ class PermissionController extends BaseRbacController
         $result = [];
         $rows = Permission::findAll(NULL, 'sort_num asc');
         foreach ($rows as $row) {
-            $result[ $row->category ][] = $row;
+            $result[$row->category][] = $row;
         }
 
         return $this->render('index', [
@@ -36,7 +36,7 @@ class PermissionController extends BaseRbacController
         $provider = new ArrayDataProvider([
             'allModels' => ArrayHelper::getValue($result, $category, []), 'key' => 'id', 'pagination' => [
                 'pageSize' => -1,
-            ]
+            ],
 
         ]);
 

@@ -31,9 +31,9 @@ class StringHelper extends \yii\helpers\BaseStringHelper
             }
 
             if ($count == 2) {
-                $items[ $itemArray[ 0 ] ] = $itemArray[ 1 ];
+                $items[$itemArray[0]] = $itemArray[1];
             } else {
-                $items[ $itemArray[ 0 ] ] = $itemArray[ 0 ];
+                $items[$itemArray[0]] = $itemArray[0];
             }
         }
 
@@ -84,14 +84,14 @@ class StringHelper extends \yii\helpers\BaseStringHelper
                 return $str;
             $slice = mb_substr($str, $start, $length, $charset);
         } else {
-            $re[ 'utf-8' ] = "/[\x01-\x7f]¦[\xc2-\xdf][\x80-\xbf]¦[\xe0-\xef][\x80-\xbf]{2}¦[\xf0-\xff][\x80-\xbf]{3}/";
-            $re[ 'gb2312' ] = "/[\x01-\x7f]¦[\xb0-\xf7][\xa0-\xfe]/";
-            $re[ 'gbk' ] = "/[\x01-\x7f]¦[\x81-\xfe][\x40-\xfe]/";
-            $re[ 'big5' ] = "/[\x01-\x7f]¦[\x81-\xfe]([\x40-\x7e]¦\xa1-\xfe])/";
-            preg_match_all($re[ $charset ], $str, $match);
-            if (count($match[ 0 ]) <= $length)
+            $re['utf-8'] = "/[\x01-\x7f]¦[\xc2-\xdf][\x80-\xbf]¦[\xe0-\xef][\x80-\xbf]{2}¦[\xf0-\xff][\x80-\xbf]{3}/";
+            $re['gb2312'] = "/[\x01-\x7f]¦[\xb0-\xf7][\xa0-\xfe]/";
+            $re['gbk'] = "/[\x01-\x7f]¦[\x81-\xfe][\x40-\xfe]/";
+            $re['big5'] = "/[\x01-\x7f]¦[\x81-\xfe]([\x40-\x7e]¦\xa1-\xfe])/";
+            preg_match_all($re[$charset], $str, $match);
+            if (count($match[0]) <= $length)
                 return $str;
-            $slice = join("", array_slice($match[ 0 ], $start, $length));
+            $slice = join("", array_slice($match[0], $start, $length));
         }
         if ($suffix != NULL && !empty($suffix)) {
             return $slice.$suffix;

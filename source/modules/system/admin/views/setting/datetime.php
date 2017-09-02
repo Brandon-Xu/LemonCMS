@@ -9,7 +9,7 @@ use source\modules\system\models\config\DatetimeConfig;
 
 $this->title = '时间设置';
 $this->addBreadcrumbs([
-    $this->title
+    $this->title,
 ]);
 ?>
 

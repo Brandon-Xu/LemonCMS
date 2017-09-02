@@ -8,7 +8,7 @@ use source\core\grid\GridView;
 /* @var $dataProvider source\core\data\ActiveDataProvider */
 
 $this->title = '日志管理';
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <?= GridView::widget([
@@ -24,7 +24,7 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
         [
             'attribute' => 'log_time', 'value' => function ($data) {
-            $time = intval($data[ 'log_time' ]);
+            $time = intval($data['log_time']);
 
             return date('m-d H:i', $time);
         },

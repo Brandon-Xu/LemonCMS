@@ -8,9 +8,9 @@ class ControllerRule extends Rule
 {
 
     public function execute($permission, $params = [], $role = NULL) {
-        $actionId = isset($params[ 'actionId' ]) ? $params[ 'actionId' ] : LuLu::getApp()->requestedAction->id;
+        $actionId = isset($params['actionId']) ? $params['actionId'] : LuLu::getApp()->requestedAction->id;
 
-        $actions = $permission[ 'value' ];
+        $actions = $permission['value'];
         if (in_array($actionId, $actions)) {
             return TRUE;
         }

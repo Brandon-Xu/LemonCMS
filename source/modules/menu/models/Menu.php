@@ -28,7 +28,7 @@ class Menu extends \source\core\base\BaseActiveRecord
 
     public function behaviors() {
         return [
-            'treeBehavior' => ['class' => 'source\core\behaviors\TreeBehavior']
+            'treeBehavior' => ['class' => 'source\core\behaviors\TreeBehavior'],
         ];
     }
 
@@ -53,7 +53,7 @@ class Menu extends \source\core\base\BaseActiveRecord
         return [
             [['parent_id', 'category_id', 'name', 'url'], 'required'], [['parent_id', 'status', 'sort_num'], 'integer'],
             [['name', 'target', 'category_id'], 'string', 'max' => 64],
-            [['url', 'description', 'thumb'], 'string', 'max' => 512]
+            [['url', 'description', 'thumb'], 'string', 'max' => 512],
         ];
     }
 
@@ -79,7 +79,7 @@ class Menu extends \source\core\base\BaseActiveRecord
         $items = [];
         foreach ($children as $child) {
             $child->level = $level;
-            $items[ $child[ 'id' ] ] = $child;
+            $items[$child['id']] = $child;
             $temp = self::getArrayTreeInternal($category, $child->id, $level + 1);
             $items = array_merge($items, $temp);
         }
@@ -172,16 +172,16 @@ class Menu extends \source\core\base\BaseActiveRecord
     private static function getMenuHtmlInternal($category, $items) {
         $html = '';
         foreach ($items as $menu) {
-            $children = self::getChildren($category, $menu[ 'id' ], 1);
+            $children = self::getChildren($category, $menu['id'], 1);
 
             if (count($children) > 0) {
-                $html .= '<li id="menu-item-'.$menu[ 'id' ].'" class="menu-item menu-item-type-'.$category.' menu-item-'.$menu[ 'id' ].' menu-item-has-children"><a href="'.$menu[ 'url' ].'" target="'.$menu[ 'target' ].'">'.$menu[ 'name' ].'</a>';
-                $html .= '<ul class="sub-menu sub-menu-'.$menu[ 'id' ].'">';
+                $html .= '<li id="menu-item-'.$menu['id'].'" class="menu-item menu-item-type-'.$category.' menu-item-'.$menu['id'].' menu-item-has-children"><a href="'.$menu['url'].'" target="'.$menu['target'].'">'.$menu['name'].'</a>';
+                $html .= '<ul class="sub-menu sub-menu-'.$menu['id'].'">';
                 $html .= self::getMenuHtmlInternal($category, $children);
                 $html .= '</ul>';
                 $html .= '</li>';
             } else {
-                $html .= '<li id="menu-item-'.$menu[ 'id' ].'" class="menu-item menu-item-type-'.$category.' menu-item-'.$menu[ 'id' ].'"><a href="'.$menu[ 'url' ].'" target="'.$menu[ 'target' ].'">'.$menu[ 'name' ].'</a>';
+                $html .= '<li id="menu-item-'.$menu['id'].'" class="menu-item menu-item-type-'.$category.' menu-item-'.$menu['id'].'"><a href="'.$menu['url'].'" target="'.$menu['target'].'">'.$menu['name'].'</a>';
                 $html .= '</li>';
             }
         }
@@ -202,23 +202,23 @@ class Menu extends \source\core\base\BaseActiveRecord
 
         $roots = self::getChildren('admin', 0, 1);
         foreach ($roots as $menu) {
-            $url = $menu[ 'url' ] === '#' ? '#' : Url::to([$menu[ 'url' ]]);
-            $title = '<span class="da-nav-icon"><img src="'.$adminUrl.'/images/icons/black/32/'.$menu[ 'thumb' ].'" alt="'.$menu[ 'name' ].'" /></span>'.$menu[ 'name' ];
+            $url = $menu['url'] === '#' ? '#' : Url::to([$menu['url']]);
+            $title = '<span class="da-nav-icon"><img src="'.$adminUrl.'/images/icons/black/32/'.$menu['thumb'].'" alt="'.$menu['name'].'" /></span>'.$menu['name'];
 
-            $html .= '<li id="menu-item-'.$menu[ 'id' ].'" '.$showHome.' class="menu-item"><a href="'.$url.'">'.$title.'</a>';
+            $html .= '<li id="menu-item-'.$menu['id'].'" '.$showHome.' class="menu-item"><a href="'.$url.'">'.$title.'</a>';
             $showHome = ' style="display:none;"';
 
-            $children = self::getChildren('admin', $menu[ 'id' ], 1);
+            $children = self::getChildren('admin', $menu['id'], 1);
             if (count($children) > 0) {
                 $opened = FALSE;
                 $childHtml = '';
                 foreach ($children as $child) {
-                    $menuUrlArray = explode('/', trim($child[ 'url' ], '/'));
-                    if (in_array($urlArray[ 0 ], $menuUrlArray)) {
+                    $menuUrlArray = explode('/', trim($child['url'], '/'));
+                    if (in_array($urlArray[0], $menuUrlArray)) {
                         $opened = TRUE;
                     }
-                    $childUrl = $child[ 'url' ] === '#' ? '#' : Url::to([$child[ 'url' ]]);
-                    $childHtml .= '<li id="menu-item-'.$child[ 'id' ].'"><a href="'.$childUrl.'" target="mainFrame">'.$child[ 'name' ].'</a></li>';
+                    $childUrl = $child['url'] === '#' ? '#' : Url::to([$child['url']]);
+                    $childHtml .= '<li id="menu-item-'.$child['id'].'"><a href="'.$childUrl.'" target="mainFrame">'.$child['name'].'</a></li>';
                 }
 
                 //$html.= $opened?'<ul>':'<ul class="closed">';

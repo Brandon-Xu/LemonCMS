@@ -88,8 +88,8 @@ class AttributeBehavior extends Behavior
      * @param Event $event
      */
     public function evaluateAttributes($event) {
-        if (!empty($this->attributes[ $event->name ])) {
-            $attributes = (array)$this->attributes[ $event->name ];
+        if (!empty($this->attributes[$event->name])) {
+            $attributes = (array)$this->attributes[$event->name];
             if ($this->batch) {
                 $value = $this->getValue($event, $attributes);
                 foreach ($attributes as $attribute) {

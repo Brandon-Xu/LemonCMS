@@ -41,7 +41,7 @@ class Role extends BaseRbacActiveRecord
     public function rules() {
         return [
             [['id', 'category', 'name', 'is_system'], 'required'], [['is_system'], 'boolean'],
-            [['description'], 'string', 'max' => 128], [['id', 'name', 'category'], 'string', 'max' => 64]
+            [['description'], 'string', 'max' => 128], [['id', 'name', 'category'], 'string', 'max' => 64],
         ];
     }
 
@@ -59,7 +59,7 @@ class Role extends BaseRbacActiveRecord
         $rows = self::findAll();
         foreach ($rows as $row) {
             $ret[] = [
-                'id' => $row[ 'id' ], 'name' => $row[ 'name' ], 'category' => self::getCategoryItems($row[ 'category' ])
+                'id' => $row['id'], 'name' => $row['name'], 'category' => self::getCategoryItems($row['category']),
             ];
         }
 

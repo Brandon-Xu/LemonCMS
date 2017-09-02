@@ -7,8 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model source\models\Dict */
 
 $this->title = $model->name;
-$this->params[ 'breadcrumbs' ][] = ['label' => 'Dicts', 'url' => ['index']];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Dicts', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="dict-view">
 

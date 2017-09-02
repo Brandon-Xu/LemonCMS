@@ -43,7 +43,7 @@ class Fragment extends \source\core\base\BaseActiveRecord
     public function rules() {
         return [
             [['name', 'category_id', 'type', 'code'], 'required'], [['category_id', 'type'], 'integer'],
-            [['name', 'code'], 'string', 'max' => 63], ['code', 'unique'], [['description'], 'string', 'max' => 128]
+            [['name', 'code'], 'string', 'max' => 63], ['code', 'unique'], [['description'], 'string', 'max' => 128],
         ];
     }
 
@@ -80,8 +80,8 @@ class Fragment extends \source\core\base\BaseActiveRecord
             LuLu::setCache($cacheKey, $values);
         }
 
-        $offset = isset($other[ 'offset' ]) ? $other[ 'offset' ] : 0;
-        $limit = isset($other[ 'limit' ]) ? $other[ 'limit' ] : count($values) - $offset;
+        $offset = isset($other['offset']) ? $other['offset'] : 0;
+        $limit = isset($other['limit']) ? $other['limit'] : count($values) - $offset;
 
         return array_slice($values, $offset, $limit, TRUE);
     }

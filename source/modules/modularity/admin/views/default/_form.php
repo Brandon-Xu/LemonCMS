@@ -11,8 +11,8 @@ use source\modules\taxonomy\models\Taxonomy;
 
 $filedOptions = [
     'template' => "{label}{input}\n{error}", 'labelOptions' => [
-        'class' => 'control-label'
-    ]
+        'class' => 'control-label',
+    ],
 ];
 
 $taxonomies = Taxonomy::getArrayTree('post');
@@ -24,8 +24,8 @@ $options = TreeHelper::buildTreeOptions($taxonomies);
     <?php $form = ActiveForm::begin([
         'options' => ['enctype' => 'multipart/form-data',], 'fieldConfig' => [
             'template' => "{label}<div class=\"col-md-8\">{input}</div>\n{error}", 'labelOptions' => [
-                'class' => 'col-md-4 control-label no-padding-left no-padding-right align-left'
-            ]
+                'class' => 'col-md-4 control-label no-padding-left no-padding-right align-left',
+            ],
         ],
 
     ]); ?>
@@ -36,7 +36,7 @@ $options = TreeHelper::buildTreeOptions($taxonomies);
                 ->label(FALSE) ?>
 
             <?= $form->field($model, 'url_alias', $filedOptions)->textInput([
-                'maxlength' => 128, 'placeholder' => 'Url 地址'
+                'maxlength' => 128, 'placeholder' => 'Url 地址',
             ]) ?>
 
             <?= $form->field($bodyModel, 'body', $filedOptions)->textarea(['rows' => 12]) ?>
@@ -48,7 +48,7 @@ $options = TreeHelper::buildTreeOptions($taxonomies);
                 <div class="file-box">
                     <input type="text" id="content-thumb" class="form-control"
                            style="display: inline-block; width:500px; " name="Content[thumb]"
-                           value="<?php echo $model[ 'thumb' ] ?>" maxlength="128">
+                           value="<?php echo $model['thumb'] ?>" maxlength="128">
                     <input type='button' class='form-control' style="display: inline-block;width:60px;" value='浏览...'/>
                     <input type="file" name="Content[thumb]" class="file"
                            onchange="document.getElementById('content-thumb').value=getFilePath(this);"/>

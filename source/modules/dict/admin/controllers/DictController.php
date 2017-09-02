@@ -52,7 +52,7 @@ class DictController extends BackController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'index', 'category' => $category
+                'index', 'category' => $category,
             ]);
         } else {
             return $this->render('create', [
@@ -73,7 +73,7 @@ class DictController extends BackController
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([
-                'index', 'category' => $category
+                'index', 'category' => $category,
             ]);
         } else {
             return $this->render('update', [

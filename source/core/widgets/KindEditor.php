@@ -25,18 +25,18 @@ class KindEditor extends BaseWidget
     public function init() {
         parent::init();
         $this->libUrl = Resource::getCommonUrl().'/libs/kindeditor';
-        $this->defaultParams[ 'width' ] = '"'.$this->width.'"';
+        $this->defaultParams['width'] = '"'.$this->width.'"';
     }
 
     public function run() {
         $view = $this->view;
 
-        if (!isset($view->params[ '__KindEditor' ])) {
+        if (!isset($view->params['__KindEditor'])) {
             $view->registerCssFile($this->libUrl.'/themes/default/default.css');
             $view->registerJsFile($this->libUrl.'/kindeditor-min.js');
             $view->registerJsFile($this->libUrl.'/lang/zh_CN.js');
 
-            $view->params[ '__KindEditor' ] = TRUE;
+            $view->params['__KindEditor'] = TRUE;
         }
 
         if ($this->editorId === NULL) {

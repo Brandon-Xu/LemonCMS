@@ -7,8 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model source\modules\menu\models\MenuCategory */
 
 $this->title = $model->name;
-$this->params[ 'breadcrumbs' ][] = ['label' => 'Menu Categories', 'url' => ['index']];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Menu Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="menu-category-view">
 

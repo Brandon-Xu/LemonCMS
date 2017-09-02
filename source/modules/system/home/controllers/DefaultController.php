@@ -23,7 +23,7 @@ class DefaultController extends BaseController
         }
 
         $locals = LuLu::getPagedRows($query, ['orderBy' => 'created_at desc', 'pageSize' => 10]);
-        $locals[ 'taxonomyModel' ] = $taxonomyModel;
+        $locals['taxonomyModel'] = $taxonomyModel;
 
         return $this->render('index', $locals);
     }

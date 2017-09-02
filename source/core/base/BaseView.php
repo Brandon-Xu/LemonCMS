@@ -47,17 +47,17 @@ class BaseView extends View
     public function addBreadcrumbs($items) {
         foreach ($items as $item) {
             if (is_array($item)) {
-                if (isset($item[ 2 ])) {
-                    $this->params[ 'breadcrumbs' ][] = [
-                        'label' => $item[ 0 ], 'url' => $item[ 1 ], 'img' => $item[ 2 ]
+                if (isset($item[2])) {
+                    $this->params['breadcrumbs'][] = [
+                        'label' => $item[0], 'url' => $item[1], 'img' => $item[2],
                     ];
                 } else {
-                    $this->params[ 'breadcrumbs' ][] = [
-                        'label' => $item[ 0 ], 'url' => $item[ 1 ]
+                    $this->params['breadcrumbs'][] = [
+                        'label' => $item[0], 'url' => $item[1],
                     ];
                 }
             } else {
-                $this->params[ 'breadcrumbs' ][] = $item;
+                $this->params['breadcrumbs'][] = $item;
             }
         }
     }
@@ -76,16 +76,16 @@ class BaseView extends View
 
     public function loopData($dataSource, $item, $appendOptions = []) {
         $options = [];
-        $options[ 'dataSource' ] = $dataSource;
-        $options[ 'item' ] = $item;
+        $options['dataSource'] = $dataSource;
+        $options['item'] = $item;
 
         echo LoopData::widget($options);
     }
 
     public function beginLoopData($dataSource, $item, $appendOptions = []) {
         $options = [];
-        $options[ 'dataSource' ] = $dataSource;
-        $options[ 'item' ] = $item;
+        $options['dataSource'] = $dataSource;
+        $options['item'] = $item;
 
         return LoopData::begin($options);
     }

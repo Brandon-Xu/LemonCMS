@@ -39,8 +39,8 @@ class LoopData extends BaseWidget
             $isFirst = FALSE;
             $isLast = FALSE;
 
-            $this->params[ 'count' ] = $count;
-            $this->params[ 'length' ] = $this->length;
+            $this->params['count'] = $count;
+            $this->params['length'] = $this->length;
 
             foreach ($this->dataSource as $id => $row) {
                 $index += 1;
@@ -48,11 +48,11 @@ class LoopData extends BaseWidget
                 $isFirst = $index === 0;
                 $isLast = $index == ($count - 1);
 
-                $this->params[ 'id' ] = $id;
-                $this->params[ $this->rowParam ] = $row;
-                $this->params[ 'index' ] = $index;
-                $this->params[ 'isFirst' ] = $isFirst;
-                $this->params[ 'isLast' ] = $isLast;
+                $this->params['id'] = $id;
+                $this->params[$this->rowParam] = $row;
+                $this->params['index'] = $index;
+                $this->params['isFirst'] = $isFirst;
+                $this->params['isLast'] = $isLast;
 
                 $ret .= $this->render($this->item, $this->params);
             }

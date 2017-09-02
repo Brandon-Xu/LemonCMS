@@ -26,8 +26,8 @@ class BasicConfig extends ConfigForm
             [
                 [
                     'sys_site_name', 'sys_site_description', 'sys_site_about', 'sys_site_url', 'sys_lang', 'sys_icp',
-                    'sys_stat'
-                ], 'string'
+                    'sys_stat',
+                ], 'string',
             ], [['sys_site_email'], 'email'], [['sys_status'], 'boolean'],
         ];
     }

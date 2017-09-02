@@ -7,10 +7,10 @@ use yii\widgets\DetailView;
 /* @var $model source\modules\rbac\models\Permission */
 
 $this->title = $model->name;
-$this->params[ 'breadcrumbs' ][] = [
-    'label' => 'Permissions', 'url' => ['index']
+$this->params['breadcrumbs'][] = [
+    'label' => 'Permissions', 'url' => ['index'],
 ];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="permission-view">
 
@@ -18,10 +18,10 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
     <p>
         <?= Html::a('Update', [
-            'update', 'id' => $model->key
+            'update', 'id' => $model->key,
         ], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', [
-            'delete', 'id' => $model->key
+            'delete', 'id' => $model->key,
         ], [
             'class' => 'btn btn-danger', 'data' => [
                 'confirm' => 'Are you sure you want to delete this item?', 'method' => 'post',

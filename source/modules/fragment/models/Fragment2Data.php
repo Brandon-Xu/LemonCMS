@@ -54,8 +54,8 @@ class Fragment2Data extends FragmentData
 
     public function beforeSave($insert) {
         $uploadedFile = Common::uploadFile('Fragment2Data[thumb]');
-        if ($uploadedFile[ 'message' ] === 'ok') {
-            $this->thumb = $uploadedFile[ 'full_name' ];
+        if ($uploadedFile['message'] === 'ok') {
+            $this->thumb = $uploadedFile['full_name'];
         }
 
         return parent::beforeSave($insert);

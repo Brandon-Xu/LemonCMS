@@ -29,7 +29,7 @@ class TaxonomyCategory extends BaseActiveRecord
     public function rules() {
         return [
             [['id', 'name'], 'required'], [['id', 'name'], 'string', 'max' => 64],
-            [['description'], 'string', 'max' => 512], [['id'], 'unique']
+            [['description'], 'string', 'max' => 512], [['id'], 'unique'],
         ];
     }
 

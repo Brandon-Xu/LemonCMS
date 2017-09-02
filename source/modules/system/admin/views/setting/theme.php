@@ -8,7 +8,7 @@ use yii\helpers\Html;
 /* @var $form ActiveForm */
 
 $this->addBreadcrumbs([
-    '主题设置'
+    '主题设置',
 ]);
 ?>
 <div class="config-theme">

@@ -26,7 +26,7 @@ class Modularity extends \source\core\base\BaseActiveRecord
     public function rules() {
         return [
             [['id'], 'required'], [['is_system', 'is_content', 'enable_admin', 'enable_home'], 'integer'],
-            [['id'], 'string', 'max' => 64]
+            [['id'], 'string', 'max' => 64],
         ];
     }
 

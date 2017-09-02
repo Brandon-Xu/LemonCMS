@@ -7,11 +7,11 @@ use source\core\widgets\ActiveForm;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 
-$this->title = '设定权限:'.$role[ 'name' ].'('.$role[ 'id' ].')';
-$this->params[ 'breadcrumbs' ][] = [
-    'label' => '角色管理', 'url' => ['role/index']
+$this->title = '设定权限:'.$role['name'].'('.$role['id'].')';
+$this->params['breadcrumbs'][] = [
+    'label' => '角色管理', 'url' => ['role/index'],
 ];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
@@ -28,13 +28,13 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
         <?php foreach ($categories as $cateId => $cateName): ?>
             <div id="tabs-<?php echo $cateId ?>">
 
-                <?php foreach ($allPermissions[ $cateId ] as $permission): ?>
-                    <?php $v = isset($rolePermissions[ $permission[ 'id' ] ]) ? $rolePermissions[ $permission[ 'id' ] ][ 'value' ] : $permission->getDefaultValue(); ?>
+                <?php foreach ($allPermissions[$cateId] as $permission): ?>
+                    <?php $v = isset($rolePermissions[$permission['id']]) ? $rolePermissions[$permission['id']]['value'] : $permission->getDefaultValue(); ?>
                     <div class="da-form-row">
-                        <label for="permission-<?php echo $permission[ 'id' ] ?>"><?php echo $permission[ 'name' ] ?></label>
+                        <label for="permission-<?php echo $permission['id'] ?>"><?php echo $permission['name'] ?></label>
                         <div class="da-form-item small">
-                            <?php echo $this->render('_form/'.$permission[ 'formView' ], [
-                                'permission' => $permission, 'value' => $v
+                            <?php echo $this->render('_form/'.$permission['formView'], [
+                                'permission' => $permission, 'value' => $v,
                             ]); ?>
                         </div>
                         <div class="help-block"></div>

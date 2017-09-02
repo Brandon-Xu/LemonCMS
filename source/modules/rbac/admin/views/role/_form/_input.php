@@ -6,5 +6,5 @@
 ?>
 
 
-<input type="text" class="form-control" name="Permission[<?php echo $permission[ 'id' ] ?>]"
+<input type="text" class="form-control" name="Permission[<?php echo $permission['id'] ?>]"
        value="<?php echo $value ?>"/>

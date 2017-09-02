@@ -15,9 +15,9 @@ use yii\helpers\Html;
 $category = LuLu::getGetValue('category');
 $categoryModel = TaxonomyCategory::findOne(['id' => $category]);
 
-$this->title = $categoryModel[ 'name' ];
+$this->title = $categoryModel['name'];
 $this->addBreadcrumbs([
-    ['分类管理', ['/taxonomy']], $categoryModel[ 'name' ],
+    ['分类管理', ['/taxonomy']], $categoryModel['name'],
 ]);
 
 ?>
@@ -38,9 +38,9 @@ $this->addBreadcrumbs([
             'attribute' => 'name', 'format' => 'html', 'width' => 'auto',
             'value' => function ($model, $key, $index, $column) {
                 return str_repeat(Constants::TabSize, $model->level).Html::a($model->name, [
-                        'taxonomy/update', 'id' => $model->id
+                        'taxonomy/update', 'id' => $model->id,
                     ]);
-            }
+            },
         ],
 
         // 'description',
@@ -51,7 +51,7 @@ $this->addBreadcrumbs([
         ], [
             'class' => 'source\core\grid\SortColumn',
         ], [
-            'class' => 'source\core\grid\ActionColumn', 'queryParams' => ['view' => ['category' => $category]]
+            'class' => 'source\core\grid\ActionColumn', 'queryParams' => ['view' => ['category' => $category]],
         ],
     ],
 ]); ?>

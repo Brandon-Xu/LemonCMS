@@ -11,11 +11,11 @@ class UrlManager extends \yii\web\UrlManager
 
     public function createUrl($params) {
         $params = (array)$params;
-        $anchor = isset($params[ '#' ]) ? '#'.$params[ '#' ] : '';
-        unset($params[ '#' ], $params[ $this->routeParam ]);
+        $anchor = isset($params['#']) ? '#'.$params['#'] : '';
+        unset($params['#'], $params[$this->routeParam]);
 
-        $route = trim($params[ 0 ], '/');
-        unset($params[ 0 ]);
+        $route = trim($params[0], '/');
+        unset($params[0]);
 
         $baseUrl = $this->showScriptName || !$this->enablePrettyUrl ? $this->getScriptUrl() : $this->getBaseUrl();
 
@@ -24,20 +24,20 @@ class UrlManager extends \yii\web\UrlManager
 
             /* @var $rule UrlRule */
             $url = FALSE;
-            if (isset($this->_ruleCache[ $cacheKey ])) {
-                foreach ($this->_ruleCache[ $cacheKey ] as $rule) {
+            if (isset($this->_ruleCache[$cacheKey])) {
+                foreach ($this->_ruleCache[$cacheKey] as $rule) {
                     if (($url = $rule->createUrl($this, $route, $params)) !== FALSE) {
                         break;
                     }
                 }
             } else {
-                $this->_ruleCache[ $cacheKey ] = [];
+                $this->_ruleCache[$cacheKey] = [];
             }
 
             if ($url === FALSE) {
                 foreach ($this->rules as $rule) {
                     if (($url = $rule->createUrl($this, $route, $params)) !== FALSE) {
-                        $this->_ruleCache[ $cacheKey ][] = $rule;
+                        $this->_ruleCache[$cacheKey][] = $rule;
                         break;
                     }
                 }

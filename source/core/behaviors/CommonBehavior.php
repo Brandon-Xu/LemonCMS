@@ -51,13 +51,13 @@ class CommonBehavior extends AttributeBehavior
         parent::init();
 
         if (!empty($this->validates)) {
-            $this->attributes[ BaseActiveRecord::EVENT_BEFORE_VALIDATE ] = $this->validates;
+            $this->attributes[BaseActiveRecord::EVENT_BEFORE_VALIDATE] = $this->validates;
         }
         if (!empty($this->inserts)) {
-            $this->attributes[ BaseActiveRecord::EVENT_BEFORE_INSERT ] = $this->inserts;
+            $this->attributes[BaseActiveRecord::EVENT_BEFORE_INSERT] = $this->inserts;
         }
         if (!empty($this->updates)) {
-            $this->attributes[ BaseActiveRecord::EVENT_BEFORE_UPDATE ] = $this->updates;
+            $this->attributes[BaseActiveRecord::EVENT_BEFORE_UPDATE] = $this->updates;
         }
     }
 

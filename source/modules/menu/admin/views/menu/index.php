@@ -13,16 +13,16 @@ use yii\helpers\Html;
 $category = LuLu::getGetValue('category');
 $categoryModel = MenuCategory::findOne(['id' => $category]);
 
-$this->title = $categoryModel[ 'name' ];
+$this->title = $categoryModel['name'];
 $this->addBreadcrumbs([
-    ['菜单管理', ['/menu']], [$categoryModel[ 'name' ], ['/menu/menu/index', 'category' => $category]], $this->title,
+    ['菜单管理', ['/menu']], [$categoryModel['name'], ['/menu/menu/index', 'category' => $category]], $this->title,
 ]);
 
 ?>
 
 <?php $this->toolbars([
     Html::a('返回', ['/menu/menu-category'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-    Html::a('新建', ['create', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+    Html::a('新建', ['create', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
 <?= GridView::widget([
@@ -34,9 +34,9 @@ $this->addBreadcrumbs([
             'attribute' => 'name', 'format' => 'html', 'width' => 'auto',
             'value' => function ($model, $key, $index, $column) {
                 return str_repeat(Constants::TabSize, $model->level).Html::a($model->name, [
-                        '/menu/menu/update', 'id' => $model->id
+                        '/menu/menu/update', 'id' => $model->id,
                     ]);
-            }
+            },
         ], [
             'attribute' => 'url', 'width' => '250px',
         ], [
@@ -48,7 +48,7 @@ $this->addBreadcrumbs([
         ],
 
         [
-            'class' => 'source\core\grid\ActionColumn', 'queryParams' => ['view' => ['category' => $category]]
+            'class' => 'source\core\grid\ActionColumn', 'queryParams' => ['view' => ['category' => $category]],
         ],
     ],
 ]); ?>

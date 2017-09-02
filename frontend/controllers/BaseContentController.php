@@ -25,7 +25,7 @@ class BaseContentController extends FrontController
         $query = Content::find()->published()->andWhere(['content_type' => $this->content_type]);
 
         $locals = LuLu::getPagedRows($query, [
-            'orderBy' => 'created_at desc', 'pageSize' => $this->pageSize_index
+            'orderBy' => 'created_at desc', 'pageSize' => $this->pageSize_index,
         ]);
 
         return $this->render('index_default', $locals);
@@ -48,13 +48,13 @@ class BaseContentController extends FrontController
         $vars = $this->getListVars($taxonomyModel);
 
         $locals = LuLu::getPagedRows($query, [
-            'orderBy' => 'created_at desc', 'pageSize' => $vars[ 'pageSize' ]
+            'orderBy' => 'created_at desc', 'pageSize' => $vars['pageSize'],
         ]);
-        $locals[ 'taxonomyModel' ] = $taxonomyModel;
+        $locals['taxonomyModel'] = $taxonomyModel;
 
-        $this->layout = $vars[ 'layout' ];
+        $this->layout = $vars['layout'];
 
-        return $this->render($vars[ 'view' ], $locals);
+        return $this->render($vars['view'], $locals);
     }
 
 
@@ -68,25 +68,25 @@ class BaseContentController extends FrontController
 
         $locals = $this->getDetail($id);
 
-        $taxonomyModel = $this->taxonomyService->getTaxonomyById($locals[ 'model' ][ 'taxonomy_id' ]);
+        $taxonomyModel = $this->taxonomyService->getTaxonomyById($locals['model']['taxonomy_id']);
         LuLu::setViewParam(['taxonomyModel' => $taxonomyModel]);
 
-        $locals[ 'taxonomyModel' ] = $taxonomyModel;
+        $locals['taxonomyModel'] = $taxonomyModel;
 
-        $vars = $this->getDetailVars($locals[ 'taxonomyModel' ], $locals[ 'model' ]);
+        $vars = $this->getDetailVars($locals['taxonomyModel'], $locals['model']);
 
-        $this->layout = $vars[ 'layout' ];
+        $this->layout = $vars['layout'];
 
-        return $this->render($vars[ 'view' ], $locals);
+        return $this->render($vars['view'], $locals);
     }
 
     public function getDetail($id) {
         $model = Content::getBodyByClass($this->bodyClass, [
-            'content.id' => $id
+            'content.id' => $id,
         ])->one();
 
         return [
-            'model' => $model
+            'model' => $model,
         ];
     }
 
@@ -98,9 +98,9 @@ class BaseContentController extends FrontController
     public function getListVars($taxonomyModel) {
         $vars = [];
 
-        $vars[ 'view' ] = empty($taxonomyModel[ 'list_view' ]) ? 'list_default' : $taxonomyModel[ 'list_view' ];
-        $vars[ 'layout' ] = empty($taxonomyModel[ 'list_layout' ]) ? NULL : $taxonomyModel[ 'list_layout' ];
-        $vars[ 'pageSize' ] = empty($taxonomyModel[ 'page_size' ]) ? 10 : $taxonomyModel[ 'page_size' ];
+        $vars['view'] = empty($taxonomyModel['list_view']) ? 'list_default' : $taxonomyModel['list_view'];
+        $vars['layout'] = empty($taxonomyModel['list_layout']) ? NULL : $taxonomyModel['list_layout'];
+        $vars['pageSize'] = empty($taxonomyModel['page_size']) ? 10 : $taxonomyModel['page_size'];
 
         return $vars;
     }
@@ -114,16 +114,16 @@ class BaseContentController extends FrontController
     public function getDetailVars($taxonomyModel, $detailModel) {
         $vars = [];
 
-        if (!empty($detailModel[ 'view' ])) {
-            $vars[ 'view' ] = $detailModel[ 'view' ];
+        if (!empty($detailModel['view'])) {
+            $vars['view'] = $detailModel['view'];
         } else {
-            $vars[ 'view' ] = empty($taxonomyModel[ 'detail_view' ]) ? 'detail_default' : $taxonomyModel[ 'detail_view' ];
+            $vars['view'] = empty($taxonomyModel['detail_view']) ? 'detail_default' : $taxonomyModel['detail_view'];
         }
 
-        if (!empty($detailModel[ 'layout' ])) {
-            $vars[ 'layout' ] = $detailModel[ 'layout' ];
+        if (!empty($detailModel['layout'])) {
+            $vars['layout'] = $detailModel['layout'];
         } else {
-            $vars[ 'layout' ] = empty($taxonomyModel[ 'detail_layout' ]) ? NULL : $taxonomyModel[ 'detail_layout' ];
+            $vars['layout'] = empty($taxonomyModel['detail_layout']) ? NULL : $taxonomyModel['detail_layout'];
         }
 
         return $vars;

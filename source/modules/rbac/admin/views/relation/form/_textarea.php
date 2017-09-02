@@ -7,4 +7,4 @@
 
 
 <textarea rows="5" class="form-control"
-          name="Permission[<?php echo $permission[ 'id' ] ?>]"><?php echo $value ?></textarea>
+          name="Permission[<?php echo $permission['id'] ?>]"><?php echo $value ?></textarea>

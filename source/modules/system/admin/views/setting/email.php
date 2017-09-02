@@ -8,7 +8,7 @@ use source\core\widgets\ActiveForm;
 
 $this->title = 'Email 设置';
 $this->addBreadcrumbs([
-    $this->title
+    $this->title,
 ]);
 ?>
 

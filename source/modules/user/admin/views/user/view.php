@@ -7,8 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model source\models\User */
 
 $this->title = $model->id;
-$this->params[ 'breadcrumbs' ][] = ['label' => 'Users', 'url' => ['index']];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
 

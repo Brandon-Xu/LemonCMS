@@ -23,11 +23,11 @@ class FrontView extends BaseView
         $config = [
             'pathMap' => [
                 '@app/views' => [
-                    '@statics/themes/'.$currentTheme.'/views', '@statics/themes/basic/views'
+                    '@statics/themes/'.$currentTheme.'/views', '@statics/themes/basic/views',
                 ], '@source/modules/'.$moduleId.'/home/views' => [
-                    '@statics/themes/'.$currentTheme.'/modules/'.$moduleId, '@statics/themes/basic/modules/'.$moduleId
-                ]
-            ], 'basePath' => '@statics/themes/basic', 'baseUrl' => '@statics/themes/basic'
+                    '@statics/themes/'.$currentTheme.'/modules/'.$moduleId, '@statics/themes/basic/modules/'.$moduleId,
+                ],
+            ], 'basePath' => '@statics/themes/basic', 'baseUrl' => '@statics/themes/basic',
         ];
 
         $this->theme = new Theme($config);

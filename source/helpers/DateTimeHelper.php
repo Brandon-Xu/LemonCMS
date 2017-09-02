@@ -54,7 +54,7 @@ class DateTimeHelper
 
         $timer = $datetime;
 
-        $diff = $_SERVER[ 'REQUEST_TIME' ] - $timer;
+        $diff = $_SERVER['REQUEST_TIME'] - $timer;
         $day = floor($diff / 86400);
 
         if ($day > 0) {

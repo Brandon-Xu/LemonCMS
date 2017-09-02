@@ -20,7 +20,7 @@ $options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
 ?>
 
 <?php $this->toolbars([
-    Html::a('返回', ['index', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+    Html::a('返回', ['index', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
 <?php $form = ActiveForm::begin(); ?>

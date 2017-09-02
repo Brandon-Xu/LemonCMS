@@ -7,8 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model source\models\DictCategory */
 
 $this->title = $model->name;
-$this->params[ 'breadcrumbs' ][] = ['label' => 'Dict Categories', 'url' => ['index']];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Dict Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="dict-category-view">
 

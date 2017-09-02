@@ -14,18 +14,18 @@ use yii\helpers\Url;
 $categoryId = LuLu::getGetValue('category');
 
 $this->title = '角色管理';
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 
 $columns = [
 
     [
-        'attribute' => 'id', 'width' => '120px;'
+        'attribute' => 'id', 'width' => '120px;',
     ], [
-        'attribute' => 'name', 'width' => '250px;'
+        'attribute' => 'name', 'width' => '250px;',
     ],
 
     [
-        'attribute' => 'description', 'width' => 'auto'
+        'attribute' => 'description', 'width' => 'auto',
     ],
 
     [
@@ -33,7 +33,7 @@ $columns = [
         'buttons' => [
             'permission' => function ($url, $model) {
                 return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/key.png">', Url::to([
-                    'relation', 'role' => $model[ 'id' ]
+                    'relation', 'role' => $model['id'],
                 ]), [
                     'title' => '设置权限',
                 ]);
@@ -45,9 +45,9 @@ $columns = [
                 return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/cross.png">', $url, [
                     'title' => Yii::t('yii', 'Delete'),
                     'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                    'data-method' => 'post', 'data-pjax' => '0'
+                    'data-method' => 'post', 'data-pjax' => '0',
                 ]);
-            }
+            },
         ],
     ],
 ];
@@ -55,8 +55,8 @@ $columns = [
 
 <?php $this->toolbars([
     Html::a('新建', [
-        'create', 'category' => $categoryId
-    ], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+        'create', 'category' => $categoryId,
+    ], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
 <style>

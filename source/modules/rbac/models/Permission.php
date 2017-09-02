@@ -69,7 +69,7 @@ class Permission extends BaseRbacActiveRecord
         return [
             [['id', 'category', 'name', 'form', 'sort_num', 'rule'], 'required'], [['form', 'sort_num'], 'integer'],
             [['default_value'], 'string'], [['description'], 'string', 'max' => 128],
-            [['id', 'name', 'category', 'rule'], 'string', 'max' => 64]
+            [['id', 'name', 'category', 'rule'], 'string', 'max' => 64],
         ];
     }
 
@@ -93,7 +93,7 @@ class Permission extends BaseRbacActiveRecord
         foreach ($options as $option) {
             $item = explode("|", $option);
             if (count($item) === 3) {
-                $ret[] = $item[ 0 ];
+                $ret[] = $item[0];
                 if ($this->form === self::Form_RadioList) {
                     break;
                 }
@@ -113,9 +113,9 @@ class Permission extends BaseRbacActiveRecord
         foreach ($options as $option) {
             $item = explode("|", $option);
             if (count($item) === 1) {
-                $ret[ $item[ 0 ] ] = $item[ 0 ];
+                $ret[$item[0]] = $item[0];
             } else {
-                $ret[ $item[ 0 ] ] = $item[ 1 ];
+                $ret[$item[0]] = $item[1];
             }
         }
 
@@ -124,13 +124,13 @@ class Permission extends BaseRbacActiveRecord
 
     public static function getAllPermissionsGroupedByCategory() {
         $allPermissions = [];
-        $allPermissions[ Permission::Category_Basic ] = [];
-        $allPermissions[ Permission::Category_Controller ] = [];
-        $allPermissions[ Permission::Category_System ] = [];
+        $allPermissions[Permission::Category_Basic] = [];
+        $allPermissions[Permission::Category_Controller] = [];
+        $allPermissions[Permission::Category_System] = [];
 
         $permissions = self::findAll([], 'sort_num asc');
         foreach ($permissions as $permission) {
-            $allPermissions[ $permission->category ][] = $permission;
+            $allPermissions[$permission->category][] = $permission;
         }
 
         return $allPermissions;
@@ -145,8 +145,8 @@ class Permission extends BaseRbacActiveRecord
     public function afterSave($insert, $changedAttributes) {
         parent::afterSave($insert, $changedAttributes);
         if (!$insert) {
-            if (isset($changedAttributes[ 'id' ])) {
-                Relation::updateAll(['permission' => $this->id], ['permission' => $changedAttributes[ 'id' ]]);
+            if (isset($changedAttributes['id'])) {
+                Relation::updateAll(['permission' => $this->id], ['permission' => $changedAttributes['id']]);
             }
         }
     }

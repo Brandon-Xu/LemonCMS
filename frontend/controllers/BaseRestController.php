@@ -10,6 +10,7 @@ namespace frontend\controllers;
 
 use source\core\data\ActiveDataProvider;
 use source\models\Content;
+use source\traits\CommonTrait;
 use Yii;
 use yii\db\ActiveQuery;
 use yii\rest\ActiveController;
@@ -17,11 +18,18 @@ use yii\web\Response;
 
 /**
  * Class BaseRestController
+ *
+ * @property \source\modules\modularity\ModularityService $modularityService
+ * @property \source\modules\rbac\RbacService $rbacService
+ * @property \source\modules\taxonomy\TaxonomyService $taxonomyService
+ * @property \source\modules\menu\MenuService $menuService
+ *
  * @package frontend\controllers
  */
 class BaseRestController extends ActiveController
 {
 
+    use CommonTrait;
     /**
      * @var \source\models\Content $modelClass
      */
@@ -86,12 +94,12 @@ class BaseRestController extends ActiveController
         ];
 
         foreach ($actions as $k => $action) {
-            $class = $action[ 'class' ];
+            $class = $action['class'];
             $fullClassName = "{$this->actionNamespace}\\{$class}";
             if (!class_exists($fullClassName)) {
                 $fullClassName = "{$this->defaultActionNamespace}\\{$class}";
             }
-            $actions[ $k ][ 'class' ] = $fullClassName;
+            $actions[$k]['class'] = $fullClassName;
         }
 
         return $actions;
@@ -99,7 +107,7 @@ class BaseRestController extends ActiveController
 
     public function behaviors() {
         $behaviors = parent::behaviors();
-        $behaviors[ 'contentNegotiator' ][ 'formats' ] = ['application/json' => Response::FORMAT_JSON];
+        $behaviors['contentNegotiator']['formats'] = ['application/json' => Response::FORMAT_JSON];
 
         return $behaviors;
     }
@@ -124,7 +132,7 @@ class BaseRestController extends ActiveController
             'taxonomy' => function ($query) {
                 /** @var $query ActiveQuery */
                 $query->select(['id', 'parent_id', 'category_id', 'name']);
-            }
+            },
         ])->asArray();
 
         return Yii::createObject([
@@ -145,8 +153,8 @@ class BaseRestController extends ActiveController
         /** @var Content $object */
         $object = Content::find()->published()->normalSelect()->where(['id' => $id])->one();
         $data = $object->toArray();
-        $data[ 'taxonomy' ] = $object->taxonomy;
-        $data[ 'body' ] = $object->body;
+        $data['taxonomy'] = $object->taxonomy;
+        $data['body'] = $object->body;
 
         return $data;
     }

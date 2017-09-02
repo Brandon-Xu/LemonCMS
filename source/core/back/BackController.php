@@ -53,7 +53,7 @@ class BackController extends BaseController
             $message = '权限不足，无法进行此项操作';
         }
         $params = array_merge([
-            'title' => $title, 'message' => $message
+            'title' => $title, 'message' => $message,
         ], $params);
 
         return $this->render('//site/message', $params);

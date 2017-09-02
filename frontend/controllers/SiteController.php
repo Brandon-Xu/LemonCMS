@@ -18,14 +18,14 @@ class SiteController extends FrontController
                 'class' => Cors::className(), 'cors' => [
                 //定义允许来源的数组
                 'Access-Control-Request-Method' => [
-                    'GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS'
+                    'GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS',
                 ],
                 //允许动作的数组
             ], 'actions' => [
                 'app' => [
                     'Access-Control-Allow-Credentials' => TRUE,
-                ]
-            ]
+                ],
+            ],
             ],
         ];
     }
@@ -45,7 +45,7 @@ class SiteController extends FrontController
         }
 
         return $this->render('login', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
 
@@ -58,26 +58,26 @@ class SiteController extends FrontController
     public function actionContact() {
         //$this->layout=false;
         $model = new ContactForm();
-        if ($model->load(app()->request->post()) && $model->contact(app()->params[ 'adminEmail' ])) {
+        if ($model->load(app()->request->post()) && $model->contact(app()->params['adminEmail'])) {
             app()->session->setFlash('contactFormSubmitted');
 
             return $this->refresh();
         }
 
         return $this->render('contact', [
-            'model' => $model
+            'model' => $model,
         ]);
     }
 
     public function actionAbout() {
         return $this->render('about', [
-            'test' => 5, 'testData' => $this->testData
+            'test' => 5, 'testData' => $this->testData,
         ]);
     }
 
     public function actionClose() {
         return $this->render('close', [
-            'message' => '站点维护中。。。'
+            'message' => '站点维护中。。。',
         ]);
     }
 

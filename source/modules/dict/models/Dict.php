@@ -35,7 +35,7 @@ class Dict extends \source\core\base\BaseActiveRecord
         return [
             [['parent_id', 'category_id', 'name', 'value'], 'required'],
             [['parent_id', 'status', 'sort_num'], 'integer'], [['value'], 'string'],
-            [['category_id', 'name'], 'string', 'max' => 64], [['description', 'thumb'], 'string', 'max' => 512]
+            [['category_id', 'name'], 'string', 'max' => 64], [['description', 'thumb'], 'string', 'max' => 512],
         ];
     }
 
@@ -94,7 +94,7 @@ class Dict extends \source\core\base\BaseActiveRecord
     public static function getChildren($category, $parentId, $status = NULL) {
         $where = ['category_id' => $category, 'parent_id' => $parentId];
         if ($status != NULL) {
-            $where[ 'status' ] = $status;
+            $where['status'] = $status;
         }
         $items = self::findAll($where, 'sort_num asc');
 
@@ -107,7 +107,7 @@ class Dict extends \source\core\base\BaseActiveRecord
         $dataList = [];
         foreach ($items as $item) {
             $item->level = $level;
-            $dataList[ $item[ 'id' ] ] = $item;
+            $dataList[$item['id']] = $item;
             $temp = self::getArrayTreeInternal($category, $item->id, $level + 1);
             $dataList = array_merge($dataList, $temp);
         }

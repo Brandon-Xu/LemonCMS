@@ -27,10 +27,10 @@ class ContentPage extends ContentBody
         return [
             //[['content_id', 'body'], 'required'],
             [
-                ['content_id'], 'integer'
+                ['content_id'], 'integer',
             ], [
-                ['body'], 'string'
-            ]
+                ['body'], 'string',
+            ],
         ];
     }
 

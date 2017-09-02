@@ -112,14 +112,14 @@ class RbacService extends ModuleService
             $query = new Query();
             $query->select([
                 'p.id', 'p.category', 'p.name', 'p.description', 'p.form', 'p.default_value', 'p.rule', 'p.sort_num',
-                'r.role', 'r.value'
+                'r.role', 'r.value',
             ]);
             $query->from([
-                'p' => $this->permissionTable, 'r' => $this->relationTable
+                'p' => $this->permissionTable, 'r' => $this->relationTable,
             ]);
             $query->where('r.permission = p.id');
             $query->andWhere([
-                'r.role' => $role
+                'r.role' => $role,
             ]);
             $rows = $query->all();
             $value = $this->convertPermissionValue($rows);
@@ -136,16 +136,16 @@ class RbacService extends ModuleService
             return $ret;
         }
         foreach ($rows as $row) {
-            $form = intval($row[ 'form' ]);
+            $form = intval($row['form']);
             if ($form === Permission::Form_Boolean) {
-                $v = Utility::isTrue($row[ 'value' ]);
+                $v = Utility::isTrue($row['value']);
             } else if ($form === Permission::Form_CheckboxList) {
-                $v = explode(',', $row[ 'value' ]);
+                $v = explode(',', $row['value']);
             } else {
-                $v = $row[ 'value' ];
+                $v = $row['value'];
             }
-            $row[ 'value' ] = $v;
-            $ret[ $row[ 'id' ] ][] = $row;
+            $row['value'] = $v;
+            $ret[$row['id']][] = $row;
         }
 
         return $ret;
@@ -160,11 +160,11 @@ class RbacService extends ModuleService
         }
         $rows = $this->getPermissionsByUser($username);
 
-        if (!isset($rows[ $permission ])) {
+        if (!isset($rows[$permission])) {
             return FALSE;
         }
 
-        return $this->executeRule($rows[ $permission ], $params, $username);
+        return $this->executeRule($rows[$permission], $params, $username);
     }
 
     public function checkHomePermission($permission = NULL, $params = [], $user = NULL) {
@@ -178,20 +178,20 @@ class RbacService extends ModuleService
 
         $rows = $this->getPermissionsByUser($user);
 
-        if (!isset($rows[ $permission ])) {
+        if (!isset($rows[$permission])) {
             return FALSE;
         }
 
-        return $this->executeRule($rows[ $permission ], $params, $user);
+        return $this->executeRule($rows[$permission], $params, $user);
     }
 
     private function executeRule($permission, $params = [], $user) {
         if (is_array($permission)) {
             foreach ($permission as $p) {
-                if (empty($p[ 'rule' ])) {
+                if (empty($p['rule'])) {
                     return TRUE;
                 }
-                $ruleClass = $this->ruleNamespace.$p[ 'rule' ];
+                $ruleClass = $this->ruleNamespace.$p['rule'];
 
                 $ruleInstance = new $ruleClass();
                 $ret = $ruleInstance->execute($p, $params, $user);
@@ -202,11 +202,11 @@ class RbacService extends ModuleService
 
             return FALSE;
         } else {
-            if (empty($permission[ 'rule' ])) {
+            if (empty($permission['rule'])) {
                 return TRUE;
             }
 
-            $ruleClass = $this->ruleNamespace.$permission[ 'rule' ];
+            $ruleClass = $this->ruleNamespace.$permission['rule'];
 
             $ruleInstance = new $ruleClass();
 

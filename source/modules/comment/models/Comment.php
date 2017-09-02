@@ -36,7 +36,7 @@ class Comment extends \source\core\base\BaseActiveRecord
             [['content_id', 'content'], 'required'], [['content_id', 'user_id', 'status'], 'integer'],
             [['content'], 'string'], [['created_at'], 'safe'],
             [['reply_ids', 'user_url', 'user_address'], 'string', 'max' => 128],
-            [['user_name', 'user_email', 'user_ip'], 'string', 'max' => 64]
+            [['user_name', 'user_email', 'user_ip'], 'string', 'max' => 64],
         ];
     }
 

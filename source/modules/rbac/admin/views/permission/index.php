@@ -12,7 +12,7 @@ use yii\helpers\Html;
 $categoryId = LuLu::getGetValue('category');
 
 $this->title = '权限管理';
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 
 $columns = [
 
@@ -21,11 +21,11 @@ $columns = [
     ], [
         'attribute' => 'name', 'width' => '250px',
     ], [
-        'attribute' => 'description', 'width' => 'auto'
+        'attribute' => 'description', 'width' => 'auto',
     ], [
         'attribute' => 'form', 'value' => function ($model) {
             return Permission::getFormItems($model->form);
-        }
+        },
     ],
 
     ['class' => 'source\core\grid\SortColumn'], ['class' => 'source\core\grid\ActionColumn'],
@@ -33,8 +33,8 @@ $columns = [
 ?>
 <?php $this->toolbars([
     Html::a('新建权限', [
-        'create', 'category' => $categoryId
-    ], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+        'create', 'category' => $categoryId,
+    ], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
 <div class="da-ex-tabs">

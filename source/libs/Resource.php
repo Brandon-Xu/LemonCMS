@@ -111,7 +111,7 @@ class Resource
 
     public static function getContentItemView($content) {
         $currentTheme = self::getHomeTheme();
-        $ret = '@webroot/statics/themes/'.$currentTheme.'/modules/'.$content[ 'type' ].'/_inc/content_default';
+        $ret = '@webroot/statics/themes/'.$currentTheme.'/modules/'.$content['type'].'/_inc/content_default';
 
         return $ret;
     }

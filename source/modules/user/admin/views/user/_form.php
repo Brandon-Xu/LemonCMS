@@ -12,7 +12,7 @@ use yii\helpers\ArrayHelper;
 <?php $form = ActiveForm::begin(); ?>
 
 <?= $form->field($model, 'username')->textInput([
-    'maxlength' => 255, 'readonly' => $model->isNewRecord ? NULL : 'readonly'
+    'maxlength' => 255, 'readonly' => $model->isNewRecord ? NULL : 'readonly',
 ]) ?>
 
 <?= $form->field($model, 'password')->textInput(['maxlength' => 255]) ?>

@@ -13,11 +13,11 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'user')->textInput([
-        'maxlength' => 64, 'readonly' => TRUE
+        'maxlength' => 64, 'readonly' => TRUE,
     ]) ?>
 
     <?= $form->field($model, 'role')->textInput([
-        'maxlength' => 64, 'readonly' => TRUE
+        'maxlength' => 64, 'readonly' => TRUE,
     ]) ?>
 
     <?= $form->field($model, 'note')->textarea(['rows' => 6]) ?>

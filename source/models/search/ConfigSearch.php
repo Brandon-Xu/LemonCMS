@@ -60,9 +60,9 @@ class ConfigSearch extends Config
         ]);
 
         $query->andFilterWhere([
-            'like', 'key', $this->key
+            'like', 'key', $this->key,
         ])->andFilterWhere([
-            'like', 'value', $this->value
+            'like', 'value', $this->value,
         ]);
 
         return $dataProvider;

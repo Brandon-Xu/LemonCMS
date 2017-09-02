@@ -28,7 +28,7 @@ class AdminLinkPager extends LinkPager
 
     protected function renderPageButton($label, $page, $class, $disabled, $active) {
         $linkOptions = $this->linkOptions;
-        $linkOptions[ 'data-page' ] = $page;
+        $linkOptions['data-page'] = $page;
 
         if ($class !== '') {
             Html::addCssClass($linkOptions, $class);

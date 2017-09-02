@@ -17,7 +17,7 @@ class Breadcrumbs extends \yii\widgets\Breadcrumbs implements IBaseWidget
         $links = [];
         if ($this->homeLink === NULL) {
             $links[] = $this->renderItem([
-                'label' => Yii::t('yii', 'Home'), 'url' => Yii::$app->homeUrl
+                'label' => Yii::t('yii', 'Home'), 'url' => Yii::$app->homeUrl,
             ], $this->itemTemplate);
         } else if ($this->homeLink !== FALSE) {
             $links[] = $this->renderItem($this->homeLink, $this->itemTemplate);
@@ -26,7 +26,7 @@ class Breadcrumbs extends \yii\widgets\Breadcrumbs implements IBaseWidget
             if (!is_array($link)) {
                 $link = ['label' => $link];
             }
-            $links[] = $this->renderItem($link, isset($link[ 'url' ]) ? $this->itemTemplate : $this->activeItemTemplate);
+            $links[] = $this->renderItem($link, isset($link['url']) ? $this->itemTemplate : $this->activeItemTemplate);
         }
         echo Html::tag($this->tag, implode($this->separator, $links), $this->options);
     }

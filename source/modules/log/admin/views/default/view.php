@@ -7,8 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model source\modules\log\models\Log */
 
 $this->title = $model->id;
-$this->params[ 'breadcrumbs' ][] = ['label' => 'Logs', 'url' => ['index']];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Logs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="log-view">
 

@@ -12,7 +12,7 @@ class Setting extends ConfigForm
     public function rules() {
         return [
             [
-                ['page_taxonomy'], 'string'
+                ['page_taxonomy'], 'string',
             ],
         ];
     }
@@ -22,7 +22,7 @@ class Setting extends ConfigForm
      */
     public function attributeLabels() {
         return [
-            'page_taxonomy' => '绑定分类'
+            'page_taxonomy' => '绑定分类',
         ];
     }
 }

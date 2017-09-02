@@ -28,11 +28,11 @@ class BaseController extends Controller
     public function actions() {
         return [
             'error' => [
-                'class' => 'yii\web\ErrorAction'
+                'class' => 'yii\web\ErrorAction',
             ], 'captcha' => [
                 'class' => 'yii\captcha\CaptchaAction', // 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-                'height' => '40', 'width' => '100', 'minLength' => 3, 'maxLength' => 5
-            ]
+                'height' => '40', 'width' => '100', 'minLength' => 3, 'maxLength' => 5,
+            ],
         ];
     }
 
@@ -41,34 +41,34 @@ class BaseController extends Controller
         parent::init();
 
         $this->getView()->on(BaseView::EVENT_BEGIN_PAGE, [
-            $this, 'beginPage'
+            $this, 'beginPage',
         ]);
         $this->getView()->on(BaseView::EVENT_BEGIN_BODY, [
-            $this, 'beginBody'
+            $this, 'beginBody',
         ]);
         $this->getView()->on(BaseView::EVENT_BEFORE_RENDER, [
-            $this, 'beforeRender'
+            $this, 'beforeRender',
         ]);
         $this->getView()->on(BaseView::EVENT_AFTER_RENDER, [
-            $this, 'afterRender'
+            $this, 'afterRender',
         ]);
         $this->getView()->on(BaseView::EVENT_END_BODY, [
-            $this, 'endBody'
+            $this, 'endBody',
         ]);
         $this->getView()->on(BaseView::EVENT_END_PAGE, [
-            $this, 'endPage'
+            $this, 'endPage',
         ]);
         $this->getView()->on(BaseView::EVENT_AFTER_PAGE, [
-            $this, 'afterPage'
+            $this, 'afterPage',
         ]);
         LuLu::getResponse()->on(Response::EVENT_AFTER_SEND, [
-            $this, 'afterResponse'
+            $this, 'afterResponse',
         ]);
     }
 
     public function jsonResponse($data, $status = NULL, $message = '') {
         $ret = [
-            'status' => $status, 'message' => $message, 'data' => $data
+            'status' => $status, 'message' => $message, 'data' => $data,
         ];
         $response = \Yii::$app->response;
         $response->format = Response::FORMAT_JSON;

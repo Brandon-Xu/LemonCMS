@@ -18,7 +18,7 @@ class DefaultController extends BackController
         $modules = $this->modularityService->getAllModules();
 
         return $this->render('index', [
-            'modules' => $modules
+            'modules' => $modules,
         ]);
     }
 
@@ -30,12 +30,12 @@ class DefaultController extends BackController
         $model->save();
 
         $modules = $this->modularityService->getAllModules();
-        if (isset($modules[ $id ]) && $modules[ $id ][ 'instance' ] !== NULL) {
-            $modules[ $id ][ 'instance' ]->install();
+        if (isset($modules[$id]) && $modules[$id]['instance'] !== NULL) {
+            $modules[$id]['instance']->install();
         }
 
         return $this->redirect([
-            'index'
+            'index',
         ]);
     }
 
@@ -43,12 +43,12 @@ class DefaultController extends BackController
         Modularity::deleteAll(['id' => $id]);
 
         $modules = $this->modularityService->getAllModules();
-        if (isset($modules[ $id ]) && $modules[ $id ][ 'instance' ] !== NULL) {
-            $modules[ $id ][ 'instance' ]->uninstall();
+        if (isset($modules[$id]) && $modules[$id]['instance'] !== NULL) {
+            $modules[$id]['instance']->uninstall();
         }
 
         return $this->redirect([
-            'index'
+            'index',
         ]);
     }
 
@@ -57,16 +57,16 @@ class DefaultController extends BackController
         Modularity::updateAll([$field => 1], ['id' => $id]);
 
         $modules = $this->modularityService->getAllModules();
-        if (isset($modules[ $id ]) && $modules[ $id ][ 'instance' ] !== NULL) {
+        if (isset($modules[$id]) && $modules[$id]['instance'] !== NULL) {
             if ($is_admin === NULL) {
-                $modules[ $id ][ 'instance' ]->activeHome();
+                $modules[$id]['instance']->activeHome();
             } else {
-                $modules[ $id ][ 'instance' ]->activeAdmin();
+                $modules[$id]['instance']->activeAdmin();
             }
         }
 
         return $this->redirect([
-            'index'
+            'index',
         ]);
     }
 
@@ -75,16 +75,16 @@ class DefaultController extends BackController
         Modularity::updateAll([$field => 0], ['id' => $id]);
 
         $modules = $this->modularityService->getAllModules();
-        if (isset($modules[ $id ]) && $modules[ $id ][ 'instance' ] !== NULL) {
+        if (isset($modules[$id]) && $modules[$id]['instance'] !== NULL) {
             if ($is_admin === NULL) {
-                $modules[ $id ][ 'instance' ]->deactiveHome();
+                $modules[$id]['instance']->deactiveHome();
             } else {
-                $modules[ $id ][ 'instance' ]->deactiveAdmin();
+                $modules[$id]['instance']->deactiveAdmin();
             }
         }
 
         return $this->redirect([
-            'index'
+            'index',
         ]);
     }
 }

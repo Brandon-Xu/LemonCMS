@@ -63,8 +63,8 @@ class Generator extends \yii\gii\Generator
         if (is_file($path)) {
             $result = json_decode(file_get_contents($path), TRUE);
             if (is_array($result)) {
-                if (isset($result[ 'moduleDir' ])) {
-                    $moduleDir = $result[ 'moduleDir' ];
+                if (isset($result['moduleDir'])) {
+                    $moduleDir = $result['moduleDir'];
                 }
             }
         }
@@ -95,20 +95,20 @@ class Generator extends \yii\gii\Generator
         return array_merge(parent::rules(), [
             [
                 ['controllerClass', 'modelClass', 'searchModelClass', 'baseControllerClass'], 'filter',
-                'filter' => 'trim'
+                'filter' => 'trim',
             ], [['modelClass', 'controllerClass', 'baseControllerClass', 'indexWidgetType'], 'required'], [
                 ['searchModelClass'], 'compare', 'compareAttribute' => 'modelClass', 'operator' => '!==',
-                'message' => 'Search Model Class must not be equal to Model Class.'
+                'message' => 'Search Model Class must not be equal to Model Class.',
             ], [
                 ['modelClass', 'controllerClass', 'baseControllerClass', 'searchModelClass'], 'match',
-                'pattern' => '/^[\w\\\\]*$/', 'message' => 'Only word characters and backslashes are allowed.'
+                'pattern' => '/^[\w\\\\]*$/', 'message' => 'Only word characters and backslashes are allowed.',
             ], [['modelClass'], 'validateClass', 'params' => ['extends' => BaseActiveRecord::className()]],
             [['baseControllerClass'], 'validateClass', 'params' => ['extends' => Controller::className()]], [
                 ['controllerClass'], 'match', 'pattern' => '/Controller$/',
-                'message' => 'Controller class name must be suffixed with "Controller".'
+                'message' => 'Controller class name must be suffixed with "Controller".',
             ], [
                 ['controllerClass'], 'match', 'pattern' => '/(^|\\\\)[A-Z][^\\\\]+Controller$/',
-                'message' => 'Controller class name must start with an uppercase letter.'
+                'message' => 'Controller class name must start with an uppercase letter.',
             ], [['controllerClass', 'searchModelClass'], 'validateNewClass'],
             [['indexWidgetType'], 'in', 'range' => ['grid', 'list']], [['modelClass'], 'validateModelClass'],
             [['enableI18N'], 'boolean'], [['messageCategory'], 'validateMessageCategory', 'skipOnEmpty' => FALSE],
@@ -234,7 +234,7 @@ class Generator extends \yii\gii\Generator
         $class = $this->modelClass;
         $pk = $class::primaryKey();
 
-        return $pk[ 0 ];
+        return $pk[0];
     }
 
     /**
@@ -244,14 +244,14 @@ class Generator extends \yii\gii\Generator
      */
     public function generateActiveField($attribute) {
         $tableSchema = $this->getTableSchema();
-        if ($tableSchema === FALSE || !isset($tableSchema->columns[ $attribute ])) {
+        if ($tableSchema === FALSE || !isset($tableSchema->columns[$attribute])) {
             if (preg_match('/^(password|pass|passwd|passcode)$/i', $attribute)) {
                 return "\$form->field(\$model, '$attribute')->passwordInput()";
             } else {
                 return "\$form->field(\$model, '$attribute')";
             }
         }
-        $column = $tableSchema->columns[ $attribute ];
+        $column = $tableSchema->columns[$attribute];
         if ($column->phpType === 'boolean') {
             return "\$form->field(\$model, '$attribute')->checkbox()";
         } else if ($column->type === 'text') {
@@ -265,7 +265,7 @@ class Generator extends \yii\gii\Generator
             if (is_array($column->enumValues) && count($column->enumValues) > 0) {
                 $dropDownOptions = [];
                 foreach ($column->enumValues as $enumValue) {
-                    $dropDownOptions[ $enumValue ] = Inflector::humanize($enumValue);
+                    $dropDownOptions[$enumValue] = Inflector::humanize($enumValue);
                 }
 
                 return "\$form->field(\$model, '$attribute')->dropDownList(".preg_replace("/\n\s*/", ' ', VarDumper::export($dropDownOptions)).", ['prompt' => ''])";
@@ -287,7 +287,7 @@ class Generator extends \yii\gii\Generator
         if ($tableSchema === FALSE) {
             return "\$form->field(\$model, '$attribute')";
         }
-        $column = $tableSchema->columns[ $attribute ];
+        $column = $tableSchema->columns[$attribute];
         if ($column->phpType === 'boolean') {
             return "\$form->field(\$model, '$attribute')->checkbox()";
         } else {
@@ -330,23 +330,23 @@ class Generator extends \yii\gii\Generator
                 case Schema::TYPE_SMALLINT:
                 case Schema::TYPE_INTEGER:
                 case Schema::TYPE_BIGINT:
-                    $types[ 'integer' ][] = $column->name;
+                    $types['integer'][] = $column->name;
                     break;
                 case Schema::TYPE_BOOLEAN:
-                    $types[ 'boolean' ][] = $column->name;
+                    $types['boolean'][] = $column->name;
                     break;
                 case Schema::TYPE_FLOAT:
                 case Schema::TYPE_DOUBLE:
                 case Schema::TYPE_DECIMAL:
                 case Schema::TYPE_MONEY:
-                    $types[ 'number' ][] = $column->name;
+                    $types['number'][] = $column->name;
                     break;
                 case Schema::TYPE_DATE:
                 case Schema::TYPE_TIME:
                 case Schema::TYPE_DATETIME:
                 case Schema::TYPE_TIMESTAMP:
                 default:
-                    $types[ 'safe' ][] = $column->name;
+                    $types['safe'][] = $column->name;
                     break;
             }
         }
@@ -376,17 +376,17 @@ class Generator extends \yii\gii\Generator
         $attributeLabels = $model->attributeLabels();
         $labels = [];
         foreach ($this->getColumnNames() as $name) {
-            if (isset($attributeLabels[ $name ])) {
-                $labels[ $name ] = $attributeLabels[ $name ];
+            if (isset($attributeLabels[$name])) {
+                $labels[$name] = $attributeLabels[$name];
             } else {
                 if (!strcasecmp($name, 'id')) {
-                    $labels[ $name ] = 'ID';
+                    $labels[$name] = 'ID';
                 } else {
                     $label = Inflector::camel2words($name);
                     if (!empty($label) && substr_compare($label, ' id', -3, 3, TRUE) === 0) {
                         $label = substr($label, 0, -3).' ID';
                     }
-                    $labels[ $name ] = $label;
+                    $labels[$name] = $label;
                 }
             }
         }
@@ -405,11 +405,11 @@ class Generator extends \yii\gii\Generator
             /* @var $model \yii\base\Model */
             $model = new $class();
             foreach ($model->attributes() as $attribute) {
-                $columns[ $attribute ] = 'unknown';
+                $columns[$attribute] = 'unknown';
             }
         } else {
             foreach ($table->columns as $column) {
-                $columns[ $column->name ] = $column->type;
+                $columns[$column->name] = $column->type;
             }
         }
 
@@ -508,11 +508,11 @@ class Generator extends \yii\gii\Generator
             return $params;
         }
         if (count($pks) === 1) {
-            return ['@param '.$table->columns[ $pks[ 0 ] ]->phpType.' $id'];
+            return ['@param '.$table->columns[$pks[0]]->phpType.' $id'];
         } else {
             $params = [];
             foreach ($pks as $pk) {
-                $params[] = '@param '.$table->columns[ $pk ]->phpType.' $'.$pk;
+                $params[] = '@param '.$table->columns[$pk]->phpType.' $'.$pk;
             }
 
             return $params;

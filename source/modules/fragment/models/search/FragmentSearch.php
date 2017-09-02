@@ -67,7 +67,7 @@ class FragmentSearch extends Fragment
         //         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])->andFilterWhere([
-            'like', 'description', $this->description
+            'like', 'description', $this->description,
         ]);
 
         return $dataProvider;

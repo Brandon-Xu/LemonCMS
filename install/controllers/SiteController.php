@@ -21,7 +21,7 @@ class SiteController extends \source\core\front\FrontController
         $file = LuLu::getAlias('@data/install.lock');
         if (file_exists($file)) {
             return $this->redirect([
-                'stop'
+                'stop',
             ]);
         }
 
@@ -120,7 +120,7 @@ class SiteController extends \source\core\front\FrontController
             $transaction->rollBack();
 
             $message = self::getDbError($e->getMessage(), [
-                'dbHost' => $dbHost, 'dbName' => $dbName
+                'dbHost' => $dbHost, 'dbName' => $dbName,
             ]);
             self::_appendLog('安装失败');
             self::_appendLog($e->getMessage(), TRUE);
@@ -143,7 +143,7 @@ class SiteController extends \source\core\front\FrontController
         }
 
         $config = [
-            'dsn' => "mysql:host={$dbHost};dbname={$dbName}", 'username' => $dbUsername, 'password' => $dbPassword
+            'dsn' => "mysql:host={$dbHost};dbname={$dbName}", 'username' => $dbUsername, 'password' => $dbPassword,
         ];
 
         $result = FALSE;
@@ -162,7 +162,7 @@ class SiteController extends \source\core\front\FrontController
         } catch (Exception $e) {
             $db->close();
             $message = self::getDbError($e->getMessage(), [
-                'dbHost' => $dbHost, 'dbName' => $dbName
+                'dbHost' => $dbHost, 'dbName' => $dbName,
             ]);
             $result = FALSE;
         }
@@ -182,13 +182,13 @@ class SiteController extends \source\core\front\FrontController
         $dbConfig = [
             'class' => 'yii\db\Connection', 'dsn' => "mysql:host={$dbHost};dbname={$dbName}", 'username' => $dbUsername,
             'password' => $dbPassword, 'charset' => 'utf8', 'tablePrefix' => $tbPre, 'enableSchemaCache' => TRUE,
-            'schemaCache' => 'schemaCache'
+            'schemaCache' => 'schemaCache',
         ];
         try {
             FileHelper::writeArray(LuLu::getAlias('@data/config/db.php'), $dbConfig);
             self::_appendLog('配置文件保存成功');
 
-            unset($dbConfig[ 'class' ]);
+            unset($dbConfig['class']);
 
             return $dbConfig;
         } catch (\Exception $e) {
@@ -219,7 +219,7 @@ class SiteController extends \source\core\front\FrontController
             return $db;
         } catch (\Exception $e) {
             $message = self::getDbError($e->getMessage(), [
-                'dbHost' => $dbHost, 'dbName' => $dbName
+                'dbHost' => $dbHost, 'dbName' => $dbName,
             ]);
             self::_appendLog($message, TRUE);
 
@@ -283,15 +283,15 @@ class SiteController extends \source\core\front\FrontController
         flush();
     }
 
-    private function getDbError($message, $params = array()) {
+    private function getDbError($message, $params = []) {
         LuLu::info($message, __METHOD__);
 
         if (preg_match('/SQLSTATE\[HY000\] \[2002\]/', $message)) {
             $message = '连接失败，请检查数据库配置';
         } else if (preg_match('/Unknown database|1049/', $message)) {
-            $message = '未找到数据库: '.$params[ 'dbName' ].' 请先创建该库';
+            $message = '未找到数据库: '.$params['dbName'].' 请先创建该库';
         } else if (preg_match('/failed to open the DB/', $message)) {
-            $message = '连接失败，请检查数据库配置: '.$params[ 'dbHost' ];
+            $message = '连接失败，请检查数据库配置: '.$params['dbHost'];
         } else if (preg_match('/1044/', $message)) {
             $message = '当前用户没有访问数据库的权限';
         }
@@ -303,18 +303,18 @@ class SiteController extends \source\core\front\FrontController
     protected function _splitsql($sql) {
         $sql = preg_replace("/TYPE=(InnoDB|MyISAM|MEMORY)( DEFAULT CHARSET=[^; ]+)?/", "ENGINE=\\1 DEFAULT CHARSET=UTF8", $sql);
         $sql = str_replace("\r", "\n", $sql);
-        $ret = array();
+        $ret = [];
         $num = 0;
         $queriesarray = explode(";\n", trim($sql));
         unset($sql);
         foreach ($queriesarray as $query) {
-            $ret[ $num ] = '';
+            $ret[$num] = '';
             $queries = explode("\n", trim($query));
             $queries = array_filter($queries);
             foreach ($queries as $query) {
                 $str1 = substr($query, 0, 1);
                 if ($str1 != '#' && $str1 != '-')
-                    $ret[ $num ] .= $query;
+                    $ret[$num] .= $query;
                 // $ret[$num] .= XUtils::autoCharset($query,'gbk','utf-8');
             }
             $num++;
@@ -326,33 +326,33 @@ class SiteController extends \source\core\front\FrontController
     private function getEnvData() {
         $isWritable = [
             [
-                '系统临时文件(data/runtime)', TRUE, FileHelper::canWrite(LuLu::getAlias('@data/runtime')), '系统核心', '必须可读写'
+                '系统临时文件(data/runtime)', TRUE, FileHelper::canWrite(LuLu::getAlias('@data/runtime')), '系统核心', '必须可读写',
             ], [
                 '附件上传目录(data/attachment)', FALSE, FileHelper::canWrite(LuLu::getAlias('@data/attachment')), '附件上传',
-                '若无附件上传可不用写权限'
+                '若无附件上传可不用写权限',
             ], [
                 '数据备份目录(data/backup)', FALSE, FileHelper::canWrite(LuLu::getAlias('@data/backup')), '数据库备份',
-                '若不备份数据库可不用写权限'
+                '若不备份数据库可不用写权限',
             ], [
                 '配置文件目录(data/config)', FALSE, FileHelper::canWrite(LuLu::getAlias('@data/attachment')), '安装程序',
-                '若手动安装系统写可不用写权限'
+                '若手动安装系统写可不用写权限',
             ], [
-                '公共资源文件(statics/assets)', TRUE, FileHelper::canWrite(LuLu::getAlias('@statics/assets')), '系统核心', '必须可读写'
-            ]
+                '公共资源文件(statics/assets)', TRUE, FileHelper::canWrite(LuLu::getAlias('@statics/assets')), '系统核心', '必须可读写',
+            ],
         ];
 
-        $requirements = array(
+        $requirements = [
             [
-                'PHP版本', TRUE, version_compare(PHP_VERSION, "5.4.0", ">="), '系统核心', 'PHP 5.4.0 或更高版本是必须的.'
+                'PHP版本', TRUE, version_compare(PHP_VERSION, "5.4.0", ">="), '系统核心', 'PHP 5.4.0 或更高版本是必须的.',
             ], [
-                '$_SERVER 服务器变量', TRUE, 'ok' === $message = Utility::checkServerVar(), '系统核心', $message
+                '$_SERVER 服务器变量', TRUE, 'ok' === $message = Utility::checkServerVar(), '系统核心', $message,
             ], [
 
-                'Reflection 扩展模块', TRUE, class_exists('Reflection', FALSE), '系统核心', ''
+                'Reflection 扩展模块', TRUE, class_exists('Reflection', FALSE), '系统核心', '',
             ], [
-                'PCRE 扩展模块', TRUE, extension_loaded("pcre"), '系统核心', ''
+                'PCRE 扩展模块', TRUE, extension_loaded("pcre"), '系统核心', '',
             ], [
-                'SPL 扩展模块', TRUE, extension_loaded("SPL"), '系统核心', ''
+                'SPL 扩展模块', TRUE, extension_loaded("SPL"), '系统核心', '',
             ], //[
             //    'DOM 扩展模块',
             //    false,
@@ -361,11 +361,11 @@ class SiteController extends \source\core\front\FrontController
             //    ''
             //],
             [
-                'PDO 扩展模块', TRUE, extension_loaded('pdo'), '所有和使用PDO数据库连接相关的类', ''
+                'PDO 扩展模块', TRUE, extension_loaded('pdo'), '所有和使用PDO数据库连接相关的类', '',
             ], [
-                'PDO MySQL 扩展模块', TRUE, extension_loaded('pdo_mysql'), 'MySql数据库', '使用MySql数据库必须支持'
+                'PDO MySQL 扩展模块', TRUE, extension_loaded('pdo_mysql'), 'MySql数据库', '使用MySql数据库必须支持',
             ], [
-                'OpenSSL 扩展模块', TRUE, extension_loaded('openssl'), 'Security', '加密和解密方法'
+                'OpenSSL 扩展模块', TRUE, extension_loaded('openssl'), 'Security', '加密和解密方法',
             ], //[
             //    'SOAP 扩展模块',
             //    false,
@@ -374,7 +374,7 @@ class SiteController extends \source\core\front\FrontController
             //    ''
             //],
             [
-                'GD 扩展模块', FALSE, 'ok' === $message = Utility::checkCaptchaSupport(), 'CaptchaAction', $message
+                'GD 扩展模块', FALSE, 'ok' === $message = Utility::checkCaptchaSupport(), 'CaptchaAction', $message,
             ], //[
             //    'Ctype 扩展模块',
             //    false,
@@ -382,28 +382,28 @@ class SiteController extends \source\core\front\FrontController
             //    'CDateFormatter, CDateFormatter, CTextHighlighter, CHtmlPurifier',
             //    ''
             //]
-        );
+        ];
 
         $requireResult = 1;
         foreach ($requirements as $i => $requirement) {
-            if ($requirement[ 1 ] && !$requirement[ 2 ])
-                $requireResult = 0; else if ($requireResult > 0 && !$requirement[ 1 ] && !$requirement[ 2 ])
+            if ($requirement[1] && !$requirement[2])
+                $requireResult = 0; else if ($requireResult > 0 && !$requirement[1] && !$requirement[2])
                 $requireResult = -1;
-            if ($requirement[ 4 ] === '')
-                $requirements[ $i ][ 4 ] = '&nbsp;';
+            if ($requirement[4] === '')
+                $requirements[$i][4] = '&nbsp;';
         }
 
         $writeableResult = 1;
         foreach ($isWritable as $k => $val) {
-            if ($val[ 1 ] && !$val[ 2 ])
-                $writeableResult = 0; else if ($requireResult > 0 && !$val[ 1 ] && !$val[ 2 ])
+            if ($val[1] && !$val[2])
+                $writeableResult = 0; else if ($requireResult > 0 && !$val[1] && !$val[2])
                 $writeableResult = -1;
-            if ($val[ 4 ] === '')
-                $isWritable[ $i ][ 4 ] = '&nbsp;';
+            if ($val[4] === '')
+                $isWritable[$i][4] = '&nbsp;';
         }
         $data = [
             'isWritable' => $isWritable, 'writeableResult' => $writeableResult, 'requireResult' => $requireResult,
-            'requirements' => $requirements
+            'requirements' => $requirements,
         ];
 
         return $data;

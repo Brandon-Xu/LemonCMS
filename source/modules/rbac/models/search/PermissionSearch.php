@@ -56,9 +56,9 @@ class PermissionSearch extends Permission
         $query->andFilterWhere(['category_id' => $this->category_id, 'form' => $this->form,]);
 
         $query->andFilterWhere(['like', 'id', $this->id])->andFilterWhere([
-            'like', 'name', $this->name
+            'like', 'name', $this->name,
         ])->andFilterWhere([
-            'like', 'description', $this->description
+            'like', 'description', $this->description,
         ]);
 
         return $dataProvider;

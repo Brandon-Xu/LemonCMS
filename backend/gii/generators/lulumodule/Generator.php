@@ -51,7 +51,7 @@ class Generator extends \yii\gii\Generator
             [['moduleID', 'moduleDir'], 'filter', 'filter' => 'trim'], [['moduleDir'], 'required'],
             [['moduleDir'], 'match', 'pattern' => '/^[\w]+$/', 'message' => 'Only word characters'], [
                 ['moduleID'], 'match', 'pattern' => '/^[\w\\-]+$/',
-                'message' => 'Only word characters and dashes are allowed.'
+                'message' => 'Only word characters and dashes are allowed.',
             ],
         ]);
     }

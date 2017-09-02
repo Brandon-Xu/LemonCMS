@@ -16,7 +16,7 @@ class ArrayHelper extends BaseArrayHelper
     public static function getItems($items, $key = NULL, $throw = FALSE) {
         if ($key !== NULL) {
             if (key_exists($key, $items)) {
-                return $items[ $key ];
+                return $items[$key];
             }
             if ($throw) {
                 throw new InvalidParamException();

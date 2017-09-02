@@ -25,7 +25,7 @@ abstract class BaseSettingController extends BackController
             $model->initAll();
 
             return $this->render($view, [
-                'model' => $model
+                'model' => $model,
             ]);
         }
     }

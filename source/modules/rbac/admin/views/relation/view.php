@@ -7,10 +7,10 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\rbac\models\Relation */
 
 $this->title = $model->role;
-$this->params[ 'breadcrumbs' ][] = [
-    'label' => 'Relations', 'url' => ['index']
+$this->params['breadcrumbs'][] = [
+    'label' => 'Relations', 'url' => ['index'],
 ];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="relation-view">
 
@@ -18,10 +18,10 @@ $this->params[ 'breadcrumbs' ][] = $this->title;
 
     <p>
         <?= Html::a('Update', [
-            'update', 'role' => $model->role, 'permission' => $model->permission
+            'update', 'role' => $model->role, 'permission' => $model->permission,
         ], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', [
-            'delete', 'role' => $model->role, 'permission' => $model->permission
+            'delete', 'role' => $model->role, 'permission' => $model->permission,
         ], [
             'class' => 'btn btn-danger', 'data' => [
                 'confirm' => 'Are you sure you want to delete this item?', 'method' => 'post',

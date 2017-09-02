@@ -9,7 +9,7 @@ use source\core\widgets\KindEditor;
 
 $this->title = '站点信息';
 $this->addBreadcrumbs([
-    $this->title
+    $this->title,
 ]);
 ?>
 

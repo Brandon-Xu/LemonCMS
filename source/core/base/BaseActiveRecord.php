@@ -43,15 +43,15 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
             if (is_string($with)) {
                 $query->innerJoinWith($with);
             } else {
-                if (isset($with[ 'type' ])) {
-                    $type = $with[ 'type' ];
-                } else if (isset($with[ 1 ])) {
-                    $type = $with[ 1 ];
+                if (isset($with['type'])) {
+                    $type = $with['type'];
+                } else if (isset($with[1])) {
+                    $type = $with[1];
                 } else {
                     $type = 'INNER JOIN';
                 }
 
-                $query->joinWith($with[ 0 ], TRUE, $type);
+                $query->joinWith($with[0], TRUE, $type);
             }
         }
 
@@ -59,9 +59,9 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
             if (!ArrayHelper::isAssociative($condition)) {
                 // query by primary key
                 $primaryKey = static::primaryKey();
-                if (isset($primaryKey[ 0 ])) {
+                if (isset($primaryKey[0])) {
                     $condition = [
-                        $primaryKey[ 0 ] => $condition
+                        $primaryKey[0] => $condition,
                     ];
                 } else {
                     throw new InvalidConfigException('"'.get_called_class().'" must have a primary key.');
@@ -170,18 +170,18 @@ class BaseActiveRecord extends \yii\db\ActiveRecord
     public function addTrimRule($rules, $scenarios = []) {
         $all = [];
         foreach ($rules as $rule) {
-            if ($rule[ 1 ] === 'trim') {
+            if ($rule[1] === 'trim') {
                 continue;
             }
-            if (is_string($rule[ 0 ])) {
-                $all[] = $rule[ 0 ];
+            if (is_string($rule[0])) {
+                $all[] = $rule[0];
             } else {
-                $all = array_merge($all, $rule[ 0 ]);
+                $all = array_merge($all, $rule[0]);
             }
         }
         $scenarios[] = self::SCENARIO_DEFAULT;
         $rules[] = [
-            $all, 'trim', 'on' => $scenarios
+            $all, 'trim', 'on' => $scenarios,
         ];
 
         return $rules;

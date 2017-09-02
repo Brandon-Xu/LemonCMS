@@ -7,8 +7,8 @@ use yii\widgets\DetailView;
 /* @var $model source\modules\fragment\models\FragmentCategory */
 
 $this->title = $model->name;
-$this->params[ 'breadcrumbs' ][] = ['label' => 'Fragment Categories', 'url' => ['index']];
-$this->params[ 'breadcrumbs' ][] = $this->title;
+$this->params['breadcrumbs'][] = ['label' => 'Fragment Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="fragment-category-view">
 

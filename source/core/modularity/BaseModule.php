@@ -35,7 +35,7 @@ class BaseModule extends \source\core\base\BaseModule
     public function getPermissions() {
         $permissions = [
             [
-                'key' => 'create', 'title' => 'create post', 'description' => 'create a new post'
+                'key' => 'create', 'title' => 'create post', 'description' => 'create a new post',
             ],
         ];
 
