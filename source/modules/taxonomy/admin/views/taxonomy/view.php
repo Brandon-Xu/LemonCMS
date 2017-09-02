@@ -3,12 +3,12 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\taxonomy\models\Taxonomy */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Taxonomies', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params[ 'breadcrumbs' ][] = ['label' => 'Taxonomies', 'url' => ['index']];
+$this->params[ 'breadcrumbs' ][] = $this->title;
 ?>
 <div class="taxonomy-view">
 
@@ -17,25 +17,15 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
+            'class' => 'btn btn-danger', 'data' => [
+                'confirm' => 'Are you sure you want to delete this item?', 'method' => 'post',
             ],
         ]) ?>
     </p>
 
     <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'type_id',
-            'parent_id',
-            'name',
-            'alias',
-            'description',
-            'contents',
-            'sort_num',
+        'model' => $model, 'attributes' => [
+            'id', 'type_id', 'parent_id', 'name', 'alias', 'description', 'contents', 'sort_num',
         ],
     ]) ?>
 

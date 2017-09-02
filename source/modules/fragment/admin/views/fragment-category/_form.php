@@ -1,8 +1,6 @@
 <?php
 
 use source\core\widgets\ActiveForm;
-use source\libs\Common;
-use source\libs\Constants;
 use source\modules\fragment\models\Fragment;
 use yii\helpers\Html;
 
@@ -11,23 +9,23 @@ use yii\helpers\Html;
 /* @var $form source\core\widgets\ActiveForm */
 ?>
 
-<?php  $this->toolbars([
+<?php $this->toolbars([
     Html::a('返回', ['index'], ['class' => 'btn btn-xs btn-primary mod-site-save'])
-]);?>
+]); ?>
 
 
-    <?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => 64]) ?>
+<?= $form->field($model, 'name')->textInput(['maxlength' => 64]) ?>
 
-    <?php if($model->isNewRecord):?>
+<?php if ($model->isNewRecord): ?>
     <?= $form->field($model, 'type')->radioList(Fragment::getTypeItems()) ?>
-    <?php else:?>
+<?php else: ?>
     <?= $form->field($model, 'type')->reayOnly(Fragment::getTypeItems($model->type)) ?>
-    <?php endif;?>
-    
-   
-    <?php  $form->defaultButtons() ?>
+<?php endif; ?>
 
-    <?php ActiveForm::end(); ?>
+
+<?php $form->defaultButtons() ?>
+
+<?php ActiveForm::end(); ?>
 

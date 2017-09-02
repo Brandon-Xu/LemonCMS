@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model app\modules\rbac\models\Relation */
 
 $this->title = 'Create Relation';

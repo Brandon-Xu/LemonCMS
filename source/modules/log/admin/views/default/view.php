@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\log\models\Log */
 
 $this->title = $model->id;

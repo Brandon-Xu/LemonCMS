@@ -1,7 +1,6 @@
 <?php
 
 use source\core\widgets\ActiveForm;
-use source\libs\Common;
 use source\libs\Constants;
 use source\LuLu;
 use yii\helpers\Html;
@@ -21,8 +20,8 @@ $this->toolbars([
 
 <?php
 $form = ActiveForm::begin([
-            'options' => ['enctype' => 'multipart/form-data', 'class' => 'da-form'],
-        ]);
+    'options' => ['enctype' => 'multipart/form-data', 'class' => 'da-form'],
+]);
 ?>
 
 
@@ -35,14 +34,13 @@ $form = ActiveForm::begin([
 -->
 
 
-
 <?= $form->field($model, 'url')->textInput(['maxlength' => 256]) ?>
 <?= $form->field($model, 'thumb')->fileInput(['class' => 'da-custom-file']) ?>
 <?php if (!$model->isNewRecord && $model->thumb): ?>
     <div class="da-form-row field-fragment2data-thumb">
         <label class="control-label" for="fragment2data-thumb-show">原缩略图</label>
         <div class="da-form-item small"><img id="fragment2data-thumb-show" src="<?= $model->thumb ?>"/></div>
-    </div> 
+    </div>
 <?php endif; ?>
 
 <?= $form->field($model, 'summary')->textarea(['maxlength' => 512]) ?>

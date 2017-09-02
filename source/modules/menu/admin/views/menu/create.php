@@ -4,7 +4,7 @@ use source\LuLu;
 use source\modules\menu\models\MenuCategory;
 
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\menu\models\Menu */
 
 $category = LuLu::getGetValue('category');

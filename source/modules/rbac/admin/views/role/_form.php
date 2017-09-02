@@ -3,7 +3,7 @@
 use source\core\widgets\ActiveForm;
 use source\modules\rbac\models\Role;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\rbac\models\Role */
 /* @var $form yii\widgets\ActiveForm */
 

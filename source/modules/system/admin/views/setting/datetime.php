@@ -3,7 +3,7 @@
 use source\core\widgets\ActiveForm;
 use source\modules\system\models\config\DatetimeConfig;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\system\models\config\BasicConfig */
 /* @var $form ActiveForm */
 

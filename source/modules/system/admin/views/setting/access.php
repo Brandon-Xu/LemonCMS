@@ -4,7 +4,7 @@ use source\core\widgets\ActiveForm;
 use source\modules\rbac\models\Role;
 use yii\helpers\ArrayHelper;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\system\models\config\BasicConfig */
 /* @var $form ActiveForm */
 

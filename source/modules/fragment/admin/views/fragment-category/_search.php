@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\fragment\models\search\FragmentCategorySearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
@@ -11,8 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="fragment-category-search">
 
     <?php $form = ActiveForm::begin([
-        'action' => ['index'],
-        'method' => 'get',
+        'action' => ['index'], 'method' => 'get',
     ]); ?>
 
     <?= $form->field($model, 'id') ?>

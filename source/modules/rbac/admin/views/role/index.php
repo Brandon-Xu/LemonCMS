@@ -7,7 +7,7 @@ use source\modules\rbac\models\Role;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $searchModel app\modules\rbac\models\search\RoleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 

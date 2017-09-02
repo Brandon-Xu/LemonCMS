@@ -8,7 +8,7 @@ use source\libs\TreeHelper;
 use source\LuLu;
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\models\Content */
 /* @var $form yii\widgets\ActiveForm */
 

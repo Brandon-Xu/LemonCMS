@@ -2,6 +2,7 @@
 
 namespace source\modules\log\models;
 
+use source\core\base\BaseActiveRecord;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -14,13 +15,13 @@ use yii\helpers\ArrayHelper;
  * @property string $prefix
  * @property string $message
  */
-class Log extends \source\core\base\BaseActiveRecord
+class Log extends BaseActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName() {
-        return 'lulu_log';
+        return '{{%log}}';
     }
 
     /**

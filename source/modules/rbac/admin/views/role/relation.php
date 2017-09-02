@@ -2,7 +2,7 @@
 
 use source\core\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $searchModel app\modules\rbac\models\search\RelationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 

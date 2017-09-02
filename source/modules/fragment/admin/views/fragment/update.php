@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\fragment\models\Fragment */
 
 $this->title = '修改碎片: '.' '.$model->name;

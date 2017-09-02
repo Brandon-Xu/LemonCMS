@@ -2,8 +2,9 @@
 
 namespace source\modules\comment\admin;
 
+use source\core\modularity\BackModule;
 
-class AdminModule extends \source\core\modularity\BackModule
+class AdminModule extends BackModule
 {
     public $controllerNamespace = 'source\modules\comment\admin\controllers';
 

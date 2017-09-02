@@ -5,7 +5,7 @@ use source\LuLu;
 use source\modules\rbac\models\Permission;
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $searchModel app\modules\rbac\models\search\PermissionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 

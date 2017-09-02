@@ -1,7 +1,7 @@
 <?php
 
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\rbac\models\Permission */
 
 $this->title = '新建权限';

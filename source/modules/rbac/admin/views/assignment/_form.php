@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model app\modules\rbac\models\Relation */
 /* @var $form yii\widgets\ActiveForm */
 ?>

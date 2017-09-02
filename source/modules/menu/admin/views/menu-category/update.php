@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\menu\models\MenuCategory */
 
 $this->title = '修改菜单分类: '.' '.$model->name;

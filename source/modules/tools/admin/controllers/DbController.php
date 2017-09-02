@@ -2,7 +2,9 @@
 
 namespace source\modules\tools\admin\controllers;
 
-class DbController extends \source\core\back\BackController
+use source\core\back\BackController;
+
+class DbController extends BackController
 {
     public function actionIndex() {
         return $this->render('index', []);

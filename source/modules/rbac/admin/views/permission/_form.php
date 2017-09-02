@@ -5,7 +5,7 @@ use source\modules\rbac\models\Permission;
 use source\modules\rbac\rules\Rule;
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\rbac\models\Permission */
 /* @var $form yii\widgets\ActiveForm */
 

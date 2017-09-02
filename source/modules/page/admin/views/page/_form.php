@@ -8,7 +8,7 @@ use source\libs\TreeHelper;
 use source\LuLu;
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\models\Content */
 /* @var $form yii\widgets\ActiveForm */
 
@@ -16,8 +16,7 @@ $filedOptions = [];
 
 $taxonomy = $this->getConfigValue('page_taxonomy');
 $taxonomies = $this->taxonomyService->getTaxonomiesAsTree($taxonomy);
-$options = TreeHelper::buildTreeOptions($taxonomies, $model->taxonomy_id);
-
+$options = TreeHelper::buildTreeOptions($taxonomies);
 LuLu::setViewParam(['defaultLayout' => FALSE]);
 
 ?>

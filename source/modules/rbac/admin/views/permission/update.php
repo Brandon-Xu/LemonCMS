@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\rbac\models\Permission */
 
 $this->title = '修改权限: '.' '.$model->name;

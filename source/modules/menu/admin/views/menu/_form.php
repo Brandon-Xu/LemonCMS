@@ -6,7 +6,7 @@ use source\libs\TreeHelper;
 use source\modules\menu\models\Menu;
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\menu\models\Menu */
 /* @var $form yii\widgets\ActiveForm */
 

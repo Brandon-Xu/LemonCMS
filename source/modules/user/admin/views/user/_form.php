@@ -4,7 +4,7 @@ use source\core\widgets\ActiveForm;
 use source\libs\Constants;
 use yii\helpers\ArrayHelper;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\models\User */
 /* @var $form yii\widgets\ActiveForm */
 ?>

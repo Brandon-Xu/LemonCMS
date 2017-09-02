@@ -1,17 +1,16 @@
 <?php
 
 use source\core\widgets\ActiveForm;
-use source\libs\Common;
 use source\libs\TreeHelper;
 use source\modules\taxonomy\models\Taxonomy;
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
+/* @var $this source\core\front\FrontView */
 /* @var $model source\modules\taxonomy\models\Taxonomy */
 /* @var $form yii\widgets\ActiveForm */
 
 
-$category=$model->category_id;
+$category = $model->category_id;
 
 
 $taxonomies = Taxonomy::getArrayTree($category);
@@ -22,11 +21,11 @@ $options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
 ?>
 
 <?php $this->toolbars([
-    Html::a('返回', ['index','category'=>$category], ['class' => 'btn btn-xs btn-primary mod-site-save'])
-]);?>
+    Html::a('返回', ['index', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save'])
+]); ?>
 
 
-    <?php $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(); ?>
 
 <div class="da-ex-tabs">
     <ul>
@@ -39,9 +38,9 @@ $options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
         <div class="da-form-row">
             <label>父结点</label>
             <div class="da-form-item small">
-                <?php echo Html::activeHiddenInput($model, 'category_id');?>
+                <?php echo Html::activeHiddenInput($model, 'category_id'); ?>
                 <select id="taxonomy-parent_id" class="form-control" name="Taxonomy[parent_id]">
-                    <?php echo $options?>
+                    <?php echo $options ?>
                 </select>
             </div>
         </div>
@@ -52,13 +51,14 @@ $options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
 
         <?= $form->field($model, 'redirect_url')->textInput(['maxlength' => 128]) ?>
 
-        <?= $form->field($model, 'thumb')->fileInput(['class'=>'da-custom-file']) ?>
+        <?= $form->field($model, 'thumb')->fileInput(['class' => 'da-custom-file']) ?>
 
         <?= $form->field($model, 'description')->textarea(['maxlength' => 256]) ?>
 
         <?= $form->field($model, 'page_size')->textInput() ?>
 
-        <?= $form->field($model, 'sort_num',['options'=> ['class' => 'da-form-row','style'=>'border-bottom: 0;']])->textInput() ?>
+        <?= $form->field($model, 'sort_num', ['options' => ['class' => 'da-form-row', 'style' => 'border-bottom: 0;']])
+            ->textInput() ?>
     </div>
     <div id="tabs-seo">
         <?= $form->field($model, 'list_view')->textInput(['maxlength' => 64]) ?>
@@ -73,7 +73,7 @@ $options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
     </div>
 </div>
 
-                                        
-    <?= $form->defaultButtons() ?>
+
+<?= $form->defaultButtons() ?>
 <?php ActiveForm::end(); ?>
            
