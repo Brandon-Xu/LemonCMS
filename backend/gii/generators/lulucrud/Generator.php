@@ -136,7 +136,7 @@ class Generator extends \yii\gii\Generator
     {
         return array_merge(parent::hints(), [
             'modelClass' => 'This is the ActiveRecord class associated with the table that CRUD will be built upon.
-                You should provide a fully qualified class name, e.g., <code>app\models\Post</code>.',
+                You should provide a fully qualified class name, e.g., <code>source\models\Post</code>.',
             'controllerClass' => 'This is the name of the controller class to be generated. You should
                 provide a fully qualified namespaced class (e.g. <code>app\controllers\PostController</code>),
                 and class name should be in CamelCase with an uppercase first letter. Make sure the class
@@ -149,7 +149,7 @@ class Generator extends \yii\gii\Generator
             'indexWidgetType' => 'This is the widget type to be used in the index page to display list of the models.
                 You may choose either <code>GridView</code> or <code>ListView</code>',
             'searchModelClass' => 'This is the name of the search model class to be generated. You should provide a fully
-                qualified namespaced class name, e.g., <code>app\models\PostSearch</code>.',
+                qualified namespaced class name, e.g., <code>source\models\PostSearch</code>.',
         ]);
     }
 

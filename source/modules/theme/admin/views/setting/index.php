@@ -1,10 +1,10 @@
 <?php
 
-use yii\helpers\Html;
-use source\LuLu;
-use source\libs\Common;
 use source\core\widgets\ActiveForm;
+use source\libs\Common;
+use source\LuLu;
 use source\modules\theme\models\Setting;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $generator yii\gii\generators\module\Generator */

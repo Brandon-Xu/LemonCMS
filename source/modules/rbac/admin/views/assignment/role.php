@@ -1,10 +1,10 @@
 <?php
 
-use yii\helpers\Html;
+use source\LuLu;
 use yii\grid\GridView;
+use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\ActiveFormAsset;
-use source\LuLu;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\rbac\models\search\RelationSearch */

@@ -1,13 +1,13 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\grid\GridView;
+use source\libs\Constants;
 use source\LuLu;
 use source\models\Content;
-use source\libs\Constants;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\search\ContentSearch */
+/* @var $searchModel source\models\search\ContentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 $type='post';
 $this->title = '单面管理';

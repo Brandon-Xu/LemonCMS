@@ -1,11 +1,11 @@
 <?php
-use yii\helpers\Html;
-use source\core\widgets\ActiveForm;
 
+use source\core\widgets\ActiveForm;
 use source\modules\system\models\config\DatetimeConfig;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\config\Basic */
+/* @var $model source\modules\system\models\config\BasicConfig */
 /* @var $form ActiveForm */
 
 $this->title = 'SEO设置';

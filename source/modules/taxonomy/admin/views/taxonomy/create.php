@@ -1,13 +1,13 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\lib\Common;
 use source\LuLu;
 use source\modules\taxonomy\models\TaxonomyCategory;
+use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Taxonomy */
+/* @var $model source\modules\taxonomy\models\Taxonomy */
 $category= LuLu::getGetValue('category');
 
 $this->title = '新建分类项';

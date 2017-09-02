@@ -24,7 +24,7 @@ class Menu extends BaseWidget
 
     private function getChildrenMenus($parentId)
 	{
-		$menus = \source\models\Menu::findAll(['category_id'=>$this->menuId,'parent_id'=>$parentId,'enabled'=>1],'sort_num desc');
+		$menus = \source\modules\menu\models\Menu::findAll(['category_id'=>$this->menuId,'parent_id'=>$parentId,'enabled'=>1],'sort_num desc');
 		return $menus;
 	}
    

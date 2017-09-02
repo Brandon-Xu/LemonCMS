@@ -1,10 +1,11 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
+use yii\helpers\Html;
+use source\modules\comment\models\Comment;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Comment */
+/* @var $model source\modules\comment\models\Comment */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

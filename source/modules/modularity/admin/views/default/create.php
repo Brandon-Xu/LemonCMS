@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Content */
+/* @var $model source\models\Content */
 
 $this->title = '新建文章';
 $this->params['breadcrumbs'][] = ['label' => '文章管理', 'url' => ['index']];

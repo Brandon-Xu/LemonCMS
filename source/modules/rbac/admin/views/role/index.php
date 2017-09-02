@@ -1,11 +1,11 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\grid\GridView;
-use yii\helpers\Url;
+use source\libs\Resource;
 use source\LuLu;
 use source\modules\rbac\models\Role;
-use source\libs\Resource;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\rbac\models\search\RoleSearch */

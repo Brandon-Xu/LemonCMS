@@ -1,12 +1,11 @@
 <?php
 
-use yii\helpers\Html;
 use source\LuLu;
-use source\core\Common;
 use source\modules\taxonomy\models\TaxonomyCategory;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Taxonomy */
+/* @var $model source\modules\taxonomy\models\Taxonomy */
 
 $category=$model['category_id'];
 

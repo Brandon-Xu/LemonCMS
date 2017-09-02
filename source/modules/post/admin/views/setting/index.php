@@ -1,13 +1,13 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
-use source\models\config\BasicConfig;
 use source\libs\Common;
+use source\modules\system\models\config\BasicConfig;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\config\Basic */
+/* @var $model source\modules\system\models\config\BasicConfig */
 /* @var $form ActiveForm */
 
 $this->title='文章模块设置';

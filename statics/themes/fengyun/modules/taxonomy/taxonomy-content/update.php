@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TaxonomyContent */
+/* @var $model source\modules\taxonomy\models\TaxonomyContent */
 
 $this->title = 'Update Taxonomy Content: ' . ' ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Taxonomy Contents', 'url' => ['index']];

@@ -1,15 +1,13 @@
 <?php
 
+use source\core\widgets\ActiveForm;
+use source\libs\Common;
+use source\libs\TreeHelper;
+use source\modules\taxonomy\models\Taxonomy;
 use yii\helpers\Html;
 
-use source\modules\taxonomy\models\Taxonomy;
-use source\helpers\StringHelper;
-use source\libs\Common;
-use source\core\widgets\ActiveForm;
-use source\libs\TreeHelper;
-
 /* @var $this yii\web\View */
-/* @var $model app\models\Taxonomy */
+/* @var $model source\modules\taxonomy\models\Taxonomy */
 /* @var $form yii\widgets\ActiveForm */
 
 

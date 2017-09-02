@@ -1,14 +1,14 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
-use source\modules\menu\models\Menu;
 use source\libs\Common;
 use source\libs\Constants;
 use source\libs\TreeHelper;
+use source\modules\menu\models\Menu;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model source\models\Menu */
+/* @var $model source\modules\menu\models\Menu */
 /* @var $form yii\widgets\ActiveForm */
 
 $category=$model->category_id;

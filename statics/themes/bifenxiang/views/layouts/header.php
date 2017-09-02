@@ -1,8 +1,8 @@
-<?php 
+<?php
 
 use source\libs\Resource;
-use source\models\Menu;
 use source\LuLu;
+use source\modules\menu\models\Menu;
 
 
 $title = $this->getConfigValue('sys_seo_title');

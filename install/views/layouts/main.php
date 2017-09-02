@@ -1,7 +1,7 @@
 <?php 
 
 use source\libs\Resource;
-use source\models\Menu;
+use source\modules\menu\models\Menu;
 use source\LuLu;
 
 ?>

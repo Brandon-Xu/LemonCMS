@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TaxonomyType */
+/* @var $model source\modules\taxonomy\models\TaxonomyType */
 
 $this->title = 'Create Taxonomy Type';
 $this->params['breadcrumbs'][] = ['label' => 'Taxonomy Types', 'url' => ['index']];

@@ -1,15 +1,15 @@
 <?php
 
-use yii\helpers\Html;
-use yii\grid\GridView;
-use source\models\Taxonomy;
-use source\models\Content;
-use yii\helpers\Url;
-use source\libs\Resource;
 use source\helpers\DateTimeHelper;
+use source\libs\Resource;
+use source\models\Content;
+use source\modules\taxonomy\models\Taxonomy;
+use yii\grid\GridView;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this source\core\front\FrontView */
-/* @var $searchModel app\models\search\ContentSearch */
+/* @var $searchModel source\models\search\ContentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = $model['title'];

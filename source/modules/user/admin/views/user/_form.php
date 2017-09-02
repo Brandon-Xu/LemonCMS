@@ -1,16 +1,16 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
-use source\models\Menu;
 use source\libs\Common;
 use source\libs\Constants;
 use source\libs\TreeHelper;
-use yii\helpers\ArrayHelper;
+use source\modules\menu\models\Menu;
 use source\modules\rbac\models\Role;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\User */
+/* @var $model source\models\User */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

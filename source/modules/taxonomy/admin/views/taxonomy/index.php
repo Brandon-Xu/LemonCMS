@@ -1,15 +1,15 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\grid\GridView;
-use source\LuLu;
 use source\core\lib\Common;
+use source\libs\Constants;
+use source\LuLu;
 use source\modules\taxonomy\models\Taxonomy;
 use source\modules\taxonomy\models\TaxonomyCategory;
-use source\libs\Constants;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\search\TaxonomySearch */
+/* @var $searchModel source\modules\taxonomy\models\search\TaxonomySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 

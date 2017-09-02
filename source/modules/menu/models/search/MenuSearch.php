@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use source\modules\menu\models\Menu;
 
 /**
- * MenuSearch represents the model behind the search form about `source\models\Menu`.
+ * MenuSearch represents the model behind the search form about `source\modules\menu\models\Menu`.
  */
 class MenuSearch extends Menu
 {

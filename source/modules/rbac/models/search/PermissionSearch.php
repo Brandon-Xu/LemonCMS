@@ -9,7 +9,7 @@ use source\modules\rbac\models\Permission;
 use source\LuLu;
 
 /**
- * PermissionSearch represents the model behind the search form about `app\modules\rbac\models\Permission`.
+ * PermissionSearch represents the model behind the search form about `source\modules\rbac\models\Permission`.
  */
 class PermissionSearch extends Permission
 {

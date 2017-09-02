@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\grid\GridView;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $searchModel source\models\search\MenuCategorySearch */

@@ -1,12 +1,13 @@
 <?php
-use yii\helpers\Html;
+
 use source\core\widgets\ActiveForm;
-use source\models\Content;
-use source\models\Taxonomy;
 use source\libs\Common;
+use source\models\Content;
+use source\modules\taxonomy\models\Taxonomy;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Content */
+/* @var $model source\models\Content */
 /* @var $form yii\widgets\ActiveForm */
 
 $filedOptions = [

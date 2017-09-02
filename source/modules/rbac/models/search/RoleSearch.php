@@ -9,7 +9,7 @@ use source\modules\rbac\models\Role;
 use source\LuLu;
 
 /**
- * RoleSearch represents the model behind the search form about `app\modules\rbac\models\Role`.
+ * RoleSearch represents the model behind the search form about `source\modules\rbac\models\Role`.
  */
 class RoleSearch extends Role
 {

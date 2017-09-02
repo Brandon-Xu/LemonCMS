@@ -1,13 +1,12 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
-use source\modules\rbac\models\Category;
 use source\libs\Constants;
 use source\modules\rbac\models\Role;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\rbac\models\Role */
+/* @var $model source\modules\rbac\models\Role */
 /* @var $form yii\widgets\ActiveForm */
 
 ?>

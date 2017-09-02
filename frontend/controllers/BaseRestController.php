@@ -167,7 +167,7 @@ class BaseRestController extends ActiveController
         $object = Content::find()->published()->normalSelect()->where(['id' => $id])->one();
         $data = $object->toArray();
         $data[ 'taxonomy' ] = $object->taxonomy;
-        $data[ 'body' ] = $object->body;
+        $data[ 'body' ]     = $object->body;
 
         return $data;
     }

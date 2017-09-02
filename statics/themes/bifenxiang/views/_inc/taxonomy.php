@@ -1,8 +1,8 @@
 <?php
 
-use yii\helpers\Html;
-use source\modules\taxonomy\models\Taxonomy;
 use source\LuLu;
+use source\modules\taxonomy\models\Taxonomy;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 if (isset($taxonomyId)) {

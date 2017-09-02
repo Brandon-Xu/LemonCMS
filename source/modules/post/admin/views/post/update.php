@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Content */
+/* @var $model source\models\Content */
 
 
 $this->title = '修改文章';

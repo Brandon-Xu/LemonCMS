@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\search\TaxonomySearch */
+/* @var $model source\modules\taxonomy\models\search\TaxonomySearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

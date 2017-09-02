@@ -1,7 +1,8 @@
 <?php
+
+use components\widgets\InhritLayout;
 use yii\helpers\Html;
 use yii\web\View;
-use components\widgets\InhritLayout;
 
 /* @var $this source\core\front\FrontView */
 

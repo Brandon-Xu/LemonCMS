@@ -1,10 +1,10 @@
 <?php
 
-use yii\helpers\Html;
 use source\modules\menu\models\MenuCategory;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model source\models\Menu */
+/* @var $model source\modules\menu\models\Menu */
 
 $category = $model->category_id;
 $categoryModel = MenuCategory::findOne(['id'=>$category]);

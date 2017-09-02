@@ -1,12 +1,12 @@
 <?php
 
-use yii\helpers\Html;
 use source\LuLu;
 use source\modules\menu\models\MenuCategory;
+use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model source\models\Menu */
+/* @var $model source\modules\menu\models\Menu */
 
 $category=LuLu::getGetValue('category');
 $categoryModel = MenuCategory::findOne(['id'=>$category]);

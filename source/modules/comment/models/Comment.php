@@ -1,6 +1,6 @@
 <?php
 
-namespace source\models;
+namespace source\modules\comment\models;
 
 use Yii;
 

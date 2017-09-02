@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TaxonomyContent */
+/* @var $model source\modules\taxonomy\models\Taxonomy */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Taxonomy Contents', 'url' => ['index']];
+$this->title = $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Taxonomies', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="taxonomy-content-view">
+<div class="taxonomy-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,8 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'taxonomy_id',
-            'content_id',
+            'type_id',
+            'parent_id',
+            'name',
+            'alias',
+            'description',
+            'contents',
+            'sort_num',
         ],
     ]) ?>
 

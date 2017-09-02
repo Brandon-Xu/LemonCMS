@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use source\models\Config;
 
 /**
- * ConfigSearch represents the model behind the search form about `app\models\Config`.
+ * ConfigSearch represents the model behind the search form about `source\models\Config`.
  */
 class ConfigSearch extends Config
 {

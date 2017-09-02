@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use source\models\Comment;
 
 /**
- * CommentSearch represents the model behind the search form about `app\models\Comment`.
+ * CommentSearch represents the model behind the search form about `source\modules\comment\models\Comment`.
  */
 class CommentSearch extends Comment
 {

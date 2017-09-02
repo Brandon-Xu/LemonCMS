@@ -1,12 +1,11 @@
 <?php
-use yii\helpers\Html;
+
 use source\core\widgets\ActiveForm;
-use source\models\config\BasicConfig;
-use yii\helpers\ArrayHelper;
 use source\modules\rbac\models\Role;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\config\Basic */
+/* @var $model source\modules\system\models\config\BasicConfig */
 /* @var $form ActiveForm */
 
 $this->title = '注册与访问控制';

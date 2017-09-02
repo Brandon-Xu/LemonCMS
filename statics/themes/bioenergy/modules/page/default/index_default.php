@@ -1,9 +1,11 @@
 <?php
-use yii\web\View;
+
+use source\libs\DataSource;
+use source\libs\Resource;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use source\libs\Resource;
-use source\libs\DataSource;
+use yii\web\View;
+
 /* @var $this yii\web\View */
 $this->title = '页面';
 

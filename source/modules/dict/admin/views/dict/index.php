@@ -1,11 +1,11 @@
 <?php
 
+use source\core\grid\GridView;
+use source\libs\Constants;
+use source\LuLu;
+use source\modules\dict\models\DictCategory;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use source\LuLu;
-use source\libs\Constants;
-use source\core\grid\GridView;
-use source\modules\dict\models\DictCategory;
 
 /* @var $this source\core\back\BackView */
 /* @var $searchModel source\models\search\DictSearch */

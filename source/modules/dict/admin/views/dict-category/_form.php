@@ -1,7 +1,7 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 /* @var $model source\models\DictCategory */

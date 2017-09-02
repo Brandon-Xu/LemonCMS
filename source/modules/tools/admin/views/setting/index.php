@@ -1,11 +1,11 @@
 <?php
 
-use yii\helpers\Html;
-use source\LuLu;
-use source\libs\Common;
-use yii\helpers\ArrayHelper;
 use source\core\widgets\ActiveForm;
+use source\libs\Common;
+use source\LuLu;
 use source\modules\tools\models\Setting;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 /* @var $this source\core\front\FrontView */
 /* @var $generator yii\gii\generators\module\Generator */

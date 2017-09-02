@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\TaxonomyType */
+/* @var $model source\modules\taxonomy\models\TaxonomyType */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Taxonomy Types', 'url' => ['index']];

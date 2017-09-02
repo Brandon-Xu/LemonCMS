@@ -1,11 +1,12 @@
 <?php
-use yii\web\View;
+
+use source\libs\Resource;
+use source\LuLu;
+use source\models\Content;
+use source\modules\taxonomy\models\Taxonomy;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use source\libs\Resource;
-use source\models\Content;
-use source\models\Taxonomy;
-use source\LuLu;
+use yii\web\View;
 
 
 /* @var $this yii\web\View */

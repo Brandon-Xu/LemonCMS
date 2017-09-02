@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model source\models\MenuCategory */
+/* @var $model source\modules\menu\models\MenuCategory */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Menu Categories', 'url' => ['index']];

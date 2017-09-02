@@ -3,8 +3,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\AppAsset;
-use source\models\Taxonomy;
+use source\modules\taxonomy\models\Taxonomy;
 use source\libs\Resource;
 use source\LuLu;
 use yii\helpers\Url;
@@ -13,7 +12,7 @@ use yii\captcha\Captcha;
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\models\LoginForm */
+/* @var $model source\models\LoginForm */
 
 
 

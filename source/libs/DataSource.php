@@ -103,11 +103,7 @@ class DataSource
                 $query->andWhere(['taxonomy_id' => $ids]);
             }
         }
-        foreach ([
-                     'recommend',
-                     'headline',
-                     'sticky'
-                 ] as $att) {
+        foreach ([ 'recommend', 'headline', 'sticky' ] as $att) {
             if (isset($options[ $att ]) && is_integer($options[ $att ])) {
                 $query->andWhere([$att => $options[ $att ]]);
             }
@@ -132,7 +128,7 @@ class DataSource
             if (is_string($options[ 'content_type' ])) {
                 $type = $options[ 'content_type' ];
             } else {
-                $module = LuLu::$app->controller->module;
+                $module = app()->controller->module;
                 if (!($module instanceof Application)) {
                     $type = $module->id;
                 }

@@ -1,13 +1,13 @@
 <?php
 
-use yii\web\View;
+use source\core\widgets\LinkPager;
+use source\core\widgets\ListView;
+use source\core\widgets\LoopData;
+use source\libs\DataSource;
+use source\libs\Resource;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use source\libs\Resource;
-use source\core\widgets\ListView;
-use source\core\widgets\LinkPager;
-use source\libs\DataSource;
-use source\core\widgets\LoopData;
+use yii\web\View;
 
 /* @var $this source\core\front\FrontView */
 $this->title = '首页';

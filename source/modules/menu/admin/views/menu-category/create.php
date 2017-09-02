@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model source\models\MenuCategory */
+/* @var $model source\modules\menu\models\MenuCategory */
 
 
 $this->title = '新建菜单';

@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model source\models\MenuCategory */
+/* @var $model source\modules\menu\models\MenuCategory */
 
 $this->title = '修改菜单分类: ' . ' ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Menu Categories', 'url' => ['index']];

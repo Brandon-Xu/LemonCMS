@@ -1,14 +1,14 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
-use source\modules\rbac\models\Category;
-use source\modules\rbac\models\Permission;
 use source\LuLu;
+
+use source\modules\rbac\models\Permission;
 use source\modules\rbac\rules\Rule;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\rbac\models\Permission */
+/* @var $model source\modules\rbac\models\Permission */
 /* @var $form yii\widgets\ActiveForm */
 
 ?>

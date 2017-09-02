@@ -1,11 +1,12 @@
 <?php
-use yii\web\View;
+
+use source\core\widgets\LinkPager;
+use source\libs\DataSource;
+use source\libs\Resource;
+use source\modules\taxonomy\models\Taxonomy;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use source\libs\Resource;
-use source\models\Taxonomy;
-use source\libs\DataSource;
-use source\core\widgets\LinkPager;
+use yii\web\View;
 
 /* @var $this source\core\front\FrontView */
 

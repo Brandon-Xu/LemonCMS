@@ -9,7 +9,6 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use source\modules\rbac\models\Permission;
 use source\LuLu;
-use source\modules\rbac\models\Category;
 use source\modules\rbac\models\Role;
 
 /**

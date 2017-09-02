@@ -1,9 +1,9 @@
-<?php 
+<?php
 
-use source\libs\Resource;
-use source\models\Menu;
-use source\LuLu;
 use source\libs\DataSource;
+use source\libs\Resource;
+use source\LuLu;
+use source\modules\menu\models\Menu;
 use yii\helpers\Url;
 
 

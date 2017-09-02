@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use source\modules\taxonomy\models\Taxonomy;
 
 /**
- * TaxonomySearch represents the model behind the search form about `app\models\Taxonomy`.
+ * TaxonomySearch represents the model behind the search form about `source\modules\taxonomy\models\Taxonomy`.
  */
 class TaxonomySearch extends Taxonomy
 {

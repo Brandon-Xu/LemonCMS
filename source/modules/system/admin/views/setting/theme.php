@@ -1,10 +1,10 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\widgets\ActiveForm;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\config\ThemeConfig */
+/* @var $model source\models\config\ThemeConfig */
 /* @var $form ActiveForm */
 
 $this->addBreadcrumbs([

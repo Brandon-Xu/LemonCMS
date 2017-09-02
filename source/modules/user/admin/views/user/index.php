@@ -1,11 +1,11 @@
 <?php
 
-use yii\helpers\Html;
 use source\core\grid\GridView;
 use source\LuLu;
+use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\search\UserSearch */
+/* @var $searchModel source\models\search\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '用户管理';

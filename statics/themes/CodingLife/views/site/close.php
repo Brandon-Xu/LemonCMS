@@ -1,9 +1,10 @@
 <?php
-use yii\web\View;
+
+use source\core\widgets\ListView;
+use source\libs\Resource;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use source\libs\Resource;
-use source\core\widgets\ListView;
+use yii\web\View;
 
 /* @var $this source\core\front\FrontView */
 
