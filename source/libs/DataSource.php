@@ -78,7 +78,10 @@ class DataSource
 
 
     private static function buildContentQuery($where = NULL, $options = []) {
-        $query = Content::find()->published()->andWhere($where);
+        $query = Content::find()->published();
+        if(!empty($where)){
+            $query->andWhere($where);
+        }
         if (isset($options['taxonomy'])) {
             $ids = [];
             if (is_array($options['taxonomy'])) {
