@@ -2,6 +2,7 @@
 
 namespace source\modules\modularity;
 
+use source\core\modularity\ModuleInfo;
 use source\core\modularity\ModuleService;
 use source\LuLu;
 use source\modules\modularity\models\Modularity;
@@ -27,10 +28,10 @@ class ModularityService extends ModuleService
             $moduleId = $m['id'];
 
             if (array_key_exists($moduleId, $allModules)) {
-                $ret[$moduleId]['id'] = $m['id'];
-                $ret[$moduleId]['dir'] = $m['dir'];
+                $ret[$moduleId]['id']       = $m['id'];
+                $ret[$moduleId]['dir']      = $m['dir'];
                 $ret[$moduleId]['dir_class'] = $m['dir_class'];
-                $ret[$moduleId]['class'] = $m['class'];
+                $ret[$moduleId]['class']    = $m['class'];
                 $ret[$moduleId]['instance'] = $m['instance'];
             }
         }
@@ -38,12 +39,14 @@ class ModularityService extends ModuleService
         return $ret;
     }
 
+
     public function getAllModules() {
         $ret = [];
 
         $allModules = Modularity::find()->indexBy('id')->all();
 
         $modules = $this->loadAllModules();
+
         foreach ($modules as $m) {
             $moduleId = $m['id'];
 
@@ -68,6 +71,9 @@ class ModularityService extends ModuleService
 
     private $allModules = NULL;
 
+    /**
+     * @return ModuleInfo[]
+     */
     private function loadAllModules() {
         if ($this->allModules !== NULL) {
             return $this->allModules;
@@ -101,18 +107,25 @@ class ModularityService extends ModuleService
                     if (empty($instance->name)) {
                         $instance->name = $moduleFolder;
                     }
-                } catch (Exception $e) {
+                } catch (\Exception $e) {
                     $instance = NULL;
                 }
 
                 if ($instance !== NULL) {
-                    $has_admin = FileHelper::exist($currentModuleDir.'/admin/AdminModule.php') ? TRUE : FALSE;
-                    $has_home = FileHelper::exist($currentModuleDir.'/home/HomeModule.php') ? TRUE : FALSE;
+                    $has_admin  = FileHelper::exist($currentModuleDir.'/admin/AdminModule.php') ? TRUE : FALSE;
+                    $has_home   = FileHelper::exist($currentModuleDir.'/home/HomeModule.php') ? TRUE : FALSE;
 
                     $this->allModules[$instance->id] = [
-                        'id' => $instance->id, 'dir' => $moduleFolder, 'dir_class' => $moduleClassName,
-                        'class' => $class, 'instance' => $instance, 'can_install' => TRUE, 'can_uninstall' => TRUE,
-                        'has_admin' => $has_admin, 'has_home' => $has_home, 'can_active_admin' => FALSE,
+                        'id' => $instance->id,
+                        'dir' => $moduleFolder,
+                        'dir_class' => $moduleClassName,
+                        'class' => $class,
+                        'instance' => $instance,
+                        'can_install' => TRUE,
+                        'can_uninstall' => TRUE,
+                        'has_admin' => $has_admin,
+                        'has_home' => $has_home,
+                        'can_active_admin' => FALSE,
                         'can_active_home' => FALSE,
                     ];
                 }
@@ -120,5 +133,28 @@ class ModularityService extends ModuleService
         }
 
         return $this->allModules;
+    }
+
+    public function loadActiveModules($isAdmin) {
+        $moduleName = $isAdmin ? 'admin\AdminModule' : 'home\HomeModule';
+
+        $activeModules = $this->getActiveModules($isAdmin);
+        foreach ($activeModules as $m) {
+            $moduleId = $m['id'];
+            $moduleDir = $m['dir'];
+            $ModuleClassName = $m['dir_class'];
+
+            app()->setModule($moduleId, [
+                'class' => 'source\modules\\'.$moduleDir.'\\'.$moduleName,
+            ]);
+
+            $serviceFile = \Yii::getAlias('@source').'\modules\\'.$moduleDir.'\\'.$ModuleClassName.'Service.php';
+            if (FileHelper::exist($serviceFile)) {
+                $serviceClass = 'source\modules\\'.$moduleDir.'\\'.$ModuleClassName.'Service';
+                /** @var ModuleService $serviceInstance */
+                $serviceInstance = new $serviceClass();
+                app()->set($serviceInstance->getServiceId(), $serviceInstance);
+            }
+        }
     }
 }

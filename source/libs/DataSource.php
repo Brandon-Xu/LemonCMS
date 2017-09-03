@@ -4,6 +4,7 @@ namespace source\libs;
 
 use source\LuLu;
 use source\models\Content;
+use source\models\ContentQuery;
 use source\modules\fragment\models\Fragment;
 use yii\base\Application;
 
@@ -76,7 +77,11 @@ class DataSource
         return $query->all();
     }
 
-
+    /**
+     * @param null $where
+     * @param array $options
+     * @return ContentQuery
+     */
     private static function buildContentQuery($where = NULL, $options = []) {
         $query = Content::find()->published();
         if(!empty($where)){

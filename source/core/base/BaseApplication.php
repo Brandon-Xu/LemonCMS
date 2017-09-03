@@ -9,47 +9,13 @@ use source\traits\CommonTrait;
 use yii\helpers\FileHelper;
 use yii\web\Application;
 
-/**
- *
- * @property \source\modules\modularity\ModularityService $modularityService
- * @property \source\modules\rbac\RbacService $rbacService
- * @property \source\modules\taxonomy\TaxonomyService $taxonomyService
- * @property \source\modules\menu\MenuService $menuService
- *
- */
 class BaseApplication extends Application
 {
     use CommonTrait;
 
-    public $activeModules = [];
-
     public function init() {
         parent::init();
         Common::setTimezone();
-    }
-
-    public function loadActiveModules($isAdmin) {
-        $moduleManager = $this->modularityService;
-        $this->activeModules = $moduleManager->getActiveModules($isAdmin);
-
-        $module = $isAdmin ? 'admin\AdminModule' : 'home\HomeModule';
-        foreach ($this->activeModules as $m) {
-            $moduleId = $m['id'];
-            $moduleDir = $m['dir'];
-            $ModuleClassName = $m['dir_class'];
-
-            $this->setModule($moduleId, [
-                'class' => 'source\modules\\'.$moduleDir.'\\'.$module,
-            ]);
-
-            $serviceFile = LuLu::getAlias('@source').'\modules\\'.$moduleDir.'\\'.$ModuleClassName.'Service.php';
-            if (FileHelper::exist($serviceFile)) {
-                $serviceClass = 'source\modules\\'.$moduleDir.'\\'.$ModuleClassName.'Service';
-                /** @var ModuleService $serviceInstance */
-                $serviceInstance = new $serviceClass();
-                $this->set($serviceInstance->getServiceId(), $serviceInstance);
-            }
-        }
     }
 
     public function handleRequest($request) {

@@ -2,7 +2,9 @@
 
 namespace source\modules\modularity;
 
-class ModularityInfo extends \source\core\modularity\ModuleInfo
+use source\core\modularity\ModuleInfo;
+
+class ModularityInfo extends ModuleInfo
 {
 
     public function init() {

@@ -2,10 +2,8 @@
 
 namespace source\modules\modularity\admin\controllers;
 
-use backend\controllers\ContentController;
 use source\core\back\BackController;
 use source\modules\modularity\models\Modularity;
-use source\modules\post\models\source\modules\post\models;
 
 class DefaultController extends BackController
 {

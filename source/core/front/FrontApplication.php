@@ -6,9 +6,8 @@ use source\core\base\BaseApplication;
 
 class FrontApplication extends BaseApplication
 {
-
     public function init() {
         parent::init();
-        $this->loadActiveModules(FALSE);
+        $this->modularityService->loadActiveModules(FALSE);
     }
 }

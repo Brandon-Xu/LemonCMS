@@ -2,7 +2,9 @@
 
 namespace source\modules\fragment\home\controllers;
 
-class DefaultController extends \source\core\front\FrontController
+use source\core\front\FrontController;
+
+class DefaultController extends FrontController
 {
     public function actionIndex() {
         return $this->render('index');

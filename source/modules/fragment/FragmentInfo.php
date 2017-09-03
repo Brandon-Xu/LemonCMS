@@ -2,7 +2,9 @@
 
 namespace source\modules\fragment;
 
-class FragmentInfo extends \source\core\modularity\ModuleInfo
+use source\core\modularity\ModuleInfo;
+
+class FragmentInfo extends ModuleInfo
 {
 
     public function init() {

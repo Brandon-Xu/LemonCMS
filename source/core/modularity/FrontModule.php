@@ -2,6 +2,8 @@
 
 namespace source\core\modularity;
 
+use source\core\base\BaseModule;
+
 class FrontModule extends BaseModule
 {
     public function init() {

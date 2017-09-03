@@ -2,7 +2,9 @@
 
 namespace source\modules\dict;
 
-class DictInfo extends \source\core\modularity\ModuleInfo
+use source\core\modularity\ModuleInfo;
+
+class DictInfo extends ModuleInfo
 {
 
     public function init() {

@@ -9,14 +9,6 @@ use yii\base\InvalidRouteException;
 use yii\web\Controller;
 use yii\web\Response;
 
-/**
- *
- * @property \source\modules\modularity\ModularityService $modularityService
- * @property \source\modules\rbac\RbacService $rbacService
- * @property \source\modules\taxonomy\TaxonomyService $taxonomyService
- * @property \source\modules\menu\MenuService $menuService
- *
- */
 class BaseController extends Controller
 {
     use CommonTrait;
