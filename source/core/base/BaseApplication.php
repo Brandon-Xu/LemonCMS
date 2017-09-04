@@ -20,7 +20,6 @@ class BaseApplication extends Application
     }
 
     public function handleRequest($request) {
-
         /*
         * @todo 如果以后要开源出去的话这块得在文档里写一下
         * copy 自 createController 方法中的代码，根据 url 获取其中的 module 模块名
@@ -28,17 +27,14 @@ class BaseApplication extends Application
         * 以达到在模块文件中另行添加 urlManager 里的 Rules 的目的，而不需要在配置文
         * 件里就写完所有 url 规则
         */
-        list ($route, $params) = $request->resolve();
         $loadModuleAndRunInit = function ($route) {
+            $id = $route;
             if (strpos($route, '/') !== FALSE) {
-                list ($id, $route) = explode('/', $route, 2);
-            } else {
-                $id = $route;
-                $route = '';
-            }
-
+                list ($id, $route) = explode('/', $route, 2); }
             return $this->getModule($id);
         };
+
+        list ($route, $params) = $request->resolve();
         $loadModuleAndRunInit($route);
 
         return parent::handleRequest($request);
