@@ -5,11 +5,16 @@
  * Time: 18:05
  */
 
+/**
+ * @return \source\core\base\BaseApplication
+ */
 function app() {
     return \Yii::$app;
 }
 
-function dd($d) {
+function dd($d, $exit = TRUE) {
     \yii\helpers\VarDumper::dump($d, 999, TRUE);
-    exit;
+    if($exit){
+        exit;
+    }
 }

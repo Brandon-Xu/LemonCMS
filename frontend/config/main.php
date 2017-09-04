@@ -1,24 +1,41 @@
 <?php
-$params = array_merge(require(__DIR__.'/../../data/config/params.php'), require(__DIR__.'/../../data/config/params-local.php'), require(__DIR__.'/params.php'), require(__DIR__.'/params-local.php'));
+$params = array_merge(
+    require(__DIR__.'/../../data/config/params.php'),
+    require(__DIR__.'/../../data/config/params-local.php'),
+    require(__DIR__.'/params.php'),
+    require(__DIR__.'/params-local.php')
+);
 
 return [
-    'id' => 'app-frontend', 'language' => 'zh-CN', 'basePath' => dirname(__DIR__), 'bootstrap' => ['log'],
-    'controllerNamespace' => 'frontend\controllers', 'components' => [
+    'id' => 'app-frontend',
+    'language' => 'zh-CN',
+    'basePath' => dirname(__DIR__),
+    'bootstrap' => ['log'],
+    'controllerNamespace' => 'frontend\controllers',
+    'components' => [
         'user' => [
             'identityClass' => 'source\models\User', 'enableAutoLogin' => TRUE,
-        ], 'log' => [
+        ],
+        'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0, 'targets' => [
                 [
                     'class' => 'yii\log\FileTarget', 'levels' => ['error', 'warning'],
                 ],
             ],
-        ], 'errorHandler' => [
+        ],
+        'errorHandler' => [
             'errorAction' => 'site/error',
-        ], 'view' => [
+        ],
+        'view' => [
             'class' => 'source\core\front\FrontView',
         ],
+        'modularityService' => [
+            'class' => 'source\modules\modularity\ModularityService',
+            'isAdmin' => FALSE
+        ],
 
-    ], 'modules' => [
+    ],
+    'modules' => [
         'install' => [
             'class' => 'source\modules\install\home\HomeModule',
         ],

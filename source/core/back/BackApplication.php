@@ -10,7 +10,6 @@ class BackApplication extends BaseApplication
 
     public function init() {
         parent::init();
-        $this->modularityService->loadActiveModules(TRUE);
         $this->layout = 'main';
     }
 }

@@ -36,6 +36,9 @@ return [
         'request' => [
             'class' => 'yii\web\Request', 'enableCsrfValidation' => FALSE,
         ],
-
+        'modularityService' => [
+            'class' => 'source\modules\modularity\ModularityService',
+            'isAdmin' => TRUE
+        ],
     ], 'params' => $params,
 ];

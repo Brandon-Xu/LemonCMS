@@ -18,13 +18,10 @@ class BaseModule extends Module
 
     public $status;
 
-    public $modularityService;
-
     public $moduleInfo;
 
     public function init() {
         parent::init();
-        $this->modularityService = LuLu::getService('modularity');
     }
 
     public function getMenus() {

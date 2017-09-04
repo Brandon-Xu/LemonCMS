@@ -4,157 +4,101 @@ namespace source\modules\modularity;
 
 use source\core\modularity\ModuleInfo;
 use source\core\modularity\ModuleService;
-use source\LuLu;
 use source\modules\modularity\models\Modularity;
 use yii\helpers\FileHelper;
 
+/**
+ * Class ModularityService
+ * @property bool $isAdmin
+ * @package source\modules\modularity
+ */
 class ModularityService extends ModuleService
 {
+    /** @var Modularity[] $_modules */
+    private $_modules = [];
+    private $_isAdmin = NULL;
 
+    const HOME  = FALSE;
+    const ADMIN = TRUE;
+
+    const ADMIN_MODULE = 'AdminModule';
+    const HOME_MODULE  = 'HomeModule';
+
+    public $moduleRootNamespace = 'source\modules';
+
+    /**
+     * @return string
+     */
     public function getServiceId() {
         return 'modularityService';
     }
 
-    public function getActiveModules($isAdmin = FALSE) {
-        $ret = [];
-
-        $field = $isAdmin ? 'enable_admin' : 'enable_home';
-        $allModules = Modularity::find()->where([
-            $field => 1,
-        ])->indexBy('id')->all();
-
-        $modules = $this->loadAllModules();
-        foreach ($modules as $m) {
-            $moduleId = $m['id'];
-
-            if (array_key_exists($moduleId, $allModules)) {
-                $ret[$moduleId]['id']       = $m['id'];
-                $ret[$moduleId]['dir']      = $m['dir'];
-                $ret[$moduleId]['dir_class'] = $m['dir_class'];
-                $ret[$moduleId]['class']    = $m['class'];
-                $ret[$moduleId]['instance'] = $m['instance'];
-            }
+    /**
+     * @param $value
+     * @return bool
+     */
+    public function setIsAdmin($value){
+        if($this->getIsAdmin() !== NULL) return TRUE;
+        if(!$value === self::ADMIN){
+            $value = self::HOME;
         }
-
-        return $ret;
+        $this->_isAdmin = $value;
+        return TRUE;
     }
-
-
-    public function getAllModules() {
-        $ret = [];
-
-        $allModules = Modularity::find()->indexBy('id')->all();
-
-        $modules = $this->loadAllModules();
-
-        foreach ($modules as $m) {
-            $moduleId = $m['id'];
-
-            $ret[$moduleId] = $m;
-            if (array_key_exists($moduleId, $allModules)) {
-                $exitModule = $allModules[$moduleId];
-
-                if ($ret[$moduleId]['has_admin']) {
-                    $ret[$moduleId]['can_active_admin'] = ($exitModule['enable_admin'] === NULL || $exitModule['enable_admin'] === 0) ? TRUE : FALSE;
-                }
-                if ($ret[$moduleId]['has_home']) {
-                    $ret[$moduleId]['can_active_home'] = ($exitModule['enable_home'] === NULL || $exitModule['enable_home'] === 0) ? TRUE : FALSE;
-                }
-
-                $ret[$moduleId]['can_install'] = FALSE;
-                $ret[$moduleId]['can_uninstall'] = ($ret[$moduleId]['has_admin'] && $exitModule['enable_admin'] || $ret[$moduleId]['has_home'] && $exitModule['enable_home']) ? FALSE : TRUE;
-            }
-        }
-
-        return $ret;
-    }
-
-    private $allModules = NULL;
 
     /**
-     * @return ModuleInfo[]
+     * @return bool
      */
-    private function loadAllModules() {
-        if ($this->allModules !== NULL) {
-            return $this->allModules;
-        }
-        $this->allModules = [];
-
-        $moduleRootPath = LuLu::getAlias('@source').'/modules';
-
-        if ($moduleRootDir = @ dir($moduleRootPath)) {
-            while (($moduleFolder = $moduleRootDir->read()) !== FALSE) {
-                $currentModuleDir = $moduleRootPath.'/'.$moduleFolder;
-                if (preg_match('|^\.+$|', $moduleFolder) || !is_dir($currentModuleDir)) {
-                    continue;
-                }
-
-                $moduleClassName = ucwords($moduleFolder);
-
-                if (FileHelper::exist($currentModuleDir.'/'.$moduleClassName.'Info.php')) {
-                    $class = 'source\modules\\'.$moduleFolder.'\\'.$moduleClassName.'Info';
-                } else {
-                    continue;
-                }
-
-                $instance = NULL;
-                try {
-                    // $moduleObj = LuLu::createObject($class);
-                    $instance = new $class();
-                    if (empty($instance->id)) {
-                        $instance->id = $moduleFolder;
-                    }
-                    if (empty($instance->name)) {
-                        $instance->name = $moduleFolder;
-                    }
-                } catch (\Exception $e) {
-                    $instance = NULL;
-                }
-
-                if ($instance !== NULL) {
-                    $has_admin  = FileHelper::exist($currentModuleDir.'/admin/AdminModule.php') ? TRUE : FALSE;
-                    $has_home   = FileHelper::exist($currentModuleDir.'/home/HomeModule.php') ? TRUE : FALSE;
-
-                    $this->allModules[$instance->id] = [
-                        'id' => $instance->id,
-                        'dir' => $moduleFolder,
-                        'dir_class' => $moduleClassName,
-                        'class' => $class,
-                        'instance' => $instance,
-                        'can_install' => TRUE,
-                        'can_uninstall' => TRUE,
-                        'has_admin' => $has_admin,
-                        'has_home' => $has_home,
-                        'can_active_admin' => FALSE,
-                        'can_active_home' => FALSE,
-                    ];
-                }
-            }
-        }
-
-        return $this->allModules;
+    public function getIsAdmin(){
+        return $this->_isAdmin;
     }
 
-    public function loadActiveModules($isAdmin) {
-        $moduleName = $isAdmin ? 'admin\AdminModule' : 'home\HomeModule';
+    /**
+     * @param null $isAdmin
+     * @return string
+     */
+    public function getModularityType($isAdmin = NULL) {
+        if($isAdmin === NULL) $isAdmin = $this->isAdmin;
+        return $isAdmin ? 'admin' : 'home';
+    }
 
-        $activeModules = $this->getActiveModules($isAdmin);
-        foreach ($activeModules as $m) {
-            $moduleId = $m['id'];
-            $moduleDir = $m['dir'];
-            $ModuleClassName = $m['dir_class'];
+    /**
+     * @return string
+     */
+    public function getModularityTypeClass(){
+        $className  = $this->isAdmin ? ModularityService::ADMIN_MODULE: ModularityService::HOME_MODULE;
+        $class      = $this->getModularityType() . '\\' . $className;
+        return $class;
+    }
 
-            app()->setModule($moduleId, [
-                'class' => 'source\modules\\'.$moduleDir.'\\'.$moduleName,
-            ]);
-
-            $serviceFile = \Yii::getAlias('@source').'\modules\\'.$moduleDir.'\\'.$ModuleClassName.'Service.php';
-            if (FileHelper::exist($serviceFile)) {
-                $serviceClass = 'source\modules\\'.$moduleDir.'\\'.$ModuleClassName.'Service';
-                /** @var ModuleService $serviceInstance */
-                $serviceInstance = new $serviceClass();
-                app()->set($serviceInstance->getServiceId(), $serviceInstance);
-            }
+    /**
+     * @param Modularity $module
+     */
+    public function addModule(Modularity $module){
+        if(!isset($this->_modules[$module->id]) && $module->build()){
+            $this->_modules[$module->id] = $module;
         }
     }
+
+    /**
+     * @return Modularity[]
+     */
+    public function getAllModules() {
+        if(empty($this->_modules)){
+            $this->loadActiveModules();
+        }
+        return $this->_modules;
+    }
+
+    /**
+     * @return bool
+     */
+    public function loadActiveModules(){
+        $field = $this->isAdmin ? 'enable_admin' : 'enable_home';
+        Modularity::find()->where([
+            $field => 1,
+        ])->indexBy('id')->all();
+        return TRUE;
+    }
+
 }

@@ -3,7 +3,9 @@
 namespace source\modules\modularity\admin;
 
 
-class AdminModule extends \source\core\modularity\BackModule
+use source\core\modularity\BackModule;
+
+class AdminModule extends BackModule
 {
     public $controllerNamespace = 'source\modules\modularity\admin\controllers';
 

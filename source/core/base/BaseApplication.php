@@ -16,6 +16,7 @@ class BaseApplication extends Application
     public function init() {
         parent::init();
         Common::setTimezone();
+        app()->modularity->loadActiveModules();
     }
 
     public function handleRequest($request) {

@@ -13,7 +13,7 @@ class DefaultController extends BackController
     }
 
     public function actionIndex() {
-        $modules = $this->modularityService->getAllModules();
+        $modules = app()->modularity->getAllModules();
 
         return $this->render('index', [
             'modules' => $modules,
@@ -27,7 +27,7 @@ class DefaultController extends BackController
         $model->enable_home = 0;
         $model->save();
 
-        $modules = $this->modularityService->getAllModules();
+        $modules = app()->modularity->getAllModules();
         if (isset($modules[$id]) && $modules[$id]['instance'] !== NULL) {
             $modules[$id]['instance']->install();
         }
@@ -40,7 +40,7 @@ class DefaultController extends BackController
     public function actionUninstall($id) {
         Modularity::deleteAll(['id' => $id]);
 
-        $modules = $this->modularityService->getAllModules();
+        $modules = app()->modularity->getAllModules();
         if (isset($modules[$id]) && $modules[$id]['instance'] !== NULL) {
             $modules[$id]['instance']->uninstall();
         }
@@ -54,7 +54,7 @@ class DefaultController extends BackController
         $field = $is_admin === NULL ? 'enable_home' : 'enable_admin';
         Modularity::updateAll([$field => 1], ['id' => $id]);
 
-        $modules = $this->modularityService->getAllModules();
+        $modules = app()->modularity->getAllModules();
         if (isset($modules[$id]) && $modules[$id]['instance'] !== NULL) {
             if ($is_admin === NULL) {
                 $modules[$id]['instance']->activeHome();
@@ -72,7 +72,7 @@ class DefaultController extends BackController
         $field = $is_admin === NULL ? 'enable_home' : 'enable_admin';
         Modularity::updateAll([$field => 0], ['id' => $id]);
 
-        $modules = $this->modularityService->getAllModules();
+        $modules = app()->modularity->getAllModules();
         if (isset($modules[$id]) && $modules[$id]['instance'] !== NULL) {
             if ($is_admin === NULL) {
                 $modules[$id]['instance']->deactiveHome();

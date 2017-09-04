@@ -2,11 +2,13 @@
 
 namespace source\traits;
 
+use source\core\modularity\ModuleService;
 use source\libs\Common;
 use source\LuLu;
+use yii\base\InvalidParamException;
 
 /**
- *
+ * @property \source\modules\modularity\ModularityService $modularity
  * @property \source\modules\modularity\ModularityService $modularityService
  * @property \source\modules\rbac\RbacService $rbacService
  * @property \source\modules\taxonomy\TaxonomyService $taxonomyService
@@ -20,10 +22,18 @@ trait  CommonTrait
         if ($dot > 0) {
             $serviceName = substr($name, 0, $dot);
 
-            return LuLu::getService($serviceName);
+            $id = $serviceName.'Service';
+            $component = app()->get($id, TRUE);
+            if ($component instanceof ModuleService) {
+                return $component;
+            }
+            throw new InvalidParamException("get service:$id");
         }
-
         return parent::__get($name);
+    }
+
+    public function getModularity(){
+        return app()->get('modularityService', TRUE);
     }
 
     public function getConfig($id) {
