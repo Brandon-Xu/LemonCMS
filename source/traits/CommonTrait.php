@@ -5,39 +5,48 @@ namespace source\traits;
 use source\core\modularity\ModuleService;
 use source\libs\Common;
 use source\LuLu;
+use source\modules\menu\MenuService;
+use source\modules\modularity\ModularityService;
+use source\modules\rbac\RbacService;
+use source\modules\taxonomy\TaxonomyService;
 use yii\base\InvalidParamException;
 
 /**
- * @property \source\modules\modularity\ModularityService $modularity
- * @property \source\modules\modularity\ModularityService $modularityService
- * @property \source\modules\rbac\RbacService $rbacService
- * @property \source\modules\taxonomy\TaxonomyService $taxonomyService
- * @property \source\modules\menu\MenuService $menuService
+ * @property ModularityService $modularity
+ * @property RbacService $rbac
+ * @property TaxonomyService $taxonomy
+ * @property MenuService $menu
  *
  */
 trait  CommonTrait
 {
-    public function __get($name) {
-        $dot = strpos($name, 'Service');
-        if ($dot > 0) {
-            $serviceName = substr($name, 0, $dot);
 
-            $id = $serviceName.'Service';
-            $component = app()->get($id, TRUE);
-            if ($component instanceof ModuleService) {
-                return $component;
-            }
-            throw new InvalidParamException("get service:$id");
-        }
-        return parent::__get($name);
-    }
-
+    /**
+     * @return null|ModularityService
+     */
     public function getModularity(){
         return app()->get('modularityService', TRUE);
     }
 
-    public function getConfig($id) {
-        return Common::getConfig($id);
+    /**
+     * @return null|RbacService
+     */
+    public function getRbac(){
+        return app()->get('rbacService', TRUE);
+    }
+
+    /**
+     * @return null|TaxonomyService
+     */
+    public function getTaxonomy(){
+        return app()->get('taxonomyService', TRUE);
+    }
+
+    /**
+     * @return null|MenuService
+     */
+    public function getMenu(){
+        return app()->get('menuService', TRUE);
     }
 
     public function getConfigValue($id) {

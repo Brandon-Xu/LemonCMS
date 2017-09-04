@@ -7,9 +7,13 @@
 
 namespace source\models;
 
-use source\core\base\ActiveQuery;
 use source\libs\Constants;
+use yii\db\ActiveQuery;
 
+/**
+ * Class ContentQuery
+ * @package source\models
+ */
 class ContentQuery extends ActiveQuery
 {
 

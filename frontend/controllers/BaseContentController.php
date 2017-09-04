@@ -42,7 +42,7 @@ class BaseContentController extends FrontController
             $query->andFilterWhere(['taxonomy_id' => intval($taxonomy)]);
         }
 
-        $taxonomyModel = $this->taxonomyService->getTaxonomyById($taxonomy);
+        $taxonomyModel = app()->taxonomy->getTaxonomyById($taxonomy);
         LuLu::setViewParam(['taxonomyModel' => $taxonomyModel]);
 
         $vars = $this->getListVars($taxonomyModel);
@@ -68,7 +68,7 @@ class BaseContentController extends FrontController
 
         $locals = $this->getDetail($id);
 
-        $taxonomyModel = $this->taxonomyService->getTaxonomyById($locals['model']['taxonomy_id']);
+        $taxonomyModel = app()->taxonomy->getTaxonomyById($locals['model']['taxonomy_id']);
         LuLu::setViewParam(['taxonomyModel' => $taxonomyModel]);
 
         $locals['taxonomyModel'] = $taxonomyModel;

@@ -18,12 +18,13 @@ class FragmentController extends BackController
      * Lists all Fragment models.
      * @return mixed
      */
-    public function actionIndex($type) {
+    public function actionIndex() {
         $searchModel = new FragmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

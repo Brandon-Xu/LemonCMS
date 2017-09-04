@@ -21,7 +21,7 @@ class BackController extends BaseController
             LuLu::go(['/site/login']);
         }
 
-        if (!$this->rbacService->checkPermission('manager_admin')) {
+        if (!app()->rbac->checkPermission('manager_admin')) {
             return $this->showMessage();
         }
 
@@ -29,7 +29,7 @@ class BackController extends BaseController
             return parent::beforeAction($action);
         }
 
-        if (!$this->rbacService->checkPermission()) {
+        if (!app()->rbac->checkPermission()) {
             return $this->showMessage();
         } else {
             return parent::beforeAction($action);

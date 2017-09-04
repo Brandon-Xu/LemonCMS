@@ -15,7 +15,7 @@ use yii\web\View;
 $moduleId = LuLu::$app->controller->module->id;
 
 
-$taxonomies = $this->taxonomyService->getTaxonomiesAsTree($this->getConfigValue($moduleId.'_taxonomy'));
+$taxonomies = app()->taxonomy->getTaxonomiesAsTree($this->getConfigValue($moduleId.'_taxonomy'));
 
 if(!empty($taxonomies))
 {

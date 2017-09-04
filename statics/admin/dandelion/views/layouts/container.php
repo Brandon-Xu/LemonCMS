@@ -131,7 +131,7 @@ $rbacService = LuLu::getService('rbac');
                         <div id="da-header-menu">
                             <?php
                             $isHome = TRUE;
-                            foreach ($this->menuService->getChildren('admin') as $item) {
+                            foreach (app()->menu->getChildren('admin') as $item) {
 
                                 ?>
                                 <div class="da-header-menu-item <?php if ($isHome) {

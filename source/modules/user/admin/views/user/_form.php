@@ -20,7 +20,7 @@ use yii\helpers\ArrayHelper;
 <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
 
 <?= $form->field($model, 'role')
-    ->dropDownList(ArrayHelper::map($this->rbacService->getAllRoles(), 'id', 'name', 'category')) ?>
+    ->dropDownList(ArrayHelper::map(app()->rbac->getAllRoles(), 'id', 'name', 'category')) ?>
 
 <?= $form->field($model, 'status')->radioList(Constants::getStatusItems()) ?>
 

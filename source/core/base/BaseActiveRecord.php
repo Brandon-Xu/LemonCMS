@@ -5,9 +5,11 @@ namespace source\core\base;
 use source\libs\Constants;
 use source\LuLu;
 use yii\base\InvalidConfigException;
+use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
-class BaseActiveRecord extends \yii\db\ActiveRecord
+class BaseActiveRecord extends ActiveRecord
 {
 
     public function init() {

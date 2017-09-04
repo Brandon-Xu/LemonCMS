@@ -286,7 +286,7 @@ class LuLu extends \Yii
 
     /**
      *
-     * @param \source\core\base\ActiveQuery|\yii\db\ActiveQuery $query
+     * @param \yii\db\ActiveQuery $query
      * @param array $config ['db','page','pageSize','orderBy','rows','pager']
      * @return array
      */

@@ -11,10 +11,6 @@ use source\libs\Resource;
 class FrontView extends BaseView
 {
 
-    public function init() {
-        parent::init();
-    }
-
     public function setTheme() {
         $currentTheme = Resource::getHomeTheme();
 
@@ -34,11 +30,11 @@ class FrontView extends BaseView
     }
 
     public function getMenus($category = 'main', $parentId = 0) {
-        return $this->menuService->getChildren($category, $parentId, 1);
+        return app()->menu->getChildren($category, $parentId, 1);
     }
 
     public function renderMenu($category = 'main', $parentId = 0) {
-        echo $this->menuService->getMenuHtml($category, 0);
+        echo app()->menu->getMenuHtml($category, 0);
     }
 
     public function getFragmentData($code, $options = []) {

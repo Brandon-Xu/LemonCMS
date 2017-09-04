@@ -14,7 +14,7 @@ use yii\helpers\Html;
 
 $filedOptions = [];
 $taxonomy = $this->getConfigValue('page_taxonomy');
-$taxonomies = $this->taxonomyService->getTaxonomiesAsTree($taxonomy);
+$taxonomies = app()->taxonomy->getTaxonomiesAsTree($taxonomy);
 $options = TreeHelper::buildTreeOptions($taxonomies);
 LuLu::setViewParam(['defaultLayout' => FALSE]);
 ?>

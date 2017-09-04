@@ -39,7 +39,7 @@ class SiteController extends BackController
         $model = new \source\models\LoginForm();
         if ($model->load(LuLu::$app->request->post())) {
             if ($model->login()) {
-                if ($this->rbacService->checkPermission('manager_admin')) {
+                if (app()->rbac->checkPermission('manager_admin')) {
                     return $this->goBack();
                 } else {
                     LuLu::$app->user->logout();

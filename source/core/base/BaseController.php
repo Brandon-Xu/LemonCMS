@@ -53,7 +53,7 @@ class BaseController extends Controller
         $this->getView()->on(BaseView::EVENT_AFTER_PAGE, [
             $this, 'afterPage',
         ]);
-        LuLu::getResponse()->on(Response::EVENT_AFTER_SEND, [
+        app()->response->on(Response::EVENT_AFTER_SEND, [
             $this, 'afterResponse',
         ]);
     }
@@ -62,7 +62,7 @@ class BaseController extends Controller
         $ret = [
             'status' => $status, 'message' => $message, 'data' => $data,
         ];
-        $response = \Yii::$app->response;
+        $response = app()->response;
         $response->format = Response::FORMAT_JSON;
         $response->data = $ret;
 
@@ -75,64 +75,6 @@ class BaseController extends Controller
 
     public function jsonFailedResponse($data, $message = '') {
         return $this->jsonResponse($data, 'failed', $message);
-    }
-
-    /**
-     * 执行一个action
-     * @param string $id
-     * @param array $params
-     * @return mixed|ActionResult
-     * @throws InvalidRouteException
-     */
-    public function runAction($id, $params = []) {
-        $action = $this->createAction($id);
-        if ($action === NULL) {
-            throw new InvalidRouteException('Unable to resolve the request: '.$this->getUniqueId().'/'.$id);
-        }
-
-        Yii::trace("Route to run: ".$action->getUniqueId(), __METHOD__);
-
-        if (Yii::$app->requestedAction === NULL) {
-            Yii::$app->requestedAction = $action;
-        }
-
-        $oldAction = $this->action;
-        $this->action = $action;
-
-        $modules = [];
-        $runAction = TRUE;
-
-        foreach ($this->getModules() as $module) {
-            if ($module->beforeAction($action)) {
-                array_unshift($modules, $module);
-            } else {
-                $runAction = FALSE;
-                break;
-            }
-        }
-
-        $actionResult = new ActionResult();
-        $actionResult->controller = $this;
-        $actionResult->action = $action;
-
-        $result = $this->beforeAction($action);
-        if ($runAction && $result === TRUE) {
-            $actionResult->isExecuted = TRUE;
-            $actionResult->result = $action->runWithParams($params);
-        } else {
-            $actionResult->isExecuted = FALSE;
-            $actionResult->result = $result;
-        }
-
-        $actionResult = $this->afterAction($action, $actionResult);
-
-        foreach ($modules as $module) {
-            $actionResult = $module->afterAction($action, $actionResult);
-        }
-
-        $this->action = $oldAction;
-
-        return $actionResult;
     }
 
     public function findLayoutFile($view) {

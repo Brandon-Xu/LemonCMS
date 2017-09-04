@@ -16,7 +16,7 @@ $filedOptions = [];
 
 
 $taxonomy = $this->getConfigValue('post_taxonomy');
-$taxonomies = $this->taxonomyService->getTaxonomiesAsTree($taxonomy);
+$taxonomies = app()->taxonomy->getTaxonomiesAsTree($taxonomy);
 
 $options = TreeHelper::buildTreeOptions($taxonomies);
 

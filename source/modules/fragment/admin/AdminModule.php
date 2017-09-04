@@ -2,22 +2,11 @@
 
 namespace source\modules\fragment\admin;
 
-class AdminModule extends \source\core\modularity\BackModule
+use source\core\modularity\BackModule;
+
+class AdminModule extends BackModule
 {
 
     public $controllerNamespace = 'source\modules\fragment\admin\controllers';
 
-    public function init() {
-        parent::init();
-
-        // custom initialization code goes here
-    }
-
-    //public function getMenus()
-    //{
-    //    return [
-    //        ['首页',['/fragment']],
-    //        ['设置',['/fragment/setting']],
-    //    ];
-    //}
 }
