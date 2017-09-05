@@ -23,17 +23,12 @@ class FileHelper extends BaseFileHelper
         return $ret;
     }
 
-    public static function isDir($path) {
-        return is_dir($path);
-    }
-
     public static function exist($path) {
         if (is_array($path)) {
             $path = self::buildPath($path);
         }
         $path = self::normalizePath($path);
 
-        //LuLu::info($path);
         return file_exists($path);
     }
 
@@ -61,10 +56,6 @@ class FileHelper extends BaseFileHelper
 
         return $ret;
     }
-
-    public static function createFile($filePath, $content) {
-    }
-
 
     public static function readFile($filePath) {
         if (is_array($filePath)) {

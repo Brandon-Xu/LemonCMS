@@ -87,6 +87,8 @@ class DataSource
         if(!empty($where)){
             $query->andWhere($where);
         }
+
+        // 多个分类的筛选
         if (isset($options['taxonomy'])) {
             $ids = [];
             if (is_array($options['taxonomy'])) {
@@ -104,25 +106,23 @@ class DataSource
                 $query->andWhere(['taxonomy_id' => $ids]);
             }
         }
+
+        // 这是咩啊？母鸡啊！
         foreach (['recommend', 'headline', 'sticky'] as $att) {
             if (isset($options[$att]) && is_integer($options[$att])) {
                 $query->andWhere([$att => $options[$att]]);
             }
         }
 
-        if (isset($options['flag'])) {
-            $flagValue = Common::getFlagValue($options['flag']);
-            if ($flagValue > 0) {
-                $query->andWhere('flag&'.$flagValue.'>0');
-            }
-        }
 
+        // 是否有图片
         if (isset($options['is_pic'])) {
             $query->andWhere([
                 '!=', 'thumb', '',
             ]);
         }
 
+        // 根据当前请求的模块来筛选内容类型
         if (isset($options['content_type'])) {
             if (is_string($options['content_type'])) {
                 $type = $options['content_type'];

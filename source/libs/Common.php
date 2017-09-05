@@ -2,6 +2,7 @@
 
 namespace source\libs;
 
+use source\helpers\FileHelper;
 use source\LuLu;
 use source\models\Config;
 use yii\web\UploadedFile;
@@ -172,40 +173,8 @@ class Common
         if (isset($format['s'])) {
             $title = '<s>'.$title.'</s>';
         }
-        // 		if(isset($format['c']))
-        // 		{
-        // 			$title = '<font color=' . $format['c'] . '>' . $title . '</font>';
-        // 		}
+
         return $title;
-    }
-
-    public static function getFlag($id = NULL) {
-        $flags = ContentFlag::getFlags();
-        if ($id !== NULL) {
-            if (isset($flags[$id])) {
-                return $flags[$id];
-            }
-
-            return '';
-        }
-
-        return $flags;
-    }
-
-    public static function getFlagValue($var) {
-        if (is_string($var)) {
-            $var = explode(',', $var);
-        }
-        if (!is_array($var)) {
-            return 0;
-        }
-
-        $ret = 0;
-        foreach ($var as $value) {
-            $ret += intval($value);
-        }
-
-        return $ret;
     }
 
     public static function getTitlePic($var) {
@@ -233,6 +202,7 @@ class Common
             $root = \Yii::getAlias('@frontend');
         }
 
+        $pathArray = [$root];
         if ($dir !== NULL) {
             if (is_string($dir)) {
                 $pathArray = [
@@ -241,11 +211,9 @@ class Common
             } else if (is_array($dir)) {
                 $pathArray = array_merge([$root], $dir);
             }
-        } else {
-            $pathArray = [$root];
         }
 
-        return TFileHelper::getFiles($pathArray, $prefix);
+        return FileHelper::getFiles($pathArray, $prefix);
     }
 
     public static function getAttachUrl($url, $echo = TRUE) {

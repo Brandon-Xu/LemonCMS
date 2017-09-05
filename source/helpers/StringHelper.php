@@ -20,20 +20,15 @@ class StringHelper extends \yii\helpers\StringHelper
         $items = [];
 
         foreach ($source as $itemString) {
-            if (empty($itemString)) {
-                continue;
-            }
+            if (empty($itemString)) { continue; }
 
             $itemArray = explode($valueSep, $itemString);
             $count = count($itemArray);
-            if ($count == 0) {
-                continue;
-            }
+            if ($count == 0) { continue; }
 
+            $items[$itemArray[0]] = $itemArray[0];
             if ($count == 2) {
                 $items[$itemArray[0]] = $itemArray[1];
-            } else {
-                $items[$itemArray[0]] = $itemArray[0];
             }
         }
 
@@ -45,13 +40,9 @@ class StringHelper extends \yii\helpers\StringHelper
     }
 
     public static function isNullOrEmpty($var) {
-        if (!isset($var)) {
+        if (!isset($var) || $var === '') {
             return TRUE;
         }
-        if ($var === '') {
-            return TRUE;
-        }
-
         return FALSE;
     }
 

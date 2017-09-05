@@ -48,11 +48,8 @@ return [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.sina.com',
-                //使用163邮箱
                 'username' => 'xxx@sina.com',
-                //你的163的帐号
                 'password' => "xxx",
-                //你的163的密码
                 'port' => '25',
                 //'port'=>'465',
                 //'encryption' => 'ssl',

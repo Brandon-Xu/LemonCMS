@@ -9,6 +9,7 @@
 namespace source\modules\post\home\controllers;
 
 use frontend\controllers\BaseRestController;
+use source\libs\DataSource;
 use source\modules\post\models\ContentPost;
 
 class ApiController extends BaseRestController
@@ -34,5 +35,9 @@ class ApiController extends BaseRestController
         return $verbs;
     }
 
+    public function actionI(){
+        $d = DataSource::getContents(NULL, 'view_count desc', 5, ['is_pic' => TRUE]);
+        return $d;
+    }
 
 }

@@ -1,11 +1,6 @@
 <?php
 
 use source\helpers\DateTimeHelper;
-use source\libs\Resource;
-use source\models\Content;
-use source\modules\taxonomy\models\Taxonomy;
-use yii\grid\GridView;
-use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this source\core\front\FrontView */

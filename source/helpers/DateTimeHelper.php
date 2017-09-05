@@ -7,14 +7,6 @@ use source\libs\Common;
 class DateTimeHelper
 {
 
-    public static function getCurrentTime($useSys = FALSE) {
-        if (!$useSys) {
-        }
-        date_default_timezone_set('PRC');
-
-        return date('Y-m-d H:i:s', time());
-    }
-
     public static function showTime($time, $format = 'Y-m-d') {
         echo date($format, strtotime($time));
     }

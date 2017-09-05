@@ -1,11 +1,6 @@
 <?php
 
-use source\helpers\DateTimeHelper;
-use source\libs\Resource;
 use yii\helpers\Html;
-use source\helpers\StringHelper;
-use yii\helpers\Url;
-use yii\web\View;
 
 /* @var $this source\core\front\FrontView */
 

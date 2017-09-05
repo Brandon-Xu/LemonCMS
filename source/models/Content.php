@@ -74,6 +74,10 @@ class Content extends BaseActiveRecord
      */
     private $_bodyClass;
 
+    /**
+     * 这个类我不想解释了！
+     * @return ContentQuery
+     */
     public static function find() {
         return new ContentQuery(get_called_class());
     }
@@ -212,19 +216,14 @@ class Content extends BaseActiveRecord
      */
     public function rules() {
         return [
-            [
-                [
-                    'taxonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count',
-                    'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'sticky',
-                    'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status',
-                ], 'integer',
-            ], [['content_type', 'title'], 'required'],
-            [['user_name', 'last_user_name', 'password', 'view', 'layout', 'content_type'], 'string', 'max' => 64], [
-                [
-                    'seo_title', 'seo_keywords', 'seo_description', 'title', 'sub_title', 'url_alias', 'redirect_url',
-                    'thumb',
-                ], 'string', 'max' => 256,
-            ], [['summary'], 'string', 'max' => 512], [['thumbs'], 'string', 'max' => 1024],
+            [[ 'taxonomy_id', 'user_id', 'last_user_id', 'created_at', 'updated_at', 'focus_count',
+               'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count', 'sticky',
+               'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status',], 'integer',],
+            [['content_type', 'title'], 'required'],
+            [['user_name', 'last_user_name', 'password', 'view', 'layout', 'content_type'], 'string', 'max' => 64],
+            [['seo_title', 'seo_keywords', 'seo_description', 'title', 'sub_title', 'url_alias', 'redirect_url', 'thumb', ], 'string', 'max' => 256,],
+            [['summary'], 'string', 'max' => 512],
+            [['thumbs'], 'string', 'max' => 1024],
         ];
     }
 
@@ -267,7 +266,7 @@ class Content extends BaseActiveRecord
             'title' => '标题',
             'sub_title' => '副标题',
             'url_alias' => '别名',
-            'redirect_url' => '转向Url',
+            'redirect_url' => '跳转Url',
             'summary' => '简介',
             'thumb' => '缩略图',
             'thumbs' => '缩略图集',
