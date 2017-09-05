@@ -2,6 +2,7 @@
 
 namespace source\modules\fragment\models;
 
+use source\core\base\BaseActiveRecord;
 use source\LuLu;
 use yii\helpers\ArrayHelper;
 
@@ -15,7 +16,7 @@ use yii\helpers\ArrayHelper;
  * @property string $description
  * @property integer $type
  */
-class Fragment extends \source\core\base\BaseActiveRecord
+class Fragment extends BaseActiveRecord
 {
     const CachePrefix = 'fragment_';
 
@@ -26,8 +27,8 @@ class Fragment extends \source\core\base\BaseActiveRecord
         $items = [
             self::Type_Code => '代码碎片', self::Type_Static => '静态碎片',
         ];
-
-        return ArrayHelper::getItems($items, $key);
+        if($key === NULL) return $items;
+        return ArrayHelper::getValue($items, $key);
     }
 
     /**
@@ -51,16 +52,10 @@ class Fragment extends \source\core\base\BaseActiveRecord
      * @inheritdoc
      */
     public function attributeLabels() {
-        return self::getAttributeLabels();
-    }
-
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
+        return [
             'id' => 'ID', 'category_id' => '碎片分类', 'code' => '标识', 'name' => '名称', 'description' => '描述',
             'type' => '类型',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
 
     public static function getData($code, $other = [], $fromCache = TRUE) {

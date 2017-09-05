@@ -8,7 +8,7 @@
 namespace source\core\base;
 
 use yii\base\InvalidParamException;
-use yii\helpers\StringHelper;
+use source\helpers\StringHelper;
 
 /**
  * Security provides a set of methods to handle common security-related tasks.

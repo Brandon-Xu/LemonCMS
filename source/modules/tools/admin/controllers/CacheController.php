@@ -2,22 +2,24 @@
 
 namespace source\modules\tools\admin\controllers;
 
+use Yii;
 use source\LuLu;
 use source\modules\tools\models\CacheForm;
+use source\core\back\BackController;
 
-class CacheController extends \source\core\back\BackController
+class CacheController extends BackController
 {
     public function actionIndex() {
         $model = new CacheForm();
 
-        if (LuLu::$app->request->isPost && $model->load(LuLu::$app->request->post())) {
+        if (app()->request->isPost && $model->load(app()->request->post())) {
             if ($model->cache) {
-                LuLu::flushCache();
-                LuLu::$app->schemaCache->flush();
+                app()->cache->flush();
+                app()->schemaCache->flush();
             }
 
             if ($model->asset) {
-                $assetDir = LuLu::getAlias('@statics/assets');
+                $assetDir = Yii::getAlias('@statics/assets');
                 //FileHelper::removeDirectoryContent($assetDir);
             }
 

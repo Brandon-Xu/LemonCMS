@@ -6,7 +6,7 @@ use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 if (isset($taxonomyId)) {
-    $moduleId = LuLu::$app->controller->module->id;
+    $moduleId = app()->controller->module->id;
     $taxonomies = Taxonomy::getArrayTree($this->getConfigValue($taxonomyId));
     ?>
 

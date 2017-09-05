@@ -5,6 +5,7 @@ namespace source\modules\taxonomy;
 use source\core\modularity\ModuleService;
 use source\modules\taxonomy\models\Taxonomy;
 use source\modules\taxonomy\models\TaxonomyCategory;
+use yii\base\UnknownClassException;
 use yii\helpers\ArrayHelper;
 
 class TaxonomyService extends ModuleService
@@ -40,6 +41,10 @@ class TaxonomyService extends ModuleService
             'Taxonomy' => Taxonomy::className(), 'TaxonomyCategory' => TaxonomyCategory::className(),
         ];
 
-        return ArrayHelper::getItems($items, $model, TRUE);
+        $value = ArrayHelper::getValue($items, $model);
+        if(empty($value)){
+            throw new UnknownClassException('unknown model');
+        }
+        return $value;
     }
 }

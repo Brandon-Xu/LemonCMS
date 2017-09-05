@@ -153,7 +153,7 @@ class RbacService extends ModuleService
 
     public function checkPermission($permission = NULL, $params = [], $username = NULL) {
         if (empty($permission)) {
-            $permission = LuLu::getApp()->controller->uniqueId;
+            $permission = app()->controller->uniqueId;
         }
         if (empty($username)) {
             $username = LuLu::getIdentity()->username;
@@ -172,7 +172,7 @@ class RbacService extends ModuleService
             $user = LuLu::getIdentity()->username;
         }
         if ($permission === NULL) {
-            $permission = LuLu::getApp()->controller->uniqueId;
+            $permission = app()->controller->uniqueId;
         }
         $permission = 'home_'.$permission;
 

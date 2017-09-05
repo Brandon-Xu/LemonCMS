@@ -27,7 +27,7 @@ use source\LuLu;
     
 
     
-    <base href="<?php echo LuLu::getAlias('@web');?>" />
+    <base href="<?php echo Yii::getAlias('@web');?>" />
     <?php Resource::registerAdmin('/css/bootstrap.css?v=20150409');?>
     <?php Resource::registerAdmin('/css/icon.css?v=20150409');?>
     <?php Resource::registerAdmin('/css/common.css?v=20150409');?>

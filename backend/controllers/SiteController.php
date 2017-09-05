@@ -31,13 +31,13 @@ class SiteController extends BackController
     }
 
     public function actionLogin() {
-        if (!LuLu::$app->user->isGuest) {
+        if (!app()->user->isGuest) {
             return $this->goHome();
         }
         $message = '';
         $this->layout = FALSE;
         $model = new \source\models\LoginForm();
-        if ($model->load(LuLu::$app->request->post())) {
+        if ($model->load(app()->request->post())) {
             if ($model->login()) {
                 if (app()->rbac->checkPermission('manager_admin')) {
                     return $this->goBack();

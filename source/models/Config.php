@@ -29,10 +29,11 @@ class Config extends \source\core\base\BaseActiveRecord
         return [[['id'], 'required'], [['value'], 'string'], [['id'], 'string', 'max' => 64]];
     }
 
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = ['id' => '名称', 'value' => '值'];
-
-        return ArrayHelper::getItems($items, $attribute);
+    public function attributeLabels() {
+        return [
+            'id' => '名称',
+            'value' => '值'
+        ];
     }
 
     public static function getModel($id, $fromCache = TRUE) {

@@ -48,7 +48,7 @@ class Fragment1DataSearch extends Fragment1Data
             'query' => $query,
         ]);
 
-        $this->fragment_id = LuLu::getGetValue('fid');
+        $this->fragment_id = app()->request->get('fid');
         $query->andFilterWhere([
             'fragment_id' => $this->fragment_id,
         ]);

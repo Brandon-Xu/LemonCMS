@@ -147,14 +147,6 @@ class BaseActiveRecord extends ActiveRecord
 
     }
 
-    public function attributeLabels() {
-        return static::getAttributeLabels();
-    }
-
-    public static function getAttributeLabels($attribute = NULL) {
-        return [];
-    }
-
     public function afterDelete() {
         parent::afterDelete();
         $this->clearCache();

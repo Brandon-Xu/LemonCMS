@@ -35,11 +35,15 @@ $this->params['breadcrumbs'][] = $this->title;
         //'allow_comment',
         //'comments',
 
-        'userText', 'comment_count', 'view_count', [
+        'userText:html',
+        'comment_count',
+        'view_count',
+        [
             'attribute' => 'status', 'width' => '25px', 'content' => function ($model, $key, $index, $gridView) {
                 return Constants::getStatusItemsForContent($model->status);
             },
-        ], // 'diggs',
+        ],
+        // 'diggs',
         // 'burys',
         // 'sticky',
         // 'password',

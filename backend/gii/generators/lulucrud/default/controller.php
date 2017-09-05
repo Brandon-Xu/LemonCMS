@@ -4,7 +4,7 @@
  */
 
 use yii\db\ActiveRecordInterface;
-use yii\helpers\StringHelper;
+use source\helpers\StringHelper;
 
 
 /* @var $this yii\web\View */
@@ -35,7 +35,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\Inflector;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\helpers\StringHelper;
+use source\helpers\StringHelper;
 use yii\helpers\ArrayHelper;
 use source\LuLu;
 use source\core\data\ActiveDataProvider;

@@ -10,7 +10,7 @@ use yii\helpers\Html;
 /* @var $searchModel source\models\search\MenuCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$category = LuLu::getGetValue('category');
+$category = app()->request->get('category');
 $categoryModel = MenuCategory::findOne(['id' => $category]);
 
 $this->title = $categoryModel['name'];

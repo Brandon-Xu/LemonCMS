@@ -13,7 +13,7 @@ use yii\helpers\Url;
 /* @var $dataProvider source\core\data\ActiveDataProvider */
 
 
-$type = LuLu::getGetValue('type');
+$type = app()->request->get('type');
 
 $this->title = Fragment::getTypeItems($type);
 $this->params['breadcrumbs'][] = $this->title;

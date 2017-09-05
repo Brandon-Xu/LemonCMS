@@ -32,7 +32,7 @@ use yii\captcha\Captcha;
     <meta name="format-detection" content="telephone=no" />
     <title>登录——LuLu CMS 管理中心</title>
 
-    <base href="<?php echo LuLu::getAlias('@web');?>" />
+    <base href="<?php echo Yii::getAlias('@web');?>" />
     <?php Resource::registerAdmin('/css/bootstrap.css?v=20150409');?>
 
     <?php Resource::registerAdmin('/css/icon.css?v=20150409');?>

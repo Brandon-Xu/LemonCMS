@@ -13,31 +13,6 @@ require_once __DIR__.'/libs/functions.php';
 class LuLu extends \Yii
 {
 
-    public static function getApp() {
-        return app();
-    }
-
-    public static function getView() {
-        return app()->getView();
-    }
-
-    public static function getRequest() {
-        return app()->request;
-    }
-
-    public static function getResponse() {
-        return app()->response;
-    }
-
-    public static function getBaseUrl($url = NULL) {
-        $baseUrl = app()->request->getBaseUrl();
-        if ($url !== NULL) {
-            $baseUrl .= $url;
-        }
-
-        return $baseUrl;
-    }
-
     public static function getHomeUrl($url = NULL) {
         $homeUrl = app()->getHomeUrl();
         if ($url !== NULL) {
@@ -56,28 +31,6 @@ class LuLu extends \Yii
         return $webUrl;
     }
 
-    public static function getWebPath($path = NULL) {
-        $webPath = self::getAlias('@webroot');
-        if ($path !== NULL) {
-            $webPath .= $path;
-        }
-
-        return $webPath;
-    }
-
-    public static function getAppParam($key, $defaultValue = NULL) {
-        if (array_key_exists($key, app()->params)) {
-            return app()->params[$key];
-        }
-
-        return $defaultValue;
-    }
-
-    public static function setAppParam($array) {
-        foreach ($array as $key => $value) {
-            app()->params[$key] = $value;
-        }
-    }
 
     public static function getViewParam($key, $defaultValue = NULL) {
         $view = app()->getView();
@@ -93,58 +46,6 @@ class LuLu extends \Yii
         foreach ($array as $name => $value) {
             $view->params[$name] = $value;
         }
-    }
-
-    public static function hasGetValue($key) {
-        return isset($_GET[$key]);
-    }
-
-    /**
-     *
-     * @param string $key a or a/b/c
-     * @param string $default
-     * @return string
-     */
-    public static function getGetValue($key, $default = NULL) {
-        $data = $_GET;
-
-        $keys = explode('/', $key);
-        foreach ($keys as $key) {
-            if (is_array($data) && key_exists($key, $data)) {
-                $data = $data[$key];
-            } else {
-                return $default;
-            }
-        }
-
-        if ($data === NULL) {
-            return $default;
-        }
-
-        return $data;
-    }
-
-    public static function hasPostValue($key) {
-        return isset($_POST[$key]);
-    }
-
-    public static function getPostValue($key, $default = NULL) {
-        $data = $_POST;
-
-        $keys = explode('/', $key);
-        foreach ($keys as $key) {
-            if (is_array($data) && key_exists($key, $data)) {
-                $data = $data[$key];
-            } else {
-                return $default;
-            }
-        }
-
-        if ($data === NULL) {
-            return $default;
-        }
-
-        return $data;
     }
 
     public static function getFlash($type, $default = NULL) {
@@ -171,19 +72,18 @@ class LuLu extends \Yii
             }
             $message = $flash;
         }
-        app()->session->setFlash($type, $message);
     }
 
     public static function setWarningMessage($message) {
-        self::setFlash('warning', $message);
+        app()->session->setFlash('warning', $message);
     }
 
     public static function setSuccessMessage($message) {
-        self::setFlash('success', $message);
+        app()->session->setFlash('success', $message);
     }
 
     public static function setErrorMessage($message) {
-        self::setFlash('error', $message);
+        app()->session->setFlash('error', $message);
     }
 
     public static function error($message, $category = 'application') {
@@ -218,10 +118,6 @@ class LuLu extends \Yii
         app()->cache->delete($key);
     }
 
-    public static function flushCache() {
-        app()->cache->flush();
-    }
-
     public static function getUser() {
         return app()->user;
     }
@@ -251,7 +147,7 @@ class LuLu extends \Yii
                 ];
             }
 
-            return app()->getResponse()->redirect(Url::to($loginUrl), 302);
+            return app()->response->redirect(Url::to($loginUrl), 302);
         }
 
         return TRUE;

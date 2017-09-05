@@ -27,8 +27,8 @@ class Permission extends BaseRbacActiveRecord
             //self::Category_Basic=>'基本权限',
             self::Category_Controller => '控制器权限', self::Category_System => '系统权限',
         ];
-
-        return ArrayHelper::getItems($items, $key);
+        if($key === NULL) return $items;
+        return ArrayHelper::getValue($items, $key);
     }
 
     const Form_Boolean = 1;
@@ -42,8 +42,8 @@ class Permission extends BaseRbacActiveRecord
             self::Form_Boolean => '布尔值', self::Form_Input => '单行输入框', self::Form_Textarea => '多行输入框',
             self::Form_RadioList => '单选', self::Form_CheckboxList => '多选',
         ];
-
-        return ArrayHelper::getItems($items, $key);
+        if($key === NULL) return $items;
+        return ArrayHelper::getValue($items, $key);
     }
 
     public function getFormView() {
@@ -51,8 +51,8 @@ class Permission extends BaseRbacActiveRecord
             self::Form_Boolean => '_boolean', self::Form_Input => '_input', self::Form_Textarea => '_textarea',
             self::Form_RadioList => '_radiolist', self::Form_CheckboxList => '_checkboxlist',
         ];
-
-        return ArrayHelper::getItems($items, $this->form);
+        if($this->form === NULL) return $items;
+        return ArrayHelper::getValue($items, $this->form);
     }
 
     /**

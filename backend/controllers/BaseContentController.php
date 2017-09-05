@@ -2,12 +2,12 @@
 
 namespace backend\controllers;
 
+use Yii;
 use source\core\back\BackController;
 use source\LuLu;
 use source\models\Content;
 use source\models\search\ContentSearch;
-use Yii;
-use yii\helpers\StringHelper;
+use source\helpers\StringHelper;
 use yii\web\NotFoundHttpException;
 
 abstract class BaseContentController extends BackController

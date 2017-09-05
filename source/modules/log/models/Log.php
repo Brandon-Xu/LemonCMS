@@ -34,13 +34,11 @@ class Log extends BaseActiveRecord
         ];
     }
 
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
+    public function attributeLabels() {
+        return [
             'id' => 'ID', 'level' => 'Level', 'category' => '分类', 'log_time' => '时间', 'prefix' => 'IP/用户',
             'message' => '内容',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
 
 }

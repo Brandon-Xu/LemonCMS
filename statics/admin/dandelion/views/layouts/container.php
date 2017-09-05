@@ -121,7 +121,7 @@ $rbacService = LuLu::getService('rbac');
                         <div id="da-logo-wrap">
                             <div id="da-logo">
                                 <div id="da-logo-img">
-                                    <a href="<?php echo LuLu::getAlias('@web').'/admin.php'; ?>">
+                                    <a href="<?php echo Yii::getAlias('@web').'/admin.php'; ?>">
                                         <img src="<?php echo Resource::getAdminUrl() ?>/images/logo.png"
                                              alt="Dandelion Admin"/>
                                     </a>
@@ -150,7 +150,7 @@ $rbacService = LuLu::getService('rbac');
                                     <img src="<?php echo Resource::getAdminUrl() ?>/images/pp.jpg" alt=""/>
                                 </div>
                                 <div id="da-user-info">
-                                    <?php echo LuLu::$app->user->identity->username ?>
+                                    <?php echo app()->user->identity->username ?>
                                 </div>
                                 <ul class="da-header-dropdown">
                                     <li class="da-dropdown-caret">
@@ -158,7 +158,7 @@ $rbacService = LuLu::getService('rbac');
                                         <span class="caret-inner"></span>
                                     </li>
                                     <li class="da-dropdown-divider"></li>
-                                    <li><a href="<?php echo LuLu::getAlias('@web').'/index.php'; ?>" target="_blank">站点首页</a>
+                                    <li><a href="<?php echo Yii::getAlias('@web').'/index.php'; ?>" target="_blank">站点首页</a>
                                     </li>
                                 </ul>
 

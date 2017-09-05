@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\View;
 
-/* @var $this yii\web\View */
+/* @var $this \source\core\back\BackView */
 $this->title = '页面';
 
 

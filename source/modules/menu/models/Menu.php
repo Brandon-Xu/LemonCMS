@@ -57,21 +57,17 @@ class Menu extends \source\core\base\BaseActiveRecord
         ];
     }
 
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
+    public function attributeLabels() {
+        return [
             'id' => 'ID', 'parent_id' => '父结点', 'category_id' => '分类', 'name' => '名称', 'url' => '链接地址',
             'target' => '打开方式', 'targetText' => '打开方式', 'description' => '描述', 'thumb' => '图片', 'status' => '状态',
             'statusText' => '状态', 'sort_num' => '排序',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
-
 
     public function getTargetText() {
         return Constants::getTargetItems($this->target);
     }
-
 
     private static function getArrayTreeInternal($category, $parentId = 0, $level = 0) {
         $children = self::findAll(['category_id' => $category, 'parent_id' => $parentId], 'sort_num asc');
@@ -195,7 +191,7 @@ class Menu extends \source\core\base\BaseActiveRecord
 
         $adminUrl = Resource::getAdminUrl();
 
-        $action = LuLu::getApp()->requestedAction;
+        $action = app()->requestedAction;
         $urlArray = explode('/', $action->uniqueId);
 
         $showHome = '';

@@ -36,8 +36,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'source\core\grid\DateTimeColumn', 'attribute' => 'updated_at',
         ], //'allow_comment',
         //'comments',
-        'userText', 'comment_count', 'view_count', [
-            'attribute' => 'status', 'width' => '25px', 'content' => function ($model, $key, $index, $gridView) {
+        'userText:html',
+        'comment_count',
+        'view_count',
+        [
+            'attribute' => 'status',
+            'width' => '25px',
+            'content' => function ($model, $key, $index, $gridView) {
                 return Constants::getStatusItemsForContent($model->status);
             },
         ], // 'diggs',

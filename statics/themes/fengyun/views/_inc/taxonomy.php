@@ -9,7 +9,7 @@ use yii\helpers\Url;
 use yii\web\View;
 
 /* @var $this yii\web\View */
-$moduleId = LuLu::$app->controller->module->id;
+$moduleId = app()->controller->module->id;
 $taxonomies = LuLu::getService('taxonomy')->getTaxonomiesAsTree($this->getConfigValue($moduleId.'_taxonomy'));
 
 if (!empty($taxonomies)) :?>

@@ -43,7 +43,7 @@ class PermissionSearch extends Permission
 
         $this->load($params);
 
-        $this->category_id = LuLu::getGetValue('category');
+        $this->category_id = app()->request->get('category');
 
         $query->andWhere(['category_id' => $this->category_id,]);
 

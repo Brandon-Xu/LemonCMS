@@ -48,7 +48,7 @@ class FragmentSearch extends Fragment
             'query' => $query,
         ]);
 
-        $this->type = LuLu::getGetValue('type');
+        $this->type = app()->request->get('type');
         $query->andFilterWhere([
             'type' => $this->type,
         ]);

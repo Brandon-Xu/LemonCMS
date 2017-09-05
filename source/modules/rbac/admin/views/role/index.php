@@ -11,7 +11,7 @@ use yii\helpers\Url;
 /* @var $searchModel app\modules\rbac\models\search\RoleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$categoryId = LuLu::getGetValue('category');
+$categoryId = app()->request->get('category');
 
 $this->title = '角色管理';
 $this->params['breadcrumbs'][] = $this->title;

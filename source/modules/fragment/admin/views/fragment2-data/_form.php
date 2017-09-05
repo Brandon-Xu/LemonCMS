@@ -12,7 +12,7 @@ use yii\helpers\Html;
 
 <?php
 $this->toolbars([
-    Html::a('返回', ['index', 'fid' => LuLu::getGetValue('fid')], ['class' => 'btn btn-xs btn-primary mod-site-save']),
+    Html::a('返回', ['index', 'fid' => app()->request->get('fid')], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]);
 ?>
 

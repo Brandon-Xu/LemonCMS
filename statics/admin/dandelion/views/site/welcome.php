@@ -32,7 +32,7 @@ $this->title='系统信息';
         </tr>
         <tr>
             <td>MySQL 版本</td>
-            <td><?php echo LuLu::$app->db->pdo->getAttribute(PDO::ATTR_SERVER_VERSION); ?></td>
+            <td><?php echo app()->db->pdo->getAttribute(PDO::ATTR_SERVER_VERSION); ?></td>
         </tr>
         
                                  

@@ -12,7 +12,7 @@ use yii\helpers\Html;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 
-$category = LuLu::getGetValue('category');
+$category = app()->request->get('category');
 $categoryModel = TaxonomyCategory::findOne(['id' => $category]);
 
 $this->title = $categoryModel['name'];
