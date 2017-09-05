@@ -86,7 +86,7 @@ class AssignmentController extends BaseRbacController
         $userRoles = Assignment::find()->select('role')->where(['user' => $user])->indexBy('role')->all();
 
         if (\Yii::$app->request->isPost) {
-            $selectedRoles = LuLu::getPostValue('roles', []);
+            $selectedRoles = app()->request->post('roles', []);
             Assignment::deleteAll([
                 'and', 'user=\''.$user.'\'', [
                     'not in', 'role', $selectedRoles,

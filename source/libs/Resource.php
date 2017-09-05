@@ -2,8 +2,8 @@
 
 namespace source\libs;
 
-use source\LuLu;
-use yii\helpers\FileHelper;
+use Yii;
+use source\helpers\FileHelper;
 
 class Resource
 {
@@ -30,7 +30,7 @@ class Resource
     }
 
     public static function getCommonPath($path = NULL) {
-        $ret = LuLu::getAlias('@webroot/statics/common');
+        $ret = Yii::getAlias('@webroot/statics/common');
         if ($path != NULL) {
             return $ret.$path;
         }
@@ -39,7 +39,7 @@ class Resource
     }
 
     public static function getCommonUrl($url = NULL) {
-        $ret = LuLu::getAlias('@web/statics/common');
+        $ret = Yii::getAlias('@web/statics/common');
         if ($url != NULL) {
             return $ret.$url;
         }
@@ -64,7 +64,7 @@ class Resource
 
     public static function getAdminUrl($url = NULL) {
         $currentTheme = self::getAdminTheme();
-        $ret = LuLu::getAlias('@web/statics/admin/'.$currentTheme);
+        $ret = Yii::getAlias('@web/statics/admin/'.$currentTheme);
         if ($url != NULL) {
             return $ret.$url;
         }
@@ -96,7 +96,7 @@ class Resource
 
     public static function getThemeUrl($url = NULL) {
         $currentTheme = self::getHomeTheme();
-        $ret = LuLu::getAlias('@web/statics/themes/'.$currentTheme);
+        $ret = Yii::getAlias('@web/statics/themes/'.$currentTheme);
         if ($url != NULL) {
             return $ret.$url;
         }
@@ -119,10 +119,10 @@ class Resource
     public static function checkHomeThemeFile($fileName, $checkDefault = TRUE) {
         $currentTheme = Resource::getHomeTheme();
 
-        $path = LuLu::getAlias('statics').'/themes/'.$currentTheme.$fileName.'.php';
+        $path = Yii::getAlias('statics').'/themes/'.$currentTheme.$fileName.'.php';
         if (!FileHelper::exist($path) && $checkDefault) {
             $currentTheme = 'd';
-            $path = LuLu::getAlias('statics').'/themes/'.$currentTheme.$fileName.'.php';
+            $path = Yii::getAlias('statics').'/themes/'.$currentTheme.$fileName.'.php';
         } else {
             return $currentTheme;
         }
@@ -143,7 +143,7 @@ class Resource
     }
 
     public static function getInstallUrl($url = NULL) {
-        $ret = LuLu::getAlias('@web/statics/install');
+        $ret = Yii::getAlias('@web/statics/install');
         if ($url != NULL) {
             return $ret.$url;
         }

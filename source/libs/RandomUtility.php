@@ -32,8 +32,8 @@ class RandomUtility
 
 
     public static function encrypt($str) {
-        $key = LuLu::getAppParam('key');
-        $iv = LuLu::getAppParam('iv');
+        $key = app()->params['key'];
+        $iv = app()->params['iv'];
 
         $key = substr($key, 0, 16);
         $iv = substr($iv, 0, 16);
@@ -42,8 +42,8 @@ class RandomUtility
     }
 
     public static function decrypt($str) {
-        $key = LuLu::getAppParam('key');
-        $iv = LuLu::getAppParam('iv');
+        $key = app()->params['key'];
+        $iv = app()->params['iv'];
 
         $key = substr($key, 0, 16);
         $iv = substr($iv, 0, 16);

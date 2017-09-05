@@ -9,7 +9,7 @@ use yii\helpers\Html;
 /* @var $searchModel app\modules\rbac\models\search\PermissionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$categoryId = LuLu::getGetValue('category');
+$categoryId = app()->request->get('category');
 
 $this->title = '权限管理';
 $this->params['breadcrumbs'][] = $this->title;

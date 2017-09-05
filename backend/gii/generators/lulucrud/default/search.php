@@ -3,7 +3,7 @@
  * This is the template for generating CRUD search class of the specified model.
  */
 
-use yii\helpers\StringHelper;
+use source\helpers\StringHelper;
 
 
 /* @var $this yii\web\View */
@@ -28,7 +28,7 @@ use yii\base\Model;
 use yii\helpers\Inflector;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\helpers\StringHelper;
+use source\helpers\StringHelper;
 use yii\helpers\ArrayHelper;
 use source\LuLu;
 use source\core\data\ActiveDataProvider;

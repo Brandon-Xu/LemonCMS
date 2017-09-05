@@ -9,7 +9,7 @@ use yii\helpers\Html;
 /* @var $model source\modules\fragment\models\Fragment */
 /* @var $form source\core\widgets\ActiveForm */
 
-$type = LuLu::getGetValue('type');
+$type = app()->request->get('type');
 
 ?>
 

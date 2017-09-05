@@ -36,13 +36,11 @@ class Fragment1Data extends FragmentData
         ];
     }
 
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
+    public function attributeLabels() {
+        return [
             'id' => 'ID', 'fragment_id' => '碎片', 'title' => '标题', 'content' => '内容', 'created_at' => '添加时间',
             'created_by' => '作者', 'sort_num' => '排序', 'status' => '状态',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
 
 }

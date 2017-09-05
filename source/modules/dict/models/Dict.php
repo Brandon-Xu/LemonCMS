@@ -39,15 +39,20 @@ class Dict extends \source\core\base\BaseActiveRecord
         ];
     }
 
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
-            'id' => '编号', 'parent_id' => '父级', 'category_id' => '分类', 'name' => '名称', 'value' => '值',
-            'description' => '描述', 'thumb' => '缩略图', 'status' => '状态', 'statusText' => '状态', 'sort_num' => '排序',
+    public function attributeLabels() {
+        return [
+            'id' => '编号',
+            'parent_id' => '父级',
+            'category_id' => '分类',
+            'name' => '名称',
+            'value' => '值',
+            'description' => '描述',
+            'thumb' => '缩略图',
+            'status' => '状态',
+            'statusText' => '状态',
+            'sort_num' => '排序',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
-
 
     public function getStatusText() {
         return Constants::getStatusItems($this->status);

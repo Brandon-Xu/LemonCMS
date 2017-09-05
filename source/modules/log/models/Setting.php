@@ -17,14 +17,9 @@ class Setting extends \source\models\ConfigForm
     }
 
     public function attributeLabels() {
-        return self::getAttributeLabels();
-    }
-
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
+        return [
             'test1' => 'test1 label', 'test2' => 'test2 label',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
+
 }

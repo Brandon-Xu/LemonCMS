@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $searchModel app\modules\rbac\models\search\RelationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$user = LuLu::getGetValue('user');
+$user = app()->request->get('user');
 
 $this->title = '用户名：'.$user;
 $this->params['breadcrumbs'][] = [

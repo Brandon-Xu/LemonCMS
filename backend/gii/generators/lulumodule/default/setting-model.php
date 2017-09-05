@@ -8,7 +8,7 @@ namespace source\modules\<?= $generator->moduleDir ?>\models;
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\helpers\StringHelper;
+use source\helpers\StringHelper;
 use yii\helpers\ArrayHelper;
 use source\LuLu;
 use source\libs\Common;
@@ -30,15 +30,10 @@ return [
 
 public function attributeLabels()
 {
-return self::getAttributeLabels();
-}
-
-public static function getAttributeLabels($attribute = null)
-{
-$items = [
+return [
 'test1' => 'test1 label',
 'test2' => 'test2 label',
 ];
-return ArrayHelper::getItems($items,$attribute);
 }
+
 }

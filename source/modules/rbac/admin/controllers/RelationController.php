@@ -22,7 +22,7 @@ class RelationController extends BaseRbacController
     public function actionIndex($role) {
         if (\Yii::$app->request->isPost) {
 
-            $selectedPermissions = LuLu::getPostValue('Permission');
+            $selectedPermissions = app()->request->post('Permission');
 
             Relation::AddBatchItems($role, $selectedPermissions);
 

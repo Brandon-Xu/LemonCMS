@@ -2,23 +2,24 @@
 
 namespace install\controllers;
 
+use Yii;
+use source\core\front\FrontController;
 use source\libs\Constants;
 use source\libs\Utility;
 use source\LuLu;
 use yii\base\Exception;
 use yii\db\Connection;
-use yii\db\yii\db;
-use yii\helpers\FileHelper;
+use source\helpers\FileHelper;
 use yii\helpers\Url;
 
-class SiteController extends \source\core\front\FrontController
+class SiteController extends FrontController
 {
     public function beforeAction($action) {
         if ($action->id === 'stop') {
             return parent::beforeAction($action);
         }
 
-        $file = LuLu::getAlias('@data/install.lock');
+        $file = Yii::getAlias('@data/install.lock');
         if (file_exists($file)) {
             return $this->redirect([
                 'stop',
@@ -57,19 +58,19 @@ class SiteController extends \source\core\front\FrontController
     }
 
     public function afterResponse($event) {
-        if (LuLu::getApp()->requestedAction->id === 'progress') {
+        if (app()->requestedAction->id === 'progress') {
             $this->installing();
         }
     }
 
     private function installing() {
-        LuLu::getApp()->controller = $this;
+        app()->controller = $this;
 
-        $dbHost = LuLu::getPostValue('dbHost');
-        $dbName = LuLu::getPostValue('dbName');
-        $dbUsername = LuLu::getPostValue('dbUsername');
-        $dbPassword = LuLu::getPostValue('dbPassword');
-        $tbPre = LuLu::getPostValue('tbPre');
+        $dbHost = app()->request->post('dbHost');
+        $dbName = app()->request->post('dbName');
+        $dbUsername = app()->request->post('dbUsername');
+        $dbPassword = app()->request->post('dbPassword');
+        $tbPre = app()->request->post('tbPre');
 
         if ($this->checkDb() === FALSE) {
             return;
@@ -98,7 +99,7 @@ class SiteController extends \source\core\front\FrontController
             $this->insertAdmin($db);
             self::_appendLog('管理员生成成功');
 
-            //             if (LuLu::getPostValue('testData') === 'Y')
+            //             if (app()->request->post('testData') === 'Y')
             //             {
             //                 self::_appendLog('导入测试数据。。。');
             //                 if($this->executeSql($db, 'test_data')!==true)
@@ -111,7 +112,7 @@ class SiteController extends \source\core\front\FrontController
 
             $transaction->commit();
 
-            $file = LuLu::getAlias('@data/install.lock');
+            $file = Yii::getAlias('@data/install.lock');
             @touch($file);
 
             self::_appendLog('安装完成');
@@ -130,10 +131,10 @@ class SiteController extends \source\core\front\FrontController
     private function checkDb() {
         self::_appendLog('检查数据库连接。。。');
 
-        $dbHost = LuLu::getPostValue('dbHost');
-        $dbName = LuLu::getPostValue('dbName');
-        $dbUsername = LuLu::getPostValue('dbUsername');
-        $dbPassword = LuLu::getPostValue('dbPassword');
+        $dbHost = app()->request->post('dbHost');
+        $dbName = app()->request->post('dbName');
+        $dbUsername = app()->request->post('dbUsername');
+        $dbPassword = app()->request->post('dbPassword');
 
         if (empty($dbHost) || empty($dbName) || empty($dbUsername)) {
             $message = '数据库信息必须填写完整';
@@ -173,11 +174,11 @@ class SiteController extends \source\core\front\FrontController
 
     private function writeConfig() {
         self::_appendLog('保存配置文件。。。');
-        $dbHost = LuLu::getPostValue('dbHost');
-        $dbName = LuLu::getPostValue('dbName');
-        $dbUsername = LuLu::getPostValue('dbUsername');
-        $dbPassword = LuLu::getPostValue('dbPassword');
-        $tbPre = LuLu::getPostValue('tbPre');
+        $dbHost = app()->request->post('dbHost');
+        $dbName = app()->request->post('dbName');
+        $dbUsername = app()->request->post('dbUsername');
+        $dbPassword = app()->request->post('dbPassword');
+        $tbPre = app()->request->post('tbPre');
 
         $dbConfig = [
             'class' => 'yii\db\Connection', 'dsn' => "mysql:host={$dbHost};dbname={$dbName}", 'username' => $dbUsername,
@@ -185,7 +186,7 @@ class SiteController extends \source\core\front\FrontController
             'schemaCache' => 'schemaCache',
         ];
         try {
-            FileHelper::writeArray(LuLu::getAlias('@data/config/db.php'), $dbConfig);
+            FileHelper::writeArray(Yii::getAlias('@data/config/db.php'), $dbConfig);
             self::_appendLog('配置文件保存成功');
 
             unset($dbConfig['class']);
@@ -201,16 +202,16 @@ class SiteController extends \source\core\front\FrontController
     private function setDb($dbConfig) {
         self::_appendLog('设置数据库信息。。。');
 
-        $dbHost = LuLu::getPostValue('dbHost');
-        $dbName = LuLu::getPostValue('dbName');
-        $dbUsername = LuLu::getPostValue('dbUsername');
-        $dbPassword = LuLu::getPostValue('dbPassword');
-        $tbPre = LuLu::getPostValue('tbPre');
+        $dbHost = app()->request->post('dbHost');
+        $dbName = app()->request->post('dbName');
+        $dbUsername = app()->request->post('dbUsername');
+        $dbPassword = app()->request->post('dbPassword');
+        $tbPre = app()->request->post('tbPre');
 
         try {
             $db = new Connection($dbConfig);
 
-            LuLu::getApp()->set('db', $db);
+            app()->set('db', $db);
 
             $db->createCommand("USE {$dbName}")->execute();
             $db->createCommand("SET NAMES 'utf8',character_set_client=binary,sql_mode=''")->execute();
@@ -229,9 +230,9 @@ class SiteController extends \source\core\front\FrontController
 
 
     private function insertAdmin($db) {
-        $username = LuLu::getPostValue('username');
-        $password = LuLu::getPostValue('password');
-        $email = LuLu::getPostValue('email');
+        $username = app()->request->post('username');
+        $password = app()->request->post('password');
+        $email = app()->request->post('email');
 
         $tbPre = $db->tablePrefix;
         $user = new \source\models\User();
@@ -247,7 +248,7 @@ class SiteController extends \source\core\front\FrontController
     }
 
     private function executeSql($db, $file) {
-        $file = LuLu::getAlias('@data/sql').'/'.$file.'.sql';
+        $file = Yii::getAlias('@data/sql').'/'.$file.'.sql';
 
         if (!FileHelper::exist($file)) {
             self::_appendLog('SQL文件：'.$file.'不存在', TRUE);
@@ -326,18 +327,18 @@ class SiteController extends \source\core\front\FrontController
     private function getEnvData() {
         $isWritable = [
             [
-                '系统临时文件(data/runtime)', TRUE, FileHelper::canWrite(LuLu::getAlias('@data/runtime')), '系统核心', '必须可读写',
+                '系统临时文件(data/runtime)', TRUE, FileHelper::canWrite(Yii::getAlias('@data/runtime')), '系统核心', '必须可读写',
             ], [
-                '附件上传目录(data/attachment)', FALSE, FileHelper::canWrite(LuLu::getAlias('@data/attachment')), '附件上传',
+                '附件上传目录(data/attachment)', FALSE, FileHelper::canWrite(Yii::getAlias('@data/attachment')), '附件上传',
                 '若无附件上传可不用写权限',
             ], [
-                '数据备份目录(data/backup)', FALSE, FileHelper::canWrite(LuLu::getAlias('@data/backup')), '数据库备份',
+                '数据备份目录(data/backup)', FALSE, FileHelper::canWrite(Yii::getAlias('@data/backup')), '数据库备份',
                 '若不备份数据库可不用写权限',
             ], [
-                '配置文件目录(data/config)', FALSE, FileHelper::canWrite(LuLu::getAlias('@data/attachment')), '安装程序',
+                '配置文件目录(data/config)', FALSE, FileHelper::canWrite(Yii::getAlias('@data/attachment')), '安装程序',
                 '若手动安装系统写可不用写权限',
             ], [
-                '公共资源文件(statics/assets)', TRUE, FileHelper::canWrite(LuLu::getAlias('@statics/assets')), '系统核心', '必须可读写',
+                '公共资源文件(statics/assets)', TRUE, FileHelper::canWrite(Yii::getAlias('@statics/assets')), '系统核心', '必须可读写',
             ],
         ];
 

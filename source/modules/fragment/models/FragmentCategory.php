@@ -35,15 +35,9 @@ class FragmentCategory extends \source\core\base\BaseActiveRecord
      * @inheritdoc
      */
     public function attributeLabels() {
-        return self::getAttributeLabels();
-    }
-
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
+        return [
             'id' => 'ID', 'name' => '名称', 'type' => '类型',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
 
     public static function getCategories($type) {

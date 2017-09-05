@@ -10,7 +10,7 @@ use yii\helpers\Html;
 /* @var $searchModel source\modules\fragment\models\search\Fragment2DataSearch */
 /* @var $dataProvider source\core\data\ActiveDataProvider */
 
-$fid = LuLu::getGetValue('fid');
+$fid = app()->request->get('fid');
 $fragmentModel = Fragment::findOne(['id' => $fid]);
 
 $this->title = $fragmentModel->name.'(静态碎片)';

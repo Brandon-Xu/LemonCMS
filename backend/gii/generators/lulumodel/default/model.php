@@ -62,14 +62,13 @@ public function rules()
 return [<?= "\n            ".implode(",\n            ", $rules)."\n        " ?>];
 }
 
-public static function getAttributeLabels($attribute = null)
+public function attributeLabels()
 {
-$items = [
+return [
 <?php foreach ($labels as $name => $label): ?>
     <?= "'$name' => ".$generator->generateString($label).",\n" ?>
 <?php endforeach; ?>
 ];
-return ArrayHelper::getItems($items, $attribute);
 }
 
 <?php foreach ($relations as $name => $relation): ?>

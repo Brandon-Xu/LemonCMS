@@ -9,7 +9,7 @@ namespace source\modules\<?= $generator->moduleDir ?>;
 
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\helpers\StringHelper;
+use source\helpers\StringHelper;
 use yii\helpers\ArrayHelper;
 use source\LuLu;
 use source\libs\Common;

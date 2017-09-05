@@ -2,9 +2,10 @@
 
 namespace source\modules\tools\models;
 
+use source\models\ConfigForm;
 use yii\helpers\ArrayHelper;
 
-class Setting extends \source\models\ConfigForm
+class Setting extends ConfigForm
 {
 
     public $test1;
@@ -12,19 +13,16 @@ class Setting extends \source\models\ConfigForm
 
     public function rules() {
         return [
-            [['test1', 'test2'], 'required'], [['test1', 'test2'], 'string', 'max' => 64],
+            [['test1', 'test2'], 'required'],
+            [['test1', 'test2'], 'string', 'max' => 64],
         ];
     }
 
     public function attributeLabels() {
-        return self::getAttributeLabels();
-    }
-
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
-            'test1' => 'test1 label', 'test2' => 'test2 label',
+        return [
+            'test1' => 'test1 label',
+            'test2' => 'test2 label',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
+
 }

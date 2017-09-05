@@ -2,11 +2,8 @@
 
 namespace source\core\base;
 
-use source\core\modularity\ModuleService;
 use source\libs\Common;
-use source\LuLu;
 use source\traits\CommonTrait;
-use yii\helpers\FileHelper;
 use yii\web\Application;
 
 class BaseApplication extends Application

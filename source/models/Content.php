@@ -128,6 +128,9 @@ class Content extends BaseActiveRecord
         return $this->hasOne(LuLu::getService('taxonomy')->getModel("Taxonomy"), ['id' => 'taxonomy_id']);
     }
 
+    /**
+     * @return null|ContentBody|string
+     */
     public function getBodyClass() {
         if ($this->_bodyClass === NULL && !empty($this->content_type)) {
             $contentType = strtolower($this->content_type);
@@ -142,9 +145,9 @@ class Content extends BaseActiveRecord
 
     public function getBody() {
         if ($this->getBodyClass() !== NULL && is_subclass_of($this->getBodyClass(), ContentBody::className())) {
-            return $this->hasOne($this->getBodyClass()::className(), ['content_id' => 'id']);
+            $className = $this->getBodyClass();
+            return $this->hasOne($className::className(), ['content_id' => 'id']);
         }
-
         return $this->hasOne(ContentBody::className(), []);
     }
 
@@ -230,15 +233,44 @@ class Content extends BaseActiveRecord
      */
     public function attributeLabels() {
         return [
-            'id' => 'ID', 'taxonomy_id' => '分类', 'user_id' => '用户ID', 'user_name' => '用户名', 'userText' => '用户名',
-            'last_user_id' => 'Last User ID', 'last_user_name' => 'Last User Name', 'created_at' => '添加时间',
-            'updated_at' => '修改时间', 'focus_count' => '关注数', 'favorite_count' => '收藏数', 'view_count' => '浏览数',
-            'comment_count' => '评论数', 'agree_count' => '赞成数', 'against_count' => '反对数', 'recommend' => '推荐',
-            'headline' => '头条', 'sticky' => '置顶', 'flag' => '标签', 'allow_comment' => '允许评论', 'password' => '密码',
-            'view' => '视图(view)', 'layout' => '布局(layout)', 'sort_num' => '排序', 'visibility' => '可见', 'status' => '状态',
-            'statusText' => '状态', 'content_type' => '内容类型', 'seo_title' => '标题', 'seo_keywords' => '关键字',
-            'seo_description' => '描述', 'title' => '标题', 'sub_title' => '副标题', 'url_alias' => '别名',
-            'redirect_url' => '转向Url', 'summary' => '简介', 'thumb' => '缩略图', 'thumbs' => '缩略图集',
+            'id' => 'ID',
+            'taxonomy_id' => '分类',
+            'user_id' => '用户ID',
+            'user_name' => '用户名',
+            'userText' => '用户名',
+            'last_user_id' => 'Last User ID',
+            'last_user_name' => 'Last User Name',
+            'created_at' => '添加时间',
+            'updated_at' => '修改时间',
+            'focus_count' => '关注数',
+            'favorite_count' => '收藏数',
+            'view_count' => '浏览数',
+            'comment_count' => '评论数',
+            'agree_count' => '赞成数',
+            'against_count' => '反对数',
+            'recommend' => '推荐',
+            'headline' => '头条',
+            'sticky' => '置顶',
+            'flag' => '标签',
+            'allow_comment' => '允许评论',
+            'password' => '密码',
+            'view' => '视图(view)',
+            'layout' => '布局(layout)',
+            'sort_num' => '排序',
+            'visibility' => '可见',
+            'status' => '状态',
+            'statusText' => '状态',
+            'content_type' => '内容类型',
+            'seo_title' => '标题',
+            'seo_keywords' => '关键字',
+            'seo_description' => '描述',
+            'title' => '标题',
+            'sub_title' => '副标题',
+            'url_alias' => '别名',
+            'redirect_url' => '转向Url',
+            'summary' => '简介',
+            'thumb' => '缩略图',
+            'thumbs' => '缩略图集',
 
         ];
     }

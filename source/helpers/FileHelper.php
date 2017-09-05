@@ -1,9 +1,10 @@
 <?php
 
-namespace yii\helpers;
+namespace source\helpers;
 
+use yii\helpers\BaseFileHelper;
 
-class FileHelper extends \yii\helpers\BaseFileHelper
+class FileHelper extends BaseFileHelper
 {
 
     public static function buildPath($pathes, $withStart = FALSE, $withEnd = FALSE) {
@@ -81,12 +82,6 @@ class FileHelper extends \yii\helpers\BaseFileHelper
         $f = fopen($filePath, $mode);
         fwrite($f, $content);
         fclose($f);
-    }
-
-    public static function createDir($dirPath) {
-    }
-
-    public static function removeDir($dirPath) {
     }
 
     public static function canWrite($file) {

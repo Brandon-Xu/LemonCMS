@@ -24,8 +24,8 @@ class Role extends BaseRbacActiveRecord
         $items = [
             self::Category_Member => '会员角色', self::Category_Admin => '管理员角色', self::Category_System => '系统角色',
         ];
-
-        return ArrayHelper::getItems($items, $key);
+        if($key === NULL) return $items;
+        return ArrayHelper::getValue($items, $key);
     }
 
     /**

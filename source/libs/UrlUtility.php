@@ -9,7 +9,7 @@ use yii\helpers\Url;
 class UrlUtility
 {
     public static function getChannelUrl($id) {
-        $cachedChannels = LuLu::getAppParam('cachedChannels');
+        $cachedChannels = app()->params['cachedChannels'];
         $channel = $cachedChannels[$id];
 
         if (!empty($channel['redirect_rul'])) {
@@ -24,7 +24,7 @@ class UrlUtility
     }
 
     public static function getChannelLink($id, $options = []) {
-        $cachedChannels = LuLu::getAppParam('cachedChannels');
+        $cachedChannels = app()->params['cachedChannels'];
         $channel = $cachedChannels[$id];
 
         if (isset($options['title'])) {

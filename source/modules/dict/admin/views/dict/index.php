@@ -6,11 +6,11 @@ use source\modules\dict\models\DictCategory;
 use yii\helpers\Html;
 
 /* @var $this source\core\back\BackView */
-/* @var $searchModel source\models\search\DictSearch */
+/* @var $searchModel source\modules\dict\models\search\DictSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 
-$category = LuLu::getGetValue('category');
+$category = app()->request->get('category');
 $categoryModel = DictCategory::findOne(['id' => $category]);
 
 $this->title = '字典';

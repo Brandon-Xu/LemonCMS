@@ -11,7 +11,7 @@ class DefaultController extends BaseController
 {
 
     public function actionIndex() {
-        $taxonomy = LuLu::getGetValue('taxonomy');
+        $taxonomy = app()->request->get('taxonomy');
         $query = Content::find();
         $query->where(['content_type' => $this->content_type]);
         $query->andFilterWhere(['taxonomy_id' => $taxonomy]);

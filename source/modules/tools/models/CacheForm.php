@@ -2,9 +2,9 @@
 
 namespace source\modules\tools\models;
 
-use yii\helpers\ArrayHelper;
+use source\core\base\BaseModel;
 
-class CacheForm extends \source\core\base\BaseModel
+class CacheForm extends BaseModel
 {
 
     public $cache;
@@ -17,11 +17,10 @@ class CacheForm extends \source\core\base\BaseModel
     }
 
 
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
-            'cache' => '清空缓存', 'asset' => '清空Asset',
+    public function attributeLabels() {
+        return [
+            'cache' => '清空缓存',
+            'asset' => '清空Asset',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
 }

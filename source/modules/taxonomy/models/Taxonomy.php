@@ -60,16 +60,14 @@ class Taxonomy extends BaseActiveRecord
         ];
     }
 
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
+    public function attributeLabels() {
+        return [
             'id' => '编号', 'parent_id' => '父结点', 'category_id' => '分类', 'name' => '名称', 'url_alias' => '别名',
             'redirect_url' => '跳转链接', 'thumb' => '缩略图', 'description' => '描述', 'page_size' => '每页大小',
             'list_view' => '列表面view', 'list_layout' => '列表面layout', 'detail_view' => '内容页view',
             'detail_layout' => '内容页layout', 'seo_title' => '标题', 'seo_keywords' => '关键字', 'seo_description' => '描述',
             'contents' => '内容数量', 'sort_num' => '排序',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
 
 

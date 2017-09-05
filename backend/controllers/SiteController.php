@@ -23,7 +23,7 @@ class SiteController extends BackController
     }
 
     public function actionLogout() {
-        LuLu::$app->user->logout();
+        app()->user->logout();
 
         return $this->redirect([
             'index',
@@ -31,18 +31,18 @@ class SiteController extends BackController
     }
 
     public function actionLogin() {
-        if (!LuLu::$app->user->isGuest) {
+        if (!app()->user->isGuest) {
             return $this->goHome();
         }
         $message = '';
         $this->layout = FALSE;
         $model = new \source\models\LoginForm();
-        if ($model->load(LuLu::$app->request->post())) {
+        if ($model->load(app()->request->post())) {
             if ($model->login()) {
                 if (app()->rbac->checkPermission('manager_admin')) {
                     return $this->goBack();
                 } else {
-                    LuLu::$app->user->logout();
+                    app()->user->logout();
                     $message = '您没有权限登录管理系统';
                     LuLu::error("用户名：{$model->username}，密码：{$model->password}，{$message}", '登录后台');
                 }

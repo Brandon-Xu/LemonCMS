@@ -19,15 +19,9 @@ class Setting extends \source\models\ConfigForm
     }
 
     public function attributeLabels() {
-        return self::getAttributeLabels();
-    }
-
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
+        return [
             'sys_theme_home' => '前台主题', 'sys_theme_admin' => '后台主题',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
 
     public static function getAllHomeThemes() {

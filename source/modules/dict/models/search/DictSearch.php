@@ -15,7 +15,7 @@ class DictSearch extends Dict
     public function init() {
         parent::init();
         $this->userValidate = FALSE;
-        $this->category_id = LuLu::getGetValue('category');
+        $this->category_id = app()->request->get('category');
     }
 
     /**

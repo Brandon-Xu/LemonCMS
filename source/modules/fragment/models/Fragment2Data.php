@@ -42,14 +42,12 @@ class Fragment2Data extends FragmentData
         ];
     }
 
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
+    public function attributeLabels() {
+        return [
             'id' => 'ID', 'fragment_id' => '碎片', 'title' => '标题', 'title_format' => '标题格式', 'thumb' => '缩略图',
             'url' => '链接地址', 'sub_title' => '副标题', 'summary' => '简介', 'created_at' => '添加时间', 'created_by' => '作者',
             'sort_num' => '排序', 'status' => '状态',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
 
     public function beforeSave($insert) {

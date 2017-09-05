@@ -30,12 +30,12 @@ class DictCategory extends \source\core\base\BaseActiveRecord
         ];
     }
 
-    public static function getAttributeLabels($attribute = NULL) {
-        $items = [
-            'id' => '标识', 'name' => '名称', 'description' => '描述',
+    public function attributeLabels() {
+        return [
+            'id' => '标识',
+            'name' => '名称',
+            'description' => '描述',
         ];
-
-        return ArrayHelper::getItems($items, $attribute);
     }
 
     public function beforeDelete() {

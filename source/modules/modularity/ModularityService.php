@@ -2,10 +2,8 @@
 
 namespace source\modules\modularity;
 
-use source\core\modularity\ModuleInfo;
 use source\core\modularity\ModuleService;
 use source\modules\modularity\models\Modularity;
-use yii\helpers\FileHelper;
 
 /**
  * Class ModularityService
