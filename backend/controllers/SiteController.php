@@ -23,7 +23,7 @@ class SiteController extends BackController
     }
 
     public function actionLogout() {
-        LuLu::$app->user->logout();
+        app()->user->logout();
 
         return $this->redirect([
             'index',
@@ -42,7 +42,7 @@ class SiteController extends BackController
                 if (app()->rbac->checkPermission('manager_admin')) {
                     return $this->goBack();
                 } else {
-                    LuLu::$app->user->logout();
+                    app()->user->logout();
                     $message = '您没有权限登录管理系统';
                     LuLu::error("用户名：{$model->username}，密码：{$model->password}，{$message}", '登录后台');
                 }
