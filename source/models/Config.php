@@ -3,10 +3,8 @@
 namespace source\models;
 
 use source\core\base\BaseActiveRecord;
-use source\LuLu;
 use source\modules\system\SystemInfo;
 use yii\base\InvalidParamException;
-use yii\base\UnknownClassException;
 use yii\base\UnknownPropertyException;
 use yii\caching\DbQueryDependency;
 
@@ -130,7 +128,7 @@ class Config extends BaseActiveRecord
             throw new UnknownPropertyException('Can\'t find the config item: '. $this->id);
         }
 
-        return FALSE;
+        return $value;
     }
 
     /**
