@@ -3,32 +3,36 @@
 namespace source\modules\system\models\config;
 
 use source\models\ConfigForm;
+use source\modules\system\SystemInfo;
 
 class BasicConfig extends ConfigForm
 {
 
+    public function _init() {
+        $this->setBelongModule(new SystemInfo());
+    }
 
-    public $sys_site_name;
-    public $sys_site_description;
-    public $sys_site_about;
-    public $sys_site_url;
-    public $sys_site_email;
+    public $site_name;
+    public $site_description;
+    public $site_about;
+    public $site_url;
+    public $site_email;
 
-    public $sys_lang;
-    public $sys_icp;
-    public $sys_stat;
+    public $lang;
+    public $icp;
+    public $stat;
 
-    public $sys_status;
+    public $status;
 
 
     public function rules() {
         return [
             [
                 [
-                    'sys_site_name', 'sys_site_description', 'sys_site_about', 'sys_site_url', 'sys_lang', 'sys_icp',
-                    'sys_stat',
+                    'site_name', 'site_description', 'site_about', 'site_url', 'lang', 'icp',
+                    'stat',
                 ], 'string',
-            ], [['sys_site_email'], 'email'], [['sys_status'], 'boolean'],
+            ], [['site_email'], 'email'], [['status'], 'boolean'],
         ];
     }
 
@@ -37,12 +41,12 @@ class BasicConfig extends ConfigForm
      */
     public function attributeLabels() {
         return [
-            'sys_site_name' => '网站名称', 'sys_site_description' => '网站描述', 'sys_site_about' => '关于',
-            //'sys_site_url' => '网站Url',
-            'sys_site_email' => '站点Email',
+            'site_name' => '网站名称', 'site_description' => '网站描述', 'site_about' => '关于',
+            //'site_url' => '网站Url',
+            'site_email' => '站点Email',
 
 
-            'sys_lang' => '站点语言', 'sys_icp' => '备案号', 'sys_stat' => '统计代码', 'sys_status' => '站点状态',
+            'lang' => '站点语言', 'icp' => '备案号', 'stat' => '统计代码', 'status' => '站点状态',
         ];
     }
 }

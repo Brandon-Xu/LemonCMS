@@ -85,7 +85,7 @@ $rbacService = LuLu::getService('rbac');
         //'/js/core/dandelion.customizer.js',
     ]); ?>
 
-    <title><?php echo $this->title ?> - <?php echo $this->getConfigValue('sys_site_name') ?></title>
+    <title><?php echo $this->title ?> - <?php echo $this->config()->get('site_name') ?></title>
     <script type="text/javascript">
 		function toggleMenu(id) {
 			$(".menu-item").hide();

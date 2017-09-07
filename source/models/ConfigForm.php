@@ -3,56 +3,116 @@
 namespace source\models;
 
 use source\core\base\BaseModel;
+use source\core\modularity\ModuleInfo;
+use source\modules\modularity\models\Modularity;
+use yii\base\ErrorException;
+use yii\base\UnknownClassException;
+use yii\base\UnknownPropertyException;
 
-class ConfigForm extends BaseModel
+/**
+ * Class ConfigForm
+ * @property string $belongModule
+ * @package source\models
+ */
+abstract class ConfigForm extends BaseModel
 {
 
-    public function initAll() {
-        $this->initAllInternal();
+    private static $_configForms = [];
+
+    /** @var string $_moduleId 模块名 */
+    private $_moduleId;
+    private $_moduleInfoClass;
+
+    /**
+     * @param $propertyName
+     * @param $arguments
+     * @return mixed
+     * @throws UnknownPropertyException
+     */
+    public static final function __callStatic($propertyName, $arguments) {
+        $className = static::className();
+        if(!isset(self::$_configForms[$className])){
+            self::$_configForms[$className] = new $className;
+        }
+        if(!property_exists(self::$_configForms[$className], $propertyName)){
+            throw new UnknownPropertyException('不存在的关键配置项: ' . $propertyName);
+        }
+        return Config::get(
+            $propertyName,
+            self::$_configForms[$className]->getBelongModule()
+        );
     }
 
-    public function saveAll() {
-        $this->saveAllInternal();
+    /**
+     * @return string
+     */
+    public final function getBelongModule(){
+        return $this->_moduleId;
     }
 
-    protected function getAllIds() {
-        // return $this->attributes();
-        return array_keys($this->attributeLabels());
+    /**
+     * @throws UnknownClassException
+     */
+    public final function init(){
+        $this->_init();
+        if(empty($this->_moduleId)){
+            throw new UnknownClassException('not set belong module, please set belongModule in your FormClass by _init() function');
+        }
+        $this->loadFromDb();
     }
 
-    protected function initAllInternal() {
-        $ids = $this->getAllIds();
-        foreach ($ids as $id) {
-            $this->initOneInternal($id);
+    /**
+     * 从数据库中读取数据并填充到字段中
+     * @param bool $fromCache
+     */
+    private function loadFromDb($fromCache = FALSE){
+        $items = $this->fields();
+        foreach ($items as $item){
+            $this->$item = Config::get($item, $this->getBelongModule(), $fromCache);
         }
     }
 
-    protected function initOneInternal($id, $defaultValue = '') {
-        $model = Config::findOne(['id' => $id]);
-        if ($model != NULL) {
-            $this->$id = $model->value;
-        } else {
-            if (empty($defaultValue) && $this->$id !== NULL) {
-                $defaultValue = $this->$id;
+    /**
+     * @param ModuleInfo $moduleInfo
+     * @return bool
+     * @throws UnknownClassException
+     */
+    public final function setBelongModule(ModuleInfo $moduleInfo){
+        /** @var Modularity $module */
+        $module = Modularity::findOne(['id'=>$moduleInfo->id]);
+        if($module && $module->info !== NULL){
+            $this->_moduleId = $module->info->id;
+            $this->_moduleInfoClass = $module->info;
+            return TRUE;
+        }
+        throw new UnknownClassException("Unknown Module Info Class: {$module->info->id}, or not be installed");
+    }
+
+    /**
+     * @return bool
+     * @throws ErrorException
+     */
+    public final function save(){
+        foreach ($this->getAttributes() as $attribute => $label){
+            $configData = [
+                'id' => $attribute,
+                'value' => $this->$attribute,
+                'module' => $this->belongModule,
+            ];
+            $item = new Config();
+            $item->load($configData, '');
+            if( !($item->load($configData, '') && $item->save()) ){
+                throw new ErrorException('config save failed');
             }
-            $model = new Config();
-            $model->id = $id;
-            $model->value = $defaultValue;
-            $model->save();
-
-            $this->$id = $defaultValue;
         }
+        return TRUE;
     }
 
-    protected function saveAllInternal() {
-        $ids = $this->getAllIds();
-        foreach ($ids as $id) {
-            $this->saveOneInternal($id, $this->$id);
-        }
-    }
+    /**
+     * 由于本类的 init 方法不允许再做修改
+     * 所以使用 _init 方法作为可重载的代替
+     */
+    public function _init(){ }
 
-    protected function saveOneInternal($id, $value) {
-        Config::updateAll(['value' => $value], ['id' => $id]);
-        Config::clearCachedConfig($id);
-    }
+
 }

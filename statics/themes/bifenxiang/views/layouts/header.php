@@ -5,10 +5,10 @@ use source\LuLu;
 use source\modules\menu\models\Menu;
 
 
-$title = $this->getConfigValue('sys_seo_title');
+$title = $this->config()->get('seo_title');
 if(empty($title))
 {
-    $title = $this->getConfigValue('sys_site_name');
+    $title = $this->config()->get('site_name');
 }
 
 ?>
@@ -21,8 +21,8 @@ if(empty($title))
     <meta http-equiv="X-UA-Compatible" content="IE=10,IE=9,IE=8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
     <title><?php echo $this->title?> —— <?php echo $title?></title>
-    <meta name="keywords" content="<?php echo $this->getConfigValue('sys_seo_keywords')?>">
-    <meta name="description" content="<?php echo $this->getConfigValue('sys_seo_description')?>">
+    <meta name="keywords" content="<?php echo $this->config()->get('seo_keywords')?>">
+    <meta name="description" content="<?php echo $this->config()->get('seo_description')?>">
     <link rel='stylesheet' id='style-css' href='<?php echo $this->getThemeUrl()?>/css/style.css' type='text/css' media='all' />
     <script type='text/javascript' src='<?php echo $this->getThemeUrl()?>/js/jquery.min.js'></script>
     <?php $this->head() ?>
@@ -32,10 +32,10 @@ if(empty($title))
     <header id="header" class="header">
         <div class="container-inner" style="height: 60px;">
             <div class="yusi-logo" style="font-size: 40px;margin-top:15px;">
-                <a href="<?php echo LuLu::getHomeUrl()?>"><?php echo $this->getConfigValue('sys_site_name')?></a>
+                <a href="<?php echo LuLu::getHomeUrl()?>"><?php echo $this->config()->get('site_name')?></a>
             </div>
             <div class="ban-r">
-            	<?php echo $this->getConfigValue('sys_site_description')?>
+            	<?php echo $this->config()->get('site_description')?>
             </div>
         </div>
 

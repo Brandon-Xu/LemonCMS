@@ -18,7 +18,7 @@ use source\modules\menu\models\Menu;
             </div>
         </div>
     </footer>
-    <?php echo $this->getConfigValue('sys_stat');?>
+    <?php echo $this->config()->get('stat');?>
 <?php $this->endBody() ?>
 </body>
 </html>

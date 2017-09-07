@@ -8,8 +8,11 @@
 
 namespace source\modules\post\home\controllers;
 
+use Carbon\Carbon;
 use frontend\controllers\BaseRestController;
+use source\helpers\DateTimeHelper;
 use source\libs\DataSource;
+use source\models\Content;
 use source\modules\post\models\ContentPost;
 
 class ApiController extends BaseRestController
@@ -36,7 +39,7 @@ class ApiController extends BaseRestController
     }
 
     public function actionI(){
-        $d = DataSource::getContents(NULL, 'view_count desc', 5, ['is_pic' => TRUE]);
+        $d = Content::findOne(['id'=>14])->createdAt;
         return $d;
     }
 

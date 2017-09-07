@@ -2,8 +2,10 @@
 
 namespace source\libs;
 
+use source\modules\theme\ThemeInfo;
 use Yii;
 use source\helpers\FileHelper;
+use source\models\Config;
 
 class Resource
 {
@@ -18,13 +20,13 @@ class Resource
     }
 
     public static function getAdminTheme() {
-        $currentTheme = Common::getConfigValue('sys_theme_admin');
+        $currentTheme = Config::get('theme_admin', ThemeInfo::getId());
 
         return $currentTheme;
     }
 
     public static function getHomeTheme() {
-        $currentTheme = Common::getConfigValue('sys_theme_home');
+        $currentTheme = Config::get('theme_home', ThemeInfo::getId());
 
         return $currentTheme;
     }

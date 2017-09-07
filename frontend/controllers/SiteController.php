@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use source\core\front\FrontController;
+use source\models\Config;
 use source\models\ContactForm;
 use source\models\User;
 use yii\filters\Cors;

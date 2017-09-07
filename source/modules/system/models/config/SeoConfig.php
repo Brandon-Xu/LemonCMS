@@ -3,18 +3,31 @@
 namespace source\modules\system\models\config;
 
 use source\models\ConfigForm;
+use source\modules\system\SystemInfo;
 
+/**
+ * Class SeoConfig
+ * @method static string seo_title()
+ * @method static string seo_keywords()
+ * @method static string seo_description()
+ * @method static string seo_head()
+ * @package source\modules\system\models\config
+ */
 class SeoConfig extends ConfigForm
 {
-    public $sys_seo_title;
-    public $sys_seo_keywords;
-    public $sys_seo_description;
 
-    public $sys_seo_head;
+    public function _init() {
+        $this->setBelongModule(new SystemInfo());
+    }
+
+    public $seo_title;
+    public $seo_keywords;
+    public $seo_description;
+    public $seo_head;
 
     public function rules() {
         return [
-            [['sys_seo_title', 'sys_seo_keywords', 'sys_seo_description', 'sys_seo_head'], 'string'],
+            [['seo_title', 'seo_keywords', 'seo_description', 'seo_head'], 'string'],
         ];
     }
 
@@ -23,8 +36,10 @@ class SeoConfig extends ConfigForm
      */
     public function attributeLabels() {
         return [
-            'sys_seo_title' => '标题', 'sys_seo_keywords' => '关键字', 'sys_seo_description' => '描述',
-            'sys_seo_head' => '其它头部信息',
+            'seo_title' => '标题',
+            'seo_keywords' => '关键字',
+            'seo_description' => '描述',
+            'seo_head' => '其它头部信息',
         ];
     }
 }

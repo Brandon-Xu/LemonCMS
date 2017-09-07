@@ -19,8 +19,8 @@ $this->addBreadcrumbs([
 
 <?php $form = ActiveForm::begin(); ?>
 
-<?= $form->field($model, 'sys_allow_register', ['size' => 'small'])->checkbox([], FALSE) ?>
-<?= $form->field($model, 'sys_default_role')
+<?= $form->field($model, 'allow_register', ['size' => 'small'])->checkbox([], FALSE) ?>
+<?= $form->field($model, 'default_role')
     ->dropDownList(ArrayHelper::map(Role::buildOptions(), 'id', 'name', 'category')) ?>
 
 <?= $form->defaultButtons() ?>

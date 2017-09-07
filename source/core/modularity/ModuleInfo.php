@@ -39,4 +39,9 @@ class ModuleInfo extends Object
 
     public function deactiveHome() { }
 
+    public static function getId(){
+        $className = self::className();
+        return (new $className)->id;
+    }
+
 }

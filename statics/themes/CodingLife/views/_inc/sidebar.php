@@ -14,7 +14,7 @@ use yii\web\View;
         <h3 class="catListTitle">关于</h3>
         <div id="blog-news" style="">
             <div id="profile_block">
-                <?php echo $this->getConfigValue('sys_site_about')?>
+                <?php echo $this->config()->get('site_about')?>
             </div>
         </div>
     </div>

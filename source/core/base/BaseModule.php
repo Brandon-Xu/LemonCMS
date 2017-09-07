@@ -28,6 +28,10 @@ class BaseModule extends Module
         return [];
     }
 
+    public function config(){
+
+    }
+
     public function getRoutings() { }
 
     public function getPermissions() {

@@ -21,7 +21,4 @@ $config = yii\helpers\ArrayHelper::merge(
 );
 
 Common::checkInstall($config);
-
-new FrontApplication($config);
-if(Common::getConfigValue('sys_status') === '0') { app()->catchAll = ['site/close', 'message' => 'test']; }
-app()->run();
+(new FrontApplication($config))->run();

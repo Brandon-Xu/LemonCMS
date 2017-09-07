@@ -2,7 +2,9 @@
 
 namespace source\modules\theme;
 
-class ThemeInfo extends \source\core\modularity\ModuleInfo
+use source\core\modularity\ModuleInfo;
+
+class ThemeInfo extends ModuleInfo
 {
 
     public function init() {

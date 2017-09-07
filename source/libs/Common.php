@@ -2,6 +2,7 @@
 
 namespace source\libs;
 
+use Carbon\Carbon;
 use source\helpers\FileHelper;
 use source\LuLu;
 use source\models\Config;
@@ -16,29 +17,33 @@ class Common
     }
 
     public static function setTimezone() {
-        $timezone = Common::getConfigValue('sys_datetime_timezone');
+        $lang = Config::get('lang');
+        if(!Carbon::setLocale($lang)){
+            $lang = explode('-', $lang)[0];
+            Carbon::setLocale($lang);
+        }
 
-        date_default_timezone_set($timezone);
-    }
+        $timezone = Config::get('datetime_timezone');
+        app()->setTimeZone($timezone);
 
-    /**
-     * 获取配置
-     * @param string $id 配置ID
-     * @param boolean $fromCache 是否从缓存读取，
-     * @return \source\models\Config
-     */
-    public static function getConfig($id, $fromCache = TRUE) {
-        return Config::getModel($id, $fromCache);
-    }
+        $datetime_date_format = Config::get('datetime_date_format');
+        $datetime_time_format = Config::get('datetime_time_format');
 
-    /**
-     * 获取配置值
-     * @param string $id
-     * @param boolean $fromCache
-     * @return string
-     */
-    public static function getConfigValue($id, $fromCache = TRUE) {
-        return Config::getValue($id, $fromCache);
+        $format = $datetime_date_format;
+        if($datetime_time_format > 0){
+            switch ($datetime_time_format){
+                case 24:
+                    $hour = 'H';break;
+                case 12:
+                    $hour = 'h';break;
+                default:
+                    $hour = NULL;
+            }
+            $timeFormat = $hour === NULL ? '' : " {$hour}:i:s" ;
+            $format = "{$format}{$timeFormat}";
+        }
+        Carbon::setToStringFormat($format);
+
     }
 
     public static function getTaxonomyCategories() {

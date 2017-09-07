@@ -118,7 +118,7 @@ use source\modules\menu\models\Menu;
 <script type='text/javascript' src='<?php echo $this->getThemeUrl();?>/js/jquery.isotope.js?ver=1.5.25'></script>
 <script type='text/javascript' src='<?php echo $this->getThemeUrl();?>/js/cherry-plugin.js?ver=1.2.3'></script>-->
 
-<?php echo $this->getConfigValue('sys_stat');?>
+<?php echo $this->config()->get('stat');?>
 
 <?php $this->endBody();?>
 </body>

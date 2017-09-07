@@ -14,7 +14,7 @@ use yii\web\View;
     <h3 class="widget-title">关于本站</h3>
     
     <div class="feed-mail widget">
-        <?php echo $this->getConfigValue('sys_site_about')?>
+        <?php echo $this->config()->get('site_about')?>
         <form action="http://list.qq.com/cgi-bin/qf_compose_send" target="_blank" method="post">
             <input type="hidden" name="t" value="qf_booked_feedback">
             <input type="hidden" name="id" value="da5aefb0325d18729a2b2dffca28413a7e0650dbc78b315a">

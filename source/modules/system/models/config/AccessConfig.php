@@ -3,18 +3,24 @@
 namespace source\modules\system\models\config;
 
 use source\models\ConfigForm;
+use source\modules\system\SystemInfo;
 
 class AccessConfig extends ConfigForm
 {
 
 
-    public $sys_allow_register;
-    public $sys_default_role;
+    public function _init() {
+        $this->setBelongModule(new SystemInfo());
+    }
+
+    public $allow_register;
+    public $default_role;
 
 
     public function rules() {
         return [
-            [['sys_default_role'], 'string'], [['sys_allow_register'], 'boolean'],
+            [['default_role'], 'string'],
+            [['allow_register'], 'boolean'],
         ];
     }
 
@@ -24,8 +30,11 @@ class AccessConfig extends ConfigForm
     public function attributeLabels() {
         return [
 
-            'sys_allow_register' => '允许注册', 'sys_default_role' => '用户默认角色',
+            'allow_register' => '允许注册',
+            'default_role' => '用户默认角色',
 
         ];
     }
 }
+
+

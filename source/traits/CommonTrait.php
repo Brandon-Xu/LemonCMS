@@ -2,14 +2,12 @@
 
 namespace source\traits;
 
-use source\core\modularity\ModuleService;
 use source\libs\Common;
-use source\LuLu;
+use source\models\Config;
 use source\modules\menu\MenuService;
 use source\modules\modularity\ModularityService;
 use source\modules\rbac\RbacService;
 use source\modules\taxonomy\TaxonomyService;
-use yii\base\InvalidParamException;
 
 /**
  * @property ModularityService $modularity
@@ -20,6 +18,13 @@ use yii\base\InvalidParamException;
  */
 trait  CommonTrait
 {
+
+    /**
+     * @return Config
+     */
+    public function config(){
+        return new Config();
+    }
 
     /**
      * @return null|ModularityService
@@ -49,16 +54,6 @@ trait  CommonTrait
         return app()->get('menuService', TRUE);
     }
 
-    public function getConfigValue($id) {
-        return Common::getConfigValue($id);
-    }
-
-    public function showConfigValue($id) {
-        $value = self::getConfigValue($id);
-        if (!empty($value)) {
-            echo $value;
-        }
-    }
 }
 
 

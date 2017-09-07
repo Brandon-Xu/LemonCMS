@@ -16,14 +16,14 @@ use source\modules\menu\models\Menu;
             <?php $this->renderMenu('footer');?>
             </ul>
             </div>
-            <?php $this->showConfigValue('sys_icp');?>
+            <?php $this->showConfigValue('icp');?>
             Copyright ©2015 yiifans
         </div>
     <!--end: footer -->
     </div>
     <!--end: home 自定义的最大容器 -->
 
-    <?php echo $this->getConfigValue('sys_stat');?>
+    <?php echo $this->config()->get('stat');?>
 <?php $this->endBody() ?>
 </body>
 </html>

@@ -81,12 +81,18 @@ class BaseContentController extends FrontController
     }
 
     public function getDetail($id) {
-        $model = Content::getBodyByClass($this->bodyClass, [
-            'content.id' => $id,
-        ])->one();
+        $model = Content::find()->with(['body'])->where(['id'=>$id])->one();
+        $array = $model->toArray();
+        if($model->body){
+            $array['created_at'] = $model->createdAt;
+            $array['updated_at'] = $model->updatedAt;
+            $array['body_id'] = $model->body->id;
+            $array['body_content_id'] = $model->body->content_id;
+            $array['body_body'] = $model->body->body;
+        }
 
         return [
-            'model' => $model,
+            'model' => $array,
         ];
     }
 

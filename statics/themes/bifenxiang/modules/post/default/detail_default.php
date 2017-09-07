@@ -20,7 +20,7 @@ $this->title = $model['title'];
             <h1 class="article-title"><?php echo $model['title']?></h1>
             <div class="meta">
                 <span id="mute-category" class="muted"><i class="fa fa-list-alt"></i><a href="">搞笑</a></span>				<span class="muted"><i class="fa fa-user"></i><a href="">LuLu Blog</a></span>
-                <time class="muted"><i class="fa fa-clock-o"></i><?php echo DateTimeHelper::formatTime($model['created_at']) ?></time>
+                <time class="muted"><i class="fa fa-clock-o"></i><?php echo $model['created_at']; ?></time>
                 <span class="muted"><i class="fa fa-eye"></i><?php echo $model['view_count']?>℃</span>
                 <span class="muted"><i class="fa fa-comments-o"></i><a href=""><?php echo $model['comment_count']?>评论</a></span>
 

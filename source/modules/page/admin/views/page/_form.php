@@ -13,7 +13,7 @@ use yii\helpers\Html;
 /* @var $form yii\widgets\ActiveForm */
 
 $filedOptions = [];
-$taxonomy = $this->getConfigValue('page_taxonomy');
+$taxonomy = $this->config()->get('page_taxonomy');
 $taxonomies = app()->taxonomy->getTaxonomiesAsTree($taxonomy);
 $options = TreeHelper::buildTreeOptions($taxonomies);
 LuLu::setViewParam(['defaultLayout' => FALSE]);

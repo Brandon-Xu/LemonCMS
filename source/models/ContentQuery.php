@@ -27,6 +27,11 @@ class ContentQuery extends ActiveQuery
         return $this;
     }
 
+    public function withAll(){
+        $this->with(['body', 'taxonomy']);
+        return $this;
+    }
+
     /**
      * 给个默认的返回字段列表
      * @param array $moreFields

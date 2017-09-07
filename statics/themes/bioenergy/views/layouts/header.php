@@ -5,10 +5,10 @@ use source\LuLu;
 use source\modules\menu\models\Menu;
 
 
-$title = $this->getConfigValue('sys_seo_title');
+$title = $this->config()->get('seo_title');
 if(empty($title))
 {
-    $title = $this->getConfigValue('sys_site_name');
+    $title = $this->config()->get('site_name');
 }
 
 
@@ -27,8 +27,8 @@ if(empty($title))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title><?php echo $this->title;?> | <?php echo $title?></title>
-    <meta name="keywords" content="<?php echo $this->getConfigValue('sys_seo_keywords')?>">
-    <meta name="description" content="<?php echo $this->getConfigValue('sys_seo_description')?>">
+    <meta name="keywords" content="<?php echo $this->config()->get('seo_keywords')?>">
+    <meta name="description" content="<?php echo $this->config()->get('seo_description')?>">
     
     <link rel="icon" href="<?php echo $this->getThemeUrl()?>/images/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->getThemeUrl()?>/css/bootstrap.css" />
@@ -148,8 +148,8 @@ if(empty($title))
 
                                 <div class="logo pull-left">
                                     <a href="<?php echo $this->getHomeUrl();?>" class="logo_h logo_h__img">
-                                        <img src="<?php echo $this->getThemeUrl()?>/images/logo.png" alt="<?php echo $this->getConfigValue('sys_site_name')?>" title="<?php echo $this->getConfigValue('sys_site_name')?>"></a>
-                                    <p class="logo_tagline"><?php echo $this->getConfigValue('sys_site_description')?></p>
+                                        <img src="<?php echo $this->getThemeUrl()?>/images/logo.png" alt="<?php echo $this->config()->get('site_name')?>" title="<?php echo $this->config()->get('site_name')?>"></a>
+                                    <p class="logo_tagline"><?php echo $this->config()->get('site_description')?></p>
                                 </div>
                             </div>
                             <div class="span9">

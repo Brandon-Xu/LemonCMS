@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 if (isset($taxonomyId)) {
     $moduleId = app()->controller->module->id;
-    $taxonomies = Taxonomy::getArrayTree($this->getConfigValue($taxonomyId));
+    $taxonomies = Taxonomy::getArrayTree($this->config()->get($taxonomyId));
     ?>
 
     <div class="widget d_postlist">

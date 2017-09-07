@@ -14,10 +14,10 @@ $this->addBreadcrumbs([
 
 
 <?php $form = ActiveForm::begin(); ?>
-<?= $form->field($model, 'sys_seo_title'); ?>
-<?= $form->field($model, 'sys_seo_keywords') ?>
-<?= $form->field($model, 'sys_seo_description')->textarea() ?>
-<?= $form->field($model, 'sys_seo_head')->textarea() ?>
+<?= $form->field($model, 'seo_title'); ?>
+<?= $form->field($model, 'seo_keywords') ?>
+<?= $form->field($model, 'seo_description')->textarea() ?>
+<?= $form->field($model, 'seo_head')->textarea() ?>
 <?= $form->defaultButtons() ?>
 <?php ActiveForm::end(); ?>
            

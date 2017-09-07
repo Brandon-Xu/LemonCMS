@@ -14,7 +14,7 @@ use yii\web\View;
 
 $moduleId = app()->controller->module->id;
 
-$taxonomies = Taxonomy::getArrayTree($this->getConfigValue($moduleId.'_taxonomy'));
+$taxonomies = Taxonomy::getArrayTree($this->config()->get($moduleId.'_taxonomy'));
 
 if(!empty($taxonomies))
 {

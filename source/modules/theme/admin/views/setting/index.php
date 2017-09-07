@@ -12,8 +12,8 @@ $this->title = '主题设置';
 
 <?php $form = ActiveForm::begin(); ?>
 
-<?= $form->field($model, 'sys_theme_admin')->radioList(Setting::getAllAdminThemes()) ?>
-<?= $form->field($model, 'sys_theme_home')->radioList(Setting::getAllHomeThemes()) ?>
+<?= $form->field($model, 'theme_admin')->radioList(Setting::getAllAdminThemes()) ?>
+<?= $form->field($model, 'theme_home')->radioList(Setting::getAllHomeThemes()) ?>
 
 <?= $form->defaultButtons() ?>
 <?php ActiveForm::end(); ?>

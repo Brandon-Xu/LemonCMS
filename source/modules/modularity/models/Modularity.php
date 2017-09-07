@@ -130,8 +130,10 @@ class Modularity extends BaseActiveRecord
         return FALSE;
     }
 
+    /**
+     * 用 yii 的模块系统注册 module
+     */
     public function registerService(){
-
         $moduleNamespace = app()->modularity->moduleRootNamespace;
         $className = ucfirst($this->id).'Service';
         $class = $moduleNamespace . "\\{$this->id}\\" . $className;

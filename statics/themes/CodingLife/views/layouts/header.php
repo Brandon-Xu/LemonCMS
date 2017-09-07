@@ -6,14 +6,14 @@ use source\modules\menu\models\Menu;
 
 /* @var $this source\core\front\FrontView */
 
-$title = $this->getConfigValue('sys_seo_title');
+$title = $this->config()->get('seo_title');
 if(empty($title))
 {
-    $title = $this->getConfigValue('sys_site_name');
+    $title = $this->config()->get('site_name');
 }
 
 
-$seoHead = $this->getConfigValue('sys_seo_head');
+$seoHead = $this->config()->get('seo_head');
 
 ?>
 <?php $this->beginPage() ?>
@@ -24,14 +24,14 @@ $seoHead = $this->getConfigValue('sys_seo_head');
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo $this->title?> —— <?php echo $title?></title>
-    <meta name="keywords" content="<?php echo $this->getConfigValue('sys_seo_keywords')?>">
-    <meta name="description" content="<?php echo $this->getConfigValue('sys_seo_description')?>">
+    <meta name="keywords" content="<?php echo $this->config()->get('seo_keywords')?>">
+    <meta name="description" content="<?php echo $this->config()->get('seo_description')?>">
     <link type="text/css" rel="stylesheet" href="<?php echo $this->getThemeUrl()?>/css/blog-common.css">
     <link id="MainCss" type="text/css" rel="stylesheet" href="<?php echo $this->getThemeUrl()?>/css/bundle-CodingLife.css">
     <script type='text/javascript' src='<?php echo $this->getThemeUrl()?>/js/jquery.min.js?ver=1419744126'></script>
     <script type='text/javascript' src='<?php echo $this->getThemeUrl()?>/js/blog-common.js'></script>
     <?php $this->head() ?>
-    <?php $this->showConfigValue('sys_seo_head');?>
+    <?php $this->showConfigValue('seo_head');?>
 </head>
 <body>
     <?php $this->beginBody() ?>
@@ -44,10 +44,10 @@ $seoHead = $this->getConfigValue('sys_seo_head');
                
                 <!--done-->
                 <h1>
-                    <a href="<?php echo $this->getHomeUrl()?>" rel="home" class="headermaintitle" title="<?php echo $this->getConfigValue('sys_site_name');?>">
-                        <?php echo $this->getConfigValue('sys_site_name');?></a>
+                    <a href="<?php echo $this->getHomeUrl()?>" rel="home" class="headermaintitle" title="<?php echo $this->config()->get('site_name');?>">
+                        <?php echo $this->config()->get('site_name');?></a>
                 </h1>
-                <h2><?php echo $this->getConfigValue('sys_site_description')?></h2>
+                <h2><?php echo $this->config()->get('site_description')?></h2>
 
 
 

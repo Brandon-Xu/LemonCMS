@@ -28,7 +28,7 @@ $this->title = $model['title'];
                     </div>
                    
                 </div>
-                <div class="postDesc">posted @ <span id="post-date"><?php echo DateTimeHelper::formatTime($model['created_at']) ?></span> 阅读(<span id="post_view_count"><?php echo $model['view_count']?></span>) 评论(<span id="post_comment_count"><?php echo $model['comment_count']?></span>)</div>
+                <div class="postDesc">posted @ <span id="post-date"><?php echo $model['created_at']; ?></span> 阅读(<span id="post_view_count"><?php echo $model['view_count']?></span>) 评论(<span id="post_comment_count"><?php echo $model['comment_count']?></span>)</div>
             </div>
             
 

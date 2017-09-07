@@ -1,9 +1,8 @@
 <?php
-
-
-$title = $this->getConfigValue('sys_seo_title');
+/** @var source\core\front\FrontView $this */
+$title = $this->config()->get('seo_title');
 if (empty($title)) {
-    $title = $this->getConfigValue('sys_site_name');
+    $title = $this->config()->get('site_name');
 }  ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -13,8 +12,8 @@ if (empty($title)) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title><?php echo $this->title ?> —— <?php echo $title ?></title>
-    <meta name="keywords" content="<?php echo $this->getConfigValue('sys_seo_keywords') ?>">
-    <meta name="description" content="<?php echo $this->getConfigValue('sys_seo_description') ?>">
+    <meta name="keywords" content="<?php echo $this->config()->get('seo_keywords') ?>">
+    <meta name="description" content="<?php echo $this->config()->get('seo_description') ?>">
 
     <link rel="shortcut icon" href="favicon.ico"/>
     <link rel="stylesheet" href="<?php echo $this->getThemeUrl() ?>/css/base1.css"/>
@@ -46,8 +45,8 @@ if (empty($title)) {
     <div class="clearfix container">
         <div class="site-branding">
             <h1 class="site-title"><a href="<?php echo $this->getHomeUrl() ?>" rel="home"
-                                      title="<?php echo $this->getConfigValue('sys_site_name'); ?>">
-                    <?php echo $this->getConfigValue('sys_site_name'); ?></a></h1>
+                                      title="<?php echo $this->config()->get('site_name'); ?>">
+                    <?php echo $this->config()->get('site_name'); ?></a></h1>
         </div>
         <nav class="site-menu" role="navigation">
             <div class="menu-toggle"><i class="fa fa-bars"></i></div>

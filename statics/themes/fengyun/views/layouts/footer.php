@@ -39,7 +39,7 @@ use source\modules\menu\models\Menu;
 <script type="text/javascript" src="<?php echo $this->getThemeUrl()?>/js/scrolltop.js"></script>
 <script type='text/javascript' src='<?php echo $this->getThemeUrl()?>/js/scripts.js?ver=1419744126'></script>
 
-<?php echo $this->getConfigValue('sys_stat');?>
+<?php echo $this->config()->get('stat');?>
 <?php $this->endBody() ?>
 </body>
 </html>

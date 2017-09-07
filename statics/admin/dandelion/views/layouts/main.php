@@ -78,7 +78,7 @@ use yii\helpers\Url;
         '/js/core/dandelion.customizer.js',
     ]); ?>
 
-    <title><?php echo $this->title ?> - <?php echo $this->getConfigValue('sys_site_name') ?></title>
+    <title><?php echo $this->title ?> - <?php echo $this->config()->get('site_name') ?></title>
     <?php $this->head() ?>
 </head>
 

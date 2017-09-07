@@ -2,6 +2,7 @@
 
 namespace source\models;
 
+use Carbon\Carbon;
 use source\core\base\BaseActiveRecord;
 use source\core\behaviors\DefaultValueBehavior;
 use source\helpers\DateTimeHelper;
@@ -27,6 +28,8 @@ use yii\helpers\Url;
  *
  * @property integer $created_at
  * @property integer $updated_at
+ * @property string $createdAt
+ * @property string $updatedAt
  *
  * @property integer $focus_count
  * @property integer $favorite_count
@@ -86,7 +89,28 @@ class Content extends BaseActiveRecord
      * @return string
      */
     public function getCreatedAt() {
-        return DateTimeHelper::formatTime($this->created_at);
+        return $this->getTimeFormat($this->created_at);
+    }
+
+    /**
+     * @return string
+     */
+    public function getUpdatedAt() {
+        return $this->getTimeFormat($this->updated_at);
+    }
+
+    private function getTimeFormat($timestamp){
+        $datetime_pretty_format = Config::get('datetime_pretty_format');
+        $carbon = $this->getCarbon($timestamp);
+        return ($datetime_pretty_format === '1') ? $carbon->diffForHumans() : $carbon->__toString();
+    }
+
+    /**
+     * @param integer $timestamp
+     * @return Carbon
+     */
+    public function getCarbon($timestamp){
+        return Carbon::createFromTimestamp($timestamp);
     }
 
     /**
@@ -171,10 +195,8 @@ class Content extends BaseActiveRecord
         $selects = ['content.*'];
 
         foreach ((array)$columns as $column) {
-            $columnName = '';
-            if (is_string($column)) {
-                $columnName = $column;
-            } else {
+            $columnName = $column;
+            if (is_object($column)) {
                 $columnName = $column->name;
             }
             $selects[] = "body.$columnName as body_$columnName";
@@ -197,9 +219,10 @@ class Content extends BaseActiveRecord
     public function behaviors() {
         return [
             [
-                'class' => DefaultValueBehavior::className(), 'validates' => [
-                'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count',
-            ], 'value' => 0,
+                'class' => DefaultValueBehavior::className(),
+                'validates' => [
+                    'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count',
+                ], 'value' => 0,
             ],
         ];
     }

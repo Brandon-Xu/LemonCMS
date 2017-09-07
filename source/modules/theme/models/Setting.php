@@ -2,31 +2,37 @@
 
 namespace source\modules\theme\models;
 
-use yii\helpers\ArrayHelper;
+use source\models\ConfigForm;
+use source\modules\theme\ThemeInfo;
 
-class Setting extends \source\models\ConfigForm
+class Setting extends ConfigForm
 {
 
-    public $sys_theme_home;
-    public $sys_theme_admin;
+    public $theme_home;
+    public $theme_admin;
 
+    public function _init() {
+        $this->setBelongModule(new ThemeInfo);
+    }
 
     public function rules() {
         return [
-            [['sys_theme_home', 'sys_theme_admin'], 'required'],
-            [['sys_theme_home', 'sys_theme_admin'], 'string', 'max' => 64],
+            [['theme_home', 'theme_admin'], 'required'],
+            [['theme_home', 'theme_admin'], 'string', 'max' => 64],
         ];
     }
 
     public function attributeLabels() {
         return [
-            'sys_theme_home' => '前台主题', 'sys_theme_admin' => '后台主题',
+            'theme_home' => '前台主题', 'theme_admin' => '后台主题',
         ];
     }
 
     public static function getAllHomeThemes() {
         $items = [
-            'bifenxiang' => '博客主题bifenxiang', 'fengyun' => '博客主题fengyun', 'bioenergy' => '企业主题',
+            'bifenxiang' => '博客主题bifenxiang',
+            'fengyun' => '博客主题fengyun',
+            'bioenergy' => '企业主题',
             'CodingLife' => 'CodingLife',
         ];
 

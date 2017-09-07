@@ -2,6 +2,7 @@
 
 namespace source\modules\menu\models;
 
+use source\core\base\BaseActiveRecord;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -11,7 +12,7 @@ use yii\helpers\ArrayHelper;
  * @property string $name
  * @property string $description
  */
-class MenuCategory extends \source\core\base\BaseActiveRecord
+class MenuCategory extends BaseActiveRecord
 {
     /**
      * @inheritdoc

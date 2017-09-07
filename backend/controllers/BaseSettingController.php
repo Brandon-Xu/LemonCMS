@@ -2,9 +2,9 @@
 
 namespace backend\controllers;
 
+use Yii;
 use source\core\back\BackController;
 use source\models\ConfigForm;
-use Yii;
 use yii\base\InvalidParamException;
 
 abstract class BaseSettingController extends BackController
@@ -15,14 +15,12 @@ abstract class BaseSettingController extends BackController
             throw new InvalidParamException('model must be instance of ConfigForm');
         }
 
-        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post()) && $model->saveAll()) {
+        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->refresh();
         } else {
             if ($view === NULL) {
                 $view = $this->action->id;
             }
-
-            $model->initAll();
 
             return $this->render($view, [
                 'model' => $model,

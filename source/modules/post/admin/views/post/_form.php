@@ -15,7 +15,7 @@ use yii\helpers\Html;
 $filedOptions = [];
 
 
-$taxonomy = $this->getConfigValue('post_taxonomy');
+$taxonomy = $this->config()->get('post_taxonomy');
 $taxonomies = app()->taxonomy->getTaxonomiesAsTree($taxonomy);
 
 $options = TreeHelper::buildTreeOptions($taxonomies);

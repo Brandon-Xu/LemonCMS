@@ -3,6 +3,7 @@
 namespace source;
 
 use source\core\modularity\ModuleService;
+use source\models\User;
 use yii\base\InvalidParamException;
 use yii\data\Pagination;
 use yii\helpers\Url;
@@ -125,7 +126,7 @@ class LuLu extends \Yii
     public static function getIdentity() {
         $identity = app()->user->getIdentity();
         if (empty($identity)) {
-            $identity = new \source\models\User();
+            $identity = new User();
         }
 
         return $identity;

@@ -30,7 +30,7 @@ $this->title = $model['title'];
                 </div>
                 <div class="post_date">
                     <i class="icon-calendar"></i>
-                    <time><?php echo DateTimeHelper::formatTime($model['created_at']) ?></time> 
+                    <time><?php echo $model['created_at']; ?></time>
                 </div>
                 <div class="post_author">
                     <i class="icon-user"></i>

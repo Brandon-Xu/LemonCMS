@@ -8,7 +8,9 @@ use source\modules\taxonomy\models\Taxonomy;
 /**
  * This is the model class for table "lulu_content".
  *
+ * @property integer $id
  * @property integer $content_id
+ * @property string $body
  *
  */
 class ContentBody extends BaseActiveRecord

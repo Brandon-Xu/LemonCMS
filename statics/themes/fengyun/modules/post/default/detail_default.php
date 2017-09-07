@@ -8,7 +8,6 @@ use source\helpers\DateTimeHelper;
 
 $this->title = $model['title'];
 
-
 ?>
 
 <article id="post-<?php echo $model['id']?>" class="post-<?php echo $model['id']?> post type-post status-publish format-standard has-post-thumbnail hentry category-guandian tag-redian tag-yingxiao clearfix">
@@ -17,7 +16,7 @@ $this->title = $model['title'];
 
         <div class="entry-meta">
             <span class="byline"><i class="fa fa-user"></i><span class="author vcard"><a href="#" title="由<?php echo $model['user_name']?>发布" rel="author"><?php echo $model['user_name']?></a></span></span>
-            <span class="posted-on"><i class="fa fa-calendar"></i><a><time><?php echo DateTimeHelper::formatTime($model['created_at']) ?></time></a></span>
+            <span class="posted-on"><i class="fa fa-calendar"></i><a><time><?php echo $model['created_at']; ?></time></a></span>
             <span class="comments-link">
                 <i class="fa fa-comments"></i>
                 <a href="#" class="ds-thread-count" data-thread-key="4682" title="《<?php echo $model['title']?>》上的评论"><?php echo $model['comment_count']?> 条评论</a>
