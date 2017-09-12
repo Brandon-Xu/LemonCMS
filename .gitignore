@@ -49,12 +49,15 @@ yarn-error.log
 *.sln
 
 # 去掉 Vue 的部分
-web/README.md
-web/index.html
-web/package.json
-web/src/
-web/webpack.config.js
-web/document
-!web/.htaccess
-!web/attachment/
-!web/assets/
+!/web/
+/web/README.md
+/web/index.html
+/web/package.json
+/web/src/
+/web/webpack.config.js
+/web/document/
+/web/attachment/*
+/web/assets/*
+!.htaccess
+!/web/assets/.htaccess
+!/web/attachment/.htaccess
