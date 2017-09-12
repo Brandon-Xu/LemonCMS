@@ -23,12 +23,3 @@
         </div>
         <!-- .site-footer -->
     </footer>
-<div id="full"></div>
-
-<?php echo $this->config()->get('stat');?>
-
-<script type="application/javascript">
-	$.get('http://j.brandon.com/service/index.php?r=site/app', {d : {a:2}}, function(res){
-		console.log(res);
-	});
-</script>

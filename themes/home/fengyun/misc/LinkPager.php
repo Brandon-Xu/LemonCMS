@@ -1,7 +1,6 @@
 <?php
-namespace statics\themes\fengyun\misc;
+namespace themes\home\fengyun\misc;
 
-use Yii;
 use yii\helpers\Html;
 
 class LinkPager extends \source\core\widgets\LinkPager

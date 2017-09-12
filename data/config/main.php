@@ -13,7 +13,7 @@ $params = array_merge(
 return [
     'id' => 'home',
     'language' => 'zh-CN',
-    'basePath' => dirname(__DIR__),
+    'basePath' => dirname(dirname(__DIR__)),
     'vendorPath' => dirname(dirname(__DIR__)).'/vendor',
     'runtimePath' => dirname(dirname(__DIR__)).'/data/runtime',
     'bootstrap' => ['log'],

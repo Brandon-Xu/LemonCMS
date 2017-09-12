@@ -97,6 +97,8 @@ class BaseView extends View
 
     public function showWidget($name, $params) {
         $currentTheme = \Yii::getAlias('@activeTheme/misc/'.$name);
+        $currentTheme = ltrim($currentTheme, app()->basePath);
+        $currentTheme = str_replace('/', '\\', $currentTheme);
         if (class_exists($currentTheme)) {
             echo $currentTheme::widget($params);
         } else {
