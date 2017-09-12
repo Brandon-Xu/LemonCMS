@@ -2,9 +2,7 @@
 
 namespace source\modules\system\admin;
 
-use source\core\modularity\BackModule;
-
-class AdminModule extends BackModule
+class AdminModule extends \source\core\modularity\AdminModule
 {
     public $controllerNamespace = 'source\modules\system\admin\controllers';
 }

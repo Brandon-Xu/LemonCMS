@@ -15,7 +15,7 @@ use yii\helpers\Html;
 $filedOptions = [];
 
 
-$taxonomy = $this->config()->get('post_taxonomy');
+$taxonomy = $this->config()->get('taxonomy', \source\modules\post\PostInfo::getId());
 $taxonomies = app()->taxonomy->getTaxonomiesAsTree($taxonomy);
 
 $options = TreeHelper::buildTreeOptions($taxonomies);
@@ -39,7 +39,7 @@ $form = ActiveForm::begin([
         <div class="da-panel">
             <div class="da-panel-header">
                 <span class="da-panel-title">
-                    <img src="<?php echo Resource::getAdminUrl() ?>/images/icons/black/16/pencil.png" alt="">
+                    <img src="<?=\source\assets\AdminIconAssets::url('/icons/black/16/pencil.png');?>" alt="">
                     <?= $this->title ?>
                 </span>
             </div>
@@ -75,7 +75,7 @@ $form = ActiveForm::begin([
         <div class="da-panel">
             <div class="da-panel-header">
                 <span class="da-panel-title">
-                    <img src="<?php echo Resource::getAdminUrl() ?>/images/icons/black/16/pencil.png" alt="">发布
+                    <img src="<?=\source\assets\AdminIconAssets::url('/icons/black/16/pencil.png');?>" alt="">发布
                 </span>
             </div>
 
@@ -118,7 +118,7 @@ $form = ActiveForm::begin([
         <div class="da-panel collapsible collapsed">
             <div class="da-panel-header">
                 <div class="da-panel-title">
-                    <img src="<?php echo Resource::getAdminUrl() ?>/images/icons/black/16/pencil.png" alt=""> 属性设置
+                    <img src="<?=\source\assets\AdminIconAssets::url('/icons/black/16/pencil.png');?>" alt=""> 属性设置
                 </div>
 
             </div>
@@ -132,7 +132,7 @@ $form = ActiveForm::begin([
         <div class="da-panel collapsible collapsed">
             <div class="da-panel-header">
                 <span class="da-panel-title">
-                    <img src="<?php echo Resource::getAdminUrl() ?>/images/icons/black/16/pencil.png" alt=""> SEO设置
+                    <img src="<?=\source\assets\AdminIconAssets::url('/icons/black/16/pencil.png');?>" alt=""> SEO设置
                 </span>
             </div>
 
@@ -154,7 +154,7 @@ $form = ActiveForm::begin([
         <div class="da-panel collapsible collapsed">
             <div class="da-panel-header">
                 <span class="da-panel-title">
-                    <img src="<?php echo Resource::getAdminUrl() ?>/images/icons/black/16/pencil.png" alt=""> 模板设置
+                    <img src="<?=\source\assets\AdminIconAssets::url('/icons/black/16/pencil.png');?>" alt=""> 模板设置
                 </span>
             </div>
 

@@ -2,14 +2,9 @@
 
 namespace source\modules\page\admin;
 
-class AdminModule extends \source\core\modularity\BackModule
+class AdminModule extends \source\core\modularity\AdminModule
 {
 
     public $controllerNamespace = 'source\modules\page\admin\controllers';
 
-    public function getMenus() {
-        return [
-            ['新建', ['/page/page/create']], ['所有单面', ['/page/page']], ['设置', ['/page/setting']],
-        ];
-    }
 }

@@ -2,7 +2,7 @@
 
 namespace source\modules\dict\admin\controllers;
 
-use backend\controllers\BaseSettingController;
+use source\modules\admin\controllers\BaseSettingController;
 use source\modules\dict\models\Setting;
 
 class SettingController extends BaseSettingController

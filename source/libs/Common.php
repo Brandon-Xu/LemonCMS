@@ -3,7 +3,6 @@
 namespace source\libs;
 
 use Carbon\Carbon;
-use source\helpers\FileHelper;
 use source\LuLu;
 use source\models\Config;
 use yii\web\UploadedFile;
@@ -18,7 +17,7 @@ class Common
 
     public static function setTimezone() {
         $lang = Config::get('lang');
-        if(!Carbon::setLocale($lang)){
+        if (!Carbon::setLocale($lang)) {
             $lang = explode('-', $lang)[0];
             Carbon::setLocale($lang);
         }
@@ -30,26 +29,21 @@ class Common
         $datetime_time_format = Config::get('datetime_time_format');
 
         $format = $datetime_date_format;
-        if($datetime_time_format > 0){
-            switch ($datetime_time_format){
+        if ($datetime_time_format > 0) {
+            switch ($datetime_time_format) {
                 case 24:
-                    $hour = 'H';break;
+                    $hour = 'H';
+                    break;
                 case 12:
-                    $hour = 'h';break;
+                    $hour = 'h';
+                    break;
                 default:
                     $hour = NULL;
             }
-            $timeFormat = $hour === NULL ? '' : " {$hour}:i:s" ;
+            $timeFormat = $hour === NULL ? '' : " {$hour}:i:s";
             $format = "{$format}{$timeFormat}";
         }
         Carbon::setToStringFormat($format);
-
-    }
-
-    public static function getTaxonomyCategories() {
-        $service = LuLu::getService('taxonomy');
-
-        return $service->getTaxonomyCategories();
     }
 
     /**
@@ -102,16 +96,14 @@ class Common
                 default:
                     $error = '未知错误。';
             }
-
             LuLu::error($error, '上传文件出错');
-
             return ['message' => $error];
         }
 
         $ymd = date("Ymd");
 
-        $save_path = \Yii::getAlias('@attachmentPath').'/'.$ymd."/";
-        $save_url = 'data/attachment/'.$ymd."/";
+        $save_path = \Yii::getAlias('@attachment').'/'.$ymd."/";
+        $save_url = 'attachment/'.$ymd."/";
 
         if (!file_exists($save_path)) {
             mkdir($save_path);
@@ -122,110 +114,21 @@ class Common
 
         // 新文件名
         $new_file_name = date("YmdHis").'_'.rand(10000, 99999).'.'.$file_ext;
-
         $uploadedFile->saveAs($save_path.$new_file_name);
 
         return [
-            'path' => $save_path, 'url' => $save_url, 'name' => $file_name, 'new_name' => $new_file_name,
-            'ext' => $file_ext, 'full_name' => $save_url.$new_file_name, 'temp_name' => $uploadedFile->tempName,
-            'type' => $uploadedFile->type, 'size' => $uploadedFile->size, 'message' => 'ok',
+            'path' => $save_path,
+            'url' => $save_url,
+            'name' => $file_name,
+            'new_name' => $new_file_name,
+            'ext' => $file_ext,
+            'full_name' => $save_url.$new_file_name,
+            'temp_name' => $uploadedFile->tempName,
+            'type' => $uploadedFile->type,
+            'size' => $uploadedFile->size,
+            'message' => 'ok',
         ];
     }
 
 
-    public static function getTitleFormat($id = NULL) {
-        $format = [
-            'b' => '加粗', 'i' => '斜体', 'u' => '下划线', 's' => '删除线',
-        ];
-
-        if ($id !== NULL) {
-            return $format[$id];
-        }
-
-        return $format;
-    }
-
-    public static function getTitleFormatValue($array) {
-        if ($array === NULL || !is_array($array)) {
-            return '';
-        }
-
-        return implode(',', $array);
-    }
-
-    public static function getTitleFormatArray($var) {
-        $format = '';
-        if (is_string($var)) {
-            $format = $var;
-        } else if (isset($var['title_format'])) {
-            $format = $var['title_format'];
-        }
-
-        return explode(',', trim($format, ','));
-    }
-
-    public static function formatTitle($title, $format) {
-        $format = self::getTitleFormatArray($format);
-        if (isset($format['b'])) {
-            $title = '<b>'.$title.'</b>';
-        }
-        if (isset($format['i'])) {
-            $title = '<i>'.$title.'</i>';
-        }
-        if (isset($format['u'])) {
-            $title = '<u>'.$title.'</u>';
-        }
-        if (isset($format['s'])) {
-            $title = '<s>'.$title.'</s>';
-        }
-
-        return $title;
-    }
-
-    public static function getTitlePic($var) {
-        $titlePic = '';
-        if (is_string($var)) {
-            $titlePic = $var;
-        } else if (isset($var['title_pic'])) {
-            $titlePic = $var['title_pic'];
-        }
-        if (stripos($titlePic, 'http') === FALSE) {
-            return 'data/'.$titlePic;
-        }
-
-        return $titlePic;
-    }
-
-
-    public static function getFiles($dir = NULL, $prefix = NULL, $isBack = NULL) {
-        $root = '';
-        if ($isBack === NULL) {
-            $root = \Yii::getAlias('@webroot');
-        } else if ($isBack) {
-            $root = \Yii::getAlias('@backend');
-        } else {
-            $root = \Yii::getAlias('@frontend');
-        }
-
-        $pathArray = [$root];
-        if ($dir !== NULL) {
-            if (is_string($dir)) {
-                $pathArray = [
-                    $root, $dir,
-                ];
-            } else if (is_array($dir)) {
-                $pathArray = array_merge([$root], $dir);
-            }
-        }
-
-        return FileHelper::getFiles($pathArray, $prefix);
-    }
-
-    public static function getAttachUrl($url, $echo = TRUE) {
-        if ($echo) {
-            echo LuLu::getWebUrl().'/data/attachment/'.$url;
-        }
-
-        return LuLu::getWebUrl().'/data/attachment/'.$url;
-    }
 }

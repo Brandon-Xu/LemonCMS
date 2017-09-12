@@ -42,3 +42,27 @@ lulucms2.v12.suo
 
 vendor
 data/backup/
+
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
+
+# Editor directories and files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# 去掉 Vue 的部分
+web/README.md
+web/assets/
+web/index.html
+web/index.php
+web/package.json
+web/src/
+web/attachment/
+web/webpack.config.js
+web/document
+!/web/index.php
+!/web/.htaccess

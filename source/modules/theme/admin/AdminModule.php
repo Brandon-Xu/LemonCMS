@@ -2,7 +2,7 @@
 
 namespace source\modules\theme\admin;
 
-class AdminModule extends \source\core\modularity\BackModule
+class AdminModule extends \source\core\modularity\AdminModule
 {
 
     public $controllerNamespace = 'source\modules\theme\admin\controllers';

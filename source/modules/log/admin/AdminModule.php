@@ -3,7 +3,7 @@
 namespace source\modules\log\admin;
 
 
-class AdminModule extends \source\core\modularity\BackModule
+class AdminModule extends \source\core\modularity\AdminModule
 {
 
     public $controllerNamespace = 'source\modules\log\admin\controllers';

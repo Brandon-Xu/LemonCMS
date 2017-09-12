@@ -3,6 +3,7 @@
 namespace source\core\grid;
 
 use source\libs\Resource;
+use source\assets\AdminIconAssets;
 use Yii;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -23,9 +24,12 @@ class ActionColumn extends \yii\grid\ActionColumn
 
     public $template = '{update} {delete}';
 
+    public $assets;
+
     public function init() {
         parent::init();
-
+        $this->assets = new AdminIconAssets;
+        $this->assets->publish(app()->assetManager);
         if (!isset($this->headerOptions['width'])) {
             $this->headerOptions['width'] = $this->width;
         }
@@ -38,21 +42,21 @@ class ActionColumn extends \yii\grid\ActionColumn
     protected function initDefaultButtons() {
         if (!isset($this->buttons['view'])) {
             $this->buttons['view'] = function ($url, $model, $key, $index, $gridView) {
-                return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/magnifier.png">', $url, [
+                return Html::a('<img src="'.$this->assets->baseUrl.'/icons/color/magnifier.png">', $url, [
                     'title' => Yii::t('yii', 'View'), 'data-pjax' => '0',
                 ]);
             };
         }
         if (!isset($this->buttons['update'])) {
             $this->buttons['update'] = function ($url, $model, $key, $index, $gridView) {
-                return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/pencil.png">', $url, [
+                return Html::a('<img src="'.$this->assets->baseUrl.'/icons/color/pencil.png">', $url, [
                     'title' => Yii::t('yii', 'Update'), 'data-pjax' => '0',
                 ]);
             };
         }
         if (!isset($this->buttons['delete'])) {
             $this->buttons['delete'] = function ($url, $model, $key, $index, $gridView) {
-                return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/cross.png">', $url, [
+                return Html::a('<img src="'.$this->assets->baseUrl.'/icons/color/cross.png">', $url, [
                     'title' => Yii::t('yii', 'Delete'),
                     'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                     'data-method' => 'post', 'data-pjax' => '0',
@@ -62,7 +66,7 @@ class ActionColumn extends \yii\grid\ActionColumn
     }
 
     public function createUrl($action, $model, $key, $index) {
-        if ($this->urlCreator instanceof Closure) {
+        if ($this->urlCreator instanceof \Closure) {
             return call_user_func($this->urlCreator, $action, $model, $key, $index, $this);
         } else {
             $params = \Yii::$app->request->queryParams;

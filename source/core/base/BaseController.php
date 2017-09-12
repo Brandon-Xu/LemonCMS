@@ -2,16 +2,13 @@
 
 namespace source\core\base;
 
-use source\LuLu;
-use source\traits\CommonTrait;
-use Yii;
-use yii\base\InvalidRouteException;
+use source\traits\Common;
 use yii\web\Controller;
 use yii\web\Response;
 
 class BaseController extends Controller
 {
-    use CommonTrait;
+    use Common;
 
     public function behaviors() {
         return [];
@@ -77,6 +74,7 @@ class BaseController extends Controller
         return $this->jsonResponse($data, 'failed', $message);
     }
 
+    /*
     public function findLayoutFile($view) {
         if (($view instanceof BaseView) && !empty($view->layout)) {
             $oldLayout = $this->layout;
@@ -89,6 +87,7 @@ class BaseController extends Controller
             return parent::findLayoutFile($view);
         }
     }
+    */
 
     public function beginPage($event) { }
 

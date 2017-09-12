@@ -2,11 +2,11 @@
 
 namespace frontend\controllers;
 
-use source\core\front\FrontController;
+use source\core\base\BaseController;
 use source\LuLu;
 use source\models\Content;
 
-class BaseContentController extends FrontController
+class BaseContentController extends BaseController
 {
     //首页页面大小
     public $pageSize_index = 10;

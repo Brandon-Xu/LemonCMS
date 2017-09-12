@@ -2,6 +2,8 @@
 
 namespace source\modules\rbac\models;
 
-class BaseRbacActiveRecord extends \source\core\base\BaseActiveRecord
+use source\core\base\BaseActiveRecord;
+
+class BaseRbacActiveRecord extends BaseActiveRecord
 {
 }

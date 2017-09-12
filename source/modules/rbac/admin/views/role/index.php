@@ -8,7 +8,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this source\core\front\FrontView */
-/* @var $searchModel app\modules\rbac\models\search\RoleSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $categoryId = app()->request->get('category');
@@ -29,20 +28,24 @@ $columns = [
     ],
 
     [
-        'class' => 'source\core\grid\ActionColumn', 'template' => '{permission}{update} {delete}', 'width' => '60px',
+        'class' => 'source\core\grid\ActionColumn',
+        'template' => '{permission}{update} {delete}',
+        'width' => '60px',
         'buttons' => [
             'permission' => function ($url, $model) {
-                return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/key.png">', Url::to([
+                $iconUrl = \source\assets\AdminIconAssets::getBaseUrl();
+                return Html::a('<img src="'.$iconUrl.'/icons/color/key.png">', Url::to([
                     'relation', 'role' => $model['id'],
                 ]), [
                     'title' => '设置权限',
                 ]);
-            }, 'delete' => function ($url, $model) {
+            },
+            'delete' => function ($url, $model) {
                 if ($model->is_system) {
                     return '';
                 }
-
-                return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/cross.png">', $url, [
+                $iconUrl = \source\assets\AdminIconAssets::getBaseUrl();
+                return Html::a('<img src="'.$iconUrl.'/icons/color/cross.png">', $url, [
                     'title' => Yii::t('yii', 'Delete'),
                     'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
                     'data-method' => 'post', 'data-pjax' => '0',

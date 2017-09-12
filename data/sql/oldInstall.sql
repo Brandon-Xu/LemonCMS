@@ -268,7 +268,7 @@ INSERT INTO `#@__config` (`id`, `value`) VALUES
 ('page_takonomy', 'page'),
 ('page_taxonomy', 'page'),
 ('post_takonomy', 'post'),
-('post_taxonomy', 'post'),
+('taxonomy', 'post'),
 ('sys_allow_register', '0'),
 ('sys_datetime_date_format', 'Y-m-d'),
 ('sys_datetime_pretty_format', '1'),

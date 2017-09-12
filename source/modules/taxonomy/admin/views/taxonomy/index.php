@@ -17,12 +17,12 @@ $categoryModel = TaxonomyCategory::findOne(['id' => $category]);
 
 $this->title = $categoryModel['name'];
 $this->addBreadcrumbs([
-    ['分类管理', ['/taxonomy']], $categoryModel['name'],
+    ['分类管理', ['taxonomy']], $categoryModel['name'],
 ]);
 
 ?>
 <?php $this->toolbars([
-    Html::a('返回', ['/taxonomy/taxonomy-category/index'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
+    Html::a('返回', ['taxonomy-category/index'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
     Html::a('新建', ['create', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
@@ -30,7 +30,8 @@ $this->addBreadcrumbs([
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider, //'filterModel' => $searchModel,
-    'layout' => "{items}\n{pager}", 'columns' => [
+    'layout' => "{items}\n{pager}",
+    'columns' => [
         [
             'class' => 'source\core\grid\IdColumn',
         ], [
@@ -51,7 +52,8 @@ $this->addBreadcrumbs([
         ], [
             'class' => 'source\core\grid\SortColumn',
         ], [
-            'class' => 'source\core\grid\ActionColumn', 'queryParams' => ['view' => ['category' => $category]],
+            'class' => 'source\core\grid\ActionColumn',
+            'queryParams' => ['view' => ['category' => $category]],
         ],
     ],
 ]); ?>

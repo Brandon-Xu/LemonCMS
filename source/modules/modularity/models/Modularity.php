@@ -179,7 +179,7 @@ class Modularity extends BaseActiveRecord
     }
 
     /**
-     * @return bool
+     * @return array|bool
      */
     public function build(){
         // 设置好对应前台的后台的子模块
@@ -196,10 +196,10 @@ class Modularity extends BaseActiveRecord
         $this->_moduleClass = (app()->modularity->isAdmin === TRUE) ? $this->_adminModuleClass : $this->_homeModuleClass;
         if($this->_moduleClass === FALSE) return FALSE;
 
-        app()->setModule($this->id, [ // 加载到 yii 的模块管理中
+        // 加载到 yii 的模块管理中
+        return $module = [
             'class' => $this->_moduleClass,
-        ]);
-        return TRUE;
+        ];
     }
 
 }

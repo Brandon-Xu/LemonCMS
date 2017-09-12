@@ -44,6 +44,9 @@ class Config extends BaseActiveRecord
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function attributeLabels() {
         return [
             'id' => '名称',
@@ -102,7 +105,7 @@ class Config extends BaseActiveRecord
      * @return string
      */
     private function getCacheId(){
-        return self::CachePrefix . $this->id;
+        return self::CachePrefix . $this->module . '_' . $this->id;
     }
 
     /**
@@ -114,59 +117,45 @@ class Config extends BaseActiveRecord
         if(empty($this->id)) throw new InvalidParamException('config id is required');
         $this->checkModuleExists('module', $this->module);
 
-        $value = FALSE;
         $cacheId = $this->getCacheId();
-        if ($fromCache === TRUE && ($value = app()->cache->get($cacheId)) !== FALSE){
+        $value = app()->cache->get($cacheId);
+
+
+        if ($fromCache === TRUE && $value !== FALSE){
             $value = is_object($value) ? $value->value : $value;
+        }else{
+            $fromCache = FALSE;
         }
 
-        if($fromCache === FALSE || $value === FALSE){
+        if($fromCache === FALSE){
             $item = static::findOne(['id'=>$this->id, 'module'=>$this->module]);
             if($item){
+                $item->addToCache();
                 return $item->value;
             }
-            throw new UnknownPropertyException('Can\'t find the config item: '. $this->id);
+            throw new UnknownPropertyException('Can\'t find the config item: '. $this->id. ':: module: '.$this->module);
         }
 
         return $value;
     }
 
     /**
-     * @param bool $runValidation
-     * @param null $attributeNames
-     * @return bool
-     */
-    public final function save($runValidation = TRUE, $attributeNames = NULL) {
-        if ($this->isNewRecord){
-            $item = $this::findOne(['id'=>$this->id, 'module'=>$this->module]);
-            if ($item){
-                $item->value = $this->value;
-                return $item->save();
-            }
-        }
-        return parent::save(TRUE, NULL);
-    }
-
-    /**
-     * 在 save 动作后执行，如果是新的配置项则新建一个 cache 并建立与 sql 语句的关联
      * @param bool $insert
      * @param array $changedAttributes
      */
     public function afterSave($insert, $changedAttributes) {
+        $this->addToCache();
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    protected function addToCache() {
         $key = $this->getCacheId();
         $value = $this->value;
         $duration = $this->duration;
-        if ($this->isNewRecord) {
-            if (app()->cache->exists($key)){ app()->cache->delete($key); }
-            $dependency = new DbQueryDependency([
-                'query' => self::find()->select('value')->where(['id' => $this->id, 'module' => $this->module]),
-            ]); // 添加至 yii 的 cache 组件
-            $result = app()->cache->add($key, $value, $duration, $dependency);
-            if ($result === FALSE){
-                \Yii::getLogger()->log('cache save failed', 'error');
-            }
+        $result = app()->cache->set($key, $value, $duration, NULL);
+        if ($result === FALSE) {
+            \Yii::getLogger()->log('cache save failed', 'error');
         }
-        parent::afterSave($insert, $changedAttributes);
     }
 
     /**

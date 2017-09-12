@@ -7,7 +7,7 @@
 
 $this->title = '新建菜单';
 $this->addBreadcrumbs([
-    ['菜单管理', ['/menu']], $this->title,
+    ['菜单管理', ['menu']], $this->title,
 ]);
 
 ?>

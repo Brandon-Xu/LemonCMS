@@ -3,31 +3,12 @@
 namespace source\core\front;
 
 use source\core\base\BaseView;
-use source\core\base\Theme;
 use source\core\front\widgets\ActiveForm;
 use source\libs\DataSource;
-use source\libs\Resource;
+use source\LuLu;
 
 class FrontView extends BaseView
 {
-
-    public function setTheme() {
-        $currentTheme = Resource::getHomeTheme();
-
-        $moduleId = app()->controller->module->id;
-
-        $config = [
-            'pathMap' => [
-                '@app/views' => [
-                    '@statics/themes/'.$currentTheme.'/views', '@statics/themes/basic/views',
-                ], '@source/modules/'.$moduleId.'/home/views' => [
-                    '@statics/themes/'.$currentTheme.'/modules/'.$moduleId, '@statics/themes/basic/modules/'.$moduleId,
-                ],
-            ], 'basePath' => '@statics/themes/basic', 'baseUrl' => '@statics/themes/basic',
-        ];
-
-        $this->theme = new Theme($config);
-    }
 
     public function getMenus($category = 'main', $parentId = 0) {
         return app()->menu->getChildren($category, $parentId, 1);
@@ -54,5 +35,8 @@ class FrontView extends BaseView
         return $this->endWidget($class);
     }
 
+    public function toolbars($bars = []) {
+        LuLu::setViewParam(['toolbars' => $bars]);
+    }
 
 }

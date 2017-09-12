@@ -4,6 +4,7 @@ namespace source\modules\modularity;
 
 use source\core\modularity\ModuleService;
 use source\modules\modularity\models\Modularity;
+use yii\base\Module;
 use yii\base\UnknownClassException;
 
 /**
@@ -25,6 +26,9 @@ class ModularityService extends ModuleService
 
     public $moduleRootNamespace = 'source\modules';
 
+    /** @var null|Module $parentModule */
+    public $parentModule = NULL;
+
     /**
      * @return string
      */
@@ -37,7 +41,6 @@ class ModularityService extends ModuleService
      * @return bool
      */
     public function setIsAdmin($value){
-        if($this->getIsAdmin() !== NULL) return TRUE;
         if(!$value === self::ADMIN){
             $value = self::HOME;
         }
@@ -81,13 +84,22 @@ class ModularityService extends ModuleService
         return $class;
     }
 
+    public function setModule($id, $module){
+        if($this->parentModule !== NULL){
+            $this->parentModule->setModule($id, $module);
+        }
+        app()->setModule($id, $module);
+    }
+
     /**
      * 在本类中注册模块
      * @param Modularity $module
      */
     public final function addModule(Modularity $module){
-        if(!isset($this->_modules[$module->id]) && $module->build()){
+        $moduleArray = $module->build();
+        if(!isset($this->_modules[$module->id]) && is_array($moduleArray)){
             $this->_modules[$module->id] = $module;
+            $this->setModule($module->id, $moduleArray);
         }
     }
 
@@ -97,7 +109,7 @@ class ModularityService extends ModuleService
      */
     public function getAllModules($onlyKeys = FALSE) {
         if(empty($this->_modules)){
-            $this->loadActiveModules();
+            $this->loadAllModules();
         }
         if($onlyKeys === TRUE){
             return array_keys($this->_modules);
@@ -117,12 +129,14 @@ class ModularityService extends ModuleService
     /**
      * @return bool
      */
-    public function loadActiveModules(){
-        $field = $this->isAdmin ? 'enable_admin' : 'enable_home';
-        Modularity::find()->where([
-            $field => 1,
-        ])->indexBy('id')->all();
+    public function loadAllModules(){
+        if(!empty($this->_modules)){
+            foreach ($this->_modules as $module => $c) {
+                app()->setModule($module, NULL);
+            }
+            $this->_modules = [];
+        }
+        Modularity::find()->indexBy('id')->all();
         return TRUE;
     }
-
 }

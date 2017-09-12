@@ -18,7 +18,8 @@
         "yiisoft/yii2-swiftmailer": "*",
         "yiisoft/yii2-faker": "*",
         "yiisoft/yii2-gii": "*",
-        "nesbot/carbon": "*"
+        "nesbot/carbon": "*",
+        "bower-asset/kind-editor": "*"
     },
     "require-dev": {
     },

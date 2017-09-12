@@ -10,13 +10,14 @@ use yii\helpers\Url;
 
 /* @var $this source\core\back\BackView */
 /* @var $searchModel source\modules\fragment\models\search\FragmentSearch */
-/* @var $dataProvider source\core\data\ActiveDataProvider */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 
 $type = app()->request->get('type');
 
 $this->title = Fragment::getTypeItems($type);
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <?php $this->toolbars([
     Html::a('新建', ['create', 'type' => $type], ['class' => 'btn btn-xs btn-primary mod-site-save']),
@@ -45,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'fragment'.$model->type.'-data/create', 'fid' => $model->id, 'type' => $model->type,
                 ]);
 
-                return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/text_signature.png">', $addUrl, [
+                return Html::a('<img src="'.\source\assets\AdminIconAssets::url('icons/color/text_signature.png').'">', $addUrl, [
                     'title' => '添加内容',
                 ]);
             },

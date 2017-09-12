@@ -2,7 +2,7 @@
 
 namespace source\modules\log\home;
 
-class HomeModule extends \source\core\modularity\FrontModule
+class HomeModule extends \source\core\modularity\HomeModule
 {
 
     public $controllerNamespace = 'source\modules\log\home\controllers';

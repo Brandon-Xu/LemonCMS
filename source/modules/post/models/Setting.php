@@ -3,16 +3,19 @@
 namespace source\modules\post\models;
 
 use source\models\ConfigForm;
+use source\modules\post\PostInfo;
 
 class Setting extends ConfigForm
 {
-
-    public $post_taxonomy;
+    public function _init() {
+        $this->setBelongModule(new PostInfo());
+    }
+    public $taxonomy;
 
     public function rules() {
         return [
             [
-                ['post_taxonomy'], 'string',
+                ['taxonomy'], 'string',
             ],
         ];
     }
@@ -22,7 +25,7 @@ class Setting extends ConfigForm
      */
     public function attributeLabels() {
         return [
-            'post_taxonomy' => '绑定分类',
+            'taxonomy' => '绑定分类',
         ];
     }
 }

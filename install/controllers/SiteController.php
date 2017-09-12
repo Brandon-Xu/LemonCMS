@@ -3,7 +3,7 @@
 namespace install\controllers;
 
 use Yii;
-use source\core\front\FrontController;
+use source\core\base\BaseController;
 use source\libs\Constants;
 use source\libs\Utility;
 use source\LuLu;
@@ -12,7 +12,7 @@ use yii\db\Connection;
 use source\helpers\FileHelper;
 use yii\helpers\Url;
 
-class SiteController extends FrontController
+class SiteController extends BaseController
 {
     public function beforeAction($action) {
         if ($action->id === 'stop') {
@@ -338,7 +338,7 @@ class SiteController extends FrontController
                 '配置文件目录(data/config)', FALSE, FileHelper::canWrite(Yii::getAlias('@data/attachment')), '安装程序',
                 '若手动安装系统写可不用写权限',
             ], [
-                '公共资源文件(statics/assets)', TRUE, FileHelper::canWrite(Yii::getAlias('@statics/assets')), '系统核心', '必须可读写',
+                '公共资源文件(web/assets)', TRUE, FileHelper::canWrite(Yii::getAlias('@assets')), '系统核心', '必须可读写',
             ],
         ];
 

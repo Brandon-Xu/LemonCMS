@@ -5,7 +5,6 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this source\core\front\FrontView */
-/* @var $searchModel source\models\search\TaxonomyCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '分类管理';
@@ -29,7 +28,7 @@ $this->addBreadcrumbs([
             'attribute' => 'name', 'format' => 'html', 'width' => '250px',
             'value' => function ($model, $key, $index, $column) {
 
-                return Html::a($model->name, ['/taxonomy/taxonomy/index', 'category' => $model->id]);
+                return Html::a($model->name, ['taxonomy/index', 'category' => $model->id]);
             },
         ], [
             'attribute' => 'description', 'width' => 'auto',

@@ -22,7 +22,7 @@ $this->addBreadcrumbs([
 <?= $form->field($model, 'stat')->textarea() ?>
 <?= $form->field($model, 'site_about', ['size' => 'default'])->textarea() ?>
 <?= $form->field($model, 'status')->radioList(['1' => '正常', '0' => '关闭']) ?>
-<?php echo KindEditor::widget(['inputId' => '#basicconfig-sys_site_about', 'width' => '70%']) ?>
+<?php echo KindEditor::widget(['inputId' => '#basicconfig-site_about', 'width' => '70%']) ?>
 <?= $form->defaultButtons() ?>
 <?php ActiveForm::end(); ?>
            

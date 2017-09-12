@@ -2,10 +2,10 @@
 
 namespace source\models;
 
-use source\core\base\BaseModel;
 use source\core\modularity\ModuleInfo;
 use source\modules\modularity\models\Modularity;
 use yii\base\ErrorException;
+use yii\base\Model;
 use yii\base\UnknownClassException;
 use yii\base\UnknownPropertyException;
 
@@ -14,7 +14,7 @@ use yii\base\UnknownPropertyException;
  * @property string $belongModule
  * @package source\models
  */
-abstract class ConfigForm extends BaseModel
+abstract class ConfigForm extends Model
 {
 
     private static $_configForms = [];

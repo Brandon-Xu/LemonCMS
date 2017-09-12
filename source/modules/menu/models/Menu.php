@@ -2,10 +2,10 @@
 
 namespace source\modules\menu\models;
 
+use source\core\base\BaseActiveRecord;
 use source\libs\Constants;
 use source\libs\Resource;
 use source\LuLu;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 /**
@@ -22,7 +22,7 @@ use yii\helpers\Url;
  * @property integer $status
  * @property integer $sort_num
  */
-class Menu extends \source\core\base\BaseActiveRecord
+class Menu extends BaseActiveRecord
 {
     const CachePrefix = 'menu_';
 
@@ -101,45 +101,6 @@ class Menu extends \source\core\base\BaseActiveRecord
         LuLu::deleteCache($cachekey);
     }
 
-    //     public static function getMenusWidthStatus($category,$status=false,$fromCache = true)
-    //     {
-    //         $menus = self::getMenusByCategory($category,$fromCache);
-    //         if($status==false)
-    //         {
-    //             return $menus;
-    //         }
-
-    //         $rets = [];
-
-    //         $disabledMenu = false;
-
-    //         foreach ($menus as $menu)
-    //         {
-    //             if($disabledMenu!==false)
-    //             {
-    //                 if($menu->level > $disabledMenu->level)
-    //                 {
-    //                     continue;
-    //                 }
-    //                 else
-    //                 {
-    //                     $disabledMenu = false;
-    //                 }
-    //             }
-
-    //             if($menu->status)
-    //             {
-    //                 $rets[]=$menu;
-    //             }
-    //             else
-    //             {
-    //                 $disabledMenu = $menu;
-    //             }
-    //         }
-    //         return $rets;
-    //     }
-
-
     public static function getChildren($category, $parentId, $status = NULL) {
         $items = [];
         $menus = self::getMenusByCategory($category);
@@ -171,13 +132,13 @@ class Menu extends \source\core\base\BaseActiveRecord
             $children = self::getChildren($category, $menu['id'], 1);
 
             if (count($children) > 0) {
-                $html .= '<li id="menu-item-'.$menu['id'].'" class="menu-item menu-item-type-'.$category.' menu-item-'.$menu['id'].' menu-item-has-children"><a href="'.$menu['url'].'" target="'.$menu['target'].'">'.$menu['name'].'</a>';
+                $html .= '<li id="menu-item-'.$menu['id'].'" class="menu-item menu-item-type-'.$category.' menu-item-'.$menu['id'].' menu-item-has-children"><a href="'.Url::to($menu['url']).'" target="'.$menu['target'].'">'.$menu['name'].'</a>';
                 $html .= '<ul class="sub-menu sub-menu-'.$menu['id'].'">';
                 $html .= self::getMenuHtmlInternal($category, $children);
                 $html .= '</ul>';
                 $html .= '</li>';
             } else {
-                $html .= '<li id="menu-item-'.$menu['id'].'" class="menu-item menu-item-type-'.$category.' menu-item-'.$menu['id'].'"><a href="'.$menu['url'].'" target="'.$menu['target'].'">'.$menu['name'].'</a>';
+                $html .= '<li id="menu-item-'.$menu['id'].'" class="menu-item menu-item-type-'.$category.' menu-item-'.$menu['id'].'"><a href="'.Url::to($menu['url']).'" target="'.$menu['target'].'">'.$menu['name'].'</a>';
                 $html .= '</li>';
             }
         }
@@ -189,17 +150,18 @@ class Menu extends \source\core\base\BaseActiveRecord
     public static function getAdminMenu() {
         $html = '';
 
-        $adminUrl = Resource::getAdminUrl();
-
         $action = app()->requestedAction;
         $urlArray = explode('/', $action->uniqueId);
 
         $showHome = '';
 
+
         $roots = self::getChildren('admin', 0, 1);
         foreach ($roots as $menu) {
             $url = $menu['url'] === '#' ? '#' : Url::to([$menu['url']]);
-            $title = '<span class="da-nav-icon"><img src="'.$adminUrl.'/images/icons/black/32/'.$menu['thumb'].'" alt="'.$menu['name'].'" /></span>'.$menu['name'];
+            //$title = '<span class="da-nav-icon"><img src="'.$adminUrl.'/images/icons/black/32/'.$menu['thumb'].'" alt="'.$menu['name'].'" /></span>'.$menu['name'];
+
+            $title = $menu['name'];
 
             $html .= '<li id="menu-item-'.$menu['id'].'" '.$showHome.' class="menu-item"><a href="'.$url.'">'.$title.'</a>';
             $showHome = ' style="display:none;"';
@@ -213,7 +175,7 @@ class Menu extends \source\core\base\BaseActiveRecord
                     if (in_array($urlArray[0], $menuUrlArray)) {
                         $opened = TRUE;
                     }
-                    $childUrl = $child['url'] === '#' ? '#' : Url::to([$child['url']]);
+                    $childUrl = $child['url'] === '#' ? '#' : Url::to([$child['url'].'/']);
                     $childHtml .= '<li id="menu-item-'.$child['id'].'"><a href="'.$childUrl.'" target="mainFrame">'.$child['name'].'</a></li>';
                 }
 

@@ -10,11 +10,8 @@ class KindEditor extends BaseWidget
 {
 
     public $params = [];
-
     public $libUrl = '';
-
     public $inputId = NULL;
-
     public $editorId = NULL;
     public $width = '100%';
 
@@ -24,7 +21,8 @@ class KindEditor extends BaseWidget
 
     public function init() {
         parent::init();
-        $this->libUrl = Resource::getCommonUrl().'/libs/kindeditor';
+        $this->libUrl = app()->assetManager->publish('@bower/kind-editor');
+        $this->libUrl = $this->libUrl[1];
         $this->defaultParams['width'] = '"'.$this->width.'"';
     }
 
@@ -33,9 +31,8 @@ class KindEditor extends BaseWidget
 
         if (!isset($view->params['__KindEditor'])) {
             $view->registerCssFile($this->libUrl.'/themes/default/default.css');
-            $view->registerJsFile($this->libUrl.'/kindeditor-min.js');
-            $view->registerJsFile($this->libUrl.'/lang/zh_CN.js');
-
+            $view->registerJsFile($this->libUrl.'/kindeditor-all-min.js');
+            $view->registerJsFile($this->libUrl.'/lang/zh-CN.js');
             $view->params['__KindEditor'] = TRUE;
         }
 

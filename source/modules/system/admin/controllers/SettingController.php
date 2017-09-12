@@ -2,7 +2,7 @@
 
 namespace source\modules\system\admin\controllers;
 
-use backend\controllers\BaseSettingController;
+use source\modules\admin\controllers\BaseSettingController;
 use source\modules\system\models\config\AccessConfig;
 use source\modules\system\models\config\BasicConfig;
 use source\modules\system\models\config\DatetimeConfig;

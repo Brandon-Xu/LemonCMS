@@ -26,7 +26,7 @@ $this->addBreadcrumbs([
         ], [
             'attribute' => 'name', 'format' => 'html', 'width' => '250px',
             'value' => function ($model, $key, $index, $column) {
-                return Html::a($model->name, ['/menu/menu/index', 'category' => $model->id]);
+                return Html::a($model->name, ['menu/index', 'category' => $model->id]);
             },
         ], [
             'attribute' => 'description', 'width' => 'auto',

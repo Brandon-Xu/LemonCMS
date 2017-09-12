@@ -2,9 +2,9 @@
 
 namespace source\modules\fragment\home\controllers;
 
-use source\core\front\FrontController;
+use source\core\base\BaseController;
 
-class DefaultController extends FrontController
+class DefaultController extends BaseController
 {
     public function actionIndex() {
         return $this->render('index');

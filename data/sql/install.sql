@@ -219,7 +219,7 @@ INSERT INTO `#@__config` (`id`, `value`, `module`) VALUES
 ('page_takonomy',	'page',	'page'),
 ('page_taxonomy',	'page',	'page'),
 ('post_takonomy',	'post',	'post'),
-('post_taxonomy',	'post',	'post'),
+('taxonomy',	'post',	'post'),
 ('seo_description',	'LemonCMS',	'system'),
 ('seo_head',	'123',	'system'),
 ('seo_keywords',	'LemonCMS,yiichina,yii2',	'system'),

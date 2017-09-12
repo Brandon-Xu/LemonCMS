@@ -2,7 +2,7 @@
 
 namespace source\modules\post\admin\controllers;
 
-use backend\controllers\BaseSettingController;
+use source\modules\admin\controllers\BaseSettingController;
 use source\modules\post\models\Setting;
 
 class SettingController extends BaseSettingController

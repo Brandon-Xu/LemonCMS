@@ -2,13 +2,12 @@
 
 namespace frontend\controllers;
 
-use source\core\front\FrontController;
-use source\models\Config;
+use source\core\base\BaseController;
 use source\models\ContactForm;
 use source\models\User;
 use yii\filters\Cors;
 
-class SiteController extends FrontController
+class SiteController extends BaseController
 {
 
     public $enableCsrfValidation = FALSE;

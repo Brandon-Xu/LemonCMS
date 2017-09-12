@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9a5fce90a34bfd16cfdc042e8506f147",
-    "content-hash": "60347950625f64b7eeefd78b526acd99",
+    "hash": "eef20699b59b6685fcbae392b319d3d6",
+    "content-hash": "ace8045e84fe172998bc7080f1a17931",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -145,6 +145,22 @@
                 "mask",
                 "plugins"
             ]
+        },
+        {
+            "name": "bower-asset/kind-editor",
+            "version": "v4.1.11",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kindsoft/kindeditor.git",
+                "reference": "5fae5df9d0c552f218c3ab22054ac281e8bb5a87"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kindsoft/kindeditor/zipball/5fae5df9d0c552f218c3ab22054ac281e8bb5a87",
+                "reference": "5fae5df9d0c552f218c3ab22054ac281e8bb5a87",
+                "shasum": ""
+            },
+            "type": "bower-asset-library"
         },
         {
             "name": "bower-asset/punycode",
@@ -1021,16 +1037,16 @@
         },
         {
             "name": "yiisoft/yii2-debug",
-            "version": "2.0.10",
+            "version": "2.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-debug.git",
-                "reference": "ad1d1780d59dc3417b4a32bab8cadac4908359eb"
+                "reference": "372fbf0d47303b7d68275d6720935e5116915418"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/yiisoft/yii2-debug/ad1d1780d59dc3417b4a32bab8cadac4908359eb.zip",
-                "reference": "ad1d1780d59dc3417b4a32bab8cadac4908359eb",
+                "url": "https://files.phpcomposer.com/files/yiisoft/yii2-debug/372fbf0d47303b7d68275d6720935e5116915418.zip",
+                "reference": "372fbf0d47303b7d68275d6720935e5116915418",
                 "shasum": ""
             },
             "require": {
@@ -1064,7 +1080,7 @@
                 "debugger",
                 "yii2"
             ],
-            "time": "2017-09-04 09:42:28"
+            "time": "2017-09-05 23:21:05"
         },
         {
             "name": "yiisoft/yii2-faker",

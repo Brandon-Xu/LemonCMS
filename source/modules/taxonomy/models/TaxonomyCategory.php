@@ -6,7 +6,7 @@ use source\core\base\BaseActiveRecord;
 use yii\helpers\ArrayHelper;
 
 /**
- * This is the model class for table "lulu_taxonomy_category".
+ * This is the model class for table "taxonomy_category".
  *
  * @property string $id
  * @property string $name
@@ -18,7 +18,6 @@ class TaxonomyCategory extends BaseActiveRecord
      * @inheritdoc
      */
     public static function tableName() {
-        //return 'lulu_taxonomy_category';
         return '{{%taxonomy_category}}';
 
     }

@@ -2,7 +2,7 @@
 
 namespace source\modules\taxonomy\home\controllers;
 
-use source\core\front\FrontController;
+use source\core\base\BaseController;
 use source\modules\taxonomy\models\search\TaxonomySearch;
 use source\modules\taxonomy\models\Taxonomy;
 use Yii;
@@ -12,7 +12,7 @@ use yii\web\NotFoundHttpException;
 /**
  * TaxonomyController implements the CRUD actions for Taxonomy model.
  */
-class TaxonomyController extends FrontController
+class TaxonomyController extends BaseController
 {
     public function behaviors() {
         return [

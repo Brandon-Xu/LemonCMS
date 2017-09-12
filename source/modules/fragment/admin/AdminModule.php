@@ -2,9 +2,7 @@
 
 namespace source\modules\fragment\admin;
 
-use source\core\modularity\BackModule;
-
-class AdminModule extends BackModule
+class AdminModule extends \source\core\modularity\AdminModule
 {
 
     public $controllerNamespace = 'source\modules\fragment\admin\controllers';

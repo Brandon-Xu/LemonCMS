@@ -19,7 +19,7 @@ class CacheController extends BackController
             }
 
             if ($model->asset) {
-                $assetDir = Yii::getAlias('@statics/assets');
+                $assetDir = Yii::getAlias('@assets');
                 //FileHelper::removeDirectoryContent($assetDir);
             }
 

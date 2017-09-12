@@ -3,7 +3,6 @@
 namespace source\modules\comment\admin\controllers;
 
 use source\core\back\BackController;
-use source\models\Comment;
 use source\models\search\CommentSearch;
 use Yii;
 use yii\filters\VerbFilter;

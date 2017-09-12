@@ -2,7 +2,7 @@
 
 namespace source\modules\post\admin\controllers;
 
-use backend\controllers\BaseContentController;
+use source\modules\admin\controllers\BaseContentController;
 use source\modules\post\models\ContentPost;
 
 class PostController extends BaseContentController

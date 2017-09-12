@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 /* @var $this source\core\back\BackView */
 /* @var $searchModel source\modules\fragment\models\search\FragmentCategorySearch */
-/* @var $dataProvider source\core\data\ActiveDataProvider */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '分类管理';
 $this->params['breadcrumbs'][] = $this->title;

@@ -8,10 +8,10 @@
 
 namespace frontend\controllers;
 
-use source\core\data\ActiveDataProvider;
 use source\models\Content;
-use source\traits\CommonTrait;
+use source\traits\Common;
 use Yii;
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
 use yii\rest\ActiveController;
 use yii\web\Response;
@@ -29,7 +29,7 @@ use yii\web\Response;
 class BaseRestController extends ActiveController
 {
 
-    use CommonTrait;
+    use Common;
     /**
      * @var \source\models\Content $modelClass
      */
@@ -75,20 +75,35 @@ class BaseRestController extends ActiveController
     public function actions() {
         $actions = [
             'index' => [
-                'class' => 'IndexAction', 'modelClass' => $this->modelClass, 'checkAccess' => [$this, 'checkAccess'],
+                'class' => 'IndexAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
                 'prepareDataProvider' => [$this, 'listDataProvider'] // 当前 Controller 下的 listDataProvider 方法
-            ], 'view' => [
-                'class' => 'ViewAction', 'modelClass' => $this->modelClass, 'checkAccess' => [$this, 'checkAccess'],
+            ],
+            'view' => [
+                'class' => 'ViewAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
                 'prepareDataProvider' => [$this, 'one'] // 当前 Controller 下的 one 方法
-            ], 'create' => [
-                'class' => 'CreateAction', 'modelClass' => $this->modelClass, 'checkAccess' => [$this, 'checkAccess'],
+            ],
+            'create' => [
+                'class' => 'CreateAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
                 'scenario' => $this->createScenario,
-            ], 'update' => [
-                'class' => 'UpdateAction', 'modelClass' => $this->modelClass, 'checkAccess' => [$this, 'checkAccess'],
+            ],
+            'update' => [
+                'class' => 'UpdateAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
                 'scenario' => $this->updateScenario,
-            ], 'delete' => [
-                'class' => 'DeleteAction', 'modelClass' => $this->modelClass, 'checkAccess' => [$this, 'checkAccess'],
-            ], 'options' => [
+            ],
+            'delete' => [
+                'class' => 'DeleteAction',
+                'modelClass' => $this->modelClass,
+                'checkAccess' => [$this, 'checkAccess'],
+            ],
+            'options' => [
                 'class' => 'OptionsAction',
             ],
         ];
@@ -136,8 +151,10 @@ class BaseRestController extends ActiveController
         ])->asArray();
 
         return Yii::createObject([
-            'class' => ActiveDataProvider::className(), 'query' => $query, 'pagination' => [
-                'pagesize' => $this->pageSize_index,
+            'class' => ActiveDataProvider::className(),
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => $this->pageSize_index,
             ],
         ]);
     }
@@ -153,8 +170,8 @@ class BaseRestController extends ActiveController
         /** @var Content $object */
         $object = Content::find()->published()->normalSelect()->where(['id' => $id])->one();
         $data = $object->toArray();
-        $data['taxonomy'] = $object->taxonomy;
-        $data['body'] = $object->body;
+        $data['taxonomy']   = $object->taxonomy;
+        $data['body']       = $object->body;
 
         return $data;
     }

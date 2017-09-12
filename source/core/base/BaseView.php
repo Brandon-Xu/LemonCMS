@@ -4,9 +4,10 @@ namespace source\core\base;
 
 use source\core\widgets\LoopData;
 use source\libs\DataSource;
-use source\libs\Resource;
 use source\LuLu;
-use source\traits\CommonTrait;
+use source\traits\Common;
+use yii\base\UnknownPropertyException;
+use yii\helpers\Url;
 use yii\web\View;
 
 /**
@@ -19,25 +20,23 @@ use yii\web\View;
  */
 class BaseView extends View
 {
+    use Common;
+
     const EVENT_AFTER_PAGE = 'afterPage';
 
-    use CommonTrait;
-
     public $layout = NULL;
+    public $themeBundle;
 
     public function init() {
         parent::init();
     }
 
-    public function renderFile($viewFile, $params = [], $context = NULL) {
-        if ($this->theme == NULL) {
-            $this->setTheme();
+    public function assetsUrl($url = ''){
+        if(empty($this->themeBundle)){
+            throw new UnknownPropertyException('themeBundle must be set');
         }
-
-        return parent::renderFile($viewFile, $params, $context);
-    }
-
-    public function setTheme() {
+        $baseUrl = $this->themeBundle->baseUrl.'/';
+        return Url::to($baseUrl.$url);
     }
 
     public function getHomeUrl($url = NULL) {
@@ -60,12 +59,6 @@ class BaseView extends View
                 $this->params['breadcrumbs'][] = $item;
             }
         }
-    }
-
-    public function getThemeUrl($url = NULL) {
-        $themeUrl = Resource::getThemeUrl($url);
-
-        return $themeUrl;
     }
 
     public function getDataSource($where = NULL, $orderBy = NULL, $limit = 10, $options = []) {
@@ -103,11 +96,9 @@ class BaseView extends View
     }
 
     public function showWidget($name, $params) {
-        $currentTheme = Resource::checkHomeThemeFile('/misc/'.$name);
-        if ($currentTheme) {
-            $class = '\\statics\\themes\\'.$currentTheme.'\\misc\\'.$name;
-
-            echo $class::widget($params);
+        $currentTheme = \Yii::getAlias('@activeTheme/misc/'.$name);
+        if (class_exists($currentTheme)) {
+            echo $currentTheme::widget($params);
         } else {
             echo 'the widget '.$name.' does not exist';
         }

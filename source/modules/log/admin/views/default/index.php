@@ -5,7 +5,7 @@ use source\core\grid\GridView;
 
 /* @var $this source\core\back\BackView */
 /* @var $searchModel source\modules\log\models\search\LogSearch */
-/* @var $dataProvider source\core\data\ActiveDataProvider */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '日志管理';
 $this->params['breadcrumbs'][] = $this->title;
@@ -32,19 +32,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
         'prefix:ntext', [
             'class' => 'source\core\grid\ActionColumn', 'template' => '{delete}', //'buttons' =>[
-            //    'data'=>function ($url, $model, $key, $index, $gridView)
-            //    {
-            //        return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/magnifier.png">', $url, [
-            //            'title' => '查看内容', 
-            //        ]);
-            //    },
-            //    'add-data'=>function ($url, $model, $key, $index, $gridView)
-            //    {
-            //        return Html::a('<img src="'.Resource::getAdminUrl().'/images/icons/color/magnifier.png">', $url, [
-            //            'title' => '添加内容', 
-            //        ]);
-            //    }
-            //]
         ],
     ],
 ]); ?>

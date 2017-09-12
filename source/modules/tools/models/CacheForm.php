@@ -2,9 +2,9 @@
 
 namespace source\modules\tools\models;
 
-use source\core\base\BaseModel;
+use yii\base\Model;
 
-class CacheForm extends BaseModel
+class CacheForm extends Model
 {
 
     public $cache;

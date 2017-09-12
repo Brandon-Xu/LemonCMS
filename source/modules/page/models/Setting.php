@@ -7,12 +7,12 @@ use source\models\ConfigForm;
 class Setting extends ConfigForm
 {
 
-    public $page_taxonomy;
+    public $taxonomy;
 
     public function rules() {
         return [
             [
-                ['page_taxonomy'], 'string',
+                ['taxonomy'], 'string',
             ],
         ];
     }
@@ -22,7 +22,7 @@ class Setting extends ConfigForm
      */
     public function attributeLabels() {
         return [
-            'page_taxonomy' => '绑定分类',
+            'taxonomy' => '绑定分类',
         ];
     }
 }

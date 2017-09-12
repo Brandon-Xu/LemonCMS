@@ -8,7 +8,7 @@ use yii\helpers\Html;
 
 /* @var $this source\core\back\BackView */
 /* @var $searchModel source\modules\fragment\models\search\Fragment2DataSearch */
-/* @var $dataProvider source\core\data\ActiveDataProvider */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $fid = app()->request->get('fid');
 $fragmentModel = Fragment::findOne(['id' => $fid]);

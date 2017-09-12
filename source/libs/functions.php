@@ -6,7 +6,7 @@
  */
 
 /**
- * @return \source\core\base\BaseApplication
+ * @return \source\core\base\BaseApplication|yii\console\Application|yii\web\Application
  */
 function app() {
     return \Yii::$app;
@@ -14,7 +14,5 @@ function app() {
 
 function dd($d, $exit = TRUE) {
     \yii\helpers\VarDumper::dump($d, 999, TRUE);
-    if($exit){
-        exit;
-    }
+    if($exit){ exit; }
 }

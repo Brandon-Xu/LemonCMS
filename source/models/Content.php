@@ -5,7 +5,6 @@ namespace source\models;
 use Carbon\Carbon;
 use source\core\base\BaseActiveRecord;
 use source\core\behaviors\DefaultValueBehavior;
-use source\helpers\DateTimeHelper;
 use source\libs\Common;
 use source\libs\Constants;
 use source\LuLu;
@@ -16,7 +15,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /**
- * This is the model class for table "lulu_content".
+ * This is the model class for table "content".
  *
  * @property integer $id
  * @property integer $taxonomy_id

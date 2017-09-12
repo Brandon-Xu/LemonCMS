@@ -10,7 +10,9 @@ use source\modules\rbac\models\Assignment;
 use source\modules\rbac\models\Permission;
 use source\modules\rbac\models\Relation;
 use source\modules\rbac\models\Role;
+use yii\base\UnknownClassException;
 use yii\db\Query;
+use yii\rbac\Rule;
 
 class RbacService extends ModuleService
 {
@@ -29,6 +31,7 @@ class RbacService extends ModuleService
 
     public function init() {
         parent::init();
+        $this->auth = app()->authManager;
 
         $this->assignmentTable = Assignment::tableName();
         $this->roleTable = Role::tableName();
@@ -216,5 +219,84 @@ class RbacService extends ModuleService
 
     public function getAllRoles() {
         return Role::buildOptions();
+    }
+
+
+    /** --------------------上面是快要去屎的代码------------------------- */
+
+    /** @var \yii\rbac\ManagerInterface $auth */
+    public $auth;
+
+    /**
+     * @param $name
+     * @param $description
+     * @param Rule|string $rule
+     * @return \yii\rbac\Permission
+     */
+    public function addPermission($name, $description = NULL, $rule = NULL){
+        $item = $this->auth->getPermission($name);
+        if(!$item){
+            $item = $this->auth->createPermission($name);
+            $item->description = $description;
+            $rule = (is_string($rule) && class_exists($rule)) ? new $rule() : $rule;
+            if(is_object($rule) && $rule instanceof Rule){
+                $item->ruleName = $rule->name;
+            }
+            $this->auth->add($item);
+        }
+        return $item;
+    }
+
+    /**
+     * @param $parent
+     * @param $child
+     * @return bool
+     */
+    public function addChild($parent, $child){
+        if (is_string($parent)){
+            $parent = $this->auth->getPermission($parent); }
+        if (is_string($child)){
+            $child = $this->auth->getPermission($child); }
+        if(!$this->auth->hasChild($parent, $child)){
+            $this->auth->addChild($parent, $child);
+        }
+        return TRUE;
+    }
+
+    /**
+     * @param $ruleClassName
+     * @return Rule
+     * @throws UnknownClassException
+     */
+    public function addRule($ruleClassName){
+        if(!class_exists($ruleClassName)) throw new UnknownClassException('不存在的 rule class');
+        /** @var Rule $ruleObj */
+        $ruleObj = new $ruleClassName;
+        $name = $ruleObj->name;
+        $rule = $this->auth->getRule($name);
+        if(!$rule){
+            $this->auth->add($ruleObj);
+            $rule = $ruleObj;
+        }
+        return $rule;
+    }
+
+    public function addRole($name, $description = NULL){
+        $role = $this->auth->getRole($name);
+        if(!$role) {
+            $role = $this->auth->createRole($name);
+            $role->description = $description;
+            $this->auth->add($role);
+        }
+        return $role;
+    }
+
+    public function assign($item, $userId){
+        if(is_string($item)){
+            $item = $this->addRole($item); }
+        $assignments = $this->auth->getAssignments($userId);
+        if(!isset($assignments[$item->name])){
+            $this->auth->assign($item, $userId);
+        }
     }
 }

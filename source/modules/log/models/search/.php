@@ -2,7 +2,7 @@
 
 namespace source\modules\log\models\search;
 
-use source\core\data\ActiveDataProvider;
+use yii\data\ActiveDataProvider;
 use source\modules\log\models\Log;
 use yii\base\Model;
 
