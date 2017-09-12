@@ -56,11 +56,13 @@ yarn-error.log
 
 # 去掉 Vue 的部分
 web/README.md
-web/assets/*
 web/index.html
 web/package.json
 web/src/
-web/attachment/*
 web/webpack.config.js
 web/document
-!/web/.htaccess
+web/assets/*
+web/attachment/*
+!web/.htaccess
+!web/attachment/
+!web/assets/
