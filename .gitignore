@@ -28,17 +28,11 @@ phpunit.phar
 
 /backend/runtime
 /frontend/runtime
-/statics/assets
 /data/cache
 /data/log
 /data/runtime
 /data/install.lock
 /data/config/local-db.php
-
-lulucms2.phpproj
-lulucms2.phpproj.user
-lulucms2.sln
-lulucms2.v12.suo
 
 vendor
 data/backup/
@@ -61,8 +55,6 @@ web/package.json
 web/src/
 web/webpack.config.js
 web/document
-web/assets/*
-web/attachment/*
 !web/.htaccess
 !web/attachment/
 !web/assets/
