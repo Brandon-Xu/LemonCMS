@@ -1,6 +1,6 @@
 <?php
 use source\LuLu;
-\themes\admin\dandelion\MainAssets::register($this);
+\themes\admin\dandelion\MainAsset::register($this);
 /* @var $this \source\core\front\FrontView */
 /* @var $content string */
 $this->beginPage(); ?>
@@ -16,12 +16,6 @@ $this->beginPage(); ?>
     <!-- iOS webapp metatags -->
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-
-    <!-- iOS webapp icons -->
-    <link rel="apple-touch-icon" href="touch-icon-iphone.png"/>
-    <link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png"/>
-    <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-retina.png"/>
-
     <title><?php echo $this->title ?> - <?php echo app()->config()->get('site_name') ?></title>
     <?php $this->head() ?>
     <style>

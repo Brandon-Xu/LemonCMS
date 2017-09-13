@@ -83,9 +83,18 @@ class User extends BaseActiveRecord implements IdentityInterface
      */
     public function attributeLabels() {
         return [
-            'id' => 'ID', 'username' => '用户名', 'password' => '密码', 'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash', 'password_reset_token' => 'Password Reset Token', 'email' => 'Email',
-            'status' => '状态', 'statusText' => '状态', 'created_at' => '创建时间', 'updated_at' => '更新时间', 'role' => '角色',
+            'id' => 'ID',
+            'username' => '用户名',
+            'password' => '密码',
+            'auth_key' => 'Auth Key',
+            'password_hash' => 'Password Hash',
+            'password_reset_token' => 'Password Reset Token',
+            'email' => 'Email',
+            'status' => '状态',
+            'statusText' => '状态',
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
+            'role' => '角色',
         ];
     }
 

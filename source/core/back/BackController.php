@@ -71,12 +71,12 @@ class BackController extends BaseController
 
 
         //检查不需要登录的action uniqueID,如 site/login, site/captcha
-        if (in_array($action->uniqueID, $this->ignoreLogin())) {
+        if (in_array($action->controller->id.'/'.$action->id, $this->ignoreLogin())) {
             return parent::beforeAction($action);
         }
 
         if (\Yii::$app->user->isGuest) {
-            LuLu::go(['/site/login']);
+            LuLu::go(['site/login']);
         }
 
         if (!app()->rbac->checkPermission('manager_admin')) {

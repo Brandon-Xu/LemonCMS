@@ -9,7 +9,7 @@ use yii\helpers\Url;
 /* @var $this \source\core\front\FrontView */
 /* @var $content string */
 $rbacService = LuLu::getService('rbac');
-\themes\admin\dandelion\MainAssets::register($this);
+\themes\admin\dandelion\MainAsset::register($this);
 $this->beginPage() ?>
 <!DOCTYPE html>
     <html lang="<?= app()->language ?>">

@@ -61,3 +61,4 @@ yarn-error.log
 !.htaccess
 !/web/assets/.htaccess
 !/web/attachment/.htaccess
+/themes/home/jydz/

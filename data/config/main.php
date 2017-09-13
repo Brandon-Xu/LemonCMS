@@ -21,7 +21,7 @@ return [
     'components' => [
         'user' => [
             'identityClass' => 'source\models\User',
-            'loginUrl' => ['site/login'],
+            'loginUrl' => ['admin/site/login'],
             'enableAutoLogin' => FALSE,
         ],
         'request' => [
@@ -58,7 +58,7 @@ return [
             'baseUrl' => '@web/assets',
             'bundles' => [
                 'yii\web\JqueryAsset' => [
-                    'js' => []
+                    'js' => ['https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js']
                 ],
             ],
             //'linkAssets' => true,

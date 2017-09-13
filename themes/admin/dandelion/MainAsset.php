@@ -9,7 +9,7 @@ namespace themes\admin\dandelion;
 
 use source\assets\BaseAssets;
 
-class MainAssets extends BaseAssets
+class MainAsset extends BaseAssets
 {
 
     public $sourcePath = '@themes/admin/dandelion/assets';
@@ -26,8 +26,6 @@ class MainAssets extends BaseAssets
     ];
 
     public $js = [
-        'js/jquery-1.7.2.min.js',
-
         'plugins/jui/js/jquery-ui-1.8.20.min.js',
         'plugins/jui/js/jquery.ui.timepicker.min.js',
         'plugins/jui/js/jquery.ui.touch-punch.min.js',
@@ -44,6 +42,10 @@ class MainAssets extends BaseAssets
 
         'js/core/dandelion.core.js',
         'js/core/dandelion.customizer.js',
+    ];
+
+    public $depends = [
+        'yii\web\JqueryAsset'
     ];
 
     public $jsOptions = [
