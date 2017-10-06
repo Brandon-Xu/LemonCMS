@@ -26,6 +26,8 @@ class MainAsset extends BaseAssets
     ];
 
     public $js = [
+        'js/jquery-1.7.2.min.js',
+
         'plugins/jui/js/jquery-ui-1.8.20.min.js',
         'plugins/jui/js/jquery.ui.timepicker.min.js',
         'plugins/jui/js/jquery.ui.touch-punch.min.js',
@@ -45,7 +47,7 @@ class MainAsset extends BaseAssets
     ];
 
     public $depends = [
-        'yii\web\JqueryAsset'
+        //'yii\web\JqueryAsset'
     ];
 
     public $jsOptions = [

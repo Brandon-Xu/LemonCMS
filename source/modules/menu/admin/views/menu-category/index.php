@@ -23,14 +23,21 @@ $this->addBreadcrumbs([
 
         [
             'class' => 'source\core\grid\TextIdColumn',
-        ], [
-            'attribute' => 'name', 'format' => 'html', 'width' => '250px',
+        ],
+        [
+            'attribute' => 'name',
+            'format' => 'raw',
+            'width' => '250px',
             'value' => function ($model, $key, $index, $column) {
                 return Html::a($model->name, ['menu/index', 'category' => $model->id]);
             },
-        ], [
-            'attribute' => 'description', 'width' => 'auto',
-        ], ['class' => 'source\core\grid\ActionColumn'],
+        ],
+        [
+            'attribute' => 'description',
+            'width' => 'auto',
+        ],
+        ['class' => 'source\core\grid\ActionColumn',
+            'template' => '{update}'],
     ],
 ]); ?>
 

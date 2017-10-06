@@ -14,14 +14,13 @@ use yii\web\NotFoundHttpException;
 class MenuController extends BackController
 {
 
-
     /**
      * Lists all Menu models.
      * @return mixed
      */
     public function actionIndex($category) {
         $dataProvider = new ArrayDataProvider([
-            'allModels' => Menu::getArrayTree($category), 'key' => 'id', 'pagination' => [
+            'allModels' => Menu::getArrayTree($category ,FALSE), 'key' => 'id', 'pagination' => [
                 'pageSize' => -1,
             ],
         ]);
@@ -50,6 +49,13 @@ class MenuController extends BackController
     public function actionCreate($category) {
         $model = new Menu();
         $model->category_id = $category;
+        $url  = app()->request->get('url', NULL);
+        $name = app()->request->get('name', NULL);
+
+        if($name !== NULL && $url !== NULL){
+            $model->url = $url;
+            $model->name = $name;
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['index', 'category' => $category]);
@@ -88,7 +94,6 @@ class MenuController extends BackController
     public function actionDelete($id) {
         $model = $this->findModel($id);
         $model->delete();
-
         $category = $model->category_id;
 
         return $this->redirect(['index', 'category' => $category]);

@@ -9,16 +9,7 @@ class AdminModule extends \source\core\modularity\AdminModule
 
     public function init() {
         parent::init();
-
         $this->defaultRoute = 'dict-category';
-        // custom initialization code goes here
     }
 
-    //     public function getMenus()
-    //     {
-    //         return [
-    //             ['首页',['/dict']],
-    //             ['设置',['/dict/setting']],
-    //         ];
-    //     }
 }

@@ -8,11 +8,13 @@ use source\LuLu;
 use source\models\Content;
 use source\models\search\ContentSearch;
 use Yii;
+use yii\helpers\Url;
 use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
 abstract class BaseContentController extends BackController
 {
+    public $enableCsrfValidation = FALSE;
 
     protected $content_type;
 
@@ -20,13 +22,28 @@ abstract class BaseContentController extends BackController
 
     protected $bodyModel;
 
+    public function actions() {
+        $actions = parent::actions();
+        $actions['upload'] = [
+            'class' => 'kucha\ueditor\UEditorAction',
+            'config' => [
+                "imageUrlPrefix"  => app()->urlManager->hostInfo,
+                "imageFolderPath" => \Yii::getAlias('@attachment'),
+                "imagePathFormat" => "/attachment/{yyyy}{mm}{dd}/{time}{rand:6}",
+                "imageRoot" => \Yii::getAlias("@webroot"),
+            ],
+        ];
+        return $actions;
+    }
+
     public function actionIndex() {
         $searchModel = new ContentSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $params = app()->request->queryParams;
+        $params = isset($params[$searchModel->formName()]) ? $params : [ $searchModel->formName() => $params ];
+        $dataProvider = $searchModel->search($params);
         $dataProvider->query->andWhere([
             'content_type' => $this->content_type,
         ]);
-
         return $this->render('index', [
             'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
         ]);
@@ -55,8 +72,11 @@ abstract class BaseContentController extends BackController
 
     public function actionUpdate($id) {
         $model = $this->findModel($id);
-        if (!app()->user->can('updateOwnContent', ['content' => $model])) {
-            throw new ForbiddenHttpException('权限不足');
+        if (app()->request->get('delThumb') == '1'){
+            $model->thumb = NULL;
+            $model->thumb2 = NULL;
+            $model->save(FALSE);
+            return $this->redirect(app()->request->referrer);
         }
         $bodyModel = $this->findBodyModel($id);
 
@@ -127,7 +147,7 @@ abstract class BaseContentController extends BackController
     }
 
     /**
-     * @param $model \source\models\ContentBody
+     * @param $model \source\models\Content
      * @param $bodyModel \source\models\ContentBody
      * @return bool
      */

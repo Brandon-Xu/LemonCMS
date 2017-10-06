@@ -11,12 +11,16 @@ $this->title='系统信息';
 <table  class="da-table">
     <tbody>
         <tr>
-            <td>Yii交流社区</td>
-            <td><a href="http://www.yiichina.com/" target="_blank"> Yii交流社区</a></td>
-        </tr>   
+            <td>技术栈</td>
+            <td>
+                <a href="https://github.com/Brandon-Xu/LemonCMS" target="_blank">LemonCMS</a>&nbsp;&nbsp;
+                <a href="https://vuejs.org/" target="_blank">Vue</a>&nbsp;&nbsp;
+                <a href="https://github.com/yiisoft/yii2" target="_blank">Yii2 framework</a>
+            </td>
+        </tr>
         <tr>
-            <td>LemonCMS下载</td>
-            <td><a href="https://github.com/Brandon-Xu/LemonCMS" target="_blank">LemonCMS(Git下载)</a></td>
+            <td>技术支持</td>
+            <td><a href="https://github.com/Brandon-Xu" target="_blank">lemonxl1994@gmail.com (徐磊)</a></td>
         </tr>
         <tr>
             <td>Yii 版本</td>

@@ -11,6 +11,7 @@ use yii\caching\DbQueryDependency;
 /**
  * This is the model class for table "{{%config}}".
  *
+ * @property integer $num_id
  * @property string $id
  * @property string $value
  * @property string $module
@@ -49,6 +50,7 @@ class Config extends BaseActiveRecord
      */
     public function attributeLabels() {
         return [
+            'num_id' => '主键',
             'id' => '名称',
             'value' => '值',
             'module' => '所属模块',
@@ -115,7 +117,7 @@ class Config extends BaseActiveRecord
      */
     private function getValue($fromCache = TRUE){
         if(empty($this->id)) throw new InvalidParamException('config id is required');
-        $this->checkModuleExists('module', $this->module);
+        //$this->checkModuleExists('module', $this->module);
 
         $cacheId = $this->getCacheId();
         $value = app()->cache->get($cacheId);

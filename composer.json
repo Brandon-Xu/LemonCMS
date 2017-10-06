@@ -19,7 +19,8 @@
         "yiisoft/yii2-faker": "*",
         "yiisoft/yii2-gii": "*",
         "nesbot/carbon": "*",
-        "bower-asset/kind-editor": "*"
+        "bower-asset/kind-editor": "*",
+        "kucha/ueditor": "*"
     },
     "require-dev": {
     },

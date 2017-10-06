@@ -62,6 +62,7 @@ use yii\helpers\Url;
  * @property string $url_alias
  * @property string $summary
  * @property string $thumb
+ * @property string $thumb2
  * @property string $thumbs
  *
  * @property ContentBody $body
@@ -136,6 +137,20 @@ class Content extends BaseActiveRecord
     }
 
     /**
+     * @param array $data
+     * @param null $formName
+     * @return bool
+     */
+    public function load($data, $formName = NULL) {
+        $t = $this->thumb;
+        $data = parent::load($data, $formName);
+        if(empty($this->thumb)){
+            $this->thumb = $t;
+        }
+        return $data;
+    }
+
+    /**
      * @param bool $insert
      * @return bool
      */
@@ -143,6 +158,10 @@ class Content extends BaseActiveRecord
         $uploadedFile = Common::uploadFile('Content[thumb]');
         if ($uploadedFile['message'] === 'ok') {
             $this->thumb = $uploadedFile['full_name'];
+        }
+        $uploadedFile = Common::uploadFile('Content[thumb2]');
+        if ($uploadedFile['message'] === 'ok') {
+            $this->thumb2 = $uploadedFile['full_name'];
         }
 
         return parent::beforeSave($insert);
@@ -162,7 +181,7 @@ class Content extends BaseActiveRecord
         if ($this->_bodyClass === NULL && !empty($this->content_type)) {
             $contentType = strtolower($this->content_type);
             $className = "source\\modules\\{$contentType}\\models\\Content".ucfirst($contentType);
-            if (class_exists($className)) {
+            if (Common::classExist($className)) {
                 $this->_bodyClass = $className;
             }
         }
@@ -243,7 +262,7 @@ class Content extends BaseActiveRecord
                'recommend', 'headline', 'flag', 'allow_comment', 'sort_num', 'visibility', 'status',], 'integer',],
             [['content_type', 'title'], 'required'],
             [['user_name', 'last_user_name', 'password', 'view', 'layout', 'content_type'], 'string', 'max' => 64],
-            [['seo_title', 'seo_keywords', 'seo_description', 'title', 'sub_title', 'url_alias', 'redirect_url', 'thumb', ], 'string', 'max' => 256,],
+            [['seo_title', 'seo_keywords', 'seo_description', 'title', 'sub_title', 'url_alias', 'redirect_url', 'thumb', 'thumb2', ], 'string', 'max' => 256,],
             [['summary'], 'string', 'max' => 512],
             [['thumbs'], 'string', 'max' => 1024],
         ];
@@ -291,6 +310,7 @@ class Content extends BaseActiveRecord
             'redirect_url' => '跳转Url',
             'summary' => '简介',
             'thumb' => '缩略图',
+            'thumb2' => '副缩略图',
             'thumbs' => '缩略图集',
 
         ];

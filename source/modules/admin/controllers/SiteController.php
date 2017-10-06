@@ -35,7 +35,6 @@ class SiteController extends BackController
     public function actionIndex() {
         $this->layout = 'container';
 
-
         return $this->render('index');
     }
 

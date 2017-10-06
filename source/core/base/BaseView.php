@@ -99,7 +99,7 @@ class BaseView extends View
         $currentTheme = \Yii::getAlias('@activeTheme/misc/'.$name);
         $currentTheme = ltrim($currentTheme, app()->basePath);
         $currentTheme = str_replace('/', '\\', $currentTheme);
-        if (class_exists($currentTheme)) {
+        if (\source\libs\Common::classExist($currentTheme)) {
             echo $currentTheme::widget($params);
         } else {
             echo 'the widget '.$name.' does not exist';

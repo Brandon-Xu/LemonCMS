@@ -42,19 +42,15 @@ LuLu::setViewParam(['defaultLayout' => FALSE]);
                 <?= $form->field($model, 'sub_title', $filedOptions)->textInput([
                     'maxlength' => 256, 'placeholder' => '请输入副标题',
                 ]) ?>
+                <!-- @todo
                 <?= $form->field($model, 'url_alias', $filedOptions)->textInput([
                     'maxlength' => 256, 'placeholder' => 'Url 地址',
                 ]) ?>
                 <?= $form->field($model, 'redirect_url', $filedOptions)->textInput(['maxlength' => 256]) ?>
-
-                <?= $form->field($bodyModel, 'body', ['size' => 'large'])->textarea(['rows' => 22]) ?>
-                <?php echo KindEditor::widget(['inputId' => '#'.Html::getInputId($bodyModel, 'body')]) ?>
-
+                -->
+                <?= $form->field($bodyModel,'body', ['size' => 'large'])->widget('kucha\ueditor\UEditor',[]);?>
                 <?= $form->field($model, 'summary', $filedOptions)->textarea(['rows' => 6]) ?>
-
                 <?= $form->field($model, 'thumb')->fileInput(['class' => 'da-custom-file']) ?>
-
-
             </div>
         </div>
     </div>
@@ -78,21 +74,24 @@ LuLu::setViewParam(['defaultLayout' => FALSE]);
                 </div>
 
                 <div class="da-form-row da-form-block">
+                    <!-- @todo
                     <?= $form->field($model, 'recommend', [
                         'options' => ['class' => 'da-form-col-4-12 alpha'], 'size' => 'large',
                     ])->dropDownList(Constants::getRecommendItems()) ?>
+                    -->
                     <?= $form->field($model, 'headline', [
-                        'options' => ['class' => 'da-form-col-4-12'], 'size' => 'large',
-                    ])->dropDownList(Constants::getHeadlineItems()) ?>
+                        'options' => ['class' => 'da-form-col-4-12 alpha'], 'size' => 'large',
+                    ])->dropDownList(Constants::getHeadlineItems(), [], FALSE) ?>
                     <?= $form->field($model, 'sticky', [
-                        'options' => ['class' => 'da-form-col-4-12 omega'], 'size' => 'large',
+                        'options' => ['class' => 'da-form-col-4-12'], 'size' => 'large',
                     ])->dropDownList(Constants::getStickyItems()) ?>
+                    <?= $form->field($model, 'status', [
+                        'options' => ['class' => 'da-form-col-4-12 omega'], 'size' => 'large',
+                    ])->dropDownList(Constants::getStatusItemsForContent()) ?>
                 </div>
 
+                <!-- @todo
                 <div class="da-form-row da-form-block">
-                    <?= $form->field($model, 'status', [
-                        'options' => ['class' => 'da-form-col-4-12 alpha'], 'size' => 'large',
-                    ])->dropDownList(Constants::getStatusItemsForContent(), [], FALSE) ?>
                     <?= $form->field($model, 'visibility', [
                         'options' => ['class' => 'da-form-col-4-12'], 'size' => 'large',
                     ])->dropDownList(Constants::getVisibilityItems(), [], FALSE) ?>
@@ -100,6 +99,7 @@ LuLu::setViewParam(['defaultLayout' => FALSE]);
                         'options' => ['class' => 'da-form-col-4-12 omega'], 'size' => 'large',
                     ])->dropDownList(Constants::getYesNoItems(), [], FALSE) ?>
                 </div>
+                -->
 
                 <?= $form->defaultButtons() ?>
             </div>
@@ -119,6 +119,7 @@ LuLu::setViewParam(['defaultLayout' => FALSE]);
                 ])->textInput() ?>
             </div>
         </div>
+        <!-- @todo
         <div class="da-panel collapsible collapsed">
             <div class="da-panel-header">
                 <span class="da-panel-title">
@@ -157,6 +158,7 @@ LuLu::setViewParam(['defaultLayout' => FALSE]);
                 ])->textInput(['maxlength' => 64]) ?>
             </div>
         </div>
+        -->
     </div>
 
 </div>

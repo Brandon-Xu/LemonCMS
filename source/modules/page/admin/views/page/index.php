@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <?php $this->toolbars([
     Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-    Html::a('设置', ['setting/index'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
+    //Html::a('设置', ['setting/index'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
 ]); ?>
 
 <?= GridView::widget([
@@ -31,11 +31,20 @@ $this->params['breadcrumbs'][] = $this->title;
         ], [
             'class' => 'source\core\grid\DateTimeColumn', 'attribute' => 'updated_at',
         ],
-
-        //'allow_comment',
-        //'comments',
-
-        'userText:html',
+        [
+            'label' => '点击快速添至导航',
+            'format' => 'raw',
+            'value' => function ($item) {
+                return Html::a("/article/{$item->id}", [
+                    '/admin/menu/menu/create',
+                    'category' => 'main',
+                    'url' => "/article/{$item->id}",
+                    'name' => $item->title,
+                ]);
+            },
+            'width' => '120px',
+        ],
+        'userText:raw',
         'comment_count',
         'view_count',
         [

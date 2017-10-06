@@ -30,7 +30,7 @@ class ContentSearch extends Content
             ], [
                 [
                     'user_name', 'last_user_name', 'password', 'view', 'layout', 'content_type', 'seo_title',
-                    'seo_keywords', 'seo_description', 'title', 'summary', 'thumb', 'url_alias',
+                    'seo_keywords', 'seo_description', 'title', 'summary', 'thumb', 'url_alias', 'taxonomy_id'
                 ], 'safe',
             ],
         ];
@@ -75,7 +75,7 @@ class ContentSearch extends Content
 
         $query->andFilterWhere([
             //             'id' => $this->id,
-            //             'taxonomy_id' => $this->taxonomy_id,
+                         'taxonomy_id' => $this->taxonomy_id,
             //             'user_id' => $this->user_id,
             //             'last_user_id' => $this->last_user_id,
             //             'created_at' => $this->created_at,

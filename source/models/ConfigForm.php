@@ -99,9 +99,14 @@ abstract class ConfigForm extends Model
                 'value' => $this->$attribute,
                 'module' => $this->belongModule,
             ];
-            $item = new Config();
-            $item->load($configData, '');
-            if( !($item->load($configData, '') && $item->save()) ){
+            $item = Config::find()->where(['id'=>$attribute, 'module'=>$this->belongModule])->one();
+            if(!$item){
+                $item = new Config();
+                $item->load($configData);
+            }else{
+                $item->value = $this->$attribute;
+            }
+            if(!$item->save()){
                 throw new ErrorException('config save failed');
             }
         }

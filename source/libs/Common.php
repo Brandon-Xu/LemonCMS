@@ -9,6 +9,24 @@ use yii\web\UploadedFile;
 
 class Common
 {
+
+    public static function init(){
+        self::setTimezone();
+        if(Config::get('status') === '0') {
+            app()->catchAll = ['site/close', 'message' => 'test'];
+        }
+    }
+
+    public static function classExist($class){
+        $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+        $classExplode = explode(DIRECTORY_SEPARATOR, $class);
+        if(empty($classExplode[0])){
+            unset($classExplode[0]); }
+        $class = implode(DIRECTORY_SEPARATOR, $classExplode);
+        $file = \Yii::getAlias('@app/'.$class.'.php');
+        return is_file($file);
+    }
+
     public static function checkInstall($config) {
         if (!isset($config['components']['db']['class'])) {
             exit('<script>top.location.href="install.php"</script>');

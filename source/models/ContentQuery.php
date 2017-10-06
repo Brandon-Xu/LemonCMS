@@ -8,8 +8,8 @@
 namespace source\models;
 
 use source\libs\Constants;
-use yii\db\ActiveQuery;
 use yii\base\Application;
+use yii\db\ActiveQuery;
 
 /**
  * Class ContentQuery
@@ -22,13 +22,14 @@ class ContentQuery extends ActiveQuery
      * @return $this
      */
     public function published() {
-        $this->andwhere(['status' => Constants::Status_Publish]);
+        $this->andwhere(['status' => Constants::Status_Publish])->orderBy(['sort_num' => SORT_DESC]);
 
         return $this;
     }
 
-    public function withAll(){
+    public function withAll() {
         $this->with(['body', 'taxonomy']);
+
         return $this;
     }
 
@@ -39,8 +40,24 @@ class ContentQuery extends ActiveQuery
      */
     public function normalSelect($moreFields = []) {
         $fields = [
-            'id', 'taxonomy_id', 'created_at', 'updated_at', 'view_count', 'status', 'content_type', 'seo_title',
-            'seo_keywords', 'seo_description', 'title', 'sub_title', 'summary', 'thumb', 'thumbs',
+            'id',
+            'taxonomy_id',
+            'created_at',
+            'updated_at',
+            'view_count',
+            'status',
+            'content_type',
+            'headline',
+            'sticky',
+            'seo_title',
+            'seo_keywords',
+            'seo_description',
+            'title',
+            'sub_title',
+            'summary',
+            'thumb',
+            'thumb2',
+            'thumbs',
         ];
         if (is_array($moreFields) && !empty($moreFields)) {
             $fields = array_merge($fields, $moreFields);
@@ -61,6 +78,7 @@ class ContentQuery extends ActiveQuery
         if (is_string($contentType)) {
             $this->andWhere(['content_type' => $contentType]);
         }
+
         return $this;
     }
 

@@ -5,6 +5,7 @@ namespace source\modules\modularity\models;
 use source\core\base\BaseActiveRecord;
 use source\core\modularity\ModuleInfo;
 use source\core\modularity\ModuleService;
+use source\libs\Common;
 use source\modules\modularity\ModularityService;
 use yii\base\UnknownClassException;
 
@@ -114,16 +115,14 @@ class Modularity extends BaseActiveRecord
      * @return bool|string
      */
     public function getClass($isAdmin){
-
         $isAdmin = $isAdmin === TRUE ? TRUE : FALSE;
-        if( empty($this->_moduleClassPullName) && (
+        if(
             ($isAdmin && $this->enable_admin == 1) ||
-            (!$isAdmin && $this->enable_home == 1) )
-        ){  //---------
+            (!$isAdmin && $this->enable_home == 1) ) {  //---------
             $moduleClassName = $this->getModularityTypeClass($isAdmin);
             $moduleNamespace = app()->modularity->moduleRootNamespace;
-            $class = "$moduleNamespace\\{$this->id}\\$moduleClassName";
-            if(class_exists($class)){
+            $class = "\\$moduleNamespace\\{$this->id}\\$moduleClassName";
+            if(Common::classExist($class)){
                 return $class;
             }
         }
@@ -137,15 +136,14 @@ class Modularity extends BaseActiveRecord
         $moduleNamespace = app()->modularity->moduleRootNamespace;
         $className = ucfirst($this->id).'Service';
         $class = $moduleNamespace . "\\{$this->id}\\" . $className;
-        if(class_exists($class)){
-            if (class_exists($class)) {
-                /** @var ModuleService $serviceInstance */
-                $serviceInstance = new $class();
-                $this->_service = $serviceInstance->getClassName();
-                // if module is already exit, just go continue
-                if(!app()->has($serviceInstance->getServiceId())){
-                    app()->set($serviceInstance->getServiceId(), $serviceInstance);
-                }
+
+        if (Common::classExist($class)) {
+            /** @var ModuleService $serviceInstance */
+            $serviceInstance = new $class();
+            $this->_service = $serviceInstance->getClassName();
+            // if module is already exit, just go continue
+            if (!app()->has($serviceInstance->getServiceId())) {
+                app()->set($serviceInstance->getServiceId(), $serviceInstance);
             }
         }
     }
@@ -169,7 +167,7 @@ class Modularity extends BaseActiveRecord
             $moduleNamespace = app()->modularity->moduleRootNamespace;
             $className = ucfirst($this->id).'Info';
             $class = $moduleNamespace . "\\{$this->id}\\" . $className;
-            if(class_exists($class)){
+            if(Common::classExist($class)){
                 $this->_infoClass = new $class;
             //}else{
                 //throw new UnknownClassException('Can\'t find module info class, module name is: '.$className);

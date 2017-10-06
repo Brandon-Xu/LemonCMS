@@ -2,6 +2,7 @@
 
 namespace source\modules\system\models\config;
 
+use source\libs\Common;
 use source\models\ConfigForm;
 use source\modules\system\SystemInfo;
 
@@ -12,6 +13,7 @@ class BasicConfig extends ConfigForm
         $this->setBelongModule(new SystemInfo());
     }
 
+    public $site_logo;
     public $site_name;
     public $site_description;
     public $site_about;
@@ -27,12 +29,9 @@ class BasicConfig extends ConfigForm
 
     public function rules() {
         return [
-            [
-                [
-                    'site_name', 'site_description', 'site_about', 'site_url', 'lang', 'icp',
-                    'stat',
-                ], 'string',
-            ], [['site_email'], 'email'], [['status'], 'boolean'],
+            [['site_logo', 'site_name', 'site_description', 'site_about', 'site_url', 'lang', 'icp', 'stat', ], 'string'],
+            [['site_email'], 'email'],
+            [['status'], 'boolean'],
         ];
     }
 
@@ -41,12 +40,27 @@ class BasicConfig extends ConfigForm
      */
     public function attributeLabels() {
         return [
-            'site_name' => '网站名称', 'site_description' => '网站描述', 'site_about' => '关于',
-            //'site_url' => '网站Url',
+            'site_logo' => '网站logo',
+            'site_name' => '网站名称',
+            'site_description' => '网站描述',
+            'site_about' => '关于',
             'site_email' => '站点Email',
-
-
-            'lang' => '站点语言', 'icp' => '备案号', 'stat' => '统计代码', 'status' => '站点状态',
+            'lang' => '站点语言',
+            'icp' => '备案号',
+            'stat' => '统计代码',
+            'status' => '站点状态',
         ];
+    }
+
+    public function load($data, $formName = NULL) {
+        $oldValue = $this->site_logo;
+        $res = parent::load($data, $formName);
+        $logo = Common::uploadFile('BasicConfig[site_logo]');
+        if(isset($logo['message']) && $logo['message'] == '没有文件'){
+            $this->site_logo = $oldValue;
+        }else{
+            $this->site_logo = $logo['full_name'];
+        }
+        return $res;
     }
 }

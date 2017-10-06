@@ -4,7 +4,6 @@ namespace source\modules\menu\models;
 
 use source\core\base\BaseActiveRecord;
 use source\libs\Constants;
-use source\libs\Resource;
 use source\LuLu;
 use yii\helpers\Url;
 
@@ -21,6 +20,8 @@ use yii\helpers\Url;
  * @property string $thumb
  * @property integer $status
  * @property integer $sort_num
+ *
+ * @property Menu[] $subMenu
  */
 class Menu extends BaseActiveRecord
 {
@@ -39,6 +40,10 @@ class Menu extends BaseActiveRecord
         parent::init();
     }
 
+    public static function find(){
+        return new MenuActiveQuery(get_called_class());
+    }
+
     /**
      * @inheritdoc
      */
@@ -51,7 +56,8 @@ class Menu extends BaseActiveRecord
      */
     public function rules() {
         return [
-            [['parent_id', 'category_id', 'name', 'url'], 'required'], [['parent_id', 'status', 'sort_num'], 'integer'],
+            [['parent_id', 'category_id', 'name', 'url'], 'required'],
+            [['parent_id', 'status', 'sort_num'], 'integer'],
             [['name', 'target', 'category_id'], 'string', 'max' => 64],
             [['url', 'description', 'thumb'], 'string', 'max' => 512],
         ];
@@ -59,9 +65,18 @@ class Menu extends BaseActiveRecord
 
     public function attributeLabels() {
         return [
-            'id' => 'ID', 'parent_id' => '父结点', 'category_id' => '分类', 'name' => '名称', 'url' => '链接地址',
-            'target' => '打开方式', 'targetText' => '打开方式', 'description' => '描述', 'thumb' => '图片', 'status' => '状态',
-            'statusText' => '状态', 'sort_num' => '排序',
+            'id' => 'ID',
+            'parent_id' => '父结点',
+            'category_id' => '分类',
+            'name' => '名称',
+            'url' => '链接地址',
+            'target' => '打开方式',
+            'targetText' => '打开方式',
+            'description' => '描述',
+            'thumb' => '图片',
+            'status' => '状态',
+            'statusText' => '状态',
+            'sort_num' => '排序',
         ];
     }
 
@@ -101,9 +116,9 @@ class Menu extends BaseActiveRecord
         LuLu::deleteCache($cachekey);
     }
 
-    public static function getChildren($category, $parentId, $status = NULL) {
+    public static function getChildren($category, $parentId, $status = NULL, $fromCache = TRUE) {
         $items = [];
-        $menus = self::getMenusByCategory($category);
+        $menus = self::getMenusByCategory($category, $fromCache);
         foreach ($menus as $menu) {
             if ($menu->parent_id === $parentId) {
                 if ($status && $menu->status !== 1) {
@@ -116,8 +131,8 @@ class Menu extends BaseActiveRecord
         return $items;
     }
 
-    public static function getArrayTree($category) {
-        return self::getMenusByCategory($category);
+    public static function getArrayTree($category, $fromCache = TRUE) {
+        return self::getMenusByCategory($category, $fromCache);
     }
 
     public static function getMenuHtml($category, $parentId) {
@@ -201,4 +216,23 @@ class Menu extends BaseActiveRecord
     public function clearCache() {
         self::clearCachedMenus($this->category_id);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /** --------------------- 上面是准备 go die 的代码 --------------------- */
+
+    public function getSubMenu(){
+        return $this->hasMany(static::className(), ['parent_id'=>'id']);
+    }
+
 }

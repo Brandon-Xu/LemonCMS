@@ -16,11 +16,6 @@ $this->beginPage() ?>
         <meta name="keywords" content="<?php echo $this->config()->get('seo_keywords') ?>">
         <meta name="description" content="<?php echo $this->config()->get('seo_description') ?>">
         <link rel="shortcut icon" href="favicon.ico"/>
-        <!--[if lt IE 9]>
-        <script src="<?=$this->assetsUrl('js/html5.js');?>"></script>
-        <script src="<?=$this->assetsUrl('js/selectivizr.js');?>"></script>
-        <script src="<?=$this->assetsUrl('js/respond.js');?>"></script>
-        <![endif]-->
         <?php $this->head() ?>
         <style type="text/css" id="custom-background-css">
             body.custom-background {

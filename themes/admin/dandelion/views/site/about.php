@@ -42,7 +42,7 @@
 
     <div class="mod-header-user">
         <ul class="pull-right">
-            
+
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle mod-bell" data-toggle="dropdown">
                     <i class="icon icon-bell"></i>
@@ -109,7 +109,7 @@
                 <a href="javascript:;" class=" icon icon-setting active" data="icon">
                     <span>全局设置</span>
                 </a>
-                
+
                 <ul>
                                         <li>
                         <a  class="active" href="http://localhost/WeCenter/?/admin/settings/category-site">
@@ -167,7 +167,7 @@
                 <a href="javascript:;" class=" icon icon-reply" data="icon">
                     <span>内容管理</span>
                 </a>
-                
+
                 <ul class="hide">
                                         <li>
                         <a  href="http://localhost/WeCenter/?/admin/question/question_list/">
@@ -190,7 +190,7 @@
                 <a href="javascript:;" class=" icon icon-user" data="icon">
                     <span>用户管理</span>
                 </a>
-                
+
                 <ul class="hide">
                                         <li>
                         <a  href="http://localhost/WeCenter/?/admin/user/list/">
@@ -218,7 +218,7 @@
                 <a href="javascript:;" class=" icon icon-report" data="icon">
                     <span>审核管理</span>
                 </a>
-                
+
                 <ul class="hide">
                                         <li>
                         <a  href="http://localhost/WeCenter/?/admin/approval/list/">
@@ -246,7 +246,7 @@
                 <a href="javascript:;" class=" icon icon-signup" data="icon">
                     <span>内容设置</span>
                 </a>
-                
+
                 <ul class="hide">
                                         <li>
                         <a  href="http://localhost/WeCenter/?/admin/nav_menu/">
@@ -279,7 +279,7 @@
                 <a href="javascript:;" class=" icon icon-share" data="icon">
                     <span>微信微博</span>
                 </a>
-                
+
                 <ul class="hide">
                                         <li>
                         <a  href="http://localhost/WeCenter/?/admin/weixin/accounts/">
@@ -327,7 +327,7 @@
                 <a href="javascript:;" class=" icon icon-inbox" data="icon">
                     <span>邮件群发</span>
                 </a>
-                
+
                 <ul class="hide">
                                         <li>
                         <a  href="http://localhost/WeCenter/?/admin/edm/tasks/">
@@ -345,7 +345,7 @@
                 <a href="javascript:;" class=" icon icon-job" data="icon">
                     <span>工具</span>
                 </a>
-                
+
                 <ul class="hide">
                                         <li>
                         <a  href="http://localhost/WeCenter/?/admin/tools/">

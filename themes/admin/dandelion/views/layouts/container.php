@@ -24,10 +24,6 @@ $this->beginPage() ?>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
 
-    <!-- iOS webapp icons -->
-    <link rel="apple-touch-icon" href="touch-icon-iphone.png"/>
-    <link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png"/>
-    <link rel="apple-touch-icon" sizes="114x114" href="touch-icon-retina.png"/>
     <title><?php echo $this->title ?> - <?php echo app()->config()->get('site_name') ?></title>
     <script type="text/javascript">
 		function toggleMenu(id) {
@@ -39,7 +35,7 @@ $this->beginPage() ?>
 		}
     </script>
     <style type="text/css">
-        html, body { height: 100%; }
+        html, body { height: 100%;overflow: hidden; }
         body #da-content #da-sidebar {
             margin: 0 auto;
             width: auto;
@@ -47,6 +43,10 @@ $this->beginPage() ?>
             float: none;
             position: inherit;
             z-index: auto;
+        }
+        div#da-header #da-header-top #da-logo-img img {
+            padding-left: 10px;
+            max-height: 40px!important;
         }
     </style>
     <?php $this->head() ?>
@@ -68,7 +68,7 @@ $this->beginPage() ?>
                             <div id="da-logo">
                                 <div id="da-logo-img">
                                     <a href="<?=Url::to(['/admin']);?>">
-                                        <img src="<?= $this->assetsUrl('images/logo.png') ?>" alt="Dandelion Admin"/>
+                                        <img src="<?= Url::to(\source\models\Config::get('site_logo', 'system', FALSE)) ?>" alt="Dandelion Admin"/>
                                     </a>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@ $this->beginPage() ?>
                         <div id="da-header-menu">
                             <?php
                             $isHome = TRUE;
-                            foreach (app()->menu->getChildren('admin') as $item) { ?>
+                            foreach (app()->menu->getChildren('admin', 0, NULL, FALSE) as $item) { ?>
                                 <div class="da-header-menu-item <?php if ($isHome) {
                                     echo 'current';
                                 } ?>" id="menu-<?php echo $item['id'] ?>"
@@ -90,7 +90,6 @@ $this->beginPage() ?>
                         <div id="da-header-toolbar" class="clearfix">
                             <div id="da-user-profile">
                                 <div id="da-user-avatar">
-                                    <img src="<?= $this->assetsUrl('images/pp.jpg') ?>" alt=""/>
                                 </div>
                                 <div id="da-user-info">
                                     <?php echo app()->user->identity->username ?>
@@ -143,7 +142,7 @@ $this->beginPage() ?>
                         <script type="text/javascript" language="javascript">
 							function iFrameHeight() {
 								var bodyHeight = document.body.scrollHeight;
-								var contentHeight = document.body.scrollHeight - 100;
+								var contentHeight = document.body.scrollHeight - 110;
 								console.log(contentHeight);
 								//$("#tableLayout").height(bodyHeight);
 								var ifm = document.getElementById("mainFrame");

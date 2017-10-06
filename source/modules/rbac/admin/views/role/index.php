@@ -69,15 +69,19 @@ $columns = [
 </style>
 <div class="da-ex-tabs">
     <ul>
+        <!-- @todo
         <li><a href="#tabs-<?php echo Role::Category_Member ?>">会员角色</a></li>
+        -->
         <li><a href="#tabs-<?php echo Role::Category_Admin ?>">管理员角色</a></li>
         <li><a href="#tabs-<?php echo Role::Category_System ?>">系统角色</a></li>
     </ul>
+    <!--
     <div id="tabs-<?php echo Role::Category_Member ?>">
         <?= GridView::widget([
             'dataProvider' => $membersDataProvider, 'columns' => $columns,
         ]); ?>
     </div>
+    -->
     <div id="tabs-<?php echo Role::Category_Admin ?>">
         <?= GridView::widget([
             'dataProvider' => $adminsDataProvider, 'columns' => $columns,

@@ -30,8 +30,10 @@ $options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
 <div class="da-ex-tabs">
     <ul>
         <li><a href="#tabs-info">基本信息</a></li>
+        <!-- @todo
         <li><a href="#tabs-seo">模板设置</a></li>
         <li><a href="#tabs-template">SEO设置</a></li>
+        -->
     </ul>
     <div id="tabs-info">
 
@@ -60,6 +62,7 @@ $options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
         <?= $form->field($model, 'sort_num', ['options' => ['class' => 'da-form-row', 'style' => 'border-bottom: 0;']])
             ->textInput() ?>
     </div>
+    <!-- @todo
     <div id="tabs-seo">
         <?= $form->field($model, 'list_view')->textInput(['maxlength' => 64]) ?>
         <?= $form->field($model, 'list_layout')->textInput(['maxlength' => 64]) ?>
@@ -71,6 +74,7 @@ $options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
         <?= $form->field($model, 'seo_keywords')->textInput(['maxlength' => 256]) ?>
         <?= $form->field($model, 'seo_description')->textarea(['maxlength' => 256]) ?>
     </div>
+    -->
 </div>
 
 

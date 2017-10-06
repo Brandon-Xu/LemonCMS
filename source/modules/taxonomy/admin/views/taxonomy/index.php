@@ -3,7 +3,6 @@
 use source\core\grid\GridView;
 use source\core\lib\Common;
 use source\libs\Constants;
-use source\LuLu;
 use source\modules\taxonomy\models\TaxonomyCategory;
 use yii\helpers\Html;
 
@@ -17,7 +16,8 @@ $categoryModel = TaxonomyCategory::findOne(['id' => $category]);
 
 $this->title = $categoryModel['name'];
 $this->addBreadcrumbs([
-    ['分类管理', ['taxonomy']], $categoryModel['name'],
+    ['分类管理', ['taxonomy']],
+    $categoryModel['name'],
 ]);
 
 ?>
@@ -34,12 +34,16 @@ $this->addBreadcrumbs([
     'columns' => [
         [
             'class' => 'source\core\grid\IdColumn',
-        ], [
+        ],
+        [
 
-            'attribute' => 'name', 'format' => 'html', 'width' => 'auto',
-            'value' => function ($model, $key, $index, $column) {
+            'attribute' => 'name',
+            'format' => 'raw',
+            'width' => 'auto',
+            'value' => function ($model, $key, $index, $column) use ($category) {
                 return str_repeat(Constants::TabSize, $model->level).Html::a($model->name, [
-                        'taxonomy/update', 'id' => $model->id,
+                        "/admin/{$category}/{$category}",
+                        'taxonomy_id' => $model->id,
                     ]);
             },
         ],
@@ -48,10 +52,22 @@ $this->addBreadcrumbs([
         // 'contents',
 
         [
-            'attribute' => 'url_alias', 'width' => '250px',
-        ], [
+            'label' => '点击快速添至导航',
+            'format' => 'raw',
+            'value' => function ($item) {
+                return Html::a("/taxonomy/{$item->id}", [
+                    '/admin/menu/menu/create',
+                    'category' => 'main',
+                    'url' => "/taxonomy/{$item->id}",
+                    'name' => $item->name,
+                ]);
+            },
+            'width' => '120px',
+        ],
+        [
             'class' => 'source\core\grid\SortColumn',
-        ], [
+        ],
+        [
             'class' => 'source\core\grid\ActionColumn',
             'queryParams' => ['view' => ['category' => $category]],
         ],

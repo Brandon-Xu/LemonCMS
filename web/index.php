@@ -4,10 +4,10 @@ use \source\core\base\BaseApplication;
 use source\libs\Common;
 
 // comment out the following two lines when deployed to production
-defined('YII_DEBUG') or define('YII_DEBUG', TRUE);
-defined('YII_ENV') or define('YII_ENV', 'dev');
-
 define('__WEB_DIR__', dirname(__DIR__));
+
+defined('YII_DEBUG') or define('YII_DEBUG', TRUE);
+defined('YII_ENV') or define('YII_ENV', 'prod');
 
 require (__WEB_DIR__ . '/vendor/autoload.php');
 require (__WEB_DIR__ . '/vendor/yiisoft/yii2/Yii.php');

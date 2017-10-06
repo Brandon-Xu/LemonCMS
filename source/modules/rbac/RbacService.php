@@ -3,6 +3,7 @@
 namespace source\modules\rbac;
 
 use source\core\modularity\ModuleService;
+use source\libs\Common;
 use source\libs\Utility;
 use source\LuLu;
 use source\models\User;
@@ -157,6 +158,7 @@ class RbacService extends ModuleService
     public function checkPermission($permission = NULL, $params = [], $username = NULL) {
         if (empty($permission)) {
             $permission = app()->controller->uniqueId;
+            $permission = str_replace('admin/', '', $permission);
         }
         if (empty($username)) {
             $username = LuLu::getIdentity()->username;
@@ -238,7 +240,7 @@ class RbacService extends ModuleService
         if(!$item){
             $item = $this->auth->createPermission($name);
             $item->description = $description;
-            $rule = (is_string($rule) && class_exists($rule)) ? new $rule() : $rule;
+            $rule = (is_string($rule) && Common::classExist($rule)) ? new $rule() : $rule;
             if(is_object($rule) && $rule instanceof Rule){
                 $item->ruleName = $rule->name;
             }
@@ -269,7 +271,7 @@ class RbacService extends ModuleService
      * @throws UnknownClassException
      */
     public function addRule($ruleClassName){
-        if(!class_exists($ruleClassName)) throw new UnknownClassException('不存在的 rule class');
+        if(!Common::classExist($ruleClassName)) throw new UnknownClassException('不存在的 rule class');
         /** @var Rule $ruleObj */
         $ruleObj = new $ruleClassName;
         $name = $ruleObj->name;

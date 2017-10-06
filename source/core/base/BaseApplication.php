@@ -18,12 +18,6 @@ class BaseApplication extends Application
     public function init() {
         parent::init();
         $this->modularity->isAdmin = FALSE;
-        $this->modularity->loadAllModules();
-        Common::setTimezone();
-
-        if(Config::get('status') === '0') {
-            app()->catchAll = ['site/close', 'message' => 'test'];
-        }
     }
 
     public function handleRequest($request) {
@@ -36,12 +30,25 @@ class BaseApplication extends Application
         $loadModuleAndRunInit = function ($route) {
             $id = $route;
             if (strpos($route, '/') !== FALSE) {
-                list ($id, $route) = explode('/', $route, 2); }
-            return $this->getModule($id);
+                list ($id, $route) = explode('/', $route, 2);
+            }
+            // 判断并加载父模块，分别是前台的 home 和后台的 admin 模块
+            $this->modularity->loadModule($id);
+            $topModule = $this->getModule($id);
+            if (strpos($route, '/') !== FALSE) {
+                list ($id, $route) = explode('/', $route, 2);
+                // 获取子模块名并加载
+                if($id){ $this->modularity->loadModule($id); }
+            }else{
+                $this->modularity->loadModule($route);
+            }
+            return $topModule;
         };
-
         list ($route, $params) = $request->resolve();
         $loadModuleAndRunInit($route);
+        // 加载模块化数据库中被标为系统模块的模块 modularity 表中 is_system = 1 的
+        $this->modularity->loadSystemModule();
+        Common::init();
         return parent::handleRequest($request);
     }
 

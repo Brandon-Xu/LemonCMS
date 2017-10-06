@@ -12,6 +12,20 @@ use source\modules\system\models\config\ThemeConfig;
 class SettingController extends BaseSettingController
 {
 
+    public function actions() {
+        $actions = parent::actions();
+        $actions['upload'] = [
+            'class' => 'kucha\ueditor\UEditorAction',
+            'config' => [
+                "imageUrlPrefix"  => app()->urlManager->hostInfo,
+                "imageFolderPath" => \Yii::getAlias('@attachment'),
+                "imagePathFormat" => "/attachment/{yyyy}{mm}{dd}/{time}{rand:6}",
+                "imageRoot" => \Yii::getAlias("@webroot"),
+            ],
+        ];
+        return $actions;
+    }
+
     public function actionBasic() {
         $model = new BasicConfig();
 

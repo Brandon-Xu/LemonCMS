@@ -20,10 +20,10 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'class' => 'source\core\grid\TextIdColumn',
         ], [
-            'attribute' => 'name', 'format' => 'html', 'width' => '250px',
+            'attribute' => 'name', 'format' => 'raw', 'width' => '250px',
             'value' => function ($model, $key, $index, $column) {
 
-                return Html::a($model->name, ['/dict/dict/index', 'category' => $model->id]);
+                return Html::a($model->name, ['dict/index', 'category' => $model->id]);
             },
         ], [
             'attribute' => 'description', 'width' => 'auto',

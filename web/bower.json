@@ -1,0 +1,22 @@
+{
+    "name": "jydz-vue",
+    "description": "A Vue.js project",
+    "main": "",
+    "authors": [
+        "BrandonXu <lemonxl1994@gmail.com>"
+    ],
+    "license": "MIT",
+    "homepage": "https://github.com/Brandon-Xu/LemonCMS",
+    "directory": "src/assets",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "vendor/bower",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "unslider": "https://github.com/idiot/unslider"
+    }
+}

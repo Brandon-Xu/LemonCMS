@@ -9,17 +9,11 @@ use yii\helpers\Html;
 $type = 'post';
 $this->title = '模块管理';
 $this->params['breadcrumbs'][] = $this->title;
-
-
 $css = <<<CSS
-
 table.da-table tr td.da-icon-column a{margin-right:5px;}
 CSS;
 $this->registerCss($css);
-
-?>
-
-<?php $this->toolbars([
+$this->toolbars([
     Html::a('新建模块', ['/gii/default/view', 'id' => 'lulumodule'], [
         'class' => 'btn btn-xs btn-primary mod-site-save', 'target' => '_blank',
     ]),
@@ -36,7 +30,7 @@ $this->registerCss($css);
     </thead>
     <tbody>
 
-    <?php foreach ($modules as $module): ?>
+    <?php foreach ($modules as $module): try{ ?>
         <tr data-key="<?php echo $module->id ?>">
             <td><?php echo $module->id ?></td>
             <td><?php echo $module->info->name ?></td>
@@ -45,6 +39,11 @@ $this->registerCss($css);
                 <?php if ($module->is_system) { echo '系统内置'; } ?>
             </td>
         </tr>
-    <?php endforeach; ?>
+    <?php }catch (\Exception $e){ ?>
+        <td></td>
+        <td class="da-icon-column">
+            <?php if ($module->is_system) { echo '系统内置'; } ?>
+        </td>
+    <?php } endforeach; ?>
     </tbody>
 </table>

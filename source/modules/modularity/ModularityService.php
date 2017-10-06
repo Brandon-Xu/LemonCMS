@@ -18,11 +18,11 @@ class ModularityService extends ModuleService
     private $_modules = [];
     private $_isAdmin = NULL;
 
-    const HOME  = FALSE;
+    const HOME = FALSE;
     const ADMIN = TRUE;
 
     const ADMIN_MODULE = 'AdminModule';
-    const HOME_MODULE  = 'HomeModule';
+    const HOME_MODULE = 'HomeModule';
 
     public $moduleRootNamespace = 'source\modules';
 
@@ -40,29 +40,29 @@ class ModularityService extends ModuleService
      * @param $value
      * @return bool
      */
-    public function setIsAdmin($value){
-        if(!$value === self::ADMIN){
+    public function setIsAdmin($value) {
+        if (!$value === self::ADMIN) {
             $value = self::HOME;
         }
         $this->_isAdmin = $value;
         return TRUE;
     }
 
-    public final function getModule($moduleId){
+    public final function getModule($moduleId) {
         return $this->getModuleById($moduleId);
     }
 
-    public final function getModuleById($moduleId){
-        if(isset($this->_modules[$moduleId])){
-            return $this->_modules[$moduleId];
+    public final function getModuleById($moduleId) {
+        if (isset($this->_modules[$moduleId])) {
+            return app()->getModules($moduleId);
         }
-        throw new UnknownClassException('Unknown Module or not be installed: ' . $moduleId);
+        throw new UnknownClassException('Unknown Module or not be installed: '.$moduleId);
     }
 
     /**
      * @return bool
      */
-    public function getIsAdmin(){
+    public function getIsAdmin() {
         return $this->_isAdmin;
     }
 
@@ -71,35 +71,35 @@ class ModularityService extends ModuleService
      * @return string
      */
     public function getModularityType($isAdmin = NULL) {
-        if($isAdmin === NULL) $isAdmin = $this->isAdmin;
+        if ($isAdmin === NULL)
+            $isAdmin = $this->isAdmin;
+
         return $isAdmin ? 'admin' : 'home';
     }
 
     /**
      * @return string
      */
-    public function getModularityTypeClass(){
-        $className  = $this->isAdmin ? ModularityService::ADMIN_MODULE: ModularityService::HOME_MODULE;
-        $class      = $this->getModularityType() . '\\' . $className;
-        return $class;
-    }
+    public function getModularityTypeClass() {
+        $className = $this->isAdmin ? ModularityService::ADMIN_MODULE : ModularityService::HOME_MODULE;
+        $class = $this->getModularityType().'\\'.$className;
 
-    public function setModule($id, $module){
-        if($this->parentModule !== NULL){
-            $this->parentModule->setModule($id, $module);
-        }
-        app()->setModule($id, $module);
+        return $class;
     }
 
     /**
      * 在本类中注册模块
      * @param Modularity $module
      */
-    public final function addModule(Modularity $module){
+    public final function addModule(Modularity $module) {
         $moduleArray = $module->build();
-        if(!isset($this->_modules[$module->id]) && is_array($moduleArray)){
-            $this->_modules[$module->id] = $module;
-            $this->setModule($module->id, $moduleArray);
+        if (!isset($this->_modules[$module->id]) && is_array($moduleArray)) {
+            $this->_modules[$module->id] = $moduleArray;
+            if ($this->parentModule instanceof Module) {
+                $this->parentModule->setModule($module->id, $moduleArray);
+            } else {
+                app()->setModule($module->id, $moduleArray);
+            }
         }
     }
 
@@ -108,13 +108,14 @@ class ModularityService extends ModuleService
      * @return Modularity[]
      */
     public function getAllModules($onlyKeys = FALSE) {
-        if(empty($this->_modules)){
+        if (empty($this->_modules)) {
             $this->loadAllModules();
         }
-        if($onlyKeys === TRUE){
+        if ($onlyKeys === TRUE) {
             return array_keys($this->_modules);
+        } else {
+            return Modularity::find()->indexBy('id')->all();
         }
-        return $this->_modules;
     }
 
     /**
@@ -122,21 +123,46 @@ class ModularityService extends ModuleService
      * @param $moduleId
      * @return bool
      */
-    public function checkModuleExists($moduleId){
+    public function checkModuleExists($moduleId) {
         return in_array($moduleId, $this->getAllModules(TRUE)) ? TRUE : FALSE;
+    }
+
+    public function loadModule($id){
+        return $this->loadModules([$id]);
+    }
+
+    /**
+     * @param array $ids
+     * @return bool
+     */
+    public function loadModules($ids = []) {
+        \diffTime::begin();
+        $traceString = 'loadModules: ';
+        $modulesList = Modularity::find()->indexBy('id');
+        if (!empty($ids)){
+            $modulesList->where(['id'=>$ids]);
+        }
+        $modulesList->all();
+        $time = \diffTime::end();
+        $traceString .= implode(',', $ids)."in time: $time";
+        \Yii::trace($traceString, self::getServiceId());
+        return TRUE;
     }
 
     /**
      * @return bool
      */
-    public function loadAllModules(){
-        if(!empty($this->_modules)){
-            foreach ($this->_modules as $module => $c) {
-                app()->setModule($module, NULL);
-            }
-            $this->_modules = [];
-        }
-        Modularity::find()->indexBy('id')->all();
+    public function loadAllModules() {
+        return $this->loadModules();
+    }
+
+    public function loadSystemModule(){
+        \diffTime::begin();
+        $traceString = 'loadSystemModule ';
+        Modularity::find()->where(['is_system'=>1])->indexBy('id')->all();
+        $time = \diffTime::end();
+        $traceString .= " in time: $time";
+        \Yii::trace($traceString, self::getServiceId());
         return TRUE;
     }
 }

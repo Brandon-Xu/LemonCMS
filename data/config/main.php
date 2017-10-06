@@ -1,14 +1,11 @@
 <?php
 
 // 正常人不要理会这个文件！！这个只是方便阿婆主自己用的而已！！
-$db = file_exists(__DIR__ . '/local-db.php') ? require(__DIR__.'/local-db.php') : require(__DIR__.'/db.php');
+$db = file_exists(__DIR__.'/local-db.php') ? require(__DIR__.'/local-db.php') : require(__DIR__.'/db.php');
 // 正常人可以用这行来引入数据库配置！！，注释掉上面那行！
 //$db = require(__DIR__.'/db.php');
 
-$params = array_merge(
-    require(__DIR__.'/params.php'),
-    require(__DIR__.'/params-local.php')
-);
+$params = array_merge(require(__DIR__.'/params.php'), require(__DIR__.'/params-local.php'));
 
 return [
     'id' => 'home',
@@ -18,6 +15,7 @@ return [
     'runtimePath' => dirname(dirname(__DIR__)).'/data/runtime',
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'defaultRoute' => 'default/index',
     'components' => [
         'user' => [
             'identityClass' => 'source\models\User',
@@ -25,7 +23,7 @@ return [
             'enableAutoLogin' => FALSE,
         ],
         'request' => [
-            //'enableCsrfValidation' => FALSE,
+            'enableCsrfValidation' => FALSE,
             'cookieValidationKey' => '41SCN-vryMrrUOuOzXXcGo0GP4zBgMhr',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
@@ -44,21 +42,21 @@ return [
         'schemaCache' => [
             'class' => 'yii\caching\FileCache',
             'cachePath' => '@data/cache',
-            'keyPrefix' => 'scheme_'
+            'keyPrefix' => 'scheme_',
         ],
         'security' => [
             'class' => 'yii\base\Security',
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
-            'db' => $db
+            'db' => $db,
         ],
         'assetManager' => [
             'basePath' => '@assets',
             'baseUrl' => '@web/assets',
             'bundles' => [
                 'yii\web\JqueryAsset' => [
-                    'js' => ['https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js']
+                    'js' => ['https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js'],
                 ],
             ],
             //'linkAssets' => true,
@@ -69,6 +67,10 @@ return [
             'enablePrettyUrl' => TRUE,
             'showScriptName' => FALSE,
             'enableStrictParsing' => FALSE,
+            'rules' => [
+                'article/<id:\d+>/' => 'default/index',
+                'taxonomy/<id:\d+>/' => 'default/index',
+            ],
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -95,14 +97,14 @@ return [
                     'class' => 'source\modules\log\DbTarget',
                     'levels' => [
                         'error',
-                        'warning'
+                        'warning',
                     ],
-                    //'categories' => ['yii\'],
                 ],
                 [
                     'class' => 'yii\log\FileTarget',
                     'levels' => [
-                        'error', 'warning',
+                        'error',
+                        'warning',
                     ],
                 ],
             ],

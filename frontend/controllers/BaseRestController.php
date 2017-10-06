@@ -1,6 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
  * User: BrandonXu
  * Date: 2017/8/13
  * Time: 22:44
@@ -8,6 +7,7 @@
 
 namespace frontend\controllers;
 
+use Carbon\Carbon;
 use source\models\Content;
 use source\traits\Common;
 use Yii;
@@ -111,7 +111,7 @@ class BaseRestController extends ActiveController
         foreach ($actions as $k => $action) {
             $class = $action['class'];
             $fullClassName = "{$this->actionNamespace}\\{$class}";
-            if (!class_exists($fullClassName)) {
+            if (!\source\libs\Common::classExist($fullClassName)) {
                 $fullClassName = "{$this->defaultActionNamespace}\\{$class}";
             }
             $actions[$k]['class'] = $fullClassName;
@@ -129,7 +129,10 @@ class BaseRestController extends ActiveController
 
     protected function verbs() {
         return [
-            'index' => ['GET', 'HEAD'], 'view' => ['GET', 'HEAD'], 'create' => ['POST'], 'update' => ['PUT', 'PATCH'],
+            'index' => ['GET', 'HEAD'],
+            'view' => ['GET', 'HEAD'],
+            'create' => ['POST'],
+            'update' => ['PUT', 'PATCH'],
             'delete' => ['DELETE'],
         ];
     }
@@ -143,16 +146,31 @@ class BaseRestController extends ActiveController
      * @return object
      */
     public function listDataProvider() {
-        $query = Content::find()->published()->normalSelect()->andWhere(['content_type' => $this->content_type])->with([
+        $taxonomy_id = app()->request->get('taxonomy_id', NULL);
+        $sticky = app()->request->get('sticky', NULL);
+        $headline = app()->request->get('headline', NULL);
+
+        $where = [
+            'taxonomy_id'=> $taxonomy_id,
+            'sticky' => $sticky,
+            'headline' => $headline,
+        ];
+        foreach ($where as $key => $item){
+            if(empty($item)){
+                unset($where[$key]);
+            }
+        }
+
+        $query = Content::find()->published()->normalSelect()->where($where)->andWhere(['content_type' => $this->content_type])->with([
             'taxonomy' => function ($query) {
                 /** @var $query ActiveQuery */
                 $query->select(['id', 'parent_id', 'category_id', 'name']);
             },
-        ])->asArray();
+        ]);
 
         return Yii::createObject([
             'class' => ActiveDataProvider::className(),
-            'query' => $query,
+            'query' => $query->asArray(),
             'pagination' => [
                 'pageSize' => $this->pageSize_index,
             ],
@@ -170,6 +188,8 @@ class BaseRestController extends ActiveController
         /** @var Content $object */
         $object = Content::find()->published()->normalSelect()->where(['id' => $id])->one();
         $data = $object->toArray();
+        $data['created_at'] = Carbon::createFromTimestamp($data['created_at'])->toDateString();
+        $data['updated_at'] = Carbon::createFromTimestamp($data['updated_at'])->toDateString();
         $data['taxonomy']   = $object->taxonomy;
         $data['body']       = $object->body;
 

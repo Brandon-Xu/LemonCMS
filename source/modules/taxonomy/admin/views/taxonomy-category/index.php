@@ -25,7 +25,7 @@ $this->addBreadcrumbs([
         [
             'class' => 'source\core\grid\TextIdColumn',
         ], [
-            'attribute' => 'name', 'format' => 'html', 'width' => '250px',
+            'attribute' => 'name', 'format' => 'raw', 'width' => '250px',
             'value' => function ($model, $key, $index, $column) {
 
                 return Html::a($model->name, ['taxonomy/index', 'category' => $model->id]);
@@ -34,7 +34,7 @@ $this->addBreadcrumbs([
             'attribute' => 'description', 'width' => 'auto',
         ], [
             'class' => 'source\core\grid\ActionColumn',
-
+            'template' => '{update}',
             'buttons' => [
                 'view' => function ($url, $model, $key, $index, $column) {
 

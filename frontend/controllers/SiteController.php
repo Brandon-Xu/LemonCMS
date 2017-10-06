@@ -7,25 +7,23 @@ use source\models\ContactForm;
 use source\models\User;
 use yii\filters\Cors;
 
+app()->end();
+
 class SiteController extends BaseController
 {
-
-    public $enableCsrfValidation = FALSE;
 
     public function behaviors() {
         return [
             [
-                'class' => Cors::className(), 'cors' => [
-                //定义允许来源的数组
-                'Access-Control-Request-Method' => [
-                    'GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS',
+                'class' => Cors::className(),
+                'cors' => [
+                    'Access-Control-Request-Method' => [ 'GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS', ],
                 ],
-                //允许动作的数组
-            ], 'actions' => [
-                'app' => [
-                    'Access-Control-Allow-Credentials' => TRUE,
+                'actions' => [
+                    'app' => [
+                        'Access-Control-Allow-Credentials' => TRUE,
+                    ],
                 ],
-            ],
             ],
         ];
     }

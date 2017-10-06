@@ -1,6 +1,5 @@
 <?php
 /**
- * Created by PhpStorm.
  * User: BrandonXu
  * Date: 2017/8/13
  * Time: 22:44
@@ -33,11 +32,6 @@ class ApiController extends BaseRestController
         $verbs = parent::verbs();
 
         return $verbs;
-    }
-
-    public function actionI(){
-        $d = Content::findOne(['id'=>14])->createdAt;
-        return $d;
     }
 
 }

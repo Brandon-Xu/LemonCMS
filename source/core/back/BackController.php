@@ -71,12 +71,12 @@ class BackController extends BaseController
 
 
         //检查不需要登录的action uniqueID,如 site/login, site/captcha
-        if (in_array($action->controller->id.'/'.$action->id, $this->ignoreLogin())) {
+        if (in_array(app()->controller->uniqueId.'/'.$action->id, $this->ignoreLogin()) || $action->id == 'upload') {
             return parent::beforeAction($action);
         }
 
         if (\Yii::$app->user->isGuest) {
-            LuLu::go(['site/login']);
+            LuLu::go(['/admin/site/login']);
         }
 
         if (!app()->rbac->checkPermission('manager_admin')) {
@@ -97,13 +97,13 @@ class BackController extends BaseController
 
     public function ignoreLogin() {
         return [
-            'site/login', 'site/captcha',
+            'admin/site/login', 'admin/site/captcha',
         ];
     }
 
     public function ingorePermission() {
         return [
-            'site/logout', 'site/error', 'site/welcome', 'site/index',
+            'admin/site/logout', 'admin/site/error', 'admin/site/welcome', 'admin/site/index',
         ];
     }
 
@@ -114,7 +114,6 @@ class BackController extends BaseController
         $params = array_merge([
             'title' => $title, 'message' => $message,
         ], $params);
-
-        return $this->render('//site/message', $params);
+        echo $this->render('@activeTheme/views/site/message', $params);app()->end();
     }
 }
