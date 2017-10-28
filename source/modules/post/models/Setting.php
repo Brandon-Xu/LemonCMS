@@ -25,7 +25,7 @@ class Setting extends ConfigForm
      */
     public function attributeLabels() {
         return [
-            'taxonomy' => '绑定分类',
+            'taxonomy' => \Yii::t('app', 'Taxonomy'),
         ];
     }
 }

@@ -16,6 +16,7 @@ class BackController extends BaseController
             return FALSE;
         }
 
+        return parent::beforeAction($action);
         /*
         $module = $action->controller->module->id;
         $moduleInfo = '后台';
@@ -97,22 +98,29 @@ class BackController extends BaseController
 
     public function ignoreLogin() {
         return [
-            'admin/site/login', 'admin/site/captcha',
+            'admin/site/login',
+            'admin/site/captcha',
         ];
     }
 
     public function ingorePermission() {
         return [
-            'admin/site/logout', 'admin/site/error', 'admin/site/welcome', 'admin/site/index',
+            'admin/site/logout',
+            'admin/site/error',
+            'admin/site/welcome',
+            'admin/site/index',
+            'admin/post/post/UEDUpload',
+            'admin/post/post/upload'
         ];
     }
 
-    public function showMessage($message = NULL, $title = '提示', $params = []) {
+    public function showMessage($message = NULL, $title = 'Hint', $params = []) {
         if ($message === NULL) {
-            $message = '权限不足，无法进行此项操作';
+            $message = \Yii::t('app', 'Permission denied');
         }
         $params = array_merge([
-            'title' => $title, 'message' => $message,
+            'title' => \Yii::t('app', $title),
+            'message' => $message,
         ], $params);
         echo $this->render('@activeTheme/views/site/message', $params);app()->end();
     }

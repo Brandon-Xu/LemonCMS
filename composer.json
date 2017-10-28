@@ -20,7 +20,13 @@
         "yiisoft/yii2-gii": "*",
         "nesbot/carbon": "*",
         "bower-asset/kind-editor": "*",
-        "kucha/ueditor": "*"
+        "bower-asset/ionicons": "*",
+        "bower-asset/fex-webuploader": "*",
+        "bower-asset/vue": "*",
+        "kucha/ueditor": "*",
+        "dmstr/yii2-adminlte-asset": "2.4.*",
+        "2amigos/yii2-tinymce-widget": "~1.1",
+        "kartik-v/yii2-widget-select2": "@dev"
     },
     "require-dev": {
     },

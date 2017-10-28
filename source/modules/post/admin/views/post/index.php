@@ -8,22 +8,20 @@ use yii\helpers\Html;
 /* @var $searchModel source\models\search\ContentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 $type = 'post';
-$this->title = '文章管理';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = $this->t('Post Manage');
+$this->breadcrumbs = [
+    $this->title
+];
 
-$this->toolbars([
-    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-    //Html::a('设置', ['setting/index'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]);
-
+$this->toolbar = [
+    Html::a(Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-primary']),
+];
 echo GridView::widget([
     'dataProvider' => $dataProvider,
     //'filterModel' => $searchModel,
-    'layout' => "{items}\n{pager}",
+    'summary' => $this->title,
     'columns' => [
-        [
-            'class' => 'source\core\grid\IdColumn',
-        ],
+        ['class' => 'source\core\grid\IdColumn'],
         [
             'attribute' => 'title',
             'headerOptions' => ['width' => 'auto'],
@@ -43,14 +41,13 @@ echo GridView::widget([
                     'name' => $item->title,
                 ]);
             },
-            'width' => '120px',
+            'width' => '150px',
         ],
         'userText:raw',
         'comment_count',
         'view_count',
         [
             'attribute' => 'status',
-            'width' => '25px',
             'content' => function ($model, $key, $index, $gridView) {
                 return Constants::getStatusItemsForContent($model->status);
             },

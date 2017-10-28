@@ -35,7 +35,9 @@ class MenuCategory extends BaseActiveRecord
 
     public function attributeLabels() {
         return [
-            'id' => '标识', 'name' => '名称', 'description' => '描述',
+            'id' => \Yii::t('app', 'ID'),
+            'name' => \Yii::t('app', 'Name'),
+            'description' => \Yii::t('app', 'Description'),
         ];
     }
 

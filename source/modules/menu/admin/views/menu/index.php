@@ -12,25 +12,22 @@ $category = app()->request->get('category');
 $categoryModel = MenuCategory::findOne(['id' => $category]);
 
 $this->title = $categoryModel['name'];
-$this->addBreadcrumbs([
-    ['菜单管理', ['menu']],
-    [$categoryModel['name'], ['menu/index', 'category' => $category]],
+$this->breadcrumbs = [
+    [ $this->t('Menu Categories'), ['category/index'] ],
     $this->title,
-]);
+];
 
-?>
+$this->toolbar =[
+    Html::a(Yii::t('app', 'Back'), ['category/index'], ['class' => 'btn btn-warning']),
+    Html::a(Yii::t('app', 'Create'), ['create', 'category' => $category], ['class' => 'btn btn-success']),
+];
 
-<?php $this->toolbars([
-    Html::a('返回', ['menu-category'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-    Html::a('新建', ['create', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]); ?>
-
-<?= GridView::widget([
-    'dataProvider' => $dataProvider, //'filterModel' => $searchModel,
+\yii\widgets\Pjax::begin();
+echo GridView::widget([
+    //'filterModel' => $searchModel,
+    'dataProvider' => $dataProvider,
     'columns' => [
-        [
-            'class' => 'source\core\grid\IdColumn',
-        ],
+        [ 'class' => 'source\core\grid\IdColumn' ],
         [
             'attribute' => 'name',
             'format' => 'raw',
@@ -44,24 +41,19 @@ $this->addBreadcrumbs([
         ],
         [
             'attribute' => 'url',
-            'width' => '250px',
+            'width' => '300px',
         ],
         [
             'class' => 'source\core\grid\CenterColumn',
             'attribute' => 'targetText',
-            'width' => '50px',
+            'width' => '80px',
         ],
-        [
-            'class' => 'source\core\grid\SortColumn',
-        ],
-        [
-            'class' => 'source\core\grid\StatusColumn',
-        ],
+        [ 'class' => 'source\core\grid\SortColumn' ],
+        [ 'class' => 'source\core\grid\StatusColumn' ],
         [
             'class' => 'source\core\grid\ActionColumn',
             'queryParams' => ['view' => ['category' => $category]],
         ],
     ],
-]); ?>
-
-                 
+]);
+\yii\widgets\Pjax::end();

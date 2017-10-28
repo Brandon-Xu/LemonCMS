@@ -1,57 +1,35 @@
 <?php
-
 namespace source\core\widgets;
 
-use yii\helpers\Html;
-
-class Menu extends BaseWidget
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+/**
+ * Class Menu
+ * Theme menu widget.
+ */
+class Menu extends \dmstr\widgets\Menu
 {
-
-    public $menuId;
-
-    public $parentId = 0;
-
-    public $itemOptions = [];
-
-    public $rootOptions = [];
-
-    public $subOptions = [];
-
-    public function init() {
-        parent::init();
-    }
-
-    private function getChildrenMenus($parentId) {
-        $menus = \source\modules\menu\models\Menu::findAll([
-            'category_id' => $this->menuId, 'parent_id' => $parentId, 'enabled' => 1,
-        ], 'sort_num desc');
-
-        return $menus;
-    }
-
-    public function getMenu($menus) {
-        $ret = '';
-
-        foreach ($menus as $menu) {
-            $ret .= '<li class="menu_item menu_'.$this->menuId.'_item" id="menu_item_'.$menu['id'].'">'.Html::a($menu['name'], $menu['url'], ['target' => $menu['target']]).'</li>';
-            $children = $this->getChildrenMenus($menu['id']);
-            if (count($children) !== 0) {
-                $ret .= '<ul class="menu_'.$this->menuId.'_sub">';
-                $ret .= $this->getMenu($children);
-                $ret .= '</ul>';
-            }
+    /**
+     * @inheritdoc
+     */
+    protected function renderItem($item)
+    {
+        if (isset($item['items'])) {
+            $labelTemplate = '<a href="{url}">{icon} {label} <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
+            $linkTemplate = '<a href="{url}">{icon} {label} <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
+        } else {
+            $labelTemplate = $this->labelTemplate;
+            $linkTemplate = $this->linkTemplate;
         }
 
-        return $ret;
-    }
+        $replacements = [
+            '{label}' => strtr($this->labelTemplate, ['{label}' => $item['label'],]),
+            '{icon}' => empty($item['icon']) ? $this->defaultIconHtml : $item['icon'],
+            '{url}' => isset($item['url']) ? Url::to($item['url']) : 'javascript:void(0);',
+        ];
 
-    public function showMenu() {
-        $ret = '<ul class="menu_'.$this->menuId.'">';
+        $template = ArrayHelper::getValue($item, 'template', isset($item['url']) ? $linkTemplate : $labelTemplate);
 
-        $ret .= $this->getMenu($this->menuId);
-
-        $ret .= '</ul>';
-
-        return $ret;
+        return strtr($template, $replacements);
     }
 }

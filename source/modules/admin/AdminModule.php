@@ -6,7 +6,7 @@ class AdminModule extends \source\core\modularity\AdminModule
 {
 
     public $id = 'admin';
-    public $defaultRoute = 'site/index';
+    public $defaultRoute = 'site/welcome';
     public $controllerNamespace = 'source\modules\admin\controllers';
 
     public function init() {

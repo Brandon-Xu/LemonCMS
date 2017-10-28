@@ -8,13 +8,13 @@ use source\modules\menu\models\MenuCategory;
 $category = $model->category_id;
 $categoryModel = MenuCategory::findOne(['id' => $category]);
 
-$this->title = '修改菜单项: '.' '.$model->name;
-$this->addBreadcrumbs([
-    ['菜单管理', ['menu']], [$categoryModel['name'], ['menu/default/index', 'category' => $category]], $this->title,
-]);
+$this->title = $this->t('Update menu: {menu}', NULL, ['menu'=>$model->name]);
+$this->breadcrumbs = [
+    [$this->t('Menu Categories'), ['category/index']],
+    [$categoryModel['name'], ['menu/index', 'category' => $category]],
+    $this->title,
+];
 
-?>
-
-<?= $this->render('_form', [
+echo $this->render('_form', [
     'model' => $model,
-]) ?>
+]);

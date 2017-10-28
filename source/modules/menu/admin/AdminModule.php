@@ -9,7 +9,7 @@ class AdminModule extends \source\core\modularity\AdminModule
     public function init() {
         parent::init();
 
-        $this->defaultRoute = 'menu-category';
+        $this->defaultRoute = 'category';
         // custom initialization code goes here
     }
 }

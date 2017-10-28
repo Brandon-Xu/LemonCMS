@@ -8,8 +8,6 @@ use source\LuLu;
 use source\models\Content;
 use source\models\search\ContentSearch;
 use Yii;
-use yii\helpers\Url;
-use yii\web\ForbiddenHttpException;
 use yii\web\NotFoundHttpException;
 
 abstract class BaseContentController extends BackController
@@ -24,7 +22,7 @@ abstract class BaseContentController extends BackController
 
     public function actions() {
         $actions = parent::actions();
-        $actions['upload'] = [
+        $actions['UEDUpload'] = [
             'class' => 'kucha\ueditor\UEditorAction',
             'config' => [
                 "imageUrlPrefix"  => app()->urlManager->hostInfo,
@@ -32,6 +30,10 @@ abstract class BaseContentController extends BackController
                 "imagePathFormat" => "/attachment/{yyyy}{mm}{dd}/{time}{rand:6}",
                 "imageRoot" => \Yii::getAlias("@webroot"),
             ],
+        ];
+
+        $actions['upload'] = [
+            'class' => 'source\core\actions\UploadAction',
         ];
         return $actions;
     }
@@ -45,7 +47,8 @@ abstract class BaseContentController extends BackController
             'content_type' => $this->content_type,
         ]);
         return $this->render('index', [
-            'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -59,14 +62,14 @@ abstract class BaseContentController extends BackController
         $bodyModel = $this->findBodyModel();
         $bodyModel->loadDefaultValues();
 
-        if ($this->saveContent($model, $bodyModel)) {
+        if ($this->saveContent($model)) {
             return $this->redirect([
                 'index',
             ]);
         }
 
         return $this->render('create', [
-            'model' => $model, 'bodyModel' => $bodyModel,
+            'model' => $model
         ]);
     }
 
@@ -78,9 +81,8 @@ abstract class BaseContentController extends BackController
             $model->save(FALSE);
             return $this->redirect(app()->request->referrer);
         }
-        $bodyModel = $this->findBodyModel($id);
 
-        if ($this->saveContent($model, $bodyModel)) {
+        if ($this->saveContent($model)) {
             return $this->redirect([
                 'index',
             ]);
@@ -88,7 +90,6 @@ abstract class BaseContentController extends BackController
 
         return $this->render('update', [
             'model' => $model,
-            'bodyModel' => $bodyModel,
         ]);
     }
 
@@ -109,7 +110,7 @@ abstract class BaseContentController extends BackController
 
     /**
      * @param $id
-     * @return array|null|\source\models\ContentBody|static
+     * @return \source\models\Content
      * @throws NotFoundHttpException
      */
     protected function findModel($id) {
@@ -148,11 +149,11 @@ abstract class BaseContentController extends BackController
 
     /**
      * @param $model \source\models\Content
-     * @param $bodyModel \source\models\ContentBody
      * @return bool
      */
-    public function saveContent($model, $bodyModel) {
+    public function saveContent($model) {
         $postDatas = Yii::$app->request->post();
+        $bodyModel = $model->body;
 
         if ($model->load($postDatas) && $bodyModel->load($postDatas) && $model->validate() && $bodyModel->validate()) {
             $model->summary = $this->getSummary($model, $bodyModel);
@@ -175,7 +176,7 @@ abstract class BaseContentController extends BackController
     }
 
     /**
-     * @param $model \source\models\ContentBody
+     * @param $model \source\models\Content
      * @param $bodyModel \source\models\ContentBody
      * @return bool
      */

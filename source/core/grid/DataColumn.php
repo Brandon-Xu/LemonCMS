@@ -15,6 +15,6 @@ class DataColumn extends \yii\grid\DataColumn
         if (!isset($this->headerOptions['width'])) {
             $this->headerOptions['width'] = $this->width;
         }
-        $this->contentOptions = ['style' => 'word-wrap: break-word; word-break: break-all;'];
+        app()->view->registerCss('.table-bordered td { word-wrap: break-word; word-break: break-all; }', [], 'tdClassCss');
     }
 }

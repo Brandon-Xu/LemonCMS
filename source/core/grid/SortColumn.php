@@ -6,7 +6,7 @@ class SortColumn extends DataColumn
 {
 
     public $attribute = 'sort_num';
-    public $headerOptions = ['width' => '50px'];
+    public $headerOptions = ['width' => '100px'];
 
     public function init() {
         parent::init();

@@ -7,29 +7,24 @@ use yii\helpers\Html;
 /* @var $searchModel source\models\search\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = '用户管理';
-$this->params['breadcrumbs'][] = $this->title;
-?>
+$this->title = Yii::t('app', 'User Manage');
+$this->breadcrumbs = [ $this->title ];
+$this->toolbar = [
+    Html::a(Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-primary']),
+];
 
-<?php $this->toolbars([
-    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]); ?>
+echo GridView::widget([
+    'dataProvider' => $dataProvider,
+    'columns' => [
 
-
-<?= GridView::widget([
-    'dataProvider' => $dataProvider, 'columns' => [
-
-        ['class' => 'source\core\grid\IdColumn'], [
-            'attribute' => 'username', 'width' => 'auto',
-        ], [
-            'attribute' => 'email', 'width' => '120px',
-        ],
-
+        [ 'class' => 'source\core\grid\IdColumn' ],
+        [ 'attribute' => 'username', 'width' => 'auto' ],
+        [ 'attribute' => 'email', 'width' => '220px' ],
         [
-            'class' => 'source\core\grid\DateTimeColumn', 'attribute' => 'created_at',
-        ], ['class' => 'source\core\grid\StatusColumn'], // 'created_at',
-        // 'updated_at',
-
+            'class' => 'source\core\grid\DateTimeColumn',
+            'attribute' => 'created_at',
+        ],
+        ['class' => 'source\core\grid\StatusColumn'],
         ['class' => 'source\core\grid\ActionColumn'],
     ],
-]); ?>
+]);

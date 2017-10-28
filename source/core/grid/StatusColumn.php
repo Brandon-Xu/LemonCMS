@@ -8,7 +8,6 @@ class StatusColumn extends DataColumn
 {
 
     public $attribute = 'status';
-    public $headerOptions = ['width' => '25px'];
 
     public function init() {
         parent::init();

@@ -4,6 +4,7 @@ namespace source\modules\post\models;
 
 use source\models\Content;
 use source\models\ContentBody;
+use Yii;
 
 /**
  * This is the model class for table "{{%content_post}}".
@@ -29,7 +30,8 @@ class ContentPost extends ContentBody
     public function rules() {
         return [
             //[['content_id', 'body'], 'required'],
-            [['content_id'], 'integer'], [['body'], 'string'],
+            [['content_id'], 'integer'],
+            [['body'], 'string'],
         ];
     }
 
@@ -38,7 +40,9 @@ class ContentPost extends ContentBody
      */
     public function attributeLabels() {
         return [
-            'id' => 'ID', 'content_id' => 'Content ID', 'body' => '内容',
+            'id' => Yii::t('app', 'ID'),
+            'content_id' => Yii::t('app', 'Content ID'),
+            'body' => Yii::t('app', 'Content'),
         ];
     }
 

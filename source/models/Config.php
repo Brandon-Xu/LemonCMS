@@ -2,11 +2,11 @@
 
 namespace source\models;
 
+use Yii;
 use source\core\base\BaseActiveRecord;
 use source\modules\system\SystemInfo;
 use yii\base\InvalidParamException;
 use yii\base\UnknownPropertyException;
-use yii\caching\DbQueryDependency;
 
 /**
  * This is the model class for table "{{%config}}".
@@ -50,10 +50,10 @@ class Config extends BaseActiveRecord
      */
     public function attributeLabels() {
         return [
-            'num_id' => '主键',
-            'id' => '名称',
-            'value' => '值',
-            'module' => '所属模块',
+            'num_id' => Yii::t('app', 'ID'),
+            'id' => Yii::t('app', 'key'),
+            'value' => Yii::t('app', 'value'),
+            'module' => Yii::t('app', 'Module'),
         ];
     }
 

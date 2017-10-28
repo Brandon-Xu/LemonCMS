@@ -10,11 +10,11 @@ class AdminLinkPager extends LinkPager
     public function init() {
         parent::init();
 
-        $this->options = ['class' => 'dataTables_paginate paging_full_numbers'];
-        $this->linkOptions = ['class' => 'paginate_button'];
+        $this->options = ['class' => 'pagination pagination-sm no-margin pull-right'];
+        $this->linkOptions = [];
 
-        $this->activePageCssClass = 'paginate_active';
-        $this->disabledPageCssClass = 'paginate_button_disabled';
+        $this->activePageCssClass = 'active';
+        $this->disabledPageCssClass = 'disabled';
     }
 
     protected function renderPageButtons() {
@@ -23,7 +23,7 @@ class AdminLinkPager extends LinkPager
             return '';
         }
 
-        return Html::tag('div', implode("\n", $buttons), $this->options);
+        return Html::tag('ul', implode("\n", $buttons), $this->options);
     }
 
     protected function renderPageButton($label, $page, $class, $disabled, $active) {
@@ -35,14 +35,14 @@ class AdminLinkPager extends LinkPager
         }
         if ($disabled) {
             Html::addCssClass($linkOptions, $this->disabledPageCssClass);
-
-            return Html::tag('a', $label, $linkOptions);
         }
         if ($active) {
             Html::addCssClass($linkOptions, $this->activePageCssClass);
         }
 
-        return Html::a($label, $this->pagination->createUrl($page), $linkOptions);
+        $url = $disabled ? 'javascript:void;' : $this->pagination->createUrl($page);
+        $link = Html::a($label, $url);
+        return Html::tag('li', $link, $linkOptions);
     }
 
 }

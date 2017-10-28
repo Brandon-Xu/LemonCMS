@@ -17,33 +17,24 @@ class LoginForm extends Model
 
     private $_user = NULL;
 
-
     /**
      * @return array the validation rules.
      */
     public function rules() {
         return [
             // username and password are both required
-            [
-                [
-                    'username', 'password',
-                ], 'required',
-            ], // rememberMe must be a boolean value
-            [
-                'rememberMe', 'boolean',
-            ], // password is validated by validatePassword()
-            [
-                'password', 'validatePassword',
-            ],
+            [ [ 'username', 'password', ], 'required' ], // rememberMe must be a boolean value
+            [ 'rememberMe', 'boolean', ], // password is validated by validatePassword()
+            [ 'password', 'validatePassword', ],
             //['verifyCode', 'captcha'],
         ];
     }
 
     public function attributeLabels() {
         return [
-
-            'username' => '用户名', 'password' => '密码', 'verifyCode' => '验证码',
-
+            'username'      => Yii::t('app', 'Username'),
+            'password'      => Yii::t('app', 'Password'),
+            'verifyCode'    => Yii::t('app', 'Verification Code'),
         ];
     }
 
@@ -58,10 +49,10 @@ class LoginForm extends Model
         if (!$this->hasErrors()) {
             $user = $this->getUser();
             if ($user === NULL) {
-                $this->addError('username', 'Incorrect username.');
+                $this->addError('username', Yii::t('app', 'Incorrect username.'));
             } else {
                 if (!$user->validatePassword($this->password, $user->password_hash)) {
-                    $this->addError($attribute, 'Incorrect password.');
+                    $this->addError($attribute, Yii::t('app', 'Incorrect password.'));
                 }
             }
 

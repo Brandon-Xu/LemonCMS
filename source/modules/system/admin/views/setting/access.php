@@ -12,16 +12,11 @@ $this->title = '注册与访问控制';
 $this->addBreadcrumbs([
     $this->title,
 ]);
-
-
 ?>
-
-
 <?php $form = ActiveForm::begin(); ?>
 
-<?= $form->field($model, 'allow_register', ['size' => 'small'])->checkbox([], FALSE) ?>
-<?= $form->field($model, 'default_role')
-    ->dropDownList(ArrayHelper::map(Role::buildOptions(), 'id', 'name', 'category')) ?>
+<?= $form->field($model, 'allow_register')->checkbox([], FALSE) ?>
+<?= $form->field($model, 'default_role')->dropDownList(ArrayHelper::map(Role::buildOptions(), 'id', 'name', 'category')) ?>
 
 <?= $form->defaultButtons() ?>
 <?php ActiveForm::end(); ?>

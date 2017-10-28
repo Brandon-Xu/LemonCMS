@@ -3,7 +3,6 @@
 namespace source\core\base;
 
 use source\libs\Common;
-use source\models\Config;
 use source\traits\Theme;
 use yii\web\Application;
 

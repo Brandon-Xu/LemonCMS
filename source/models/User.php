@@ -2,9 +2,9 @@
 
 namespace source\models;
 
+use Yii;
 use source\core\base\BaseActiveRecord;
 use source\libs\Constants;
-use Yii;
 use yii\web\IdentityInterface;
 
 /**
@@ -37,29 +37,12 @@ class User extends BaseActiveRecord implements IdentityInterface
      */
     public function rules() {
         return [
-            [
-                [
-                    'username', 'auth_key', 'password_hash', 'email', 'role',
-                ], 'required',
-            ], [
-                [
-                    'username', 'email',
-                ], 'unique',
-            ], [
-                ['password'], 'required', 'on' => [
-                    'login', 'create',
-                ],
-            ], [
-                [
-                    'status', 'created_at', 'updated_at',
-                ], 'integer',
-            ], [
-                'email', 'email',
-            ], [
-                [
-                    'username', 'password_hash', 'password_reset_token', 'email', 'auth_key',
-                ], 'string', 'max' => 255,
-            ],
+            [ [ 'username', 'auth_key', 'password_hash', 'email', 'role', ], 'required' ],
+            [ [ 'username', 'email', ], 'unique' ],
+            [ ['password'], 'required', 'on' => [ 'login', 'create' ] ],
+            [ [ 'status', 'created_at', 'updated_at' ], 'integer' ],
+            [ [ 'email' ], 'email' ],
+            [ [ 'username', 'password_hash', 'password_reset_token', 'email', 'auth_key' ], 'string', 'max' => 255 ],
         ];
     }
 
@@ -83,18 +66,18 @@ class User extends BaseActiveRecord implements IdentityInterface
      */
     public function attributeLabels() {
         return [
-            'id' => 'ID',
-            'username' => '用户名',
-            'password' => '密码',
-            'auth_key' => 'Auth Key',
-            'password_hash' => 'Password Hash',
-            'password_reset_token' => 'Password Reset Token',
-            'email' => 'Email',
-            'status' => '状态',
-            'statusText' => '状态',
-            'created_at' => '创建时间',
-            'updated_at' => '更新时间',
-            'role' => '角色',
+            'id'            => Yii::t('app', 'ID'),
+            'username'      => Yii::t('app', 'Username'),
+            'password'      => Yii::t('app', 'Password'),
+            'auth_key'      => Yii::t('app', 'Auth Key'),
+            'password_hash' => Yii::t('app', 'Password Hash'),
+            'password_reset_token' => Yii::t('app', 'Password Reset Token'),
+            'email'         => Yii::t('app', 'Email'),
+            'status'        => Yii::t('app', 'Status'),
+            'statusText'    => Yii::t('app', 'Status'),
+            'created_at'    => Yii::t('app', 'Created At'),
+            'updated_at'    => Yii::t('app', 'Updated At'),
+            'role'          => Yii::t('app', 'Rule'),
         ];
     }
 

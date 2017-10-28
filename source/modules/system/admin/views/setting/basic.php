@@ -14,8 +14,8 @@ $this->addBreadcrumbs([
 
 $form = ActiveForm::begin([
     'options' => [
-        'class' => 'da-form',
-        'enctype' => 'multipart/form-data'
+        'enctype' => 'multipart/form-data',
+        'style' => 'padding: 10px;',
     ]
 ]); ?>
 <style>
@@ -28,7 +28,7 @@ $form = ActiveForm::begin([
 <?= $form->field($model, 'lang')->dropDownList(['zh-CN' => '中文', 'en-US' => '英文']) ?>
 <?= $form->field($model, 'icp') ?>
 <?= $form->field($model, 'stat')->textarea() ?>
-<?= $form->field($model, 'site_about', ['size' => 'large'])->widget('kucha\ueditor\UEditor',[]);?>
+<?= $form->field($model, 'site_about')->widget('source\assets\UEditor');?>
 <?= $form->field($model, 'status')->radioList(['1' => '正常', '0' => '关闭']) ?>
 
 <?= $form->defaultButtons() ?>

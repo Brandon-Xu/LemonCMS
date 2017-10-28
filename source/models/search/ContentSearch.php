@@ -55,9 +55,10 @@ class ContentSearch extends Content
         $query = Content::find();
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query, //             'pagination' => [
-            //                  'pageSize' => 2,
-            //              ],
+            'query' => $query,
+            'pagination' => [
+                'pageSize' => 10,
+            ],
             'sort' => [
                 'defaultOrder' => [
                     'created_at' => SORT_DESC,

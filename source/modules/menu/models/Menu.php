@@ -2,10 +2,12 @@
 
 namespace source\modules\menu\models;
 
+use Yii;
 use source\core\base\BaseActiveRecord;
 use source\libs\Constants;
 use source\LuLu;
 use yii\helpers\Url;
+use rmrevin\yii\fontawesome\FA;
 
 /**
  * This is the model class for table "lulu_menu".
@@ -14,6 +16,7 @@ use yii\helpers\Url;
  * @property integer $parent_id
  * @property string $category_id
  * @property string $name
+ * @property string $icon
  * @property string $url
  * @property string $target
  * @property string $description
@@ -60,23 +63,25 @@ class Menu extends BaseActiveRecord
             [['parent_id', 'status', 'sort_num'], 'integer'],
             [['name', 'target', 'category_id'], 'string', 'max' => 64],
             [['url', 'description', 'thumb'], 'string', 'max' => 512],
+            [['icon'], 'string', 'max' => 256],
         ];
     }
 
     public function attributeLabels() {
         return [
-            'id' => 'ID',
-            'parent_id' => '父结点',
-            'category_id' => '分类',
-            'name' => '名称',
-            'url' => '链接地址',
-            'target' => '打开方式',
-            'targetText' => '打开方式',
-            'description' => '描述',
-            'thumb' => '图片',
-            'status' => '状态',
-            'statusText' => '状态',
-            'sort_num' => '排序',
+            'id'            => Yii::t('app', 'Id'),
+            'parent_id'     => Yii::t('app', 'Parent'),
+            'category_id'   => Yii::t('app', 'Category'),
+            'name'          => Yii::t('app', 'Name'),
+            'icon'          => Yii::t('app', 'Icon'),
+            'url'           => Yii::t('app', 'Url'),
+            'target'        => Yii::t('app', 'Target'),
+            'targetText'    => Yii::t('app', 'Target'),
+            'description'   => Yii::t('app', 'Description'),
+            'thumb'         => Yii::t('app', 'Thumb'),
+            'status'        => Yii::t('app', 'Status'),
+            'statusText'    => Yii::t('app', 'Status'),
+            'sort_num'      => Yii::t('app', 'Sort Num'),
         ];
     }
 
@@ -233,6 +238,15 @@ class Menu extends BaseActiveRecord
 
     public function getSubMenu(){
         return $this->hasMany(static::className(), ['parent_id'=>'id']);
+    }
+
+    protected $defaultIcon = '<i class="fa fa-circle-o"></i>';
+    public function afterFind() {
+        $re = parent::afterFind();
+        if(empty($this->icon)){
+            $this->icon = $this->defaultIcon;
+        }
+        return $re;
     }
 
 }

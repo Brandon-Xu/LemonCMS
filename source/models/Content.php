@@ -9,6 +9,7 @@ use source\libs\Common;
 use source\libs\Constants;
 use source\LuLu;
 use source\modules\taxonomy\models\Taxonomy;
+use Yii;
 use yii\db\ActiveRecord;
 use yii\db\Query;
 use yii\helpers\Html;
@@ -192,7 +193,12 @@ class Content extends BaseActiveRecord
     public function getBody() {
         if ($this->getBodyClass() !== NULL && is_subclass_of($this->getBodyClass(), ContentBody::className())) {
             $className = $this->getBodyClass();
-            return $this->hasOne($className::className(), ['content_id' => 'id']);
+            $one = $this->hasOne($className::className(), ['content_id' => 'id']);
+            if ($one->primaryModel->isNewRecord){
+                return new $className;
+            }else {
+                return $one;
+            }
         }
         return $this->hasOne(ContentBody::className(), []);
     }
@@ -239,8 +245,14 @@ class Content extends BaseActiveRecord
             [
                 'class' => DefaultValueBehavior::className(),
                 'validates' => [
-                    'focus_count', 'favorite_count', 'view_count', 'comment_count', 'agree_count', 'against_count',
-                ], 'value' => 0,
+                    'focus_count',
+                    'favorite_count',
+                    'view_count',
+                    'comment_count',
+                    'agree_count',
+                    'against_count',
+                ],
+                'value' => 0,
             ],
         ];
     }
@@ -273,46 +285,45 @@ class Content extends BaseActiveRecord
      */
     public function attributeLabels() {
         return [
-            'id' => 'ID',
-            'taxonomy_id' => '分类',
-            'user_id' => '用户ID',
-            'user_name' => '用户名',
-            'userText' => '用户名',
-            'last_user_id' => 'Last User ID',
-            'last_user_name' => 'Last User Name',
-            'created_at' => '添加时间',
-            'updated_at' => '修改时间',
-            'focus_count' => '关注数',
-            'favorite_count' => '收藏数',
-            'view_count' => '浏览数',
-            'comment_count' => '评论数',
-            'agree_count' => '赞成数',
-            'against_count' => '反对数',
-            'recommend' => '推荐',
-            'headline' => '头条',
-            'sticky' => '置顶',
-            'flag' => '标签',
-            'allow_comment' => '允许评论',
-            'password' => '密码',
-            'view' => '视图(view)',
-            'layout' => '布局(layout)',
-            'sort_num' => '排序',
-            'visibility' => '可见',
-            'status' => '状态',
-            'statusText' => '状态',
-            'content_type' => '内容类型',
-            'seo_title' => '标题',
-            'seo_keywords' => '关键字',
-            'seo_description' => '描述',
-            'title' => '标题',
-            'sub_title' => '副标题',
-            'url_alias' => '别名',
-            'redirect_url' => '跳转Url',
-            'summary' => '简介',
-            'thumb' => '缩略图',
-            'thumb2' => '副缩略图',
-            'thumbs' => '缩略图集',
-
+            'id'                => Yii::t('app', 'ID'),
+            'taxonomy_id'       => Yii::t('app', 'Taxonomy'),
+            'user_id'           => Yii::t('app', 'User Id'),
+            'user_name'         => Yii::t('app', 'Username'),
+            'userText'          => Yii::t('app', 'Name'),
+            'last_user_id'      => Yii::t('app', 'Last User Id'),
+            'last_user_name'    => Yii::t('app', 'Last User Name'),
+            'created_at'        => Yii::t('app', 'Created At'),
+            'updated_at'        => Yii::t('app', 'Updated At'),
+            'focus_count'       => Yii::t('app', 'Focus Count'),
+            'favorite_count'    => Yii::t('app', 'Favorite Count'),
+            'view_count'        => Yii::t('app', 'PV'),
+            'comment_count'     => Yii::t('app', 'Comments'),
+            'agree_count'       => Yii::t('app', 'Agree Count'),
+            'against_count'     => Yii::t('app', 'Against Count'),
+            'recommend'         => Yii::t('app', 'Recommend'),
+            'headline'          => Yii::t('app', 'Headline'),
+            'sticky'            => Yii::t('app', 'Sticky'),
+            'flag'              => Yii::t('app', 'Flag'),
+            'allow_comment'     => Yii::t('app', 'Allow Comment'),
+            'password'          => Yii::t('app', 'Password'),
+            'view'              => Yii::t('app', 'View'),
+            'layout'            => Yii::t('app', 'Layout'),
+            'sort_num'          => Yii::t('app', 'Sort Num'),
+            'visibility'        => Yii::t('app', 'Visibility'),
+            'status'            => Yii::t('app', 'Status'),
+            'statusText'        => Yii::t('app', 'Status'),
+            'content_type'      => Yii::t('app', 'Content Type'),
+            'seo_title'         => Yii::t('app', 'SEO Title'),
+            'seo_keywords'      => Yii::t('app', 'SEO Keywords'),
+            'seo_description'   => Yii::t('app', 'SEO Description'),
+            'title'             => Yii::t('app', 'Title'),
+            'sub_title'         => Yii::t('app', 'Sub Title'),
+            'url_alias'         => Yii::t('app', 'Url Alias'),
+            'redirect_url'      => Yii::t('app', 'Redirect Url'),
+            'summary'           => Yii::t('app', 'Summary'),
+            'thumb'             => Yii::t('app', 'Thumb'),
+            'thumb2'            => Yii::t('app', 'Second Thumb'),
+            'thumbs'            => Yii::t('app', 'Thumbs'),
         ];
     }
 

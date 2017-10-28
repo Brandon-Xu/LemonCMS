@@ -10,6 +10,7 @@ $params = array_merge(require(__DIR__.'/params.php'), require(__DIR__.'/params-l
 return [
     'id' => 'home',
     'language' => 'zh-CN',
+    'sourceLanguage' => 'en-US',
     'basePath' => dirname(dirname(__DIR__)),
     'vendorPath' => dirname(dirname(__DIR__)).'/vendor',
     'runtimePath' => dirname(dirname(__DIR__)).'/data/runtime',
@@ -27,6 +28,14 @@ return [
             'cookieValidationKey' => '41SCN-vryMrrUOuOzXXcGo0GP4zBgMhr',
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
+            ],
+        ],
+        'i18n' => [
+            'translations' => [
+                'app*' => [
+                    'class' => 'yii\i18n\DbMessageSource',
+                    'on missingTranslation' => ['source\modules\i18n\components\TranslationEventHandler', 'handleMissingTranslation']
+                ],
             ],
         ],
         'view' => [
@@ -54,15 +63,9 @@ return [
         'assetManager' => [
             'basePath' => '@assets',
             'baseUrl' => '@web/assets',
-            'bundles' => [
-                'yii\web\JqueryAsset' => [
-                    'js' => ['https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js'],
-                ],
-            ],
             //'linkAssets' => true,
         ],
         'urlManager' => [
-            //'class' => 'source\core\base\UrlManager',
             'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => TRUE,
             'showScriptName' => FALSE,

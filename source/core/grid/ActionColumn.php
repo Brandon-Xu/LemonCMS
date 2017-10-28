@@ -2,6 +2,7 @@
 
 namespace source\core\grid;
 
+use rmrevin\yii\fontawesome\FA;
 use source\libs\Resource;
 use source\assets\AdminIconAssets;
 use Yii;
@@ -17,10 +18,10 @@ use yii\helpers\Url;
 class ActionColumn extends \yii\grid\ActionColumn
 {
 
-    public $header = '操作';
+    public $header = 'Actions';
     public $queryParams = [];
 
-    public $width = '30px';
+    public $width = '100px';
 
     public $template = '{update} {delete}';
 
@@ -28,80 +29,60 @@ class ActionColumn extends \yii\grid\ActionColumn
 
     public function init() {
         parent::init();
-        $this->assets = new AdminIconAssets;
-        $this->assets->publish(app()->assetManager);
         if (!isset($this->headerOptions['width'])) {
             $this->headerOptions['width'] = $this->width;
         }
-
+        $this->header = Yii::t('app', $this->header);
         $this->contentOptions = [
-            'class' => 'da-icon-column', 'style' => 'width:'.$this->width.';',
+            'class' => 'icon-column',
+            'style' => "width:{$this->width};",
         ];
+
+        app()->view->registerCss("
+            .icon-column i.fa-eye { color:#0cc6eb; }\n
+            .icon-column i.fa-pencil { color:#efbd18; }\n
+            .icon-column i.fa-key { color:#efbd18; }\n
+            .icon-column i.fa-remove { color:#e33333; }\n
+            .icon-column i.fa-trash-o { color:#e33333; }\n
+            .action-column, \n
+            .icon-column { text-align: center; }\n
+        ", [], 'actionColumnClassCss');
     }
 
-    protected function initDefaultButtons() {
-        if (!isset($this->buttons['view'])) {
-            $this->buttons['view'] = function ($url, $model, $key, $index, $gridView) {
-                return Html::a('<img src="'.$this->assets->baseUrl.'/icons/color/magnifier.png">', $url, [
-                    'title' => Yii::t('yii', 'View'), 'data-pjax' => '0',
-                ]);
+        protected function initDefaultButtons() {
+        $this->initDefaultButton('view', 'eye');
+        $this->initDefaultButton('update', 'pencil');
+        $this->initDefaultButton('delete', 'trash-o', [
+            'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+            'data-method' => 'post',
+        ]);
+    }
+
+    protected function initDefaultButton($name, $iconName, $additionalOptions = []) {
+        if (!isset($this->buttons[$name]) && strpos($this->template, '{' . $name . '}') !== false) {
+            $this->buttons[$name] = function ($url, $model, $key) use ($name, $iconName, $additionalOptions) {
+                switch ($name) {
+                    case 'view':
+                        $title = Yii::t('yii', 'View');
+                        break;
+                    case 'update':
+                        $title = Yii::t('yii', 'Update');
+                        break;
+                    case 'delete':
+                        $title = Yii::t('yii', 'Delete');
+                        break;
+                    default:
+                        $title = ucfirst($name);
+                }
+                $options = array_merge([
+                    'title' => $title,
+                    'aria-label' => $title,
+                    //'data-pjax' => '0',
+                ], $additionalOptions, $this->buttonOptions);
+                $icon = FA::i($iconName);
+                return Html::a($icon, $url, $options);
             };
         }
-        if (!isset($this->buttons['update'])) {
-            $this->buttons['update'] = function ($url, $model, $key, $index, $gridView) {
-                return Html::a('<img src="'.$this->assets->baseUrl.'/icons/color/pencil.png">', $url, [
-                    'title' => Yii::t('yii', 'Update'), 'data-pjax' => '0',
-                ]);
-            };
-        }
-        if (!isset($this->buttons['delete'])) {
-            $this->buttons['delete'] = function ($url, $model, $key, $index, $gridView) {
-                return Html::a('<img src="'.$this->assets->baseUrl.'/icons/color/cross.png">', $url, [
-                    'title' => Yii::t('yii', 'Delete'),
-                    'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                    'data-method' => 'post', 'data-pjax' => '0',
-                ]);
-            };
-        }
     }
 
-    public function createUrl($action, $model, $key, $index) {
-        if ($this->urlCreator instanceof \Closure) {
-            return call_user_func($this->urlCreator, $action, $model, $key, $index, $this);
-        } else {
-            $params = \Yii::$app->request->queryParams;
-            if (is_array($key)) {
-                $params = array_merge($params, $key);
-            } else {
-                $params['id'] = (string)$key;
-            }
-            if (isset($this->queryParams[$action])) {
-                $params = array_merge($params, $this->queryParams[$action]);
-            }
-
-            $params[0] = $this->controller ? $this->controller.'/'.$action : $action;
-
-            return Url::toRoute($params);
-        }
-    }
-
-    /**
-     * @inheritdoc
-     */
-    protected function renderDataCellContent($model, $key, $index) {
-        if ($this->content !== NULL) {
-            return call_user_func($this->content, $model, $key, $index, $this);
-        }
-
-        return preg_replace_callback('/\\{([\w\-\/]+)\\}/', function ($matches) use ($model, $key, $index) {
-            $name = $matches[1];
-            if (isset($this->buttons[$name])) {
-                $url = $this->createUrl($name, $model, $key, $index);
-
-                return call_user_func($this->buttons[$name], $url, $model, $key, $index, $this);
-            } else {
-                return '';
-            }
-        }, $this->template);
-    }
 }

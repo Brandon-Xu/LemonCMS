@@ -47,7 +47,7 @@ trait Theme {
             ],
             'basePath' => "{$theme}",
         ];
-        app()->view->theme = new \yii\base\Theme($config);
+        app()->getView()->theme = new \yii\base\Theme($config);
     }
 
     /**

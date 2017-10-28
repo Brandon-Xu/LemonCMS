@@ -8,46 +8,29 @@ use yii\helpers\Html;
 
 /* @var $this source\core\front\FrontView */
 /* @var $model source\modules\menu\models\Menu */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form ActiveForm */
 
 $category = $model->category_id;
 
-
+$s = $this->menu->getTree($category);
 $taxonomies = Menu::getArrayTree($category);
-
 $options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
 
-?>
+$form = ActiveForm::begin(); ?>
 
-<?php $this->toolbars([
-    Html::a('返回', ['index', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]); ?>
-
-<?php $form = ActiveForm::begin(); ?>
-<div class="da-form-row">
-    <label>父结点</label>
-    <div class="da-form-item small">
-        <?php echo Html::activeHiddenInput($model, 'category_id') ?>
-        <select type="text" id="menu-parent_id" class="form-control" name="Menu[parent_id]">
-            <?php echo $options ?>
-        </select>
+    <div class="col-md-6">
+        <?= $this->menu->dropDownListTree($form, $model, 'category_id', $this->menu->getTree($category, 0, FALSE)); ?>
+        <?= $form->field($model, 'name')->textInput() ?>
+        <?= $form->field($model, 'icon')->fontAwesomeList(); ?>
+        <?= $form->field($model, 'description')->textInput() ?>
+        <?= $form->field($model, 'url')->textInput() ?>
+        <?= $form->field($model, 'target')->radioList(Constants::getTargetItems()) ?>
+        <?= $form->field($model, 'status')->radioList(Constants::getStatusItems()) ?>
     </div>
-</div>
 
-<?= $form->field($model, 'name')->textInput(['maxlength' => 64]) ?>
-<?= $form->field($model, 'description')->textInput(['maxlength' => 512]) ?>
+    <div class="col-md-6">
+        <?= $form->field($model, 'sort_num')->textInput() ?>
+        <?= $form->field($model, 'thumb')->fileInput() ?>
+    </div>
 
-<?= $form->field($model, 'url')->textInput(['maxlength' => 512]) ?>
-
-<?= $form->field($model, 'target')->radioList(Constants::getTargetItems()) ?>
-
-
-
-<?= $form->field($model, 'thumb')->fileInput(['class' => 'da-custom-file']) ?>
-
-<?= $form->field($model, 'sort_num')->textInput() ?>
-
-<?= $form->field($model, 'status')->radioList(Constants::getStatusItems()) ?>
-
-<?= $form->defaultButtons() ?>
-<?php ActiveForm::end(); ?>
+<?php ActiveForm::end();

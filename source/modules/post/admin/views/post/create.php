@@ -4,10 +4,12 @@
 /* @var $this source\core\front\FrontView */
 /* @var $model source\models\Content */
 
-$this->title = '新建文章';
-$this->params['breadcrumbs'][] = ['label' => '文章管理', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<?= $this->render('_form', [
-    'model' => $model, 'bodyModel' => $bodyModel,
-]) ?>
+$this->title = $this->t('Create Post');
+$this->breadcrumbs = [
+    ['Post Manage', ['index']],
+    $this->title
+];
+
+echo $this->render('_form', [
+    'model' => $model
+]);

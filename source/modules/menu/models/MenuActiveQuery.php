@@ -79,7 +79,7 @@ class MenuActiveQuery extends ActiveQuery
      */
     public function select($columns = [], $option = NULL) {
         $normalSelect = [
-            'id','parent_id', 'name', 'url', 'target', 'description', 'thumb'
+            'id','parent_id', 'name', 'icon', 'url', 'target', 'description', 'thumb'
         ];
         $columns = array_merge($normalSelect, $columns);
         parent::select($columns, $option);

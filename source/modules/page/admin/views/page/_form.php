@@ -48,7 +48,7 @@ LuLu::setViewParam(['defaultLayout' => FALSE]);
                 ]) ?>
                 <?= $form->field($model, 'redirect_url', $filedOptions)->textInput(['maxlength' => 256]) ?>
                 -->
-                <?= $form->field($bodyModel,'body', ['size' => 'large'])->widget('kucha\ueditor\UEditor',[]);?>
+                <?= $form->field($bodyModel,'body')->widget('source\assets\UEditor');?>
                 <?= $form->field($model, 'summary', $filedOptions)->textarea(['rows' => 6]) ?>
                 <?= $form->field($model, 'thumb')->fileInput(['class' => 'da-custom-file']) ?>
             </div>
