@@ -4,17 +4,17 @@
  * Date: 2017/9/13
  * Time: 22:53
  */
-namespace source\modules\menu\models;
+namespace source\modules\dict\models;
 
 use source\core\base\BaseTreeActiveQuery;
 
 /**
  * 这个文件我就不解释了 ！
  * Class MenuActiveQuery
- * @package source\modules\menu\models
+ * @package source\modules\dict\models
  * @see \yii\db\ActiveRecord
  */
-class MenuActiveQuery extends BaseTreeActiveQuery
+class DictActiveQuery extends BaseTreeActiveQuery
 {
 
     /**
@@ -24,7 +24,7 @@ class MenuActiveQuery extends BaseTreeActiveQuery
      */
     public function select($columns = [], $option = NULL) {
         $normalSelect = [
-            'id','parent_id', 'name', 'icon', 'url', 'target', 'description', 'thumb'
+            'id','parent_id', 'name', 'description', 'thumb'
         ];
         $columns = array_merge($normalSelect, $columns);
         parent::select($columns, $option);

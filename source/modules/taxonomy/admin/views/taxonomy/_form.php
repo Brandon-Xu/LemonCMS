@@ -1,83 +1,58 @@
 <?php
 
 use source\core\widgets\ActiveForm;
-use source\libs\TreeHelper;
-use source\modules\taxonomy\models\Taxonomy;
 use yii\helpers\Html;
 
 /* @var $this source\core\front\FrontView */
 /* @var $model source\modules\taxonomy\models\Taxonomy */
-/* @var $form yii\widgets\ActiveForm */
+/* @var $form source\core\widgets\ActiveForm */
+$this->toolbar = [
+    Html::a('返回', ['index', 'category' => $category], ['class' => 'btn btn-primary']),
+];
 
+$form = ActiveForm::begin();
 
-$category = $model->category_id;
+$this->beginBlock('template');
+echo $form->field($model, 'list_view')->textInput(['maxlength' => 64]);
+echo $form->field($model, 'list_layout')->textInput(['maxlength' => 64]);
+echo $form->field($model, 'detail_view')->textInput(['maxlength' => 64]);
+echo $form->field($model, 'detail_layout')->textInput(['maxlength' => 64]);
+$this->endBlock();
 
+$this->beginBlock('seo');
+echo $form->field($model, 'seo_title')->textInput(['maxlength' => 256]);
+echo $form->field($model, 'seo_keywords')->textInput(['maxlength' => 256]);
+echo $form->field($model, 'seo_description')->textarea(['maxlength' => 256]);
+$this->endBlock();
 
-$taxonomies = Taxonomy::getArrayTree($category);
-
-$options = TreeHelper::buildTreeOptionsForSelf($taxonomies, $model);
-
-
-?>
-
-<?php $this->toolbars([
-    Html::a('返回', ['index', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save']),
+$tabs = \yii\bootstrap\Tabs::widget([
+    'options' => ['class' => 'pull-right'],
+    'items' => [
+        [
+            'label' => '模板设置',
+            'content' => $this->blocks['template'],
+        ],
+        [
+            'label' => 'SEO设置',
+            'content' => $this->blocks['seo'],
+            'active' => TRUE,
+        ],
+    ],
 ]); ?>
-
-
-<?php $form = ActiveForm::begin(); ?>
-
-<div class="da-ex-tabs">
-    <ul>
-        <li><a href="#tabs-info">基本信息</a></li>
-        <!-- @todo
-        <li><a href="#tabs-seo">模板设置</a></li>
-        <li><a href="#tabs-template">SEO设置</a></li>
-        -->
-    </ul>
-    <div id="tabs-info">
-
-        <div class="da-form-row">
-            <label>父结点</label>
-            <div class="da-form-item small">
-                <?php echo Html::activeHiddenInput($model, 'category_id'); ?>
-                <select id="taxonomy-parent_id" class="form-control" name="Taxonomy[parent_id]">
-                    <?php echo $options ?>
-                </select>
-            </div>
+    <div class="row">
+        <div class="col-md-8">
+            <?php
+            echo $form->field($model, 'parent_id')->dropDownListTree(app()->taxonomy->getTree($model->category_id, 0, FALSE));
+            echo $form->field($model, 'name')->textInput(['maxlength' => 64]);
+            echo $form->field($model, 'url_alias')->textInput(['maxlength' => 64]);
+            echo $form->field($model, 'redirect_url')->textInput(['maxlength' => 128]);
+            echo $form->field($model, 'thumb')->fileInput();
+            echo $form->field($model, 'description')->textarea(['maxlength' => 256]);
+            echo $form->field($model, 'page_size')->textInput();
+            echo $form->field($model, 'sort_num', ['options' => ['style' => 'border-bottom: 0;']])->textInput(); ?>
         </div>
-
-        <?= $form->field($model, 'name')->textInput(['maxlength' => 64]) ?>
-
-        <?= $form->field($model, 'url_alias')->textInput(['maxlength' => 64]) ?>
-
-        <?= $form->field($model, 'redirect_url')->textInput(['maxlength' => 128]) ?>
-
-        <?= $form->field($model, 'thumb')->fileInput(['class' => 'da-custom-file']) ?>
-
-        <?= $form->field($model, 'description')->textarea(['maxlength' => 256]) ?>
-
-        <?= $form->field($model, 'page_size')->textInput() ?>
-
-        <?= $form->field($model, 'sort_num', ['options' => ['class' => 'da-form-row', 'style' => 'border-bottom: 0;']])
-            ->textInput() ?>
+        <div class="col-md-4">
+            <div class="nav-tabs-custom" style="box-shadow: none"><?= $tabs; ?></div>
+        </div>
     </div>
-    <!-- @todo
-    <div id="tabs-seo">
-        <?= $form->field($model, 'list_view')->textInput(['maxlength' => 64]) ?>
-        <?= $form->field($model, 'list_layout')->textInput(['maxlength' => 64]) ?>
-        <?= $form->field($model, 'detail_view')->textInput(['maxlength' => 64]) ?>
-        <?= $form->field($model, 'detail_layout')->textInput(['maxlength' => 64]) ?>
-    </div>
-    <div id="tabs-template">
-        <?= $form->field($model, 'seo_title')->textInput(['maxlength' => 256]) ?>
-        <?= $form->field($model, 'seo_keywords')->textInput(['maxlength' => 256]) ?>
-        <?= $form->field($model, 'seo_description')->textarea(['maxlength' => 256]) ?>
-    </div>
-    -->
-</div>
-
-
-<?= $form->defaultButtons() ?>
-<?php ActiveForm::end(); ?>
-           
+<?php ActiveForm::end();

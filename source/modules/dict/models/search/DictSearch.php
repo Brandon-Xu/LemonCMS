@@ -2,7 +2,6 @@
 
 namespace source\modules\dict\models\search;
 
-use source\LuLu;
 use source\modules\dict\models\Dict;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -66,9 +65,13 @@ class DictSearch extends Dict
         //]);
 
         $query->andFilterWhere(['like', 'category_id', $this->category_id])->andFilterWhere([
-            'like', 'name', $this->name,
+            'like',
+            'name',
+            $this->name,
         ])->andFilterWhere(['like', 'value', $this->value])->andFilterWhere([
-            'like', 'description', $this->description,
+            'like',
+            'description',
+            $this->description,
         ])->andFilterWhere(['like', 'thumb', $this->thumb]);
 
         return $dataProvider;

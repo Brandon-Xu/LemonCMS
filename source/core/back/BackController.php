@@ -16,7 +16,6 @@ class BackController extends BaseController
             return FALSE;
         }
 
-        return parent::beforeAction($action);
         /*
         $module = $action->controller->module->id;
         $moduleInfo = '后台';
@@ -72,7 +71,7 @@ class BackController extends BaseController
 
 
         //检查不需要登录的action uniqueID,如 site/login, site/captcha
-        if (in_array(app()->controller->uniqueId.'/'.$action->id, $this->ignoreLogin()) || $action->id == 'upload') {
+        if (in_array(app()->controller->uniqueId.'/'.$action->id, $this->ignoreLogin())) {
             return parent::beforeAction($action);
         }
 

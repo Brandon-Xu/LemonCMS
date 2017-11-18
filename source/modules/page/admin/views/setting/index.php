@@ -20,6 +20,6 @@ $categories = $this->taxonomy->getTaxonomyCategories();
 <?php $form = ActiveForm::begin(); ?>
 <?= $form->field($model, 'taxonomy')->dropDownList(ArrayHelper::map($categories, 'id', 'name')) ?>
 
-<?= $form->defaultButtons() ?>
+
 <?php ActiveForm::end(); ?>
            

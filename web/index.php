@@ -7,7 +7,7 @@ use source\libs\Common;
 define('__WEB_DIR__', dirname(__DIR__));
 
 defined('YII_DEBUG') or define('YII_DEBUG', TRUE);
-defined('YII_ENV') or define('YII_ENV', 'prod');
+defined('YII_ENV') or define('YII_ENV', 'dev');
 
 require (__WEB_DIR__ . '/vendor/autoload.php');
 require (__WEB_DIR__ . '/vendor/yiisoft/yii2/Yii.php');

@@ -13,7 +13,7 @@ $this->addBreadcrumbs([
 ?>
 
 <?php $form = ActiveForm::begin(); ?>
-<?= $form->defaultButtons() ?>
+
 <?php ActiveForm::end(); ?>
            
                     

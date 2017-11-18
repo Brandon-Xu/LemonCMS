@@ -47,6 +47,6 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
 
-<?= $form->defaultButtons() ?>
+
 
 <?php ActiveForm::end(); ?>

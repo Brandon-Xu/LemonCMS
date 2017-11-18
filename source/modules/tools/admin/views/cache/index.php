@@ -14,5 +14,5 @@ $this->title = '缓存管理';
 <?= $form->field($model, 'cache')->checkbox([], FALSE) ?>
 <?= $form->field($model, 'asset')->checkbox([], FALSE) ?>
 
-<?= $form->defaultButtons() ?>
+
 <?php ActiveForm::end(); ?>

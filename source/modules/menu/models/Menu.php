@@ -24,6 +24,7 @@ use rmrevin\yii\fontawesome\FA;
  * @property integer $status
  * @property integer $sort_num
  *
+ * @property Menu[] $subItem
  * @property Menu[] $subMenu
  */
 class Menu extends BaseActiveRecord
@@ -236,8 +237,12 @@ class Menu extends BaseActiveRecord
 
     /** --------------------- 上面是准备 go die 的代码 --------------------- */
 
-    public function getSubMenu(){
+    public function getSubItem(){
         return $this->hasMany(static::className(), ['parent_id'=>'id']);
+    }
+
+    public function getSubMenu(){
+        return $this->subItem;
     }
 
     protected $defaultIcon = '<i class="fa fa-circle-o"></i>';

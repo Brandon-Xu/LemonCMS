@@ -34,6 +34,7 @@ return [
             'translations' => [
                 'app*' => [
                     'class' => 'yii\i18n\DbMessageSource',
+                    'enableCaching' => TRUE,
                     'on missingTranslation' => ['source\modules\i18n\components\TranslationEventHandler', 'handleMissingTranslation']
                 ],
             ],
@@ -73,6 +74,7 @@ return [
             'rules' => [
                 'article/<id:\d+>/' => 'default/index',
                 'taxonomy/<id:\d+>/' => 'default/index',
+
             ],
         ],
         'mailer' => [

@@ -101,7 +101,7 @@ LuLu::setViewParam(['defaultLayout' => FALSE]);
                 </div>
                 -->
 
-                <?= $form->defaultButtons() ?>
+
             </div>
         </div>
 

@@ -1,7 +1,6 @@
 <?php
 
 use source\core\grid\GridView;
-use source\LuLu;
 use source\modules\dict\models\DictCategory;
 use yii\helpers\Html;
 
@@ -13,37 +12,39 @@ use yii\helpers\Html;
 $category = app()->request->get('category');
 $categoryModel = DictCategory::findOne(['id' => $category]);
 
-$this->title = '字典';
-$this->params['breadcrumbs'][] = $this->title;
-?>
+$this->title = $this->t('Dictionary: {name}', NULL, ['name'=> $categoryModel->name]);
 
-<?php $this->toolbars([
-    Html::a('返回', ['/dict/dict-category'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-    Html::a('新建', ['create', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]); ?>
+$this->breadcrumbs = [
+    [$this->t('Dictionary Manage'), ['dict-category/index']],
+    $categoryModel->name
+];
 
+$this->toolbar = [
+    Html::a(Yii::t('app', 'Back'), ['/dict/dict-category'], ['class' => 'btn btn-warning']),
+    Html::a(Yii::t('app', 'Create'), ['create', 'category' => $category], ['class' => 'btn btn-primary']),
+];
 
-<?= GridView::widget([
+echo GridView::widget([
     'dataProvider' => $dataProvider,
-
     'columns' => [
+        [ 'class' => 'source\core\grid\IdColumn' ],
         [
-            'class' => 'source\core\grid\IdColumn',
-        ], [
-            'attribute' => 'name', 'width' => '250px',
-        ], [
-            'attribute' => 'value', 'format' => 'ntext', 'width' => 'auto',
+            'attribute' => 'name',
+            'width' => '250px',
+        ],
+        [
+            'attribute' => 'value',
+            'format' => 'ntext',
+            'width' => 'auto',
         ],
 
         // 'description',
         // 'thumb',
+        [ 'class' => 'source\core\grid\SortColumn' ],
+        [ 'class' => 'source\core\grid\StatusColumn' ],
         [
-            'class' => 'source\core\grid\SortColumn',
-        ], [
-            'class' => 'source\core\grid\StatusColumn',
-        ], [
-            'class' => 'source\core\grid\ActionColumn', 'queryParams' => ['view' => ['category' => $category]],
+            'class' => 'source\core\grid\ActionColumn',
+            'queryParams' => ['view' => ['category' => $category]],
         ],
-
     ],
-]); ?>
+]);

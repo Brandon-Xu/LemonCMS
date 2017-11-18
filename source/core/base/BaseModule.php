@@ -4,6 +4,8 @@ namespace source\core\base;
 
 use source\traits\Common;
 use source\traits\Theme;
+use yii\base\Application;
+use yii\base\BootstrapInterface;
 use yii\base\Module;
 
 class BaseModule extends Module

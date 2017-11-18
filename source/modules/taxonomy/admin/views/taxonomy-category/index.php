@@ -8,20 +8,17 @@ use yii\helpers\Url;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '分类管理';
-$this->addBreadcrumbs([
+$this->breadcrumbs = [
     $this->title,
-]);
+];
 
+$this->toolbar = [
+    Html::a(Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-primary']),
+];
 
-?>
-<?php $this->toolbars([
-    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]); ?>
-
-
-<?= GridView::widget([
+echo GridView::widget([
     'dataProvider' => $dataProvider, //'filterModel' => $searchModel,
-    'layout' => "{items}\n{pager}", 'columns' => [
+    'columns' => [
         [
             'class' => 'source\core\grid\TextIdColumn',
         ], [
@@ -47,6 +44,4 @@ $this->addBreadcrumbs([
             ],
         ],
     ],
-]); ?>
-
-
+]);

@@ -1,7 +1,6 @@
 <?php
 
 use source\core\grid\GridView;
-use source\core\lib\Common;
 use source\libs\Constants;
 use source\modules\taxonomy\models\TaxonomyCategory;
 use yii\helpers\Html;
@@ -15,28 +14,22 @@ $category = app()->request->get('category');
 $categoryModel = TaxonomyCategory::findOne(['id' => $category]);
 
 $this->title = $categoryModel['name'];
-$this->addBreadcrumbs([
+$this->breadcrumbs = [
     ['分类管理', ['taxonomy']],
     $categoryModel['name'],
-]);
+];
 
-?>
-<?php $this->toolbars([
-    Html::a('返回', ['taxonomy-category/index'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-    Html::a('新建', ['create', 'category' => $category], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]); ?>
-
+$this->toolbar = [
+    Html::a('返回', ['taxonomy-category/index'], ['class' => 'btn btn-warning']),
+    Html::a('新建', ['create', 'category' => $category], ['class' => 'btn btn-primary']),
+];
 
 
-<?= GridView::widget([
+echo GridView::widget([
     'dataProvider' => $dataProvider, //'filterModel' => $searchModel,
-    'layout' => "{items}\n{pager}",
     'columns' => [
+        [ 'class' => 'source\core\grid\IdColumn' ],
         [
-            'class' => 'source\core\grid\IdColumn',
-        ],
-        [
-
             'attribute' => 'name',
             'format' => 'raw',
             'width' => 'auto',
@@ -47,10 +40,8 @@ $this->addBreadcrumbs([
                     ]);
             },
         ],
-
         // 'description',
         // 'contents',
-
         [
             'label' => '点击快速添至导航',
             'format' => 'raw',
@@ -64,9 +55,7 @@ $this->addBreadcrumbs([
             },
             'width' => '120px',
         ],
-        [
-            'class' => 'source\core\grid\SortColumn',
-        ],
+        [ 'class' => 'source\core\grid\SortColumn' ],
         [
             'class' => 'source\core\grid\ActionColumn',
             'queryParams' => ['view' => ['category' => $category]],

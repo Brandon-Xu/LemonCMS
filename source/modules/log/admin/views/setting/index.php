@@ -12,5 +12,5 @@ use yii\helpers\ArrayHelper;
 
 <?= $form->field($model, 'taxonomy')->dropDownList(ArrayHelper::map($categories, 'id', 'name')) ?>
 
-<?= $form->defaultButtons() ?>
+
 <?php ActiveForm::end(); ?>

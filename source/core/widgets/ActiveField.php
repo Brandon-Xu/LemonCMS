@@ -3,6 +3,7 @@
 namespace source\core\widgets;
 
 use kartik\select2\Select2;
+use yii\base\Model;
 use yii\web\JsExpression;
 use yii\web\View;
 
@@ -42,6 +43,43 @@ class ActiveField extends \yii\bootstrap\ActiveField implements IBaseWidget
             ],
         ]);
         return $this;
+    }
+
+    /**
+     * 递归返回树状下拉菜单选项
+     * @param Model[] $itemModels
+     * @param array $option
+     * @return string
+     */
+    public function dropDownListTree($itemModels, $option = []){
+        $items = [];
+        /**
+         * 递归函数
+         * Recursively Function
+         * @param Model $item
+         * @param string $tab
+         */
+        $recursively = function(Model $item, $tab = '') use (&$items, &$recursively){
+            $preStr = empty($tab) ? '' : "$tab|---";
+            $items[$item->id] = $preStr.$item->name;
+            $tab .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+            if (!empty($item->subItem)){
+                foreach ($item->subItem as $subMenu){ $recursively($subMenu, $tab); }
+            }
+        };
+
+        foreach ($itemModels as $key => $item){
+            $recursively($item);
+        }
+
+        $defaultOption = [
+            'encode' => FALSE,
+        ];
+
+        $option = array_merge($defaultOption, $option);
+        $option['options'][$this->model->id]['disabled'] = TRUE;
+
+        return $this->dropDownList($items, $option);
     }
 
     public function fontAwesomeList(){

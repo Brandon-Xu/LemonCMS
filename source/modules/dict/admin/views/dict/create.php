@@ -1,13 +1,15 @@
 <?php
 
-
 /* @var $this source\core\front\FrontView */
-/* @var $model source\models\Dict */
+/* @var $model \source\modules\dict\models\Dict */
 
-$this->title = '新建字典';
-$this->params['breadcrumbs'][] = ['label' => 'Dicts', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<?= $this->render('_form', [
+$this->title = $this->t('Create Dictionary');
+
+$this->breadcrumbs = [
+    [$this->t('Dictionary Manage'), ['index']],
+    $this->title
+];
+
+echo $this->render('_form', [
     'model' => $model,
-]) ?>
+]);

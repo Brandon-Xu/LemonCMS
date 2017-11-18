@@ -33,6 +33,6 @@ use yii\helpers\Html;
 
 <?= $form->field($model, 'sort_num')->textInput() ?>
 
-<?= $form->defaultButtons() ?>
+
 
 <?php ActiveForm::end(); ?>

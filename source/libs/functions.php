@@ -9,15 +9,9 @@ function app() {
     return \Yii::$app;
 }
 
-function dd() {
-    $args = func_get_args();
-    if(count($args) > 0){
-        if(count($args) == 1) $args = $args[0];
-        \yii\helpers\VarDumper::dump($args, 999, TRUE);
-        if ($args[count($args)-1] === FALSE) {
-            app()->end();
-        }
-    }
+function dd(...$args){
+    \yii\helpers\VarDumper::dump($args, 999, TRUE);
+    die(1);
 }
 
 class diffTime{

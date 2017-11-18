@@ -73,6 +73,20 @@ class WebUploader extends InputWidget
 
         $config = Json::encode($config);
         $this->getView()->registerJs("var {$this->id} = WebUploader.create($config);", View::POS_READY);
+
+        $inputName = Html::getInputName($this->model, $this->attribute);
+        $callbackJs = <<<EOF
+        {$this->id}.on('uploadSuccess', function(file, response){
+            if( response.code === 200 ){
+                $('input[name="{$inputName}"]').val(response.data.basePath);
+                var img = $('#box_{$this->id}').find('.file-box > .item').find('img');
+                $(img).attr('src', response.data.absUrl);
+                console.log($(this), $(img));
+            }
+        });
+EOF;
+
+        $this->getView()->registerJs($callbackJs, View::POS_READY);
     }
 
     /**
@@ -92,8 +106,7 @@ class WebUploader extends InputWidget
         $this->view->registerCss('
         .file-box { width: 100%; float: left;margin-bottom: 5px; }
         .file-box .item { float:left; width: 30%; padding-right: 3.3333333% }
-        .file-box img { display: block; width: 100%; }
-        ');
+        .file-box img { display: block; width: 100%; }');
 
         $file = $this->renderItem();
         return Html::tag('div', $file, ['class'=>'file-box']);
@@ -104,7 +117,7 @@ class WebUploader extends InputWidget
     }
 
     public function renderItem(){
-        $file = '';
+        $file = Html::img(Url::to(app()->files->emptyImage()), ['class'=>'img-thumbnail']);
         $value = $this->model->{$this->attribute};
         if(!empty($value)){
             $file = Html::img(Url::to(['/'.$value]), ['class'=>'img-thumbnail']);

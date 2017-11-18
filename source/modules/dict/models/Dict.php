@@ -2,6 +2,7 @@
 
 namespace source\modules\dict\models;
 
+use source\core\base\BaseActiveRecord;
 use source\libs\Constants;
 use source\libs\TreeHelper;
 use yii\helpers\ArrayHelper;
@@ -18,8 +19,12 @@ use yii\helpers\ArrayHelper;
  * @property string $thumb
  * @property integer $status
  * @property integer $sort_num
+ *
+ * @property Dict[] $subItem
+ * @property Dict[] $subDict
+ * @property DictCategory $category
  */
-class Dict extends \source\core\base\BaseActiveRecord
+class Dict extends BaseActiveRecord
 {
     /**
      * @inheritdoc
@@ -58,8 +63,9 @@ class Dict extends \source\core\base\BaseActiveRecord
         return Constants::getStatusItems($this->status);
     }
 
-    public function getTargetText() {
-        return Constants::getTargetItems($this->target);
+
+    public static function find() {
+        return new DictActiveQuery(get_called_class());
     }
 
     private $_level;
@@ -129,5 +135,23 @@ class Dict extends \source\core\base\BaseActiveRecord
         self::deleteAll(['id' => $childrenIds]);
 
         return TRUE;
+    }
+
+
+
+
+
+
+    /* -------------  go die ------------ */
+    public function getSubItem(){
+        return $this->hasMany(static::className(), ['parent_id'=>'id']);
+    }
+
+    public function getSubDict(){
+        return $this->subItem;
+    }
+
+    public function getCategory(){
+        return $this->hasOne(DictCategory::className(), ['id'=>'category_id']);
     }
 }

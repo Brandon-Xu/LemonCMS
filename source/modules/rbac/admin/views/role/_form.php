@@ -21,6 +21,6 @@ use source\modules\rbac\models\Role;
 
 <?= $form->field($model, 'description')->textarea() ?>
 
-<?= $form->defaultButtons() ?>
+
 
 <?php ActiveForm::end(); ?>

@@ -49,7 +49,7 @@ EOF;
         foreach ($this->toolbar as $item){
             $content .= $item;
         }
-        return Html::tag('div', $content);
+        return Html::tag('div', $content, ['class'=>'btn-group']);
     }
 
 

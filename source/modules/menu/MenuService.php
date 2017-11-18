@@ -28,7 +28,7 @@ class MenuService extends ModuleService
      * @param null $categoryId
      * @param int $parentId
      * @param bool $asArray
-     * @return Menu[]
+     * @return Menu|Model[]
      */
     public function getTree($categoryId = NULL, $parentId = 0, $asArray = TRUE){
         $query = Menu::find();
@@ -39,7 +39,7 @@ class MenuService extends ModuleService
     /**
      * 递归返回树状下拉菜单选项
      * @param ActiveForm $form
-     * @param Model $model
+     * @param Menu $model
      * @param string $attribute
      * @param Menu[] $menus
      * @return string
@@ -56,12 +56,23 @@ class MenuService extends ModuleService
             $preStr = empty($tab) ? '' : "$tab|---";
             $items[$menu->id] = $preStr.$menu->name;
             $tab .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-            if (!empty($menu->subMenu)){
-                foreach ($menu->subMenu as $subMenu){ $rec($subMenu, $tab); }
+            if (!empty($menu->subItem)){
+                foreach ($menu->subItem as $subMenu){ $rec($subMenu, $tab); }
             }
         };
-        foreach ($menus as $key => $menu){ $rec($menu); }
-        return $form->field($model, $attribute)->dropDownList($items, ['encode'=>FALSE]);
+
+        foreach ($menus as $key => $menu){
+            $rec($menu);
+        }
+
+        return $form->field($model, $attribute)->dropDownList($items, [
+            'encode'=>FALSE,
+            'options' => [
+                $model->id => [
+                    'disabled' => TRUE
+                ]
+            ]
+        ]);
     }
 
 }

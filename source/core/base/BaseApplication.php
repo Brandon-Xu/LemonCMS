@@ -20,12 +20,14 @@ class BaseApplication extends Application
     }
 
     public function handleRequest($request) {
-        /*
-        * copy 自 createController 方法中的代码，根据 url 获取其中的 module 模块名
-        * 然后尝试引入模块，如果模块存在并成功引入，则会自动执行模块中的 init() 方法
-        * 以达到在模块文件中通过 init 方法另行设置各类不得不在请求被 handle 之前设置的模块参数
-        * 例如 urlManager 里的 Rules 的目的，而不需要在配置文件里就写完所有 url 规则
-        */
+        /**
+         * copy 自 createController 方法中的代码，根据 url 获取其中的 module 模块名
+         * 然后尝试引入模块，如果模块存在并成功引入，则会自动执行模块中的 init() 方法
+         * 以达到在模块文件中通过 init 方法另行设置各类不得不在请求被 handle 之前设置的模块参数
+         * 例如 urlManager 里的 Rules 的目的，而不需要在配置文件里就写完所有 url 规则
+         * @param $route
+         * @return null|\yii\base\Module
+         */
         $loadModuleAndRunInit = function ($route) {
             $id = $route;
             if (strpos($route, '/') !== FALSE) {
@@ -37,8 +39,11 @@ class BaseApplication extends Application
             if (strpos($route, '/') !== FALSE) {
                 list ($id, $route) = explode('/', $route, 2);
                 // 获取子模块名并加载
-                if($id){ $this->modularity->loadModule($id); }
-            }else{
+                if (!empty($id)) {
+                    $this->modularity->loadModule($id);
+                    $topModule->getModule($id);
+                }
+            } else {
                 $this->modularity->loadModule($route);
             }
             return $topModule;
@@ -48,6 +53,7 @@ class BaseApplication extends Application
         // 加载模块化数据库中被标为系统模块的模块 modularity 表中 is_system = 1 的
         $this->modularity->loadSystemModule();
         Common::init();
+
         return parent::handleRequest($request);
     }
 

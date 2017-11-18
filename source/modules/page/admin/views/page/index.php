@@ -7,29 +7,27 @@ use yii\helpers\Html;
 /* @var $this source\core\front\FrontView */
 /* @var $searchModel source\models\search\ContentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-$type = 'post';
-$this->title = '单面管理';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = $this->t('Page Manage');
+$this->breadcrumbs = [
+    $this->title
+];
 
-
-?>
-<?php $this->toolbars([
-    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
+$this->toolbar = [
+    Html::a(Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-primary']),
     //Html::a('设置', ['setting/index'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]); ?>
-
-<?= GridView::widget([
+];
+echo GridView::widget([
     'dataProvider' => $dataProvider, //'filterModel' => $searchModel,
-    'layout' => "{items}\n{pager}", 'columns' => [
+    'columns' => [
 
+        ['class' => 'source\core\grid\IdColumn'],
         [
-            'class' => 'source\core\grid\IdColumn',
+            'attribute' => 'title',
+            'headerOptions' => ['width' => 'auto'],
         ],
-
         [
-            'attribute' => 'title', 'headerOptions' => ['width' => 'auto'],
-        ], [
-            'class' => 'source\core\grid\DateTimeColumn', 'attribute' => 'updated_at',
+            'class' => 'source\core\grid\DateTimeColumn',
+            'attribute' => 'updated_at',
         ],
         [
             'label' => '点击快速添至导航',
@@ -48,7 +46,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'comment_count',
         'view_count',
         [
-            'attribute' => 'status', 'width' => '25px', 'content' => function ($model, $key, $index, $gridView) {
+            'attribute' => 'status',
+            'width' => '25px',
+            'content' => function ($model, $key, $index, $gridView) {
                 return Constants::getStatusItemsForContent($model->status);
             },
         ],
@@ -68,5 +68,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ['class' => 'source\core\grid\ActionColumn'],
     ],
-]); ?>
-
+]);

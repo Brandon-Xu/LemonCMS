@@ -138,37 +138,6 @@ class Content extends BaseActiveRecord
     }
 
     /**
-     * @param array $data
-     * @param null $formName
-     * @return bool
-     */
-    public function load($data, $formName = NULL) {
-        $t = $this->thumb;
-        $data = parent::load($data, $formName);
-        if(empty($this->thumb)){
-            $this->thumb = $t;
-        }
-        return $data;
-    }
-
-    /**
-     * @param bool $insert
-     * @return bool
-     */
-    public function beforeSave($insert) {
-        $uploadedFile = Common::uploadFile('Content[thumb]');
-        if ($uploadedFile['message'] === 'ok') {
-            $this->thumb = $uploadedFile['full_name'];
-        }
-        $uploadedFile = Common::uploadFile('Content[thumb2]');
-        if ($uploadedFile['message'] === 'ok') {
-            $this->thumb2 = $uploadedFile['full_name'];
-        }
-
-        return parent::beforeSave($insert);
-    }
-
-    /**
      * @return \yii\db\ActiveQuery
      */
     public function getTaxonomy() {

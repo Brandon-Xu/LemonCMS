@@ -130,7 +130,7 @@ class Modularity extends BaseActiveRecord
     }
 
     /**
-     * 用 yii 的模块系统注册 module
+     * 用 yii 的模块系统注册模块的业务逻辑类 XxxService
      */
     public function registerService(){
         $moduleNamespace = app()->modularity->moduleRootNamespace;
@@ -194,7 +194,7 @@ class Modularity extends BaseActiveRecord
         $this->_moduleClass = (app()->modularity->isAdmin === TRUE) ? $this->_adminModuleClass : $this->_homeModuleClass;
         if($this->_moduleClass === FALSE) return FALSE;
 
-        // 加载到 yii 的模块管理中
+        // 用于加载到 yii 的模块管理中
         return $module = [
             'class' => $this->_moduleClass,
         ];

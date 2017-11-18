@@ -1,13 +1,16 @@
 <?php
 
 /* @var $this source\core\front\FrontView */
-/* @var $model source\models\Dict */
+/* @var $model \source\modules\dict\models\Dict */
 
-$this->title = '修改字典: '.' '.$model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Dicts', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
-?>
-<?= $this->render('_form', [
+$this->title = $this->t('Update Dictionary: {name}', NULL, ['name'=>$model->name]);
+
+$this->breadcrumbs = [
+    [$this->t('Dictionary Manage'), ['dict-category/']],
+    [$model->category->name, ['index', 'category'=>$model->category->id]],
+    $model->name
+];
+
+echo $this->render('_form', [
     'model' => $model,
-]) ?>
+]);

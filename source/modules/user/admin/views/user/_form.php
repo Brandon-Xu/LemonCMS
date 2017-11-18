@@ -23,6 +23,6 @@ use yii\helpers\ArrayHelper;
 
 <?= $form->field($model, 'status')->radioList(Constants::getStatusItems()) ?>
 
-<?= $form->defaultButtons() ?>
+
 
 <?php ActiveForm::end(); ?>

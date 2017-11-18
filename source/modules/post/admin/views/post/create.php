@@ -6,7 +6,7 @@
 
 $this->title = $this->t('Create Post');
 $this->breadcrumbs = [
-    ['Post Manage', ['index']],
+    [$this->t('Post Manage'), ['index']],
     $this->title
 ];
 

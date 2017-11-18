@@ -18,6 +18,6 @@ $this->addBreadcrumbs([
 <?= $form->field($model, 'seo_keywords') ?>
 <?= $form->field($model, 'seo_description')->textarea() ?>
 <?= $form->field($model, 'seo_head')->textarea() ?>
-<?= $form->defaultButtons() ?>
+
 <?php ActiveForm::end(); ?>
            

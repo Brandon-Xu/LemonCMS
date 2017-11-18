@@ -29,4 +29,10 @@ class FilesService extends ModuleService
             'options' => $options
         ]);
     }
+
+    public function emptyImage(){
+        $assetsFolder = \Yii::getAlias('@app/source/modules/files/assets');
+        list( $basePath, $baseUrl) = app()->assetManager->publish($assetsFolder);
+        return $baseUrl.'/default.png';
+    }
 }

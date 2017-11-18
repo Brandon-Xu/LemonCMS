@@ -12,16 +12,9 @@ $this->addBreadcrumbs([
     $this->title,
 ]);
 
-$form = ActiveForm::begin([
-    'options' => [
-        'enctype' => 'multipart/form-data',
-        'style' => 'padding: 10px;',
-    ]
-]); ?>
-<style>
-    .hint-block > img { padding: 15px 15px 0 15px; }
-</style>
-<?= $form->field($model, 'site_logo')->hint(\yii\helpers\Html::img('/'.$model->site_logo, ['width'=>'100']))->fileInput() ?>
+$form = ActiveForm::begin(); ?>
+
+<?= $form->field($model, 'site_logo')->fileInput() ?>
 <?= $form->field($model, 'site_name') ?>
 <?= $form->field($model, 'site_description') ?>
 <?= $form->field($model, 'site_email') ?>
@@ -31,5 +24,4 @@ $form = ActiveForm::begin([
 <?= $form->field($model, 'site_about')->widget('source\assets\UEditor');?>
 <?= $form->field($model, 'status')->radioList(['1' => '正常', '0' => '关闭']) ?>
 
-<?= $form->defaultButtons() ?>
 <?php ActiveForm::end(); ?>

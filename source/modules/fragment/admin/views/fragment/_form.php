@@ -26,7 +26,7 @@ $type = app()->request->get('type');
 
 <?= $form->field($model, 'description')->textarea(['maxlength' => 256]) ?>
 
-<?php $form->defaultButtons() ?>
+
 
 <?php ActiveForm::end(); ?>
 

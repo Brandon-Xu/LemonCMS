@@ -82,5 +82,5 @@ $options = TreeHelper::buildTreeOptions($taxonomies);
 
             <?= $form->field($model, 'against_count')->textInput() ?>
 
-            <?= $form->defaultButtons() ?>
+
             <?php ActiveForm::end(); ?>

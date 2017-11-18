@@ -4,7 +4,7 @@ use source\core\widgets\ActiveForm;
 use source\modules\fragment\models\Fragment;
 use yii\helpers\Html;
 
-/* @var $this source\core\back\BackView */
+/* @var $this \source\core\front\FrontView */
 /* @var $model source\modules\fragment\models\FragmentCategory */
 /* @var $form source\core\widgets\ActiveForm */
 ?>
@@ -25,7 +25,7 @@ use yii\helpers\Html;
 <?php endif; ?>
 
 
-<?php $form->defaultButtons() ?>
+
 
 <?php ActiveForm::end(); ?>
 

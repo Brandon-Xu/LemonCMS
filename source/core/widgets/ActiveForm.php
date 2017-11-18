@@ -10,27 +10,26 @@ class ActiveForm extends \yii\bootstrap\ActiveForm
 
     public $buttons = [];
 
-    public $options = [
-        'role' => 'form',
-        'class' => 'row',
-    ];
-
     public $fieldClass = 'source\core\widgets\ActiveField';
 
     public function init() {
+        $this->options['role'] = isset($this->options['role']) ? $this->options['role'] : 'form';
+        $this->options['class'] = isset($this->options['class']) ? $this->options['class'] . ' box' : 'box';
+
+
         /** @var FrontView $view */
         $view = $this->getView();
         $title = $view->title;
 
+        parent::init();
         echo <<<EOF
-        <div class="box">
         <div class="box-header">
             <h3 class="box-title">$title</h3>
         </div>
         <div class="box-body">
-            <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
 EOF;
-        parent::init();
     }
 
     public function run() {
@@ -42,15 +41,15 @@ EOF;
         }
         $button = $this->renderButtons();
 
-        parent::run();
         echo <<<EOF
+                </div>
             </div>
         </div>
         <div class="box-footer clearfix">
             $button
         </div>
-    </div>
 EOF;
+        parent::run();
     }
 
     /**

@@ -25,7 +25,7 @@ use yii\helpers\Html;
 
 <?= $form->field($model, 'message')->textarea(['rows' => 6]) ?>
 
-<?php $form->defaultButtons() ?>
+
 
 <?php ActiveForm::end(); ?>
 

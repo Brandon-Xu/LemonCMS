@@ -20,5 +20,5 @@ use yii\helpers\Html;
 
 <?= $form->field($model, 'description')->textarea(['maxlength' => 512]) ?>
 
-<?= $form->defaultButtons() ?>
+
 <?php ActiveForm::end(); ?>

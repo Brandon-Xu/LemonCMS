@@ -32,7 +32,7 @@ use yii\helpers\Html;
 
     <?= $form->field($model, 'status')->radioList(Constants::getStatusItems()) ?>
 
-    <?php $form->defaultButtons() ?>
+
 
     <?php ActiveForm::end(); ?>
 

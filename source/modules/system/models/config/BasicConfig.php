@@ -52,15 +52,4 @@ class BasicConfig extends ConfigForm
         ];
     }
 
-    public function load($data, $formName = NULL) {
-        $oldValue = $this->site_logo;
-        $res = parent::load($data, $formName);
-        $logo = Common::uploadFile('BasicConfig[site_logo]');
-        if(isset($logo['message']) && $logo['message'] == '没有文件'){
-            $this->site_logo = $oldValue;
-        }else{
-            $this->site_logo = $logo['full_name'];
-        }
-        return $res;
-    }
 }
