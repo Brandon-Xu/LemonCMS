@@ -27,7 +27,7 @@ class TreeGridView extends GridView
         $keys = $this->dataProvider->getKeys();
         $rows = [];
 
-        $this->renderTableRowByModel($models, $keys, $rows);
+        $this->renderTableRowByModel($models, $keys, $rows, 0);
 
         if (empty($rows) && $this->emptyText !== false) {
             $colspan = count($this->columns);
@@ -81,8 +81,8 @@ class TreeGridView extends GridView
                     return $model->primaryKey;
                 });
 
-                $tabNum += $this->tabStep;
-                $this->renderTableRowByModel($subItem, $subItemKeys, $rows, $tabNum);
+                $_tab_num = $tabNum + $this->tabStep;
+                $this->renderTableRowByModel($subItem, $subItemKeys, $rows, $_tab_num);
             }
         }
     }

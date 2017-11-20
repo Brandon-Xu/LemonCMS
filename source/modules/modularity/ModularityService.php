@@ -30,7 +30,7 @@ class ModularityService extends ModuleService implements BootstrapInterface
     /**
      * 不解释
      */
-    public function beforeRequest(){
+    public function beforeRequest() {
         // 注册自己
         app()->set('modularityService', ['class' => static::className()]);
         app()->modularity->loadSystemModule();
@@ -45,18 +45,18 @@ class ModularityService extends ModuleService implements BootstrapInterface
      * @param Module $parentModule
      * @return mixed
      */
-    protected function moduleRegisterByRoute($route, $parentModule){
+    protected function moduleRegisterByRoute($route, $parentModule) {
         if ($route === '') {
             $route = $parentModule->defaultRoute;
         }
 
         // double slashes or leading/ending slashes may cause substr problem
         $route = trim($route, '/');
-        if (strpos($route, '//') !== false) {
-            return false;
+        if (strpos($route, '//') !== FALSE) {
+            return FALSE;
         }
 
-        if (strpos($route, '/') !== false) {
+        if (strpos($route, '/') !== FALSE) {
             list($id, $route) = explode('/', $route, 2);
         } else {
             $id = $route;
@@ -67,13 +67,13 @@ class ModularityService extends ModuleService implements BootstrapInterface
             return TRUE;
         }
 
-        if($parentModule->hasModule($id)) {
+        if ($parentModule->hasModule($id)) {
             return TRUE;
         }
 
-        if ($id === $this->backendRoute){
+        if ($id === $this->backendRoute) {
             $parentModule->setModule($this->backendRoute, [
-                'class' => $this->backendClass
+                'class' => $this->backendClass,
             ]);
             app()->modularity->isAdmin = TRUE;
             $this->moduleRegisterByRoute($route, $parentModule->getModule($id));
@@ -81,9 +81,10 @@ class ModularityService extends ModuleService implements BootstrapInterface
 
 
         $modularityModel = Modularity::findOne(['id' => $id]);
-        if($modularityModel){
+        if ($modularityModel) {
             $parentModule->setModule($id, $modularityModel->build());
         }
+
         //$this->loadModule($id);
         return TRUE;
     }
@@ -119,6 +120,7 @@ class ModularityService extends ModuleService implements BootstrapInterface
             $value = self::HOME;
         }
         $this->_isAdmin = $value;
+
         return TRUE;
     }
 
@@ -162,6 +164,17 @@ class ModularityService extends ModuleService implements BootstrapInterface
     }
 
     /**
+     * 在本类中注册模块
+     * @param Modularity $module
+     */
+    public final function addModule(Modularity $module) {
+        $moduleArray = $module->build();
+        if (!isset($this->_modules[$module->id]) && is_array($moduleArray)) {
+            $this->_modules[$module->id] = $moduleArray;
+        }
+    }
+
+    /**
      * @param bool $onlyKeys
      * @return Modularity[]
      */
@@ -185,7 +198,7 @@ class ModularityService extends ModuleService implements BootstrapInterface
         return in_array($moduleId, $this->getAllModules(TRUE)) ? TRUE : FALSE;
     }
 
-    public function loadModule($id){
+    public function loadModule($id) {
         return $this->loadModules([$id]);
     }
 
@@ -195,10 +208,11 @@ class ModularityService extends ModuleService implements BootstrapInterface
      */
     public function loadModules($ids = []) {
         $modulesList = Modularity::find()->indexBy('id');
-        if (!empty($ids)){
-            $modulesList->where(['id'=>$ids]);
+        if (!empty($ids)) {
+            $modulesList->where(['id' => $ids]);
         }
         $modulesList->all();
+
         return TRUE;
     }
 
@@ -209,8 +223,9 @@ class ModularityService extends ModuleService implements BootstrapInterface
         return $this->loadModules();
     }
 
-    public function loadSystemModule(){
-        Modularity::find()->where(['is_system'=>1])->indexBy('id')->all();
+    public function loadSystemModule() {
+        Modularity::find()->where(['is_system' => 1])->indexBy('id')->all();
+
         return TRUE;
     }
 

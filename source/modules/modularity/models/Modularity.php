@@ -62,6 +62,7 @@ class Modularity extends BaseActiveRecord
     public function afterFind() {
         parent::afterFind();
         $this->registerService();
+        app()->modularity->addModule($this);
     }
 
     /**
