@@ -3,7 +3,7 @@
 namespace source\modules\admin\controllers;
 
 use Yii;
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\models\ConfigForm;
 use yii\base\InvalidParamException;
 

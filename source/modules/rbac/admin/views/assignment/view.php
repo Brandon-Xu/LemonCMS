@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model app\modules\rbac\models\Relation */
 
 $this->title = $model->role;

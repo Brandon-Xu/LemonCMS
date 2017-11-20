@@ -1,7 +1,7 @@
 <?php
 
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\fragment\models\Fragment */
 
 $this->title = '新建碎片';

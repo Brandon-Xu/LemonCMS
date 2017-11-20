@@ -4,7 +4,7 @@ use source\core\grid\GridView;
 use source\libs\Constants;
 use yii\helpers\Html;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $searchModel source\models\search\ContentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 $type = 'post';

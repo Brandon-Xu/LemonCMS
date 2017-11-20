@@ -2,7 +2,7 @@
 
 namespace source\modules\log\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\modules\log\models\Log;
 use source\modules\log\models\search\LogSearch;
 use Yii;

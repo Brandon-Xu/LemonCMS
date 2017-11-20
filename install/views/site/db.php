@@ -3,7 +3,7 @@
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 
 $this->title = '填写数据库信息';
 ?>

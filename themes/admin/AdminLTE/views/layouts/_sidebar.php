@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\Url;
-/* @var $this \source\core\front\FrontView */
+/* @var $this \source\core\base\BaseView */
 
 if (!\Yii::$app->user->isGuest): ?>
 <!--
@@ -9,7 +9,7 @@ if (!\Yii::$app->user->isGuest): ?>
         <div class="pull-left info">
             <p><?= \Yii::$app->user->identity->username ?></p>
 
-            <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            <a href="#"><i class="fa fa-circle text-success"/> Online</a>
         </div>
     </div>
 -->

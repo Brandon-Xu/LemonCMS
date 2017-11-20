@@ -1,11 +1,10 @@
 <?php
 
-use source\core\grid\GridView;
-use source\libs\Constants;
+use source\core\grid\TreeGridView;
 use source\modules\menu\models\MenuCategory;
 use yii\helpers\Html;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $category = app()->request->get('category');
@@ -22,8 +21,7 @@ $this->toolbar =[
     Html::a(Yii::t('app', 'Create'), ['create', 'category' => $category], ['class' => 'btn btn-success']),
 ];
 
-\yii\widgets\Pjax::begin();
-echo GridView::widget([
+echo TreeGridView::widget([
     //'filterModel' => $searchModel,
     'dataProvider' => $dataProvider,
     'columns' => [
@@ -33,7 +31,7 @@ echo GridView::widget([
             'format' => 'raw',
             'width' => 'auto',
             'value' => function ($model, $key, $index, $column) {
-                return str_repeat(Constants::TabSize, $model->level).Html::a($model->name, [
+                return Html::a($model->name, [
                         'menu/update',
                         'id' => $model->id,
                     ]);
@@ -43,11 +41,7 @@ echo GridView::widget([
             'attribute' => 'url',
             'width' => '300px',
         ],
-        [
-            'class' => 'source\core\grid\CenterColumn',
-            'attribute' => 'targetText',
-            'width' => '80px',
-        ],
+        [ 'class' => 'source\core\grid\TargetColumn' ],
         [ 'class' => 'source\core\grid\SortColumn' ],
         [ 'class' => 'source\core\grid\StatusColumn' ],
         [
@@ -56,4 +50,3 @@ echo GridView::widget([
         ],
     ],
 ]);
-\yii\widgets\Pjax::end();

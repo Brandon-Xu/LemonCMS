@@ -14,9 +14,14 @@ return [
     'basePath' => dirname(dirname(__DIR__)),
     'vendorPath' => dirname(dirname(__DIR__)).'/vendor',
     'runtimePath' => dirname(dirname(__DIR__)).'/data/runtime',
-    'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'defaultRoute' => 'default/index',
+    'bootstrap' => [
+        'log',
+        'modularityService' => [
+            'class' => 'source\modules\modularity\ModularityService',
+        ],
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'source\models\User',
@@ -37,10 +42,14 @@ return [
                     'enableCaching' => TRUE,
                     'on missingTranslation' => ['source\modules\i18n\components\TranslationEventHandler', 'handleMissingTranslation']
                 ],
+                'yii2mod.rbac' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@yii2mod/rbac/messages',
+                ],
             ],
         ],
         'view' => [
-            'class' => 'source\core\front\FrontView',
+            'class' => 'source\core\base\BaseView',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -74,7 +83,6 @@ return [
             'rules' => [
                 'article/<id:\d+>/' => 'default/index',
                 'taxonomy/<id:\d+>/' => 'default/index',
-
             ],
         ],
         'mailer' => [
@@ -114,13 +122,10 @@ return [
                 ],
             ],
         ],
-        'modularityService' => [
-            'class' => 'source\modules\modularity\ModularityService',
-        ],
     ],
     'modules' => [
-        'admin' => [
-            'class' => 'source\modules\admin\AdminModule',
+        'rbac' => [
+            'class' => 'source\core\rbac\RbacModule',
         ],
         'install' => [
             'class' => 'source\modules\install\home\HomeModule',

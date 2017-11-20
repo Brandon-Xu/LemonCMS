@@ -365,7 +365,7 @@
             <h3>
                 <span class="pull-left">站点信息</span>
 
-                <span class="pull-right"><a href="javascript:;" onclick="AWS.ajax_post($('#settings_form'));" class="btn btn-xs btn-primary mod-site-save">快速保存</a></span>
+                <span class="pull-right"><a href="javascript:;" onclick="AWS.ajax_post($('#settings_form'));" class="btn btn-default">快速保存</a></span>
             </h3>
         </div>
         <div class="tab-content mod-content">

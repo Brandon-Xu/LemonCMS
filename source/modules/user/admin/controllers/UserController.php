@@ -2,7 +2,7 @@
 
 namespace source\modules\user\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\libs\Constants;
 use source\models\search\UserSearch;
 use source\models\User;

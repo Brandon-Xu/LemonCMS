@@ -2,14 +2,14 @@
 
 namespace install\controllers;
 
-use Yii;
 use source\core\base\BaseController;
+use source\helpers\FileHelper;
 use source\libs\Constants;
 use source\libs\Utility;
 use source\LuLu;
+use Yii;
 use yii\base\Exception;
 use yii\db\Connection;
-use source\helpers\FileHelper;
 use yii\helpers\Url;
 
 class SiteController extends BaseController
@@ -121,7 +121,8 @@ class SiteController extends BaseController
             $transaction->rollBack();
 
             $message = self::getDbError($e->getMessage(), [
-                'dbHost' => $dbHost, 'dbName' => $dbName,
+                'dbHost' => $dbHost,
+                'dbName' => $dbName,
             ]);
             self::_appendLog('安装失败');
             self::_appendLog($e->getMessage(), TRUE);
@@ -144,7 +145,9 @@ class SiteController extends BaseController
         }
 
         $config = [
-            'dsn' => "mysql:host={$dbHost};dbname={$dbName}", 'username' => $dbUsername, 'password' => $dbPassword,
+            'dsn' => "mysql:host={$dbHost};dbname={$dbName}",
+            'username' => $dbUsername,
+            'password' => $dbPassword,
         ];
 
         $result = FALSE;
@@ -163,7 +166,8 @@ class SiteController extends BaseController
         } catch (Exception $e) {
             $db->close();
             $message = self::getDbError($e->getMessage(), [
-                'dbHost' => $dbHost, 'dbName' => $dbName,
+                'dbHost' => $dbHost,
+                'dbName' => $dbName,
             ]);
             $result = FALSE;
         }
@@ -181,8 +185,13 @@ class SiteController extends BaseController
         $tbPre = app()->request->post('tbPre');
 
         $dbConfig = [
-            'class' => 'yii\db\Connection', 'dsn' => "mysql:host={$dbHost};dbname={$dbName}", 'username' => $dbUsername,
-            'password' => $dbPassword, 'charset' => 'utf8', 'tablePrefix' => $tbPre, 'enableSchemaCache' => TRUE,
+            'class' => 'yii\db\Connection',
+            'dsn' => "mysql:host={$dbHost};dbname={$dbName}",
+            'username' => $dbUsername,
+            'password' => $dbPassword,
+            'charset' => 'utf8',
+            'tablePrefix' => $tbPre,
+            'enableSchemaCache' => TRUE,
             'schemaCache' => 'schemaCache',
         ];
         try {
@@ -220,7 +229,8 @@ class SiteController extends BaseController
             return $db;
         } catch (\Exception $e) {
             $message = self::getDbError($e->getMessage(), [
-                'dbHost' => $dbHost, 'dbName' => $dbName,
+                'dbHost' => $dbHost,
+                'dbName' => $dbName,
             ]);
             self::_appendLog($message, TRUE);
 
@@ -327,33 +337,78 @@ class SiteController extends BaseController
     private function getEnvData() {
         $isWritable = [
             [
-                '系统临时文件(data/runtime)', TRUE, FileHelper::canWrite(Yii::getAlias('@data/runtime')), '系统核心', '必须可读写',
-            ], [
-                '附件上传目录(data/attachment)', FALSE, FileHelper::canWrite(Yii::getAlias('@data/attachment')), '附件上传',
+                '系统临时文件(data/runtime)',
+                TRUE,
+                FileHelper::canWrite(Yii::getAlias('@data/runtime')),
+                '系统核心',
+                '必须可读写',
+            ],
+            [
+                '附件上传目录(data/attachment)',
+                FALSE,
+                FileHelper::canWrite(Yii::getAlias('@data/attachment')),
+                '附件上传',
                 '若无附件上传可不用写权限',
-            ], [
-                '数据备份目录(data/backup)', FALSE, FileHelper::canWrite(Yii::getAlias('@data/backup')), '数据库备份',
+            ],
+            [
+                '数据备份目录(data/backup)',
+                FALSE,
+                FileHelper::canWrite(Yii::getAlias('@data/backup')),
+                '数据库备份',
                 '若不备份数据库可不用写权限',
-            ], [
-                '配置文件目录(data/config)', FALSE, FileHelper::canWrite(Yii::getAlias('@data/attachment')), '安装程序',
+            ],
+            [
+                '配置文件目录(data/config)',
+                FALSE,
+                FileHelper::canWrite(Yii::getAlias('@data/attachment')),
+                '安装程序',
                 '若手动安装系统写可不用写权限',
-            ], [
-                '公共资源文件(web/assets)', TRUE, FileHelper::canWrite(Yii::getAlias('@assets')), '系统核心', '必须可读写',
+            ],
+            [
+                '公共资源文件(web/assets)',
+                TRUE,
+                FileHelper::canWrite(Yii::getAlias('@assets')),
+                '系统核心',
+                '必须可读写',
             ],
         ];
 
         $requirements = [
             [
-                'PHP版本', TRUE, version_compare(PHP_VERSION, "5.4.0", ">="), '系统核心', 'PHP 5.4.0 或更高版本是必须的.',
-            ], [
-                '$_SERVER 服务器变量', TRUE, 'ok' === $message = Utility::checkServerVar(), '系统核心', $message,
-            ], [
+                'PHP版本',
+                TRUE,
+                version_compare(PHP_VERSION, "5.4.0", ">="),
+                '系统核心',
+                'PHP 5.4.0 或更高版本是必须的.',
+            ],
+            [
+                '$_SERVER 服务器变量',
+                TRUE,
+                'ok' === $message = Utility::checkServerVar(),
+                '系统核心',
+                $message,
+            ],
+            [
 
-                'Reflection 扩展模块', TRUE, class_exists('Reflection', FALSE), '系统核心', '',
-            ], [
-                'PCRE 扩展模块', TRUE, extension_loaded("pcre"), '系统核心', '',
-            ], [
-                'SPL 扩展模块', TRUE, extension_loaded("SPL"), '系统核心', '',
+                'Reflection 扩展模块',
+                TRUE,
+                class_exists('Reflection', FALSE),
+                '系统核心',
+                '',
+            ],
+            [
+                'PCRE 扩展模块',
+                TRUE,
+                extension_loaded("pcre"),
+                '系统核心',
+                '',
+            ],
+            [
+                'SPL 扩展模块',
+                TRUE,
+                extension_loaded("SPL"),
+                '系统核心',
+                '',
             ], //[
             //    'DOM 扩展模块',
             //    false,
@@ -362,11 +417,25 @@ class SiteController extends BaseController
             //    ''
             //],
             [
-                'PDO 扩展模块', TRUE, extension_loaded('pdo'), '所有和使用PDO数据库连接相关的类', '',
-            ], [
-                'PDO MySQL 扩展模块', TRUE, extension_loaded('pdo_mysql'), 'MySql数据库', '使用MySql数据库必须支持',
-            ], [
-                'OpenSSL 扩展模块', TRUE, extension_loaded('openssl'), 'Security', '加密和解密方法',
+                'PDO 扩展模块',
+                TRUE,
+                extension_loaded('pdo'),
+                '所有和使用PDO数据库连接相关的类',
+                '',
+            ],
+            [
+                'PDO MySQL 扩展模块',
+                TRUE,
+                extension_loaded('pdo_mysql'),
+                'MySql数据库',
+                '使用MySql数据库必须支持',
+            ],
+            [
+                'OpenSSL 扩展模块',
+                TRUE,
+                extension_loaded('openssl'),
+                'Security',
+                '加密和解密方法',
             ], //[
             //    'SOAP 扩展模块',
             //    false,
@@ -375,7 +444,11 @@ class SiteController extends BaseController
             //    ''
             //],
             [
-                'GD 扩展模块', FALSE, 'ok' === $message = Utility::checkCaptchaSupport(), 'CaptchaAction', $message,
+                'GD 扩展模块',
+                FALSE,
+                'ok' === $message = Utility::checkCaptchaSupport(),
+                'CaptchaAction',
+                $message,
             ], //[
             //    'Ctype 扩展模块',
             //    false,
@@ -403,7 +476,9 @@ class SiteController extends BaseController
                 $isWritable[$i][4] = '&nbsp;';
         }
         $data = [
-            'isWritable' => $isWritable, 'writeableResult' => $writeableResult, 'requireResult' => $requireResult,
+            'isWritable' => $isWritable,
+            'writeableResult' => $writeableResult,
+            'requireResult' => $requireResult,
             'requirements' => $requirements,
         ];
 

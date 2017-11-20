@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-/* @var $this source\core\back\BackView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\log\models\search\LogSearch */
 /* @var $form source\core\widgets\ActiveForm */
 ?>

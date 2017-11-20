@@ -2,7 +2,7 @@
 
 namespace source\modules\comment\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\models\search\CommentSearch;
 use Yii;
 use yii\filters\VerbFilter;

@@ -4,7 +4,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $searchModel app\modules\rbac\models\search\RelationSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 

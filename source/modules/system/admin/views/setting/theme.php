@@ -3,13 +3,13 @@
 use source\core\widgets\ActiveForm;
 use yii\helpers\Html;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\models\config\ThemeConfig */
 /* @var $form ActiveForm */
 
-$this->addBreadcrumbs([
+$this->breadcrumbs = [
     '主题设置',
-]);
+];
 ?>
 <div class="config-theme">
 

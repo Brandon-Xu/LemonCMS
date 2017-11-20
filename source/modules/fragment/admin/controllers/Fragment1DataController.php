@@ -2,7 +2,7 @@
 
 namespace source\modules\fragment\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\libs\Constants;
 use source\modules\fragment\models\Fragment1Data;
 use source\modules\fragment\models\search\Fragment1DataSearch;

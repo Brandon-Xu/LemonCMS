@@ -2,7 +2,7 @@
 
 namespace source\modules\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\LuLu;
 use source\models\LoginForm;
 use yii\filters\AccessControl;

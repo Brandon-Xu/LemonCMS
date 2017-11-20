@@ -31,4 +31,16 @@ class TaxonomyActiveQuery extends BaseTreeActiveQuery
         return $this;
     }
 
+    public function orderBy($columns = []) {
+        if(empty($columns)){
+            $columns = [
+                'sort_num'  => SORT_ASC,
+                'parent_id' => SORT_ASC,
+                'id'        => SORT_ASC,
+            ];
+        }
+        parent::orderBy($columns);
+        return $this;
+    }
+
 }

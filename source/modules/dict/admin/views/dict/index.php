@@ -4,7 +4,7 @@ use source\core\grid\GridView;
 use source\modules\dict\models\DictCategory;
 use yii\helpers\Html;
 
-/* @var $this source\core\back\BackView */
+/* @var $this source\core\base\BaseView */
 /* @var $searchModel source\modules\dict\models\search\DictSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 

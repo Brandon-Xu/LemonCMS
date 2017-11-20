@@ -3,11 +3,10 @@
 namespace source\core\grid;
 
 use rmrevin\yii\fontawesome\FA;
-use source\libs\Resource;
 use source\assets\AdminIconAssets;
+use source\libs\Resource;
 use Yii;
 use yii\helpers\Html;
-use yii\helpers\Url;
 
 /**
  * ActiveField represents a form input field within an [[ActiveForm]].
@@ -49,7 +48,7 @@ class ActionColumn extends \yii\grid\ActionColumn
         ", [], 'actionColumnClassCss');
     }
 
-        protected function initDefaultButtons() {
+    protected function initDefaultButtons() {
         $this->initDefaultButton('view', 'eye');
         $this->initDefaultButton('update', 'pencil');
         $this->initDefaultButton('delete', 'trash-o', [
@@ -59,7 +58,7 @@ class ActionColumn extends \yii\grid\ActionColumn
     }
 
     protected function initDefaultButton($name, $iconName, $additionalOptions = []) {
-        if (!isset($this->buttons[$name]) && strpos($this->template, '{' . $name . '}') !== false) {
+        if (!isset($this->buttons[$name]) && strpos($this->template, '{'.$name.'}') !== FALSE) {
             $this->buttons[$name] = function ($url, $model, $key) use ($name, $iconName, $additionalOptions) {
                 switch ($name) {
                     case 'view':
@@ -80,6 +79,7 @@ class ActionColumn extends \yii\grid\ActionColumn
                     //'data-pjax' => '0',
                 ], $additionalOptions, $this->buttonOptions);
                 $icon = FA::i($iconName);
+
                 return Html::a($icon, $url, $options);
             };
         }

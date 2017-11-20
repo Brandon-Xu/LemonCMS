@@ -5,14 +5,14 @@ use source\libs\Constants;
 use source\LuLu;
 use yii\helpers\Html;
 
-/* @var $this source\core\back\BackView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\fragment\models\Fragment1Data */
 /* @var $form source\core\widgets\ActiveForm */
 ?>
 
-<?php $this->toolbars([
-    Html::a('返回', ['index', 'fid' => app()->request->get('fid')], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]); ?>
+<?php $this->toolbar = [
+    Html::a('返回', ['index', 'fid' => app()->request->get('fid')], ['class' => 'btn btn-default']),
+]; ?>
 
 <div class="fragment1-data-form">
 

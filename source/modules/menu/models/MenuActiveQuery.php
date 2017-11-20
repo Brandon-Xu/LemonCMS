@@ -26,8 +26,20 @@ class MenuActiveQuery extends BaseTreeActiveQuery
         $normalSelect = [
             'id','parent_id', 'name', 'icon', 'url', 'target', 'description', 'thumb'
         ];
-        $columns = array_merge($normalSelect, $columns);
+        $columns = empty($columns) ? $normalSelect : $columns;
         parent::select($columns, $option);
+        return $this;
+    }
+
+    public function orderBy($columns = []) {
+        if(empty($columns)){
+            $columns = [
+                'sort_num'  => SORT_ASC,
+                'parent_id' => SORT_ASC,
+                'id'        => SORT_ASC,
+            ];
+        }
+        parent::orderBy($columns);
         return $this;
     }
 

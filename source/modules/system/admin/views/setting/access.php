@@ -4,14 +4,14 @@ use source\core\widgets\ActiveForm;
 use source\modules\rbac\models\Role;
 use yii\helpers\ArrayHelper;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\system\models\config\BasicConfig */
 /* @var $form ActiveForm */
 
 $this->title = '注册与访问控制';
-$this->addBreadcrumbs([
+$this->breadcrumbs = [
     $this->title,
-]);
+];
 ?>
 <?php $form = ActiveForm::begin(); ?>
 

@@ -2,8 +2,9 @@
 
 namespace source\modules\menu\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\modules\menu\models\Menu;
+use source\modules\menu\models\search\MenuSearch;
 use Yii;
 use yii\data\ArrayDataProvider;
 use yii\web\NotFoundHttpException;
@@ -18,14 +19,11 @@ class MenuController extends BackController
      * Lists all Menu models.
      * @return mixed
      */
-    public function actionIndex($category) {
-        $dataProvider = new ArrayDataProvider([
-            'allModels' => Menu::getArrayTree($category ,FALSE),
-            // 'allModels' => Menu::find()->where(['category_id'=>$category])->all(),
-            'key' => 'id',
-            'pagination' => [
-                'pageSize' => -1,
-            ],
+    public function actionIndex() {
+        $searchModel = new MenuSearch();
+        $searchModel->parent_id = 0;
+        $dataProvider = $searchModel->search([
+            $searchModel->formName() => app()->request->queryParams
         ]);
 
         return $this->render('index', [
@@ -51,6 +49,7 @@ class MenuController extends BackController
      */
     public function actionCreate($category) {
         $model = new Menu();
+        $model->loadDefaultValues();
         $model->category_id = $category;
         $url  = app()->request->get('url', NULL);
         $name = app()->request->get('name', NULL);
@@ -96,8 +95,8 @@ class MenuController extends BackController
      */
     public function actionDelete($id) {
         $model = $this->findModel($id);
-        $model->delete();
         $category = $model->category_id;
+        $model->delete();
 
         return $this->redirect(['index', 'category' => $category]);
     }

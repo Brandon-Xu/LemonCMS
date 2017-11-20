@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\models\Content */
 
 

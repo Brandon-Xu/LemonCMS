@@ -3,7 +3,7 @@
 use source\core\grid\GridView;
 use yii\helpers\Html;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '字典';

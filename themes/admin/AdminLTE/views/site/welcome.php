@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this \source\core\front\FrontView */
+/* @var $this \source\core\base\BaseView */
 
 $this->title = '系统信息';
 $this->toolbar = []; ?>

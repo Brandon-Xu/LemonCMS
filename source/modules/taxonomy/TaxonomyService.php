@@ -18,24 +18,11 @@ class TaxonomyService extends ModuleService
     }
 
     public function getTaxonomyCategories() {
-        $categories = TaxonomyCategory::findAll([], 'name asc');
-
-        return $categories;
+        return TaxonomyCategory::find()->all();
     }
 
-    public function getTaxonomiesAsTree($category) {
-        return Taxonomy::getArrayTree($category);
-    }
-
-    public function getTaxonomyById($id, $default = TRUE) {
-        $taxonomyModel = Taxonomy::getTaxonomyById($id);
-        if ($taxonomyModel === NULL && $default === TRUE) {
-            $taxonomyModel = new Taxonomy();
-            $taxonomyModel->id = -1;
-            $taxonomyModel->name = '所有';
-        }
-
-        return $taxonomyModel;
+    public function getTaxonomyById($id) {
+        return Taxonomy::findOne(['id'=>$id]);
     }
 
     public function getModel($model) {
@@ -51,14 +38,11 @@ class TaxonomyService extends ModuleService
         return $value;
     }
 
-
-
-
     /**
      * @param null $categoryId
      * @param int $parentId
      * @param bool $asArray
-     * @return Taxonomy[]
+     * @return Taxonomy|Model[]
      */
     public function getTree($categoryId = NULL, $parentId = 0, $asArray = TRUE){
         $query = Taxonomy::find();
@@ -66,42 +50,4 @@ class TaxonomyService extends ModuleService
         return $query->getTree($categoryId, $parentId);
     }
 
-    /**
-     * 递归返回树状下拉菜单选项
-     * @param ActiveForm $form
-     * @param Taxonomy $model
-     * @param string $attribute
-     * @param Taxonomy[] $taxonomies
-     * @return string
-     */
-    public function dropDownListTree($form, $model, $attribute, $taxonomies){
-        $items = [];
-        /**
-         * 递归函数
-         * Recursively Function
-         * @param Taxonomy $taxonomy
-         * @param string $tab
-         */
-        $rec = function(Taxonomy $taxonomy, $tab = '') use (&$items, &$rec){
-            $preStr = empty($tab) ? '' : "$tab|---";
-            $items[$taxonomy->id] = $preStr.$taxonomy->name;
-            $tab .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-            if (!empty($taxonomy->subTaxonomy)){
-                foreach ($taxonomy->subTaxonomy as $subTaxonomy){ $rec($subTaxonomy, $tab); }
-            }
-        };
-
-        foreach ($taxonomies as $key => $taxonomy){
-            $rec($taxonomy);
-        }
-
-        return $form->field($model, $attribute)->dropDownList($items, [
-            'encode'=>FALSE,
-            'options' => [
-                $model->id => [
-                    'disabled' => TRUE
-                ]
-            ]
-        ]);
-    }
 }

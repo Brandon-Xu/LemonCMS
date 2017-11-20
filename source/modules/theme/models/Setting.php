@@ -41,7 +41,6 @@ class Setting extends ConfigForm
 
     public static function getAllAdminThemes() {
         $items = [
-            'dandelion' => 'dandelion',
             'AdminLTE' => 'AdminLTE',
         ];
 

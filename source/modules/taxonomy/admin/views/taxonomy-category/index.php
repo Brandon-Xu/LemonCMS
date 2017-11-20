@@ -4,7 +4,7 @@ use source\core\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '分类管理';

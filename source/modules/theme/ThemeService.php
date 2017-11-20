@@ -2,7 +2,9 @@
 
 namespace source\modules\theme;
 
-class ThemeService extends \source\core\modularity\ModuleService
+use source\core\modularity\ModuleService;
+
+class ThemeService extends ModuleService
 {
 
     public function init() {

@@ -115,13 +115,6 @@ class Content extends BaseActiveRecord
     }
 
     /**
-     * @return array
-     */
-    public function getStatusText() {
-        return Constants::getStatusItemsForContent($this->status);
-    }
-
-    /**
      * @return string
      */
     public function getUserText() {
@@ -141,7 +134,7 @@ class Content extends BaseActiveRecord
      * @return \yii\db\ActiveQuery
      */
     public function getTaxonomy() {
-        return $this->hasOne(LuLu::getService('taxonomy')->getModel("Taxonomy"), ['id' => 'taxonomy_id']);
+        return $this->hasOne(app()->taxonomy->getModel("Taxonomy"), ['id' => 'taxonomy_id']);
     }
 
     /**

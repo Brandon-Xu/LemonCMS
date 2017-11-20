@@ -2,7 +2,7 @@
 
 use source\modules\menu\models\MenuCategory;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\menu\models\Menu */
 
 $category = $model->category_id;

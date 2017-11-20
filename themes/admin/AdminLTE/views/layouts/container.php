@@ -1,9 +1,8 @@
 <?php
 use yii\helpers\Html;
 
-/* @var $this \source\core\front\FrontView */
+/* @var $this \source\core\base\BaseView */
 /* @var $content string */
-$rbacService = \source\LuLu::getService('rbac');
 \themes\admin\AdminLTE\assets\MainAsset::register($this);
 \themes\admin\AdminLTE\assets\BowerAsset::registerBower('slimScroll', $this);
 $this->beginPage(); ?>
@@ -30,8 +29,7 @@ $this->beginPage(); ?>
 
 <div class="wrapper">
     <header class="main-header">
-        <a href="<?= \Yii::$app->homeUrl ?>" class="logo"><?= Html::encode($this->config()
-                    ->get('site_name').' Dashboard') ?></a>
+        <a href="<?= \Yii::$app->homeUrl ?>" class="logo"><?= Html::encode($this->config()->get('site_name').' Dashboard') ?></a>
         <nav class="navbar navbar-static-top" role="navigation">
             <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
                 <span class="sr-only">Toggle navigation</span>
@@ -42,7 +40,7 @@ $this->beginPage(); ?>
                     <?php if (!\Yii::$app->user->isGuest): ?>
                         <li class="dropdown messages-menu" style="display: none;">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-envelope-o"></i>
+								<i class="fa fa-envelope-o"></i>
                                 <span class="label label-success">1</span>
                             </a>
                             <ul class="dropdown-menu">

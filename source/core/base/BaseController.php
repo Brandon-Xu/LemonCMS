@@ -47,9 +47,6 @@ class BaseController extends Controller
         $this->getView()->on(BaseView::EVENT_END_PAGE, [
             $this, 'endPage',
         ]);
-        $this->getView()->on(BaseView::EVENT_AFTER_PAGE, [
-            $this, 'afterPage',
-        ]);
         app()->response->on(Response::EVENT_AFTER_SEND, [
             $this, 'afterResponse',
         ]);
@@ -100,8 +97,6 @@ class BaseController extends Controller
     public function endBody($event) { }
 
     public function endPage($event) { }
-
-    public function afterPage($event) { }
 
     public function afterResponse($event) { }
 }

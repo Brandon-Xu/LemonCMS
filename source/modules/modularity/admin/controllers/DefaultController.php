@@ -2,7 +2,7 @@
 
 namespace source\modules\modularity\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\modules\modularity\models\Modularity;
 
 class DefaultController extends BackController

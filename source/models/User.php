@@ -81,10 +81,6 @@ class User extends BaseActiveRecord implements IdentityInterface
         ];
     }
 
-    public function getStatusText() {
-        return Constants::getStatusItems($this->status);
-    }
-
     public static function findByUsername($username) {
         return self::findOne(['username' => $username]);
     }

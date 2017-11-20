@@ -1,6 +1,6 @@
 <?php
 \themes\home\fengyun\MainAssets::register($this);
-/** @var source\core\front\FrontView $this */
+/** @var source\core\base\BaseView $this */
 $title = $this->config()->get('seo_title');
 if (empty($title)) {
     $title = $this->config()->get('site_name');

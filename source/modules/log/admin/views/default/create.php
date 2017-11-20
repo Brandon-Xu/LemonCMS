@@ -1,7 +1,7 @@
 <?php
 
 
-/* @var $this source\core\back\BackView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\log\models\Log */
 
 $this->title = 'Create Log';

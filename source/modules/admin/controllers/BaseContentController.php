@@ -2,9 +2,8 @@
 
 namespace source\modules\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\helpers\StringHelper;
-use source\LuLu;
 use source\models\Content;
 use source\models\search\ContentSearch;
 use Yii;
@@ -54,8 +53,8 @@ abstract class BaseContentController extends BackController
 
     public function actionCreate() {
         $model = new Content();
-        $model->user_id = LuLu::getIdentity()->id;
-        $model->user_name = LuLu::getIdentity()->username;
+        $model->user_id = app()->user->getIdentity()->id;
+        $model->user_name = app()->user->getIdentity()->username;
         $model->content_type = $this->content_type;
         $model->loadDefaultValues();
 
@@ -94,7 +93,7 @@ abstract class BaseContentController extends BackController
     }
 
     public function actionDelete($id) {
-        $transaction = LuLu::getDB()->beginTransaction();
+        $transaction = app()->db->beginTransaction();
         try {
             $this->findModel($id)->delete();
             $this->findBodyModel($id)->delete();
@@ -157,7 +156,7 @@ abstract class BaseContentController extends BackController
 
         if ($model->load($postDatas) && $bodyModel->load($postDatas) && $model->validate() && $bodyModel->validate()) {
             $model->summary = $this->getSummary($model, $bodyModel);
-            $transaction = LuLu::getDB()->beginTransaction();
+            $transaction = app()->db->beginTransaction();
             try {
                 $model->save(FALSE);
                 $bodyModel->content_id = $model->id;

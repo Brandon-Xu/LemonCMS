@@ -3,14 +3,14 @@
 use source\core\widgets\ActiveForm;
 use source\core\widgets\KindEditor;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\system\models\config\BasicConfig */
 /* @var $form ActiveForm */
 
 $this->title = '站点信息';
-$this->addBreadcrumbs([
+$this->breadcrumbs = [
     $this->title,
-]);
+];
 
 $form = ActiveForm::begin(); ?>
 

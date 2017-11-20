@@ -5,12 +5,15 @@ namespace source\modules\menu\models\search;
 use source\modules\menu\models\Menu;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\db\Query;
 
 /**
  * MenuSearch represents the model behind the search form about `source\modules\menu\models\Menu`.
  */
 class MenuSearch extends Menu
 {
+    public $category;
+
     public function init() {
         parent::init();
         $this->userValidate = FALSE;
@@ -21,8 +24,8 @@ class MenuSearch extends Menu
      */
     public function rules() {
         return [
-            [['id', 'parent_id', 'category_id', 'enabled', 'sort_num'], 'integer'],
-            [['name', 'url', 'target', 'description', 'thumb'], 'safe'],
+            [['id', 'parent_id', 'sort_num'], 'integer'],
+            [['name', 'url', 'target', 'description', 'thumb', 'category', 'parent_id'], 'safe'],
         ];
     }
 
@@ -42,10 +45,13 @@ class MenuSearch extends Menu
      * @return ActiveDataProvider
      */
     public function search($params) {
-        $query = Menu::find();
+        $query = Menu::find()->with('subItem')->orderBy();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => -1,
+            ]
         ]);
 
         $this->load($params);
@@ -57,14 +63,20 @@ class MenuSearch extends Menu
         }
 
         $query->andFilterWhere([
-            'id' => $this->id, 'parent_id' => $this->parent_id, 'category_id' => $this->category_id,
-            'enabled' => $this->enabled, 'sort_num' => $this->sort_num,
+            'id' => $this->id,
+            'parent_id' => $this->parent_id,
+            'category_id' => $this->category_id,
+            'target' => $this->target
         ]);
 
-        $query->andFilterWhere(['like', 'name', $this->name])->andFilterWhere(['like', 'url', $this->url])
-            ->andFilterWhere(['like', 'target', $this->target])->andFilterWhere([
-                'like', 'description', $this->description,
-            ])->andFilterWhere(['like', 'thumb', $this->thumb]);
+        $query->andFilterWhere([
+            'category_id' => $this->category,
+        ]);
+
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'url', $this->url])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'thumb', $this->thumb]);
 
         return $dataProvider;
     }

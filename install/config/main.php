@@ -15,7 +15,7 @@ return [
         ], 'errorHandler' => [
             'errorAction' => 'site/error',
         ], //         'view' => [
-        // 	        'class' => 'source\core\front\FrontView',
+        // 	        'class' => 'source\core\base\BaseView',
         //         ],
 
     ], 'modules' => [

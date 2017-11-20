@@ -2,7 +2,7 @@
 
 use yii\helpers\Url;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 $this->title = '阅读协议';
 ?>
 

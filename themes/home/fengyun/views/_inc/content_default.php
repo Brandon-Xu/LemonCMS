@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use source\helpers\StringHelper;
 use yii\helpers\Url;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 
 ?>
 <div class="thumbnail_box">

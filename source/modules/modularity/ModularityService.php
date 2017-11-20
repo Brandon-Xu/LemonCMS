@@ -4,6 +4,7 @@ namespace source\modules\modularity;
 
 use source\core\modularity\ModuleService;
 use source\modules\modularity\models\Modularity;
+use yii\base\BootstrapInterface;
 use yii\base\Module;
 use yii\base\UnknownClassException;
 
@@ -12,8 +13,81 @@ use yii\base\UnknownClassException;
  * @property bool $isAdmin
  * @package source\modules\modularity
  */
-class ModularityService extends ModuleService
+class ModularityService extends ModuleService implements BootstrapInterface
 {
+
+    public $backendRoute = 'admin';
+    public $backendClass = 'source\modules\admin\AdminModule';
+
+    /**
+     * 用于注册 beforeRequest 事件，用于动态加载配置文件内已定义之外的模块
+     * @param \yii\base\Application $app
+     */
+    public function bootstrap($app) {
+        $app->on($app::EVENT_BEFORE_REQUEST, [$this, 'beforeRequest']);
+    }
+
+    /**
+     * 不解释
+     */
+    public function beforeRequest(){
+        // 注册自己
+        app()->set('modularityService', ['class' => static::className()]);
+        app()->modularity->loadSystemModule();
+
+        list ($route, $params) = app()->getRequest()->resolve();
+        $this->moduleRegisterByRoute($route, app());
+    }
+
+    /**
+     * 根据路由查找是否有可用的模块化的模块，优先匹配 yii2 的模块
+     * @param $route
+     * @param Module $parentModule
+     * @return mixed
+     */
+    protected function moduleRegisterByRoute($route, $parentModule){
+        if ($route === '') {
+            $route = $parentModule->defaultRoute;
+        }
+
+        // double slashes or leading/ending slashes may cause substr problem
+        $route = trim($route, '/');
+        if (strpos($route, '//') !== false) {
+            return false;
+        }
+
+        if (strpos($route, '/') !== false) {
+            list($id, $route) = explode('/', $route, 2);
+        } else {
+            $id = $route;
+            $route = '';
+        }
+
+        if (isset($parentModule->controllerMap[$id])) {
+            return TRUE;
+        }
+
+        if($parentModule->hasModule($id)) {
+            return TRUE;
+        }
+
+        if ($id === $this->backendRoute){
+            $parentModule->setModule($this->backendRoute, [
+                'class' => $this->backendClass
+            ]);
+            app()->modularity->isAdmin = TRUE;
+            $this->moduleRegisterByRoute($route, $parentModule->getModule($id));
+        }
+
+
+        $modularityModel = Modularity::findOne(['id' => $id]);
+        if($modularityModel){
+            $parentModule->setModule($id, $modularityModel->build());
+        }
+        //$this->loadModule($id);
+        return TRUE;
+    }
+
     /** @var Modularity[] $_modules */
     private $_modules = [];
     private $_isAdmin = NULL;
@@ -92,15 +166,19 @@ class ModularityService extends ModuleService
      * @param Modularity $module
      */
     public final function addModule(Modularity $module) {
-        $moduleArray = $module->build();
-        if (!isset($this->_modules[$module->id]) && is_array($moduleArray)) {
-            $this->_modules[$module->id] = $moduleArray;
-            if ($this->parentModule instanceof Module) {
-                $this->parentModule->setModule($module->id, $moduleArray);
-            } else {
-                app()->setModule($module->id, $moduleArray);
-            }
-        }
+
+        //$moduleArray = $module->build();
+        /*
+
+ if (!isset($this->_modules[$module->id]) && is_array($moduleArray)) {
+     $this->_modules[$module->id] = $moduleArray;
+     if ($this->parentModule instanceof Module) {
+         $this->parentModule->setModule($module->id, $moduleArray);
+     } else {
+         app()->setModule($module->id, $moduleArray);
+     }
+ }
+ */
     }
 
     /**
@@ -165,4 +243,5 @@ class ModularityService extends ModuleService
         \Yii::trace($traceString, self::getServiceId());
         return TRUE;
     }
+
 }

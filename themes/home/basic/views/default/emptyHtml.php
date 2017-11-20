@@ -1,5 +1,5 @@
 <?php
-/** @var source\core\front\FrontView $this */
+/** @var source\core\base\BaseView $this */
 $seoTitle = $this->config()->get('seo_title');
 $siteName = $this->config()->get('site_name');
 $title = empty($seoTitle) ? $siteName : $seoTitle;

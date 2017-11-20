@@ -64,15 +64,11 @@ class DictSearch extends Dict
         //    'sort_num' => $this->sort_num,
         //]);
 
-        $query->andFilterWhere(['like', 'category_id', $this->category_id])->andFilterWhere([
-            'like',
-            'name',
-            $this->name,
-        ])->andFilterWhere(['like', 'value', $this->value])->andFilterWhere([
-            'like',
-            'description',
-            $this->description,
-        ])->andFilterWhere(['like', 'thumb', $this->thumb]);
+        $query->andFilterWhere(['like', 'category_id', $this->category_id])
+            ->andFilterWhere([ 'like', 'name', $this->name ])
+            ->andFilterWhere(['like', 'value', $this->value])
+            ->andFilterWhere(['like', 'thumb', $this->thumb])
+            ->andFilterWhere([ 'like', 'description', $this->description ]);
 
         return $dataProvider;
     }

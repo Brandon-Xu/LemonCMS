@@ -3,7 +3,7 @@
 use source\core\widgets\ActiveForm;
 use source\modules\theme\models\Setting;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $generator yii\gii\generators\module\Generator */
 
 $this->title = '主题设置';

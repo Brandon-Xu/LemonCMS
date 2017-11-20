@@ -2,7 +2,7 @@
 
 namespace source\modules\dict\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\libs\Constants;
 use source\modules\dict\models\Dict;
 use source\modules\dict\models\search\DictSearch;
@@ -48,7 +48,7 @@ class DictController extends BackController
         $model = new Dict();
         $model->category_id = $category;
         $model->sort_num = 100;
-        $model->status = Constants::Status_Enable;
+        $model->status = Constants::ENABLE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect([

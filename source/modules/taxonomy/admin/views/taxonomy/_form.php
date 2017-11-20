@@ -3,7 +3,7 @@
 use source\core\widgets\ActiveForm;
 use yii\helpers\Html;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\taxonomy\models\Taxonomy */
 /* @var $form source\core\widgets\ActiveForm */
 $this->toolbar = [

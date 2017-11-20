@@ -2,7 +2,7 @@
 
 namespace source\modules\taxonomy\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\modules\taxonomy\models\search\TaxonomySearch;
 use source\modules\taxonomy\models\Taxonomy;
 use Yii;
@@ -17,15 +17,14 @@ class TaxonomyController extends BackController
 
     /**
      * Lists all Taxonomy models.
-     * @param $category
      * @return mixed
      */
-    public function actionIndex($category) {
+    public function actionIndex() {
         $searchModel = new TaxonomySearch();
-
-        $dataProvider = new ArrayDataProvider();
-        $dataProvider->allModels = Taxonomy::getArrayTree($category, FALSE);
-        $dataProvider->key = 'id';
+        $searchModel->parent_id = 0;
+        $dataProvider = $searchModel->search([
+            $searchModel->formName() => app()->request->queryParams
+        ]);
 
         return $this->render('index', [
             'searchModel' => $searchModel, 'dataProvider' => $dataProvider,
@@ -90,10 +89,9 @@ class TaxonomyController extends BackController
      * Deletes an existing Taxonomy model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
-     * @param $category
      * @return mixed
      */
-    public function actionDelete($id, $category) {
+    public function actionDelete($id) {
         $model = $this->findModel($id);
         $model->delete();
         $category = $model->category_id;

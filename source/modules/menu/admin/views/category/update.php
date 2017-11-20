@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\menu\models\MenuCategory */
 
 $this->title = $this->t('Update menu category: {menu}', NULL, ['menu'=>$model->name]);

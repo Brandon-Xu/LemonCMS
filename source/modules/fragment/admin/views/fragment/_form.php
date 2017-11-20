@@ -5,7 +5,7 @@ use source\LuLu;
 use source\modules\fragment\models\FragmentCategory;
 use yii\helpers\Html;
 
-/* @var $this source\core\back\BackView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\fragment\models\Fragment */
 /* @var $form source\core\widgets\ActiveForm */
 
@@ -13,9 +13,9 @@ $type = app()->request->get('type');
 
 ?>
 
-<?php $this->toolbars([
-    Html::a('返回', ['index', 'type' => $type], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]); ?>
+<?php $this->toolbar = [
+    Html::a('返回', ['index', 'type' => $type], ['class' => 'btn btn-default']),
+]; ?>
 
 
 <?php $form = ActiveForm::begin(); ?>

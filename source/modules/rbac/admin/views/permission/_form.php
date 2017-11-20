@@ -5,15 +5,15 @@ use source\modules\rbac\models\Permission;
 use source\modules\rbac\rules\Rule;
 use yii\helpers\Html;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\rbac\models\Permission */
 /* @var $form yii\widgets\ActiveForm */
 
 ?>
 
-<?php $this->toolbars([
-    Html::a('返回', ['index'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]); ?>
+<?php $this->toolbar = [
+    Html::a('返回', ['index'], ['class' => 'btn btn-default']),
+]; ?>
 
 <?php $form = ActiveForm::begin(); ?>
 

@@ -45,9 +45,9 @@ class RbacService extends ModuleService
     }
 
     public function getRolesByUser($username) {
-        if ($username === LuLu::getIdentity()->username) {
+        if ($username === app()->user->getIdentity()->username) {
 
-            $role = LuLu::getIdentity()->role;
+            $role = app()->user->getIdentity()->role;
         } else {
             $user = User::findOne(['username' => $username]);
             $role = $user->role;
@@ -111,7 +111,7 @@ class RbacService extends ModuleService
     public function getPermissionsByRole($role, $fromCache = TRUE) {
         $cacheKey = self::CachePrefix.$role;
 
-        $value = $fromCache ? LuLu::getCache($cacheKey) : FALSE;
+        $value = $fromCache ? app()->cache->get($cacheKey) : FALSE;
         if ($value === FALSE) {
             $query = new Query();
             $query->select([
@@ -128,7 +128,7 @@ class RbacService extends ModuleService
             $rows = $query->all();
             $value = $this->convertPermissionValue($rows);
 
-            LuLu::setCache($cacheKey, $value);
+            app()->cache->set($cacheKey, $value);
         }
 
         return $value;
@@ -161,7 +161,7 @@ class RbacService extends ModuleService
             $permission = str_replace('admin/', '', $permission);
         }
         if (empty($username)) {
-            $username = LuLu::getIdentity()->username;
+            $username = app()->user->getIdentity()->username;
         }
         $rows = $this->getPermissionsByUser($username);
 
@@ -174,7 +174,7 @@ class RbacService extends ModuleService
 
     public function checkHomePermission($permission = NULL, $params = [], $user = NULL) {
         if ($user === NULL) {
-            $user = LuLu::getIdentity()->username;
+            $user = app()->user->getIdentity()->username;
         }
         if ($permission === NULL) {
             $permission = app()->controller->uniqueId;

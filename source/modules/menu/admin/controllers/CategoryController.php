@@ -2,7 +2,7 @@
 
 namespace source\modules\menu\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\modules\menu\models\MenuCategory;
 use source\modules\menu\models\search\MenuCategorySearch;
 use Yii;

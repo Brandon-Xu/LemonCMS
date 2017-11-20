@@ -11,6 +11,7 @@ use yii\data\ActiveDataProvider;
  */
 class TaxonomySearch extends Taxonomy
 {
+    public $category;
     public function init() {
         parent::init();
         $this->userValidate = FALSE;
@@ -22,7 +23,7 @@ class TaxonomySearch extends Taxonomy
     public function rules() {
         return [
             [['id', 'parent_id', 'contents', 'sort_num'], 'integer'],
-            [['name', 'url_alias', 'description', 'category_id'], 'safe'],
+            [['name', 'url_alias', 'description', 'category_id', 'category', 'parent_id'], 'safe'],
         ];
     }
 
@@ -42,15 +43,30 @@ class TaxonomySearch extends Taxonomy
      * @return ActiveDataProvider
      */
     public function search($params) {
-        $query = Taxonomy::find();
+        $query = Taxonomy::find()->with(['subItem']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => -1,
+            ]
         ]);
 
-        $query->andFilterWhere($params);
+        $this->load($params);
 
-        $query->andFilterWhere(['like', 'name', $this->name])->andFilterWhere(['like', 'url_alias', $this->url_alias])
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        $query->andFilterWhere([
+            'category_id' => $this->category,
+            'parent_id' => $this->parent_id
+        ]);
+
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'url_alias', $this->url_alias])
             ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;

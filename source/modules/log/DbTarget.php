@@ -14,7 +14,7 @@ class DbTarget extends \yii\log\DbTarget
 
         $ip = Utility::getIp();
 
-        $userID = LuLu::getIdentity()->username;
+        $userID = app()->user->getIdentity()->username;
         if (empty($userID)) {
             return "[$ip]";
         } else {

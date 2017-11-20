@@ -5,7 +5,7 @@ use source\LuLu;
 use source\modules\rbac\models\Permission;
 use yii\helpers\Html;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $searchModel app\modules\rbac\models\search\PermissionSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -31,11 +31,11 @@ $columns = [
     ['class' => 'source\core\grid\SortColumn'], ['class' => 'source\core\grid\ActionColumn'],
 ];
 ?>
-<?php $this->toolbars([
+<?php $this->toolbar = [
     Html::a('新建权限', [
         'create', 'category' => $categoryId,
-    ], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]); ?>
+    ], ['class' => 'btn btn-default']),
+]; ?>
 
 <div class="da-ex-tabs">
     <ul>

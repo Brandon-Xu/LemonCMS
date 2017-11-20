@@ -5,7 +5,7 @@ use source\modules\rbac\models\Role;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $categoryId = app()->request->get('category');
@@ -53,46 +53,47 @@ $columns = [
 ?>
 
 
-<style>
-    .ui-tabs .ui-tabs-panel {
-        padding: 0;
-    }
-</style>
+<div>
+	<style>
+		.ui-tabs .ui-tabs-panel {
+		padding: 0;
+	}
+	</style>
 
-<div class="nav-tabs-custom">
-    <ul class="nav nav-tabs pull-right">
-        <li class="active"><a href="#t1" data-toggle="tab" aria-expanded="true">管理员角色</a></li>
-        <li class=""><a href="#t2" data-toggle="tab" aria-expanded="false">系统角色</a></li>
-        <li class="pull-left header"><i class="fa fa-th"></i></li>
-    </ul>
-    <div class="tab-content no-padding">
-        <div class="tab-pane active" id="t1">
-            <?= GridView::widget([
-                'dataProvider' => $adminsDataProvider,
-                'columns' => $columns,
-                'tableOptions' => ['class' => 'table table-bordered no-margin'],
-                'layout' => "{items}"
-            ]); ?>
-        </div>
-        <!-- /.tab-pane -->
-        <div class="tab-pane" id="t2">
-            <?= GridView::widget([
-                'dataProvider' => $systemsDataProvider,
-                'columns' => $columns,
-                'tableOptions' => ['class' => 'table table-bordered no-margin'],
-                'layout' => "{items}"
-            ]); ?>
-        </div>
-        <!-- /.tab-pane -->
-    </div>
-    <!-- /.tab-content -->
-</div>
-<!--
-    <div id="tabs-<?php echo Role::Category_Member ?>">
+	<div class="nav-tabs-custom">
+		<ul class="nav nav-tabs pull-right">
+			<li class="active"><a href="#t1" data-toggle="tab" aria-expanded="true">管理员角色</a></li>
+			<li class=""><a href="#t2" data-toggle="tab" aria-expanded="false">系统角色</a></li>
+			<li class="pull-left header"><i class="fa fa-th"></i></li>
+		</ul>
+		<div class="tab-content no-padding">
+			<div class="tab-pane active" id="t1">
+                <?= GridView::widget([
+                    'dataProvider' => $adminsDataProvider,
+                    'columns' => $columns,
+                    'tableOptions' => ['class' => 'table table-bordered no-margin'],
+                    'layout' => "{items}"
+                ]); ?>
+			</div>
+			<!-- /.tab-pane -->
+			<div class="tab-pane" id="t2">
+                <?= GridView::widget([
+                    'dataProvider' => $systemsDataProvider,
+                    'columns' => $columns,
+                    'tableOptions' => ['class' => 'table table-bordered no-margin'],
+                    'layout' => "{items}"
+                ]); ?>
+			</div>
+			<!-- /.tab-pane -->
+		</div>
+		<!-- /.tab-content -->
+	</div>
+	<!--
+        <div id="tabs-<?php echo Role::Category_Member ?>">
         <?= GridView::widget([
     'dataProvider' => $membersDataProvider,
     'columns' => $columns,
 ]); ?>
     </div>
     -->
-
+</div>

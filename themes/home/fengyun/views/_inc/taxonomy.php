@@ -10,7 +10,6 @@ use yii\web\View;
 
 /* @var $this yii\web\View */
 $moduleId = app()->controller->module->id;
-$taxonomies = LuLu::getService('taxonomy')->getTaxonomiesAsTree($moduleId);
 
 if (!empty($taxonomies)) :?>
     <h3 class="widget-title">分类</h3>

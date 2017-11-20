@@ -16,8 +16,8 @@ class Constants
         return time();
     }
 
-    const YesNo_Yes = 1;
-    const YesNo_No = 0;
+    const YES = 1;
+    const NO  = 0;
 
     /**
      * @param null $key
@@ -25,14 +25,14 @@ class Constants
      */
     public static function getYesNoItems($key = NULL) {
         $items = [
-            self::YesNo_Yes => '是', self::YesNo_No => '否',
+            self::YES => '是', self::NO => '否',
         ];
         if($key === NULL) return $items;
         return ArrayHelper::getValue($items, $key);
     }
 
-    const Status_Enable = 1;
-    const Status_Desable = 0;
+    const ENABLE = 1;
+    const DISABLE= 0;
 
     /**
      * @param null $key
@@ -40,14 +40,14 @@ class Constants
      */
     public static function getStatusItems($key = NULL) {
         $items = [
-            self::Status_Enable => '可用', self::Status_Desable => '禁用',
+            self::ENABLE => '可用', self::DISABLE => '禁用',
         ];
         if($key === NULL) return $items;
         return ArrayHelper::getValue($items, $key);
     }
 
-    const Target_Self = '_self';
-    const Target_blank = '_blank';
+    const SELF = '_self';
+    const BLANK = '_blank';
 
     /**
      * @param null $key
@@ -55,7 +55,7 @@ class Constants
      */
     public static function getTargetItems($key = NULL) {
         $items = [
-            self::Target_Self => '当前窗口', self::Target_blank => '新窗口',
+            self::SELF => '当前窗口', self::BLANK => '新窗口',
         ];
         if($key === NULL) return $items;
         return ArrayHelper::getValue($items, $key);

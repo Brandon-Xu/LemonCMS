@@ -2,9 +2,9 @@
 
 namespace source\core\modularity;
 
-use source\core\base\BaseComponent;
+use yii\base\Component;
 
-abstract class ModuleService extends BaseComponent implements IModuleService
+abstract class ModuleService extends Component implements IModuleService
 {
     public abstract function getServiceId();
 

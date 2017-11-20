@@ -5,16 +5,16 @@ use source\modules\fragment\models\Fragment;
 use yii\helpers\Html;
 
 
-/* @var $this source\core\back\BackView */
+/* @var $this source\core\base\BaseView */
 /* @var $searchModel source\modules\fragment\models\search\FragmentCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = '分类管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<?php $this->toolbars([
-    Html::a('新建', ['create'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
-]); ?>
+<?php $this->toolbar = [
+    Html::a('新建', ['create'], ['class' => 'btn btn-default']),
+]; ?>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider, 'columns' => [
@@ -29,6 +29,3 @@ $this->params['breadcrumbs'][] = $this->title;
         ['class' => 'source\core\grid\ActionColumn'],
     ],
 ]); ?>
-
-
-</div>

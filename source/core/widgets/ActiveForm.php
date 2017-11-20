@@ -2,7 +2,7 @@
 
 namespace source\core\widgets;
 
-use source\core\front\FrontView;
+use source\core\base\BaseView;
 use yii\helpers\Html;
 
 class ActiveForm extends \yii\bootstrap\ActiveForm

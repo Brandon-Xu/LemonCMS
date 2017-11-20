@@ -2,7 +2,7 @@
 
 namespace source\modules\dict\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\modules\dict\models\DictCategory;
 use source\modules\dict\models\search\DictCategorySearch;
 use Yii;

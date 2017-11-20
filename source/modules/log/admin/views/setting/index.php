@@ -3,7 +3,7 @@
 use source\core\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
-/* @var $this source\core\back\BackView */
+/* @var $this source\core\base\BaseView */
 
 
 ?>

@@ -2,7 +2,7 @@
 
 namespace source\modules\tools\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 
 class DbController extends BackController
 {

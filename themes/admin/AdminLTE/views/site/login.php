@@ -3,7 +3,7 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 
-/* @var $this \source\core\front\FrontView */
+/* @var $this \source\core\base\BaseView */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model source\models\LoginForm */
 \themes\admin\dandelion\LoginAsset::register($this);

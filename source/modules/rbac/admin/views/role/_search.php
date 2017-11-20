@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model app\modules\rbac\models\search\RoleSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model \source\modules\dict\models\Dict */
 
 $this->title = $this->t('Update Dictionary: {name}', NULL, ['name'=>$model->name]);

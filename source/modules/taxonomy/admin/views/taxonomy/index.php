@@ -1,11 +1,10 @@
 <?php
 
-use source\core\grid\GridView;
-use source\libs\Constants;
+use source\core\grid\TreeGridView;
 use source\modules\taxonomy\models\TaxonomyCategory;
 use yii\helpers\Html;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $searchModel source\modules\taxonomy\models\search\TaxonomySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
@@ -25,7 +24,7 @@ $this->toolbar = [
 ];
 
 
-echo GridView::widget([
+echo TreeGridView::widget([
     'dataProvider' => $dataProvider, //'filterModel' => $searchModel,
     'columns' => [
         [ 'class' => 'source\core\grid\IdColumn' ],
@@ -34,7 +33,7 @@ echo GridView::widget([
             'format' => 'raw',
             'width' => 'auto',
             'value' => function ($model, $key, $index, $column) use ($category) {
-                return str_repeat(Constants::TabSize, $model->level).Html::a($model->name, [
+                return Html::a($model->name, [
                         "/admin/{$category}/{$category}",
                         'taxonomy_id' => $model->id,
                     ]);

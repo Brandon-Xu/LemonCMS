@@ -8,7 +8,7 @@
 namespace themes\admin\AdminLTE\assets;
 
 use source\assets\BaseAssets;
-use source\core\front\FrontView;
+use source\core\base\BaseView;
 use yii\web\View;
 
 class PluginsAsset extends BaseAssets

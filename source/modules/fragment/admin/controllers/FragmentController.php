@@ -2,7 +2,7 @@
 
 namespace source\modules\fragment\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\modules\fragment\models\Fragment;
 use source\modules\fragment\models\search\FragmentSearch;
 use Yii;

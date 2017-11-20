@@ -14,40 +14,7 @@ require_once __DIR__.'/libs/functions.php';
 class LuLu extends \Yii
 {
 
-    public static function getHomeUrl($url = NULL) {
-        $homeUrl = app()->getHomeUrl();
-        if ($url !== NULL) {
-            $homeUrl .= $url;
-        }
 
-        return $homeUrl;
-    }
-
-    public static function getWebUrl($url = NULL) {
-        $webUrl = self::getAlias('@web');
-        if ($url !== NULL) {
-            $webUrl .= $url;
-        }
-
-        return $webUrl;
-    }
-
-
-    public static function getViewParam($key, $defaultValue = NULL) {
-        $view = app()->getView();
-        if (array_key_exists($key, $view->params)) {
-            return $view->params[$key];
-        }
-
-        return $defaultValue;
-    }
-
-    public static function setViewParam($array) {
-        $view = app()->getView();
-        foreach ($array as $name => $value) {
-            $view->params[$name] = $value;
-        }
-    }
 
     public static function getFlash($type, $default = NULL) {
         $flash = app()->session->getFlash($type, $default);
@@ -107,9 +74,7 @@ class LuLu extends \Yii
         parent::info($dump, $category);
     }
 
-    public static function getCache($key) {
-        return app()->cache->get($key);
-    }
+
 
     public static function setCache($key, $value, $duration = 0, $dependency = NULL) {
         return app()->cache->set($key, $value, $duration, $dependency);

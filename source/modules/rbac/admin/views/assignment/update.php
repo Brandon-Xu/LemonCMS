@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model app\modules\rbac\models\Relation */
 
 $this->title = 'Update Relation: '.' '.$model->role;

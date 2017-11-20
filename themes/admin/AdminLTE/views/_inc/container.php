@@ -9,10 +9,10 @@ use source\LuLu;
 use yii\helpers\Url;
 use source\modules\menu\models\Menu;
 
-/* @var $this \yii\web\View */
+/* @var $this \source\core\base\BaseView */
 /* @var $content string */
 
-$rbacService = LuLu::getService('rbac');
+$rbacService = $this->rbac;
 
 if($message = LuLu::getFlash('error')):?>
     <div class="da-message error">

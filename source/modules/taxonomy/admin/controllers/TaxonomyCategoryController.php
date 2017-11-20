@@ -2,7 +2,7 @@
 
 namespace source\modules\taxonomy\admin\controllers;
 
-use source\core\back\BackController;
+use source\core\base\BackController;
 use source\modules\taxonomy\models\search\TaxonomyCategorySearch;
 use source\modules\taxonomy\models\TaxonomyCategory;
 use Yii;

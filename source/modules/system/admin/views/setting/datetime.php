@@ -3,15 +3,14 @@
 use source\core\widgets\ActiveForm;
 use source\modules\system\models\config\DatetimeConfig;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\system\models\config\BasicConfig */
 /* @var $form ActiveForm */
 
 $this->title = '时间设置';
-$this->addBreadcrumbs([
+$this->breadcrumbs = [
     $this->title,
-]);
-?>
+];?>
 
 
 <?php $form = ActiveForm::begin(); ?>

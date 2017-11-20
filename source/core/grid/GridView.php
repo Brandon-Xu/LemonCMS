@@ -2,7 +2,7 @@
 
 namespace source\core\grid;
 
-use source\core\front\FrontView;
+use source\core\base\BaseView;
 use yii\helpers\Html;
 
 class GridView extends \yii\grid\GridView

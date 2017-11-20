@@ -3,7 +3,7 @@
 use source\core\grid\GridView;
 
 
-/* @var $this source\core\back\BackView */
+/* @var $this source\core\base\BaseView */
 /* @var $searchModel source\modules\log\models\search\LogSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 

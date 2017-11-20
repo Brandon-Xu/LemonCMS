@@ -115,12 +115,12 @@ class BaseActiveRecord extends ActiveRecord
             }
             if ($this->hasAttribute('created_by')) {
                 if (empty($this->created_by)) {
-                    $this->created_by = LuLu::getIdentity()->username;
+                    $this->created_by = app()->user->getIdentity()->username;
                 }
             }
             if ($this->hasAttribute('updated_by')) {
                 if (empty($this->updated_by)) {
-                    $this->updated_by = LuLu::getIdentity()->username;
+                    $this->updated_by = app()->user->getIdentity()->username;
                 }
             }
 

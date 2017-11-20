@@ -1,6 +1,6 @@
 <?php
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\fragment\models\Fragment1Data */
 
 $this->title = '修改内容 '.' '.$model->title;

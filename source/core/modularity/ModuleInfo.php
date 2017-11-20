@@ -2,9 +2,9 @@
 
 namespace source\core\modularity;
 
-use yii\base\Object;
+use yii\base\BaseObject;
 
-class ModuleInfo extends Object
+class ModuleInfo extends BaseObject
 {
 
     public $id;

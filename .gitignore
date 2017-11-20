@@ -61,4 +61,7 @@ yarn-error.log
 !.htaccess
 !/web/assets/.htaccess
 !/web/attachment/.htaccess
-/themes/home/jydz/
+
+web/.gitignore
+
+source/modules/zjut

@@ -5,7 +5,7 @@ namespace source\modules\tools\admin\controllers;
 use Yii;
 use source\LuLu;
 use source\modules\tools\models\CacheForm;
-use source\core\back\BackController;
+use source\core\base\BackController;
 
 class CacheController extends BackController
 {

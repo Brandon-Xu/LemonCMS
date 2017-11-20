@@ -27,7 +27,8 @@
         "dmstr/yii2-adminlte-asset": "2.4.*",
         "2amigos/yii2-tinymce-widget": "~1.1",
         "kartik-v/yii2-widget-select2": "@dev",
-        "moonlandsoft/yii2-phpexcel": "*"
+        "moonlandsoft/yii2-phpexcel": "*",
+        "yii2mod/yii2-rbac": "*"
     },
     "require-dev": {
     },

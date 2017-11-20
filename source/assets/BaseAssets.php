@@ -6,7 +6,7 @@
  */
 namespace source\assets;
 
-use source\core\front\FrontView;
+use source\core\base\BaseView;
 use yii\helpers\Url;
 use yii\web\AssetBundle;
 use yii\web\View;

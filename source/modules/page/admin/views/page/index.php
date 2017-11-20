@@ -4,7 +4,7 @@ use source\core\grid\GridView;
 use source\libs\Constants;
 use yii\helpers\Html;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $searchModel source\models\search\ContentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 $this->title = $this->t('Page Manage');
@@ -14,7 +14,7 @@ $this->breadcrumbs = [
 
 $this->toolbar = [
     Html::a(Yii::t('app', 'Create'), ['create'], ['class' => 'btn btn-primary']),
-    //Html::a('设置', ['setting/index'], ['class' => 'btn btn-xs btn-primary mod-site-save']),
+    //Html::a('设置', ['setting/index'], ['class' => 'btn btn-default']),
 ];
 echo GridView::widget([
     'dataProvider' => $dataProvider, //'filterModel' => $searchModel,

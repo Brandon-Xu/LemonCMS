@@ -5,7 +5,7 @@ namespace source\modules\files\admin\controllers;
 use Yii;
 use source\modules\files\models\Files;
 use source\modules\files\models\search\FileSearch;
-use source\core\back\BackController;
+use source\core\base\BackController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 

@@ -35,13 +35,6 @@ class Taxonomy extends BaseActiveRecord
 {
     const CachePrefix = 'taxonomy_';
 
-    public function behaviors() {
-        return [
-            'treeBehavior' => ['class' => 'source\core\behaviors\TreeBehavior'],
-        ];
-    }
-
-
     /**
      * @inheritdoc
      */
@@ -88,80 +81,6 @@ class Taxonomy extends BaseActiveRecord
     public static function find() {
         return new TaxonomyActiveQuery(get_called_class());
     }
-
-
-    private static function getArrayTreeInternal($category, $parentId = 0, $level = 0) {
-        $children = self::findAll([
-            'category_id' => $category, 'parent_id' => $parentId,
-        ], 'sort_num asc');
-
-        $items = [];
-        foreach ($children as $child) {
-            $child->level = $level;
-            $items[$child['id']] = $child;
-            $temp = self::getArrayTreeInternal($category, $child->id, $level + 1);
-            $items = ArrayHelper::merge($items, $temp);
-        }
-
-        return $items;
-    }
-
-    public static function getTaxonomiesByCategory($category, $fromCache = TRUE) {
-        $cachekey = self::CachePrefix.$category;
-
-        $values = $fromCache ? LuLu::getCache($cachekey) : FALSE;
-
-        if ($values === FALSE) {
-            $values = self::getArrayTreeInternal($category, 0, 0);
-            LuLu::setCache($cachekey, $values);
-        }
-
-        return $values;
-    }
-
-    public static function getTaxonomyById($id, $fromCache = TRUE) {
-        if ($id < 0 || empty($id)) {
-            return NULL;
-        }
-
-        $cacheKey = self::CachePrefix.$id;
-        $value = $fromCache ? LuLu::getCache($cacheKey) : FALSE;
-        if ($value === FALSE) {
-            $value = self::findOne(['id' => $id]);
-            if ($value !== NULL) {
-                LuLu::setCache($cacheKey, $value);
-            }
-        }
-
-        return $value;
-    }
-
-    public static function clearCachedTaxonomies($category, $id) {
-        LuLu::deleteCache(self::CachePrefix.$category);
-        LuLu::deleteCache(self::CachePrefix.$id);
-    }
-
-
-    public static function getArrayTree($category, $fromCache = TRUE) {
-        return self::getTaxonomiesByCategory($category, $fromCache);
-    }
-
-
-    public function beforeDelete() {
-        $childrenIds = $this->getChildrenIds();
-        self::deleteAll(['id' => $childrenIds]);
-
-        return TRUE;
-    }
-
-    public function clearCache() {
-        self::clearCachedTaxonomies($this->category_id, $this->id);
-    }
-
-
-
-
-    /*------------------- go die  ---------------*/
 
     public function getSubItem(){
         return $this->hasMany(static::className(), ['parent_id'=>'id']);

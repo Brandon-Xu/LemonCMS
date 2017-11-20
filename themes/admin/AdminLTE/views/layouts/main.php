@@ -1,20 +1,21 @@
 <?php
-/** @var \source\core\front\FrontView $this */
+/** @var \source\core\base\BaseView $this */
 $this->beginContent('@activeTheme/views/layouts/container.php');
 
 ?>
-    <aside class="main-sidebar">
-        <section class="sidebar">
+<div>
+	<aside class="main-sidebar">
+		<section class="sidebar">
             <?= $this->render('_sidebar') ?>
-        </section>
-    </aside>
+		</section>
+	</aside>
 
-    <div class="content-wrapper">
-        <div style="max-width: 1200px">
-            <section class="content-header">
-                <h1>
-                    <small>&nbsp;<?= $this->title ?> </small>
-                </h1>
+	<div class="content-wrapper">
+		<div style="max-width: 1200px">
+			<section class="content-header">
+				<h1>
+					<small>&nbsp;<?= $this->title ?> </small>
+				</h1>
                 <?= yii\widgets\Breadcrumbs::widget([
                     'tag' => 'ol',
                     'links' => $this->breadcrumbs,
@@ -24,14 +25,15 @@ $this->beginContent('@activeTheme/views/layouts/container.php');
                         'encode' => FALSE,
                     ],
                 ]) ?>
-            </section>
+			</section>
 
-            <section class="content">
+			<section class="content">
                 <?= \dmstr\widgets\Alert::widget() ?>
                 <?= $content ?>
-            </section>
-        </div>
-    </div>
+			</section>
+		</div>
+	</div>
+</div>
 <?php
 // AdminLTE 的一个调整高度的脚本
 $this->registerJs("

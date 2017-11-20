@@ -1,13 +1,13 @@
 <?php
 
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\models\TaxonomyCategory */
 
 $this->title = '新建分类';
-$this->addBreadcrumbs([
+$this->breadcrumbs = [
     ['分类管理', ['/taxonomy']], $this->title,
-]);
+];
 
 
 ?>

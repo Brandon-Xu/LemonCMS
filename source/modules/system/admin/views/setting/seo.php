@@ -2,14 +2,14 @@
 
 use source\core\widgets\ActiveForm;
 
-/* @var $this source\core\front\FrontView */
+/* @var $this source\core\base\BaseView */
 /* @var $model source\modules\system\models\config\BasicConfig */
 /* @var $form ActiveForm */
 
 $this->title = 'SEO设置';
-$this->addBreadcrumbs([
+$this->breadcrumbs = [
     $this->title,
-]);
+];
 ?>
 
 
