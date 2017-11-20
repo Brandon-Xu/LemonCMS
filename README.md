@@ -23,24 +23,14 @@ composer install
 
 呀你居然能发现这个？我还没在任何其他地方放出链接哦，真是猿粪呐！
 
-啊另外，我给这个模块化的功能改了点小东西
-具体的位置在 BaseApplication 文件中的重写的 handleRequest 方法
-
-效果是可以在 module 文件里通过init方法另行添加url Rules规则，而不需要非得在config里把所有模块儿的url全定义完，虽然这样可能容易引起模块之间如果不注意的话容易有问题，不过鉴于我现在喜欢这么搞，那我就这么搞拉，不需要的话删掉就扩以拉
-
+啊另外，我Lulucms的那个模块化的实现方式我给整个儿的改了，在 ModularityService 的 bootstrap 方法中通过绑定 beforeRequest 事件来实现动态加载模块的逻辑，通过在配置文件中添加一个bootstrap的项来挂到项目中
 ```
-class HomeModule extends FrontModule
-{
-    public $controllerNamespace = 'source\modules\post\home\controllers';
-    public function init(){
-        app()->urlManager->addRules([
-            [
-                'class' => 'yii\rest\UrlRule',
-                'controller' => ['post/api'=>'post/api'],
-            ]
-        ]);
-        parent::init();
-        // custom initialization code goes here
-    }
-}
+return [
+    'bootstrap' => [
+        'log', // 这个是 yii2 的 log 模块
+        'modularityService' => [
+            'class' => 'source\modules\modularity\ModularityService',
+        ],
+    ],
+]
 ```
