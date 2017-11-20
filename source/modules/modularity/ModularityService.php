@@ -162,26 +162,6 @@ class ModularityService extends ModuleService implements BootstrapInterface
     }
 
     /**
-     * 在本类中注册模块
-     * @param Modularity $module
-     */
-    public final function addModule(Modularity $module) {
-
-        //$moduleArray = $module->build();
-        /*
-
- if (!isset($this->_modules[$module->id]) && is_array($moduleArray)) {
-     $this->_modules[$module->id] = $moduleArray;
-     if ($this->parentModule instanceof Module) {
-         $this->parentModule->setModule($module->id, $moduleArray);
-     } else {
-         app()->setModule($module->id, $moduleArray);
-     }
- }
- */
-    }
-
-    /**
      * @param bool $onlyKeys
      * @return Modularity[]
      */
@@ -214,16 +194,11 @@ class ModularityService extends ModuleService implements BootstrapInterface
      * @return bool
      */
     public function loadModules($ids = []) {
-        \diffTime::begin();
-        $traceString = 'loadModules: ';
         $modulesList = Modularity::find()->indexBy('id');
         if (!empty($ids)){
             $modulesList->where(['id'=>$ids]);
         }
         $modulesList->all();
-        $time = \diffTime::end();
-        $traceString .= implode(',', $ids)."in time: $time";
-        \Yii::trace($traceString, self::getServiceId());
         return TRUE;
     }
 
@@ -235,12 +210,7 @@ class ModularityService extends ModuleService implements BootstrapInterface
     }
 
     public function loadSystemModule(){
-        \diffTime::begin();
-        $traceString = 'loadSystemModule ';
         Modularity::find()->where(['is_system'=>1])->indexBy('id')->all();
-        $time = \diffTime::end();
-        $traceString .= " in time: $time";
-        \Yii::trace($traceString, self::getServiceId());
         return TRUE;
     }
 

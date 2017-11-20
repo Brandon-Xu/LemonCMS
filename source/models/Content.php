@@ -6,8 +6,6 @@ use Carbon\Carbon;
 use source\core\base\BaseActiveRecord;
 use source\core\behaviors\DefaultValueBehavior;
 use source\libs\Common;
-use source\libs\Constants;
-use source\LuLu;
 use source\modules\taxonomy\models\Taxonomy;
 use Yii;
 use yii\db\ActiveRecord;
